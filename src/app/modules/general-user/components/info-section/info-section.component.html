@@ -1,0 +1,14 @@
+<section class="info">
+  <h2 class="infoTitle">{{'SISTEMAS DE GESTIÓN DE LA CALIDAD'|uppercase}}</h2>
+  <div class="infoDetail">
+    <div class="infoSlide">
+      <img [src]="img" alt="">
+    </div>
+    <div class="description">
+      <p *ngFor="let detail of details">{{detail}}</p>
+      <div class="resources">
+        <a *ngFor="let resource of resourses" [href]="resource" target="_blank" >{{resource}}</a>
+      </div>
+    </div>
+  </div>
+</section>

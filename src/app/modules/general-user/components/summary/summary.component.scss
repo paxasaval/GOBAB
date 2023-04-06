@@ -1,0 +1,94 @@
+.summary{
+  width: 100%;
+}
+.summaryTitle{
+  padding: 1.5em 4em;
+  height: 8vh;
+  display: flex;
+  align-items: center;
+}
+.summaryTitle h2{
+  padding: 0 2em;
+  font-size: 2.5em;
+}
+.summaryData{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+.dataCell{
+  border-radius: 8px;
+  border: 2px solid var(--black);
+  height: 15vh;
+  width: 28%;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dataCell h3{
+  font-size:1.75em;
+  margin: 0;
+  text-align: center;
+  letter-spacing: 1px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dataCell span{
+  font-size: 3.5em;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.data{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+.autoLeft{
+  align-self: start;
+}
+.semaphore{
+  display: flex;
+  flex-wrap: wrap;
+  width: 70%;
+  height: 100%;
+}
+.light{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  height: 50%;
+}
+.light p{
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.2em;
+}
+.circle{
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+}
+.red{
+  background-color: var(--red);
+}
+.yellow{
+  background-color: var(--yellow);
+}
+.green{
+  background-color: var(--green);
+}
+.grey{
+  background-color: var(--grey);
+}
+

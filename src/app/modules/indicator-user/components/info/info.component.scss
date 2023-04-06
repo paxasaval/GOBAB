@@ -1,0 +1,35 @@
+.info{
+  border-width: 0 1px 1px 1px;
+  border-color: #000;
+  border-style: solid;
+  padding: 1em;
+  min-height: 10vh;
+  max-width: 15%;
+  }
+.infoLine{
+  display: flex;
+  padding: 0.25em;
+}
+.infoLine select{
+  width: 50%;
+  display: flex;
+  justify-content: end;
+}
+.infoLine span{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  font-weight: 700;
+}
+.right{
+  text-align: right;
+  justify-content: end;
+  font-weight: 500!important;
+}
+.selectYear{
+  display: flex;
+  justify-content: end;
+  width: 50%;
+}
+

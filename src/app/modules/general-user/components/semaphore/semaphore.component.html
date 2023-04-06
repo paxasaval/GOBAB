@@ -1,0 +1,34 @@
+<section class="trafficLigth">
+  <div class="title">
+  <h2>Semaforización</h2>
+  </div>
+  <div class="controllers">
+    <div class="selectYear">
+      <mat-form-field appearance="outline">
+        <mat-label>Selecione el periodo</mat-label>
+        <mat-select>
+          <mat-option value="2022" >2022</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="legend">
+      <div class="semaphoreLegend">
+        <div class="lightRed">Inaceptable</div>
+        <div class="lightYellow"> Debajo de Aceptable</div>
+        <div class="lightGreen">Aceptable</div>
+      </div>
+      <div class="greyLegend">No evaluado</div>
+    </div>
+  </div>
+  <div class="chartContainer">
+    <div class="chartInfo">
+      <div class="cardInfo">
+        <mat-icon class="mat-18">info</mat-icon>
+        <p>Para mayor información sobre un indicador haga clic sobre el mismo</p>
+      </div>
+    </div>
+    <div class="chartSemaphore">
+     <div class="chart" id="chartdiv"></div>
+    </div>
+  </div>
+</section>

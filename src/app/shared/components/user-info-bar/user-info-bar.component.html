@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="user" *ngIf="userIsLogged;else elseBlock">
+    <img  [src]="image" alt="">
+    <div class="userInfo">
+      <p>{{mail}}</p>
+      <p class="rol" >{{rol}}</p>
+    </div>
+    <button mat-raised-button (click)="loggOut">Salir</button>
+  </div>
+  <ng-template class="noUser" #elseBlock>
+    <button mat-raised-button >Entrar</button>
+  </ng-template>
+</div>
+
+

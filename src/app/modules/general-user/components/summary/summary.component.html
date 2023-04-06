@@ -1,0 +1,41 @@
+<section class="summary">
+  <div class="summaryTitle">
+    <h2>Resumen General</h2>
+  </div>
+  <div class="summaryData">
+    <article class="dataCell">
+      <h3>Indicadores Evaluados</h3>
+      <span>{{ evaluated + "/" + totalIndicators }}</span>
+    </article>
+    <article class="dataCell">
+      <h3>Evidencias Registradas</h3>
+      <span>{{ totalEvidences }}</span>
+    </article>
+    <article class="dataCell">
+      <h3>Subindicadores Evaluados</h3>
+      <div class="data">
+        <span class="autoLeft">{{
+          evaluatedSub + "/" + totalSubindicators
+        }}</span>
+        <div class="semaphore">
+          <div class="light">
+            <div class="circle red"></div>
+            <p>{{ red }}</p>
+          </div>
+          <div class="light">
+            <div class="circle yellow"></div>
+            <p>{{ yellow }}</p>
+          </div>
+          <div class="light">
+            <div class="circle green"></div>
+            <p>{{ green }}</p>
+          </div>
+          <div class="light">
+            <div class="circle grey"></div>
+            <p>{{ grey }}</p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

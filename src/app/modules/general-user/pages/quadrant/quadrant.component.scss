@@ -1,0 +1,15 @@
+.title{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color2);
+}
+.title h1{
+  font-size: 2.25em;
+  color: var(--white);
+  margin: 0;
+  padding: 0.75em;
+  font-weight: 700;
+  letter-spacing: 2px;
+}

@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+@use "sass:map";
+@use '@angular/material' as mat;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  $kids-typography: mat.define-typography-config(
+    $font-family: 'Montserrat',
+  );
+
+$my-theme: mat.define-light-theme((
+   typography: $kids-typography,
+ ));
+ @include mat.all-component-themes($my-theme);
+ @include mat.typography-hierarchy($kids-typography);
+
+
+:root{
+  --white: #ffffff;
+  --black: #000000;
+  --color1:#5FAAD9;
+  --color2:#2477BF;
+  --color3:#010B40;
+  --green:#009640;
+  --yellow:#FCEA00;
+  --red:#E00613;
+  --grey: #D9D9D9;
+
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: "Montserrat", sans-serif; }
+:host ::ng-deep .mat-typography h1{
+  font-family: "Montserrat",sans-serif;
+}

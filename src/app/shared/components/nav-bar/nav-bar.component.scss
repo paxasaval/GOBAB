@@ -1,0 +1,30 @@
+.container{
+  background-color: var(--white);
+  display: flex;
+  height: 10vh;
+}
+.logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+}
+.logo img{
+  height: 100%;
+}
+
+.menu{
+  display: flex;
+  width: 100%;
+}
+.menu ul{
+  width: 100%;
+  display: flex;
+}
+.container ul li{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  cursor: pointer;
+}
