@@ -1,19 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { SimpleChanges,Component, OnInit, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-info',
   templateUrl: './info.component.html',
   styleUrls: ['./info.component.scss']
 })
-export class InfoComponent implements OnInit {
+export class InfoComponent implements OnInit, OnChanges {
 
-  colorSelected='#FCEA00'
-  qualification='Amarillo'
+
+
+  @Input() colorSelected='#D9D9D9'
+  @Input() qualification:number = 0
+  qualificationString:string = 'No evaluado'
+
   dateUpdate= new Date()
 
   constructor() { }
 
-  ngOnInit(): void {
+  setQualification(){
+    if(this.qualification==1){
+      this.qualificationString='Rojo'
+    }
+    if(this.qualification==2){
+      this.qualificationString='Amarillo'
+    }
+    if(this.qualification==3){
+      this.qualificationString='Verde'
+
+    }
+
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.setQualification()
+  }
+
+  ngOnInit(): void {
+    this.setQualification()
+  }
+
 
 }

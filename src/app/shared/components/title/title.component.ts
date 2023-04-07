@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-title',
@@ -9,7 +10,13 @@ export class TitleComponent implements OnInit {
 
   @Input() title=''
 
-  constructor() { }
+  constructor(
+    private location:Location
+  ) { }
+
+  goBack(){
+    this.location.back()
+  }
 
   ngOnInit(): void {
   }

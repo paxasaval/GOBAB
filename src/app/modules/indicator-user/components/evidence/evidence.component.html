@@ -1,0 +1,10 @@
+<div class="container" *ngIf="evidenceFlag; else elseBlock">
+  <h3>{{title}}</h3>
+  <iframe class="pdf" [src]="safeURL"></iframe>
+</div>
+<ng-template #elseBlock>
+  <h3>{{title}}</h3>
+  <div class="pdf no-content">No se han cargado archivos</div>
+</ng-template>
+
+

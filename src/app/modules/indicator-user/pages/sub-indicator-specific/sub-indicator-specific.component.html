@@ -1,1 +1,34 @@
-<p>sub-indicator-specific works!</p>
+<div class="search">
+  <form class>
+    <mat-form-field appearance="outline">
+      <mat-label>Titulo del proyecto, programa o planificación</mat-label>
+      <input
+        type="text"
+        placeholder="Titulo del proyecto, programa o planificación..."
+        aria-label="Subindicador"
+        matInput
+        [formControl]="myContol"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete #auto>
+        <mat-option *ngFor="let option of options" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+  <button mat-button (click)="search()">Buscar</button>
+</div>
+<div class="filters">
+  <div class="filter">
+    <h4>Eje</h4>
+    <mat-form-field appearance="outline">
+      <mat-label>Favorite food</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let food of foods" [value]="food.value">
+          {{ food.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
