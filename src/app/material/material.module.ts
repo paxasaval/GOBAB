@@ -7,6 +7,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
 @NgModule({
   declarations: [],
   imports: [
@@ -18,7 +19,8 @@ import {MatInputModule} from '@angular/material/input';
     MatAutocompleteModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule
   ],
   exports:[
     MatButtonModule,
@@ -28,7 +30,8 @@ import {MatInputModule} from '@angular/material/input';
     MatAutocompleteModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule
   ]
 })
 export class MaterialModule { }

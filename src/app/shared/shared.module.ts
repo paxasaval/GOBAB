@@ -6,6 +6,8 @@ import { MaterialModule } from '../material/material.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { TitleComponent } from './components/title/title.component';
+import { ViewPdfComponent } from './components/view-pdf/view-pdf.component';
+import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.component';
 
 
 
@@ -14,7 +16,9 @@ import { TitleComponent } from './components/title/title.component';
     NavBarComponent,
     UserInfoBarComponent,
     FooterComponent,
-    TitleComponent
+    TitleComponent,
+    ViewPdfComponent,
+    AdminSidebarComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +29,9 @@ import { TitleComponent } from './components/title/title.component';
     NavBarComponent,
     UserInfoBarComponent,
     FooterComponent,
-    TitleComponent
+    TitleComponent,
+    ViewPdfComponent,
+    AdminSidebarComponent
 
   ]
 })

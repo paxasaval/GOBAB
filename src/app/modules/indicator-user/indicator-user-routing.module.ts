@@ -38,8 +38,7 @@ const routes: Routes = [
         path:'specific-sub-indicators',
         component:SubIndicatorSpecificComponent,
         data:{title:'Subindicadores Especificos'}
-      },
-
+      }
     ]
   }
 ];

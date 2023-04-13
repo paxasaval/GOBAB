@@ -1,0 +1,131 @@
+
+.search{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 1em;
+  gap: 1em;
+  align-items: center;
+  align-content: center;
+}
+.form-search{
+  width: 80%;
+  mat-form-field{
+    width: 100%;
+  };
+}
+.btn-search{
+  width: 10%;
+  align-self: flex-start;
+  margin-top: 0.5em;
+  height: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color2);
+  color: var((--white));
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.filters{
+  width: 100%;
+  display: flex;
+  gap: 1.5em;
+  justify-content: center;
+}
+.filter{
+  width: 20%;
+  h4{
+    font-weight: 700;
+    margin: 0;
+    padding: 0 0 0 1.5em;
+  }
+  mat-form-field{
+    width: 100%;
+  }
+}
+.cleanFilters{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  span{
+    color: var(--red);
+    text-decoration: underline;
+    font-style: italic;
+    font-weight: 400;
+    cursor: pointer;
+  }
+}
+
+::ng-deep .mat-form-field-outline {
+  border: 1px solid var(--color2);
+  border-radius: 8px;
+}
+
+.tableSubindicators{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1em;
+  table{
+    width: 90%;
+  }
+}
+.mat-header-cell{
+  background-color: var(--color3);
+  color: var(--white);
+  font-size: 1em;
+  font-weight: 700;
+  margin: 0 0.5em 0 0.5em;
+  text-align: center;
+}
+.mat-column-name{
+  width: 30%;
+  border-right: 1px solid #000;
+}
+.mat-column-type{
+  width: 10%;
+  border-right: 1px solid #000;
+
+}
+.mat-column-state{
+  width: 10%;
+  border-right: 1px solid #000;
+
+}
+.mat-column-dateUpdate{
+  width: 10%;
+  border-right: 1px solid #000;
+}
+.mat-column-responsibles{
+  width: 30%;
+  border-right: 1px solid #000;
+}
+.mat-column-actions{
+  width: 10%;
+}
+.mat-cell{
+  //text-align: center;
+  padding: 1em;
+}
+.overY{
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.overY::-webkit-scrollbar {
+  width: 0.25em;
+}
+
+.overY::-webkit-scrollbar-track {
+  background-color: rgba(#5FAAD9,0.3);
+}
+
+.overY::-webkit-scrollbar-thumb {
+  background-color: var(--color3);
+  border-radius: 5px;
+}
+.mat-row{
+  height: 10vh;
+}

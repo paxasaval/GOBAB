@@ -1,0 +1,66 @@
+.container{
+  display: flex;
+  min-height: 85vh;
+}
+main{
+  width: 75%;
+  h2{
+    width: 100%;
+    height: 8vh;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.5em;
+  }
+}
+aside{
+  width: 25%;
+  border-left:1px solid #000;
+}
+.info{
+  width: 100%;
+  display: flex;
+}
+.qualification{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+.update{
+  width: 50%;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+.bold{
+    font-weight: 700;
+    font-size: 1.25em;
+}
+.btn-actions{
+  width: 100%;
+  height: 8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  button{
+    background-color: var(--color1);
+    color: var(--white);
+    width: 10vw;
+  }
+}
+.view-pdf{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding-top: 1.5em;
+}
+
+
+
