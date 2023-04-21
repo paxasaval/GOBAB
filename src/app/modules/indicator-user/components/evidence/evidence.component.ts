@@ -1,6 +1,7 @@
 import { SimpleChanges, Component, ViewChild, ElementRef, Input, OnInit, AfterViewInit, OnChanges } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { CharacteristicID } from 'src/app/models/characteristic';
+import { EvidenceCharacteristics } from '../../pages/sub-indicator-general/sub-indicator-general.component';
 
 @Component({
   selector: 'app-evidence',
@@ -9,9 +10,9 @@ import { CharacteristicID } from 'src/app/models/characteristic';
 })
 export class EvidenceComponent implements OnInit, AfterViewInit,OnChanges {
 
-  evidenceFlag=false
+  evidenceFlag=true
 
-  @Input() characteristic!:CharacteristicID
+  @Input() characteristicEvidences!:EvidenceCharacteristics
   title=''
   documentURL ='https://www.orimi.com/pdf-test.pdf'
   safeURL!:SafeUrl
@@ -22,8 +23,9 @@ export class EvidenceComponent implements OnInit, AfterViewInit,OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(this.characteristic){
-      this.title=this.characteristic.name
+    if(this.characteristicEvidences){
+      this.evidenceFlag = (this.characteristicEvidences.evidence.length>0)
+      this.title=this.characteristicEvidences.characteristic.name
     }
   }
 

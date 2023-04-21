@@ -25,7 +25,7 @@ const routes:Routes = [
     ]
   },
   {
-    path:'indicator',
+    path:'quadrant/:id/indicator/:id',
     loadChildren:()=>import('../indicator-user/indicator-user.module').then(m=>m.IndicatorUserModule)
   },
   {

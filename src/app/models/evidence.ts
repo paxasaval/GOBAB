@@ -1,6 +1,9 @@
+import { CharacteristicID } from "./characteristic";
+import { SubindicatorID } from "./subindicators";
+
 export interface Evidence{
-  characteristicID:string,
-  subIndicatorID:string,
+  characteristicID:string | CharacteristicID,
+  subIndicatorID:string | SubindicatorID,
   name:string,
   link:string,
   note:string,

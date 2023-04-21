@@ -1,8 +1,8 @@
 export interface Characteristic{
-  typeID:string,
   name:string,
   group:string,
   groupName:string,
+  isRequired:boolean,
   required:boolean,
   tier:number,
   unique:boolean

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { TitleService } from 'src/app/services/title/title.service';
 
 @Component({
   selector: 'app-title',
@@ -11,7 +12,8 @@ export class TitleComponent implements OnInit {
   @Input() title=''
 
   constructor(
-    private location:Location
+    private location:Location,
+    private titleService:TitleService
   ) { }
 
   goBack(){
@@ -19,6 +21,9 @@ export class TitleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.title===''){
+      this.titleService.title$.subscribe(title=>this.title=title)
+    }
   }
 
 }

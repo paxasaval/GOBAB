@@ -10,34 +10,36 @@ const routes: Routes = [
     component:LayoutComponent,
     children:[
       {
-        path:'responsible-instance',
+        path:'Instancia-responsable',
         component:SubIndicatorGeneralComponent,
-        data:{title:'Instancia Responsable',id:'641f09bad9b5d8272b1ada54'}
+        data:{typeID:'64400a11cf6b0eec947e8867'}
       },
       {
         path:'',
-        redirectTo:'responsible-instance',
+        redirectTo:'Instancia-responsable',
         pathMatch:'full'
       },
       {
-        path:'diagnostic',
+        path:'Diagnostico',
         component:SubIndicatorGeneralComponent,
-        data:{title:'Diagnostico',id:'6423abae357f0145adbca034'}
+        data:{typeID:'64400a11cf6b0eec947e8869'}
+
       },
       {
-        path:'normativity',
+        path:'Normativa-y Reglamentación',
         component:SubIndicatorGeneralComponent,
-        data:{title:'Normativa y Reglamentación',id:'6423abae357f0145adbca035'}
+        data:{typeID:'64400a11cf6b0eec947e886b'}
+
       },
       {
-        path:'mechanism',
+        path:'Mecanismos',
         component:SubIndicatorGeneralComponent,
-        data:{title:'Mecanismo',id:'6423abae357f0145adbca036'}
+        data:{typeID:'64400a11cf6b0eec947e8871'}
+
       },
       {
         path:'specific-sub-indicators',
         component:SubIndicatorSpecificComponent,
-        data:{title:'Subindicadores Especificos'}
       }
     ]
   }

@@ -1,1 +1,29 @@
-<p>admin-sidebar works!</p>
+<div class="container">
+  <div class="user">
+    <div class="user-image">
+      <img [src]='userDefault' alt="">
+    </div>
+    <div class="user-info">
+      <span class="user-name">{{user.name}}</span>
+      <span class="user-rol">{{user.rol}}</span>
+    </div>
+  </div>
+  <menu class="menu">
+    <div class="menuItem">
+      <mat-expansion-panel class="menu-list" routerLink="home" routerLinkActive="active" [disabled]="true" [hideToggle]="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title><li>Inicio</li></mat-panel-title>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+    </div>
+    <div *ngFor="let quadrant of arrayIndicadores" class="menuItem">
+      <mat-expansion-panel class="menu-list" [routerLink]="['quadrant',quadrant.number]" routerLinkActive="active" [hideToggle]="true">
+        <mat-expansion-panel-header >
+            <mat-panel-title><li>{{quadrant.quadrantName}}</li></mat-panel-title>
+        </mat-expansion-panel-header>
+        <li class="submenu" *ngFor="let subindicador of quadrant.subindicadores">{{subindicador.name}}</li>
+      </mat-expansion-panel>
+    </div>
+  </menu>
+</div>
+

@@ -90,7 +90,7 @@
 
 .chartContainer{
   display: flex;
-  height: 80vh;
+  height: 100vh;
   margin: 2em;
   border-radius: 10px;
   border: 2px solid #000;
@@ -104,8 +104,7 @@
 }
 .chart{
   height: 100%;
-  width: 112%;
-  transform: translate(12%);
+  width: 100%;
 }
 .chartInfo{
   padding: 2em;

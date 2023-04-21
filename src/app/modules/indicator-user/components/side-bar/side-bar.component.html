@@ -1,19 +1,7 @@
 <section class="sideBar">
   <ul class="btnGroup">
-    <li class="btn" routerLink="responsible-instance" routerLinkActive="active">
-      <a>Instancia Responsable</a>
-    </li>
-    <li class="btn" routerLink="diagnostic" routerLinkActive="active">
-      <a>Diagnostico</a>
-    </li>
-    <li class="btn" routerLink="normativity" routerLinkActive="active">
-      <a>Normatividad / Reglamentación</a>
-    </li>
-    <li class="btn" routerLink="mechanism" routerLinkActive="active">
-      <a>Mecanismo</a>
-    </li>
-    <li class="btn" routerLink="specific-sub-indicators" routerLinkActive="active">
-      <a>Subindicadores especificos</a>
+    <li *ngFor="let route of routes" class="btn" [routerLink]="route.route" [state]="{data:route.subindicator}" routerLinkActive="active">
+      <a *ngIf="route.subindicator">{{route.subindicator!.name}}</a>
     </li>
   </ul>
 </section>

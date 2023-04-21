@@ -8,6 +8,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
+import {MatExpansionModule} from '@angular/material/expansion';
 @NgModule({
   declarations: [],
   imports: [
@@ -20,7 +21,8 @@ import {MatTableModule} from '@angular/material/table';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    MatExpansionModule
   ],
   exports:[
     MatButtonModule,
@@ -31,7 +33,8 @@ import {MatTableModule} from '@angular/material/table';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModule { }

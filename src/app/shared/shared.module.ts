@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { TitleComponent } from './components/title/title.component';
 import { ViewPdfComponent } from './components/view-pdf/view-pdf.component';
 import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.component';
+import { SemaphoreComponent } from './components/semaphore/semaphore.component';
 
 
 
@@ -18,7 +19,8 @@ import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.
     FooterComponent,
     TitleComponent,
     ViewPdfComponent,
-    AdminSidebarComponent
+    AdminSidebarComponent,
+    SemaphoreComponent
   ],
   imports: [
     CommonModule,
@@ -31,8 +33,8 @@ import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.
     FooterComponent,
     TitleComponent,
     ViewPdfComponent,
-    AdminSidebarComponent
-
+    AdminSidebarComponent,
+    SemaphoreComponent
   ]
 })
 export class SharedModule { }

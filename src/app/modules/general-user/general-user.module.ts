@@ -8,7 +8,6 @@ import { QuadrantComponent } from './pages/quadrant/quadrant.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { SummaryComponent } from './components/summary/summary.component';
-import { SemaphoreComponent } from './components/semaphore/semaphore.component';
 import { MaterialModule } from 'src/app/material/material.module';
 
 
@@ -22,8 +21,6 @@ import { MaterialModule } from 'src/app/material/material.module';
     QuadrantComponent,
     LayoutComponent,
     SummaryComponent,
-    SemaphoreComponent,
-
   ],
   imports: [
     CommonModule,

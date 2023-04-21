@@ -15,8 +15,12 @@ export class TypeService {
     private http: HttpClient
   ) {
 
-   }
-   getTypeById(id:string): Observable<TypeID> {
-      return this.http.get<TypeID>(`${this.apiUrl}/${id}`)
-   }
+  }
+  getTypeById(id: string): Observable<TypeID> {
+    return this.http.get<TypeID>(`${this.apiUrl}/${id}`)
+  }
+  getTypeByMandatory(mandatory: boolean) {
+    return this.http.get<TypeID[]>(`${this.apiUrl}?mandatory=${mandatory}`)
+
+  }
 }
