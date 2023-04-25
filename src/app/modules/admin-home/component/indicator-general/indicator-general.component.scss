@@ -1,0 +1,26 @@
+.form{
+  width: 100%;
+  min-height: 65vh  ;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+.actions{
+  display: flex;
+  width: 98%;
+  justify-content: flex-end;
+}
+.buttons{
+  display: flex;
+  gap:1em
+}
+button{
+  color:var(--white)
+}
+.save{
+  background-color: var(--color2);
+}
+.cancel{
+  background-color: var(--red);
+}

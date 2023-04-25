@@ -168,8 +168,8 @@ export class SemaphoreComponent implements OnInit, AfterViewInit, OnChanges {
       if (this.quadrant === '3') {
         this.startAngle = -360
         this.endAngle = -270
-        this.centerX = 225
-        this.centerY = 50
+        this.centerX = 250
+        this.centerY = 60
         this.chartContainer.nativeElement.style.flexDirection = 'row-reverse'
 
       } if (this.quadrant === '4') {

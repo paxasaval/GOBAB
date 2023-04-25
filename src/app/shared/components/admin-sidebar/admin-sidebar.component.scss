@@ -45,8 +45,11 @@
   justify-content: flex-start;
   align-items: center;
   gap: 0.5em;
-  overflow-y: hidden;
+  overflow-y: scroll;
   height: 80%;
+}
+.menu::-webkit-scrollbar{
+  display: none;
 }
 .menu li{
   list-style-type: none;

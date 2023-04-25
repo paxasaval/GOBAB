@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="summary">
+    <h3>Resumen del subindicador</h3>
+    <form class="name-form">
+      <span>Nombre</span>
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput type="text" [formControl]="nameControl" />
+      </mat-form-field>
+    </form>
+    <form class="type-form" [formGroup]="typeControl">
+      <span>Tipo</span>
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo</mat-label>
+        <mat-select
+          formControlName="type"
+          placeholder=""
+          (valueChange)="selectChanges($event)"
+        >
+          <mat-option *ngFor="let type of types" [value]="type">{{
+            type.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+    <form class="responsible-form">
+      <span>Responsable(s)</span>
+      <mat-form-field appearance="outline">
+        <mat-label>Responsable(s)</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="5"
+          type="text"
+          [formControl]="responsibleControl"
+        ></textarea>
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="portada">
+    <app-input-evidence1
+      class="evidence-portada"
+      [characteristic]="portada"
+    ></app-input-evidence1>
+  </div>
+  <div class="characteristics">
+    <h3>Ingreso de Evidencias</h3>
+    <div class="container-characteristics">
+      <div class="tree-characteristics">
+        <ul *ngIf="group1.length > 0" class="group entrada">
+          <span>{{ group1[0].groupName }}</span>
+          <li *ngFor="let characteristic of group1">
+            {{ characteristic.name }}
+          </li>
+        </ul>
+        <ul *ngIf="group2.length > 0" class="group ejejcucion">
+          <span>{{ group2[0].groupName }}</span>
+          <li *ngFor="let characteristic of group2">
+            {{ characteristic.name }}
+          </li>
+        </ul>
+        <ul *ngIf="group3.length > 0" class="group salida">
+          <span>{{ group3[0].groupName }}</span>
+          <li *ngFor="let characteristic of group3">
+            {{ characteristic.name }}
+          </li>
+        </ul>
+      </div>
+      <div class="characteristics-form">
+        <mat-expansion-panel *ngIf="group1.length > 0" [hideToggle]="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h4>{{ group1[0].groupName }}</h4>
+            </mat-panel-title>
+            <mat-panel-description></mat-panel-description>
+          </mat-expansion-panel-header>
+          <app-input-evidence2
+            *ngFor="let characteristic of group1"
+            [characteristic]="characteristic"
+          ></app-input-evidence2>
+        </mat-expansion-panel>
+        <mat-expansion-panel *ngIf="group2.length > 0" [hideToggle]="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h4>{{ group2[0].groupName }}</h4>
+            </mat-panel-title>
+            <mat-panel-description></mat-panel-description>
+          </mat-expansion-panel-header>
+          <app-input-evidence2
+            *ngFor="let characteristic of group2"
+            [characteristic]="characteristic"
+          ></app-input-evidence2>
+        </mat-expansion-panel>
+        <mat-expansion-panel *ngIf="group3.length > 0" [hideToggle]="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h4>{{ group3[0].groupName }}</h4>
+            </mat-panel-title>
+            <mat-panel-description></mat-panel-description>
+          </mat-expansion-panel-header>
+          <app-input-evidence2
+            *ngFor="let characteristic of group3"
+            [characteristic]="characteristic"
+          ></app-input-evidence2>
+        </mat-expansion-panel>
+      </div>
+    </div>
+  </div>
+</div>

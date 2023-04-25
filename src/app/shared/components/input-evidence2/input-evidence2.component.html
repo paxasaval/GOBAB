@@ -1,0 +1,48 @@
+<div class="container">
+  <span class="title">{{ characteristic.name }}</span>
+  <div *ngFor="let evidence of arrayEvidence" class="file-container">
+    <div class="file">
+      <div class="file-name">
+        <span>Nombre del documento</span>
+        <form class="form-input">
+          <mat-form-field class="form" appearance="outline">
+            <mat-label>Nombre del documnto</mat-label>
+            <input matInput type="text" [formControl]="evidence.nameControl" />
+          </mat-form-field>
+        </form>
+      </div>
+      <div class="file-input">
+        <form class="form-file">
+          <button mat-raised-button>
+            <mat-icon class="mat-18">upload</mat-icon>
+            Subir Archivo
+          </button>
+          <input type="file" [formControl]="evidence.fileControl" />
+        </form>
+      </div>
+    </div>
+    <div class="observation">
+      <span>Observaciones:</span>
+      <form class="form-longText">
+        <mat-form-field appearance="outline">
+          <mat-label>Observaciones</mat-label>
+          <textarea
+            matInput
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"
+            type="text"
+            [formControl]="evidence.observationControl"
+          ></textarea>
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button mat-raised-button (click)="addFile()">
+      <mat-icon class="mat-18">add</mat-icon>
+      <span>Añadir archivo</span>
+    </button>
+  </div>
+</div>

@@ -9,6 +9,10 @@ import { TitleComponent } from './components/title/title.component';
 import { ViewPdfComponent } from './components/view-pdf/view-pdf.component';
 import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.component';
 import { SemaphoreComponent } from './components/semaphore/semaphore.component';
+import { InputEvidence1Component } from './components/input-evidence1/input-evidence1.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { SearchSpecificSubindicatorComponent } from './components/search-specific-subindicator/search-specific-subindicator.component';
+import { InputEvidence2Component } from './components/input-evidence2/input-evidence2.component';
 
 
 
@@ -20,12 +24,16 @@ import { SemaphoreComponent } from './components/semaphore/semaphore.component';
     TitleComponent,
     ViewPdfComponent,
     AdminSidebarComponent,
-    SemaphoreComponent
+    SemaphoreComponent,
+    InputEvidence1Component,
+    SearchSpecificSubindicatorComponent,
+    InputEvidence2Component
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    DragDropModule
   ],
   exports:[
     NavBarComponent,
@@ -34,7 +42,10 @@ import { SemaphoreComponent } from './components/semaphore/semaphore.component';
     TitleComponent,
     ViewPdfComponent,
     AdminSidebarComponent,
-    SemaphoreComponent
+    SemaphoreComponent,
+    InputEvidence1Component,
+    SearchSpecificSubindicatorComponent,
+    InputEvidence2Component
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,19 @@
+<div class="container">
+  <h3>{{ characteristic.groupName }}</h3>
+  <div class="form">
+    <form class="formInput" [formGroup]="evidenceForm">
+      <span>Observaciones:</span>
+      <mat-form-field class="formField" appearance="outline">
+        <mat-label for="observation">Ingrese las observaciones</mat-label>
+        <input matInput type="text" formControlName="observation" />
+      </mat-form-field>
+      <span>Subir Archivo:</span>
+      <div class="dropFile">
+        <mat-icon class="mat-18">upload</mat-icon>
+        <p>Arrastre aquí los archivos</p>
+        <span>Archivos (PDF, jpg, png)</span>
+        <input type="file" (change)="getFiles($event)" class="file" />
+      </div>
+    </form>
+  </div>
+</div>

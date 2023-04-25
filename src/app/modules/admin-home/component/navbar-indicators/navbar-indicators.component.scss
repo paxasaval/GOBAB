@@ -1,0 +1,31 @@
+.container{
+  display: flex;
+  width: 100%;
+  overflow-x: hidden;
+}
+.menu-indicators{
+  display: flex;
+  width: 100%;
+  gap: 1em;
+
+}
+.menu-option{
+  list-style: none;
+  display: flex;
+  height: 7vh;
+  width: 20%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background-color: var(--color2);
+  color:var(--white);
+  font-weight: 600;
+  cursor: pointer;
+}
+.active{
+  background-color: var(--white);
+  border-color: var(--color2);
+  border-width: 2px;
+  border-style: solid;
+  color: var(--color2);
+}

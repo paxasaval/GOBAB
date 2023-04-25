@@ -7,6 +7,12 @@ import { LastUpdateComponent } from './component/last-update/last-update.compone
 import { QuadrantComponent } from './pages/quadrant/quadrant.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HomeComponent } from './pages/home/home.component';
+import { IndicatorComponent } from './pages/indicator/indicator.component';
+import { IndicatorGeneralComponent } from './component/indicator-general/indicator-general.component';
+import { NavbarIndicatorsComponent } from './component/navbar-indicators/navbar-indicators.component';
+import { MaterialModule } from 'src/app/material/material.module';
+import { SpecificSubindicatorsComponent } from './pages/specific-subindicators/specific-subindicators.component';
+import { AddSubindicatorComponent } from './pages/add-subindicator/add-subindicator.component';
 
 
 @NgModule({
@@ -14,12 +20,18 @@ import { HomeComponent } from './pages/home/home.component';
     LayoutComponent,
     LastUpdateComponent,
     QuadrantComponent,
-    HomeComponent
+    HomeComponent,
+    IndicatorComponent,
+    IndicatorGeneralComponent,
+    NavbarIndicatorsComponent,
+    SpecificSubindicatorsComponent,
+    AddSubindicatorComponent,
   ],
   imports: [
     CommonModule,
     AdminHomeRoutingModule,
-    SharedModule
+    SharedModule,
+    MaterialModule
   ]
 })
 export class AdminHomeModule { }
