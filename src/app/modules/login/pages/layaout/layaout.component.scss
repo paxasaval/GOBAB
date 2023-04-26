@@ -1,0 +1,27 @@
+.container{
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.vector {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+.form{
+  position: absolute;
+  top: 25%;
+  right: 5%;
+  width: 50vh;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: var(--color3);
+}

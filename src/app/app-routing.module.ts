@@ -11,6 +11,10 @@ const routes:Routes=[
     loadChildren:()=>import('./modules/admin-home/admin-home.module').then(m=>m.AdminHomeModule)
   },
   {
+    path:'login',
+    loadChildren:()=>import('./modules/login/login.module').then(m=>m.LoginModule)
+  },
+  {
     path:'',
     redirectTo:'user',
     pathMatch:'full'

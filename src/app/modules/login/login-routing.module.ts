@@ -1,7 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LayaoutComponent } from './pages/layaout/layaout.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path:'',
+    component:LayaoutComponent,
+    children:[
+      {
+        path:'signIn',
+        component:LoginFormComponent
+      },
+      {
+        path:'',
+        redirectTo:'signIn',
+        pathMatch:'full'
+      }
+    ]
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

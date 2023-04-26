@@ -14,7 +14,7 @@ export class EvidenceComponent implements OnInit, AfterViewInit,OnChanges {
 
   @Input() characteristicEvidences!:EvidenceCharacteristics
   title=''
-  documentURL ='https://www.orimi.com/pdf-test.pdf'
+  documentURL =''
   safeURL!:SafeUrl
 
   constructor(
@@ -27,6 +27,9 @@ export class EvidenceComponent implements OnInit, AfterViewInit,OnChanges {
       this.evidenceFlag = (this.characteristicEvidences.evidence.length>0)
       this.title=this.characteristicEvidences.characteristic.name
     }
+  }
+  sanitizerURL(url:any){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url)
   }
 
   ngOnInit(): void {

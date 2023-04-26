@@ -1,6 +1,9 @@
 <div class="container" *ngIf="evidenceFlag; else elseBlock">
-  <h3>{{title}}</h3>
-  <iframe class="pdf" [src]="safeURL"></iframe>
+  <div class="container" *ngFor="let evidence of characteristicEvidences.evidence">
+    <h3>{{evidence.name}}</h3>
+    <iframe class="pdf" [src]="sanitizerURL(evidence.link)"></iframe>
+    <span>{{evidence.note}}</span>
+  </div>
 </div>
 <ng-template #elseBlock>
   <h3>{{title}}</h3>

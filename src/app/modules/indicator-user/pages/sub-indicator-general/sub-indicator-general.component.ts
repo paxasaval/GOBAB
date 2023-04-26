@@ -73,6 +73,7 @@ export class SubIndicatorGeneralComponent implements OnInit, OnChanges {
           const arrayEvidences = subindicatorSelected.evidences as EvidenceID[]
           this.title = subindicatorSelected.name
           this.characteristicsEvidence = this.matcherEvidencesCharacteristic(this.characteristics,arrayEvidences)
+          console.log(this.characteristicsEvidence)
         }
       }
     )

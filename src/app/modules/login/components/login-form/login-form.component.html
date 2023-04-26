@@ -1,1 +1,23 @@
-<p>login-form works!</p>
+<form class="container" [formGroup]="loginForm">
+  <div class="input">
+    <span>Correo Electronico</span>
+    <mat-form-field appearance="outline">
+      <mat-label>Correo Electronico</mat-label>
+      <input matInput type="mail" formControlName="mail" />
+    </mat-form-field>
+  </div>
+  <div class="input">
+    <span>Contraseña</span>
+    <mat-form-field appearance="outline">
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" formControlName="password" />
+    </mat-form-field>
+  </div>
+  <div class="actions">
+    <button mat-raised-button (click)="login()">Ingresar</button>
+  </div>
+  <div class="extras">
+    <span>Recuperar contraseña</span>
+    <span>Registrarse</span>
+  </div>
+</form>
