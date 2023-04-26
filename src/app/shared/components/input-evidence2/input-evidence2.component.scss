@@ -49,6 +49,23 @@
     opacity: 0;
   }
 }
+.form-link{
+  mat-form-field{
+    width: 100%;
+  }
+}
+.change-type{
+  display: flex;
+  width: 98%;
+  flex-direction: row-reverse;
+}
+.change-name{
+  font-weight: 500;
+  color: var(--color2);
+  text-decoration: underline;
+  font-style: italic;
+  cursor: pointer;
+}
 .observation{
   display: flex;
   flex-direction: column;

@@ -1,14 +1,17 @@
-:host{
+:host {
   width: 80%;
 }
-.container{
+.container {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
 }
-h3{
-  font-weight: 700;
-  font-size: 24t;
+h3 {
+  font-weight: 600;
+  font-size: 14pt;
 }
-.dropFile{
+.dropFile {
   width: 100%;
   height: 20vh;
   border-style: dotted;
@@ -20,19 +23,38 @@ h3{
   justify-content: center;
   position: relative;
 }
-.file{
+.legend{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.file {
   position: absolute;
   z-index: 1;
   width: 100%;
   height: 100%;
   opacity: 0;
 }
-.form{
+.form {
   display: flex;
   width: 100%;
 }
-.formInput{
+.formInput {
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+.changeInput {
+  color: var(--color2);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.actions {
+  display: flex;
+  justify-content: center;
+  button {
+    background-color: var(--color2);
+    color: var(--white);
+  }
 }

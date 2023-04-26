@@ -76,6 +76,7 @@
             <mat-panel-description></mat-panel-description>
           </mat-expansion-panel-header>
           <app-input-evidence2
+            (evidenceEmit)="addEvidence($event)"
             *ngFor="let characteristic of group1"
             [characteristic]="characteristic"
           ></app-input-evidence2>
@@ -88,6 +89,7 @@
             <mat-panel-description></mat-panel-description>
           </mat-expansion-panel-header>
           <app-input-evidence2
+            (evidenceEmit)="addEvidence($event)"
             *ngFor="let characteristic of group2"
             [characteristic]="characteristic"
           ></app-input-evidence2>
@@ -100,11 +102,16 @@
             <mat-panel-description></mat-panel-description>
           </mat-expansion-panel-header>
           <app-input-evidence2
+            (evidenceEmit)="addEvidence($event)"
             *ngFor="let characteristic of group3"
             [characteristic]="characteristic"
           ></app-input-evidence2>
         </mat-expansion-panel>
       </div>
     </div>
+  </div>
+  <div class="actions">
+    <button class="save" mat-raised-button (click)="saveEvidence()">Guardar</button>
+      <button class="cancel" mat-raised-button (click)="cancelEvidence()">Cancelar</button>
   </div>
 </div>

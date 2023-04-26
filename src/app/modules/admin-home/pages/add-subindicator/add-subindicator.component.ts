@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CharacteristicID } from 'src/app/models/characteristic';
+import { Evidence } from 'src/app/models/evidence';
 import { TypeID } from 'src/app/models/type';
 import { TypeService } from 'src/app/services/type/type.service';
 
@@ -27,6 +28,7 @@ export class AddSubindicatorComponent implements OnInit {
   })
   responsibleControl = new FormControl('')
   types:TypeID[]=[]
+  arrayEvidence:Evidence[] = []
   characteristics:CharacteristicID[] = []
   group1:CharacteristicID[] = []
   group2:CharacteristicID[] = []
@@ -56,6 +58,24 @@ export class AddSubindicatorComponent implements OnInit {
     const type = event as TypeID
     this.characteristics = type.characteristics as CharacteristicID[]
     this.groupCharacteristics(this.characteristics)
+  }
+
+  addEvidence(event: Evidence[]) {
+    //console.log(event)
+    event.map(evidence => {
+      const found = this.arrayEvidence.findIndex(e => e.name == evidence.name)
+      if (found == -1) {
+        this.arrayEvidence.push(evidence)
+      }else{
+        this.arrayEvidence[found] = evidence
+      }
+    })
+  }
+  saveEvidence() {
+    console.log(this.arrayEvidence)
+  }
+  cancelEvidence() {
+    window.location.reload()
   }
 
   ngOnInit(): void {

@@ -5,8 +5,8 @@ export interface Evidence{
   characteristicID:string | CharacteristicID,
   subIndicatorID:string | SubindicatorID,
   name:string,
-  link:string,
+  link:string | File,
   note:string,
-  verified:string
+  verified:boolean
 }
 export interface EvidenceID extends Evidence{id:string}

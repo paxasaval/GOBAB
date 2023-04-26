@@ -1,11 +1,11 @@
 <div class="container">
   <div class="form">
-    <app-input-evidence1 *ngFor="let characteristic of characteristics" [characteristic]="characteristic"></app-input-evidence1>
+    <app-input-evidence1 (evidenceEmit)="addEvidence($event)" *ngFor="let characteristic of characteristics" [characteristic]="characteristic"></app-input-evidence1>
   </div>
   <div class="actions">
     <div class="buttons">
       <button class="save" mat-raised-button (click)="saveEvidence()">Guardar</button>
-      <button class="cancel" mat-raised-button (click)="cancelEvidence()">Guardar</button>
+      <button class="cancel" mat-raised-button (click)="cancelEvidence()">Cancelar</button>
     </div>
   </div>
 </div>
