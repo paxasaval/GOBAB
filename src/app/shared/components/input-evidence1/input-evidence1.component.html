@@ -56,7 +56,7 @@
       >
     </form>
   </div>
-  <div class="actions">
+  <div *ngIf="!characteristic.unique" class="actions">
     <button mat-raised-button (click)="addEvidence()">
       <mat-icon class="mat-18">add</mat-icon>
       Añadir Evidencia

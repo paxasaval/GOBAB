@@ -18,10 +18,9 @@
 }
 .evidenceCard{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 45%;
   height: 70vh;
   //border: 1px solid #000;
   padding: 1em;
+  min-width: 45%;
+
 }

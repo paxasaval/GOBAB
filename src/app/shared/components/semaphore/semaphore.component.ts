@@ -32,6 +32,7 @@ export class SemaphoreComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() data: IndicatorInstanceID[] = []
   @Input() quadrant: string = '1'
   @Input() period: string = '2022'
+  @Input() scale = 1
   startAngle = 0
   endAngle = 0
   centerY = 0
@@ -70,16 +71,16 @@ export class SemaphoreComponent implements OnInit, AfterViewInit, OnChanges {
       dataContext.indicatorID = dataContext.indicatorID as IndicatorID
       dataContext.indicatorID.ods.forEach((ods) => {
         ods = ods as OdsID
-        html += `<img src=${ods.img} width=\"32\" height=\"32\">`
+        html += `<img src=${ods.img} width=\"${32*this.scale}\" height=\"${32*this.scale}\">`
       })
-      html += `<span>${dataContext.indicatorID.number}. ${dataContext.name}</span>`
+      html += `<span style=\"font-size:${this.scale}em\">${dataContext.indicatorID.number}. ${dataContext.name}</span>`
     }
     return '<p style=\"display:flex;align-items:center;gap:0.2em;overflow:visible;\">' + html + '</p>';
   }
 
   renderChart() {
     //this.root.container.children.dispose()
-    console.log(this.data[0].indicatorID)
+    console.log(this.data)
     this.root.dispose()
     this.root = am5.Root.new("chartdiv");
     this.root.container.children.clear()
@@ -87,9 +88,10 @@ export class SemaphoreComponent implements OnInit, AfterViewInit, OnChanges {
       am5percent.PieChart.new(this.root, {
         startAngle: this.startAngle,
         endAngle: this.endAngle,
+        width:1100*this.scale,
         innerRadius: am5.percent(10),
         centerY: this.centerY,
-        centerX: this.centerX
+        centerX: this.centerX,
       })
     );
     chart.series.clear()
@@ -152,7 +154,7 @@ export class SemaphoreComponent implements OnInit, AfterViewInit, OnChanges {
       if (this.quadrant === '1') {
         this.startAngle = -90
         this.endAngle = -180
-        this.centerX = -250
+        this.centerX = -300 + (1-this.scale)*400
         this.centerY = 0
         this.chartContainer.nativeElement.style.flexDirection = 'row'
 
@@ -160,7 +162,7 @@ export class SemaphoreComponent implements OnInit, AfterViewInit, OnChanges {
       if (this.quadrant === '2') {
         this.startAngle = -90
         this.endAngle = 0
-        this.centerX = 225
+        this.centerX = 225 - (1-this.scale)*500
         this.centerY = 0
         this.chartContainer.nativeElement.style.flexDirection = 'row-reverse'
 
@@ -168,14 +170,14 @@ export class SemaphoreComponent implements OnInit, AfterViewInit, OnChanges {
       if (this.quadrant === '3') {
         this.startAngle = -360
         this.endAngle = -270
-        this.centerX = 250
+        this.centerX = 250 - (1-this.scale)*500
         this.centerY = 60
         this.chartContainer.nativeElement.style.flexDirection = 'row-reverse'
 
       } if (this.quadrant === '4') {
         this.startAngle = -180
         this.endAngle = -270
-        this.centerX =-250
+        this.centerX =-250 - (1-this.scale)*150
         this.centerY = 25
         this.chartContainer.nativeElement.style.flexDirection = 'row'
 

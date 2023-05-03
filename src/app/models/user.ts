@@ -1,8 +1,10 @@
+import { Rol, RolID } from "./rol";
+
 export interface User{
   name: string,
   mail:string,
   password:string,
-  rol:string,
+  rol:string|RolID,
   created:Date,
   lastUpdate:Date,
   state:boolean

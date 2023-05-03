@@ -53,6 +53,23 @@ form{
 }
 .tree-characteristics{
   width: 20%;
+  border-right: 1px solid #000;
+}
+.group{
+  span{
+    font-size: 14pt;
+    font-weight: 600;
+  }
+  li{
+    list-style: none;
+    a{
+      padding-left: 1em;
+      cursor: pointer;
+    }a::before{
+      content: '-';
+    }
+  }
+
 }
 .characteristics-form{
   width: 80%;
@@ -66,4 +83,25 @@ form{
 h4{
   font-weight: 300;
   font-size: 16pt;
+}
+.actions{
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  height: 12vh;
+  align-items: center;
+}
+.actions button{
+  width: 10vw;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+}
+.save{
+  background-color: var(--color2);
+}
+.cancel{
+  background-color: var(--red);
 }

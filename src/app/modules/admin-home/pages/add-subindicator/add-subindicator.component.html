@@ -42,6 +42,7 @@
     <app-input-evidence1
       class="evidence-portada"
       [characteristic]="portada"
+      (evidenceEmit)="handlePortada($event)"
     ></app-input-evidence1>
   </div>
   <div class="characteristics">
@@ -51,24 +52,25 @@
         <ul *ngIf="group1.length > 0" class="group entrada">
           <span>{{ group1[0].groupName }}</span>
           <li *ngFor="let characteristic of group1">
-            {{ characteristic.name }}
+            <a (click)="scroll(characteristic.name,group1[0].groupName)">{{ characteristic.name }}</a>
+
           </li>
         </ul>
         <ul *ngIf="group2.length > 0" class="group ejejcucion">
           <span>{{ group2[0].groupName }}</span>
           <li *ngFor="let characteristic of group2">
-            {{ characteristic.name }}
+            <a (click)="scroll(characteristic.name,group2[0].groupName)">{{ characteristic.name }}</a>
           </li>
         </ul>
         <ul *ngIf="group3.length > 0" class="group salida">
           <span>{{ group3[0].groupName }}</span>
           <li *ngFor="let characteristic of group3">
-            {{ characteristic.name }}
+            <a (click)="scroll(characteristic.name,group3[0].groupName)">{{ characteristic.name }}</a>
           </li>
         </ul>
       </div>
       <div class="characteristics-form">
-        <mat-expansion-panel *ngIf="group1.length > 0" [hideToggle]="false">
+        <mat-expansion-panel *ngIf="group1.length > 0" [hideToggle]="false" [id]="group1[0].groupName">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <h4>{{ group1[0].groupName }}</h4>
@@ -79,9 +81,10 @@
             (evidenceEmit)="addEvidence($event)"
             *ngFor="let characteristic of group1"
             [characteristic]="characteristic"
+            [id]="characteristic.name+group1[0].groupName"
           ></app-input-evidence2>
         </mat-expansion-panel>
-        <mat-expansion-panel *ngIf="group2.length > 0" [hideToggle]="false">
+        <mat-expansion-panel *ngIf="group2.length > 0" [hideToggle]="false" [id]="group2[0].groupName">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <h4>{{ group2[0].groupName }}</h4>
@@ -92,9 +95,10 @@
             (evidenceEmit)="addEvidence($event)"
             *ngFor="let characteristic of group2"
             [characteristic]="characteristic"
+            [id]="characteristic.name+group2[0].groupName"
           ></app-input-evidence2>
         </mat-expansion-panel>
-        <mat-expansion-panel *ngIf="group3.length > 0" [hideToggle]="false">
+        <mat-expansion-panel *ngIf="group3.length > 0" [hideToggle]="false" [id]="group3[0].groupName">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <h4>{{ group3[0].groupName }}</h4>
@@ -105,13 +109,18 @@
             (evidenceEmit)="addEvidence($event)"
             *ngFor="let characteristic of group3"
             [characteristic]="characteristic"
+            [id]="characteristic.name+group3[0].groupName"
           ></app-input-evidence2>
         </mat-expansion-panel>
       </div>
     </div>
   </div>
   <div class="actions">
-    <button class="save" mat-raised-button (click)="saveEvidence()">Guardar</button>
-      <button class="cancel" mat-raised-button (click)="cancelEvidence()">Cancelar</button>
+    <button class="save" mat-raised-button (click)="saveEvidence()">
+      Guardar
+    </button>
+    <button class="cancel" mat-raised-button (click)="cancelEvidence()">
+      Cancelar
+    </button>
   </div>
 </div>

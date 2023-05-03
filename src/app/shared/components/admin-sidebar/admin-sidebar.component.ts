@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { IndicatorID } from 'src/app/models/indicator';
 import { IndicatorInstanceID } from 'src/app/models/indicatorInstance';
+import { Rol, RolID } from 'src/app/models/rol';
+import { User } from 'src/app/models/user';
 import { IndicatorsService } from 'src/app/services/indicators/indicators.service';
 import { TitleService } from 'src/app/services/title/title.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-admin-sidebar',
@@ -11,13 +14,9 @@ import { TitleService } from 'src/app/services/title/title.service';
 })
 export class AdminSidebarComponent implements OnInit {
 
-  user = {
-    name: 'Paul Sanchez',
-    rol: 'Administrador'
-  }
-
+  user:User|null=null
   userDefault = "../../../../assets/userDefault-2.png"
-
+  rol:RolID={description:'',name:'',id:''}
   arrayIndicadores: IndicatorID[] = []
 
   quadrant1: IndicatorID[] = []
@@ -31,7 +30,8 @@ export class AdminSidebarComponent implements OnInit {
 
   constructor(
     private titleService: TitleService,
-    private indicatorService: IndicatorsService
+    private indicatorService: IndicatorsService,
+    private userService:UserService
   ) { }
 
   filterQuadrants(arrayIndicators: IndicatorID[]) {
@@ -68,6 +68,22 @@ export class AdminSidebarComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    const token = localStorage.getItem('token')
+    const idUser = localStorage.getItem('user')
+    this.userService.getUserSesion().subscribe(
+      user=>{
+        this.user=user
+        if(user.name!==''){
+          this.rol = this.user?.rol as RolID
+        }else if(idUser){
+          this.userService.userById(idUser).toPromise().then(
+            userBD=>{
+              this.userService.setUserSesion(userBD)
+            }
+          )
+        }
+      }
+    )
     this.indicatorService.getAllIndicators().subscribe(
       indicators=>{
         this.arrayIndicadores=indicators

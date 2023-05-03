@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Evidence, EvidenceID } from 'src/app/models/evidence';
 import { environment } from 'src/environments/environment';

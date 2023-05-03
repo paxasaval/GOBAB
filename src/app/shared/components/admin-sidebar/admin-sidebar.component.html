@@ -3,9 +3,9 @@
     <div class="user-image">
       <img [src]="userDefault" alt="" />
     </div>
-    <div class="user-info">
+    <div *ngIf="user" class="user-info">
       <span class="user-name">{{ user.name }}</span>
-      <span class="user-rol">{{ user.rol }}</span>
+      <span *ngIf="rol" class="user-rol">{{ rol.name }}</span>
     </div>
   </div>
   <menu class="menu">
@@ -32,7 +32,7 @@
         >
           <mat-expansion-panel-header>
             <mat-panel-title
-              ><li>Cuadrante {{ quadrant[0].quadrant }}</li></mat-panel-title
+              ><li >Cuadrante {{ quadrant[0].quadrant }}</li></mat-panel-title
             >
           </mat-expansion-panel-header>
           <li class="submenu" *ngFor="let indicator of quadrant">

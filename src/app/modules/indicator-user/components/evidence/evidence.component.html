@@ -1,11 +1,11 @@
 <div class="container" *ngIf="evidenceFlag; else elseBlock">
-  <div class="container" *ngFor="let evidence of characteristicEvidences.evidence">
+  <div class="container-card" *ngFor="let evidence of characteristicEvidences.evidence">
     <h3>{{evidence.name}}</h3>
     <iframe class="pdf" [src]="sanitizerURL(evidence.link)"></iframe>
     <span>{{evidence.note}}</span>
   </div>
 </div>
-<ng-template #elseBlock>
+<ng-template class="container" #elseBlock>
   <h3>{{title}}</h3>
   <div class="pdf no-content">No se han cargado archivos</div>
 </ng-template>

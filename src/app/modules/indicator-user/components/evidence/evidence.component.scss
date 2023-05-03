@@ -12,9 +12,16 @@ h3{
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-wrap: wrap;
   height: 100%;
   width: 100%;
+}
+.container-card{
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  height: 65vh;
+  align-items: center;
 }
 .pdf{
   height: 85%;
@@ -27,6 +34,7 @@ h3{
   justify-content: center;
   font-style: italic;
   font-weight: 400;
+
 }
 
 

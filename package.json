@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@auth0/angular-jwt": "^5.1.2",
     "pdf-viewer": "^0.8.1",
     "pdfjs-dist": "^3.5.141",
     "rxjs": "~6.6.0",
