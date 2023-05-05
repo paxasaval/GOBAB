@@ -6,6 +6,9 @@ import { User } from "./user";
 
 export interface Subindicator{
   indicadorID:string | IndicatorID,
+  requireCover?:boolean,
+  cover?:string,
+  observationCover?:string,
   typeID:string | TypeID,
   name: string,
   responsible:string,

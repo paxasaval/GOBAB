@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { User } from 'src/app/models/user';
+import { User, UserID } from 'src/app/models/user';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,14 +10,15 @@ import { environment } from 'src/environments/environment';
 export class UserService {
 
   private apiUrl = `${environment.API_URL}/api/users`
-  private userSubject = new BehaviorSubject<User>({
+  private userSubject = new BehaviorSubject<UserID>({
     created:new Date(),
     lastUpdate:new Date(),
     mail:'',
     name:'',
     password:'',
     rol:'',
-    state:true
+    state:true,
+    id:''
   })
   private user$ = this.userSubject.asObservable()
   constructor(
@@ -28,11 +29,11 @@ export class UserService {
     return this.user$
   }
 
-  setUserSesion(user:User){
+  setUserSesion(user:UserID){
     this.userSubject.next(user)
   }
   userById(id:string){
-    return this.http.get<User>(`${this.apiUrl}/${id}`)
+    return this.http.get<UserID>(`${this.apiUrl}/${id}`)
   }
 
 }
