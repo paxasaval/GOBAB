@@ -1,0 +1,10 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+  overflow-y: scroll;
+}
+.semaphore{
+  height: 100%;
+  width: 100%;
+}

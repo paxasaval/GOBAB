@@ -1,1 +1,10 @@
-<p>side-bar works!</p>
+<section class="sideBar">
+  <ul class="btnGroup">
+    <li *ngFor="let route of routes" class="btn" [routerLink]="route.route" [state]="{data:route.subindicator}" routerLinkActive="active">
+      <a *ngIf="route.subindicator">{{route.subindicator!.name}}</a>
+    </li>
+    <li class="btn" routerLink="specific-sub-indicators">
+      <a>Subindicadores especificos</a>
+    </li>
+  </ul>
+</section>

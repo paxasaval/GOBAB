@@ -1,0 +1,81 @@
+<div class="container">
+  <span class="title">{{ characteristic.name }}</span>
+  <div *ngFor="let evidence of arrayEvidence" class="file-container">
+    <div class="file">
+      <div class="file-name">
+        <span>Nombre del documento</span>
+        <form class="form-input">
+          <mat-form-field class="form" appearance="outline">
+            <mat-label>Nombre del documnto</mat-label>
+            <input
+              matInput
+              type="text"
+              (change)="getName($event)"
+              [formControl]="evidence.nameControl"
+            />
+          </mat-form-field>
+          <span *ngIf="evidence.evidence">
+            <mat-icon class="mat-18">description</mat-icon>
+            {{evidence.evidence.name}}
+          </span>
+        </form>
+      </div>
+      <div *ngIf="evidence.flag; else changeType" class="file-input">
+        <form class="form-file">
+          <button mat-raised-button>
+            <mat-icon class="mat-18">upload</mat-icon>
+            Subir Archivo
+          </button>
+          <input
+            type="file"
+            (change)="getFile($event, evidence)"
+            [formControl]="evidence.fileControl"
+          />
+        </form>
+      </div>
+      <ng-template #changeType class="link-input">
+        <form class="form-link">
+          <span>Enlace del documento</span>
+          <mat-form-field appearance="outline">
+            <mat-label>Ingrese el enlace del documento</mat-label>
+            <input
+              matInput
+              type="url"
+              (change)="getLink($event)"
+              [formControl]="evidence.linkControl"
+            />
+          </mat-form-field>
+        </form>
+      </ng-template>
+    </div>
+    <div class="change-type">
+      <span class="change-name" (click)="changeName(evidence)"
+        >Cambiar a subir {{ evidence.changeName }}</span
+      >
+    </div>
+    <div class="observation">
+      <span>Observaciones:</span>
+      <form class="form-longText">
+        <mat-form-field appearance="outline">
+          <mat-label>Observaciones</mat-label>
+          <textarea
+            matInput
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"
+            type="text"
+            (change)="getObservation($event)"
+            [formControl]="evidence.observationControl"
+          ></textarea>
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button mat-raised-button (click)="addFile()">
+      <mat-icon class="mat-18">add</mat-icon>
+      <span>Añadir evidencia</span>
+    </button>
+  </div>
+</div>

@@ -7,6 +7,8 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { SubIndicatorGeneralComponent } from './pages/sub-indicator-general/sub-indicator-general.component';
 import { SubIndicatorSpecificComponent } from './pages/sub-indicator-specific/sub-indicator-specific.component';
+import { EvidenceComponent } from './components/evidence/evidence.component';
+import { MaterialModule } from 'src/app/material/material.module';
 
 
 
@@ -16,12 +18,14 @@ import { SubIndicatorSpecificComponent } from './pages/sub-indicator-specific/su
     SideBarComponent,
     LayoutComponent,
     SubIndicatorGeneralComponent,
-    SubIndicatorSpecificComponent
+    SubIndicatorSpecificComponent,
+    EvidenceComponent
   ],
   imports: [
     CommonModule,
     IndicatorUserRoutingModule,
-    SharedModule
+    SharedModule,
+    MaterialModule
   ]
 })
 export class IndicatorUserModule { }

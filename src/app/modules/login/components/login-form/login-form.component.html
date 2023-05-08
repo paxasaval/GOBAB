@@ -1,0 +1,22 @@
+<form class="container" [formGroup]="loginForm">
+  <div class="input">
+    <span>Correo Electronico</span>
+    <mat-form-field appearance="outline">
+
+      <input matInput placeholder="Correo electronico" type="mail" formControlName="mail" />
+    </mat-form-field>
+  </div>
+  <div class="input">
+    <span>Contraseña</span>
+    <mat-form-field appearance="outline">
+      <input matInput placeholder="Contraseña" type="password" formControlName="password" />
+    </mat-form-field>
+  </div>
+  <div class="actions">
+    <button mat-raised-button (click)="login()">Ingresar</button>
+  </div>
+  <div class="extras">
+    <span>Recuperar contraseña</span>
+    <span>Registrarse</span>
+  </div>
+</form>

@@ -1,0 +1,65 @@
+<div class="container">
+  <h3>{{ characteristic.groupName }}</h3>
+  <div *ngFor="let formEvidence of arrayForms" class="form">
+    <form class="formInput" [formGroup]="formEvidence.form">
+      <span>Observaciones:</span>
+      <mat-form-field class="formField" appearance="outline">
+        <mat-label for="observation">Ingrese las observaciones</mat-label>
+        <textarea
+          (change)="changeObservation($event)"
+          matInput
+          type="text"
+          formControlName="observation"
+          cdkTextareaAutosize
+          [cdkAutosizeMinRows]="1"
+          [cdkAutosizeMaxRows]="5"
+        ></textarea>
+      </mat-form-field>
+      <div
+        *ngIf="formEvidence.flag == true; else elseBlock"
+        class="upload-file"
+      >
+        <span>Subir Archivo:</span>
+        <div class="dropFile">
+          <div class="legend" *ngIf="!formEvidence.evidence;else nameFile">
+            <mat-icon class="mat-18">upload</mat-icon>
+            <p>Arrastre aquí los archivos</p>
+            <span>Archivos (PDF, jpg, png)</span>
+          </div>
+          <ng-template #nameFile class="legend">
+            <mat-icon class="mat-18">description</mat-icon>
+            {{formEvidence.evidence?.name}}
+          </ng-template>
+          <input
+            #fileInput
+            type="file"
+            (change)="getFiles($event, formEvidence)"
+            formControlName="file"
+            class="file"
+          />
+        </div>
+      </div>
+      <ng-template #elseBlock>
+        <span>Subir Enlace:</span>
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Ingrese el enlace hacia su documento</mat-label>
+          <input
+            matInput
+            (change)="changeLink($event)"
+            type="text"
+            formControlName="link"
+          />
+        </mat-form-field>
+      </ng-template>
+      <span class="changeInput" (click)="changeInput(formEvidence)"
+        >Cambiar a subir {{ formEvidence.changeName }}</span
+      >
+    </form>
+  </div>
+  <div *ngIf="!characteristic.unique" class="actions">
+    <button mat-raised-button (click)="addEvidence()">
+      <mat-icon class="mat-18">add</mat-icon>
+      Añadir Evidencia
+    </button>
+  </div>
+</div>

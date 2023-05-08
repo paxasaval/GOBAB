@@ -19,7 +19,9 @@ export class IndicatorsService {
    getIndicatorsByQuadrant(quadrant:string){
       return this.http.get<IndicatorID[]>(`${this.apiUrl}?quadrant=${quadrant}`)
    }
-
+   getAllIndicators(){
+    return this.http.get<IndicatorID[]>(`${this.apiUrl}`)
+   }
 
 
 }

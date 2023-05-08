@@ -2,8 +2,8 @@
 <app-title [title]="title"></app-title>
 <section class="container">
   <div class="side">
-    <app-info></app-info>
-    <app-side-bar></app-side-bar>
+    <app-info [qualification]="qualification" [lastUpdate]="lastUpdate"></app-info>
+    <app-side-bar [generalTypes]="generalTypes" [subindicators]="subindicators" ></app-side-bar>
   </div>
   <main class="mainContainer">
     <router-outlet></router-outlet>
