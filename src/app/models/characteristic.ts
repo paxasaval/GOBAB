@@ -1,3 +1,5 @@
+import { EvidenceID } from "./evidence"
+
 export interface Characteristic{
   name:string,
   group:string,
@@ -8,3 +10,7 @@ export interface Characteristic{
   unique:boolean
 }
 export interface CharacteristicID extends Characteristic{id:string}
+export interface CharacteristicWithEvidence{
+  characteristic:CharacteristicID
+  evidences:EvidenceID[]
+}

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL:'http://localhost:3001'
-  //API_URL:'https://iso-18091-backend-production.up.railway.app'
+  //API_URL:'http://localhost:3001'
+  API_URL:'https://iso-18091-backend-production.up.railway.app'
 };
 
 /*

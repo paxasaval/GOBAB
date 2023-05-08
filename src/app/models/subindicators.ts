@@ -1,11 +1,12 @@
 import { CommitID } from "./commit";
 import { EvidenceID } from "./evidence";
-import { IndicatorID } from "./indicator";
+import { IndicatorInstanceID } from "./indicatorInstance";
+import { Pagination } from "./pagination";
 import { TypeID } from "./type";
 import { User } from "./user";
 
 export interface Subindicator{
-  indicadorID:string | IndicatorID,
+  indicadorID:string | IndicatorInstanceID,
   requireCover?:boolean,
   cover?:string,
   observationCover?:string,
@@ -20,3 +21,7 @@ export interface Subindicator{
   evidences:string[] | EvidenceID[]
 }
 export interface SubindicatorID extends Subindicator{id:string}
+export interface SubindicatorIDWithPagination{
+  pagination:Pagination
+  docs:SubindicatorID[]
+}

@@ -93,15 +93,15 @@ export class AddSubindicatorComponent implements OnInit, AfterViewInit {
   }
 
   addEvidence(event: Evidence[]) {
-    //console.log(event)
     event.map(evidence => {
-      const found = this.arrayEvidence.findIndex(e => e.name == evidence.name)
+      const found = this.arrayEvidence.findIndex(e => ((e.name == evidence.name) && (e.characteristicID == evidence.characteristicID)))
       if (found == -1) {
         this.arrayEvidence.push(evidence)
       } else {
         this.arrayEvidence[found] = evidence
       }
     })
+    console.log(this.arrayEvidence)
   }
   scroll(name: string, groupName: string) {
     const elementID = name + groupName

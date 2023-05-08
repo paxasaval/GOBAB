@@ -22,6 +22,10 @@ const routes: Routes = [
         pathMatch:'full'
       }
     ]
+  },
+  {
+    path:':id',
+    component:LayoutComponent
   }
 ];
 

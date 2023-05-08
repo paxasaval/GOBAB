@@ -41,16 +41,16 @@ export class AdminSidebarComponent implements OnInit {
     this.quadrant4 = []
     this.arrayQuadrant = []
     arrayIndicators.map(indicator => {
-      if (indicator.quadrant == '1') {
+      if (indicator.quadrant == 1) {
         this.quadrant1.push(indicator)
       }
-      if (indicator.quadrant == '2') {
+      if (indicator.quadrant == 2) {
         this.quadrant2.push(indicator)
       }
-      if (indicator.quadrant == '3') {
+      if (indicator.quadrant == 3) {
         this.quadrant3.push(indicator)
       }
-      if (indicator.quadrant == '4') {
+      if (indicator.quadrant == 4) {
         this.quadrant4.push(indicator)
       }
     })

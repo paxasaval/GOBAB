@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CharacteristicID } from 'src/app/models/characteristic';
+import { CharacteristicID, CharacteristicWithEvidence } from 'src/app/models/characteristic';
 
 @Component({
   selector: 'app-side-bar-evidences',
@@ -9,7 +9,7 @@ import { CharacteristicID } from 'src/app/models/characteristic';
 export class SideBarEvidencesComponent implements OnInit {
 
   @Input() evidences:CharacteristicID[] = []
-
+  @Input() characteristicWithEvidences:CharacteristicWithEvidence[] = []
   constructor() { }
 
   ngOnInit(): void {

@@ -1,1 +1,7 @@
-<app-view-pdf></app-view-pdf>
+<h3 *ngIf="name">{{name}}</h3>
+<app-view-pdf class="container" *ngIf="url;else elseBlock" [url]="url"></app-view-pdf>
+<ng-template class="container no-content" #elseBlock class="noContent">
+  No existe portada
+  <span>Puede selecionar otra evidencia para cargarla aqui!</span>
+</ng-template>
+<span class="note" *ngIf="note">{{note}}</span>

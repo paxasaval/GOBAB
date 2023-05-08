@@ -1,11 +1,11 @@
-<app-title title="4.3 Imagen del entorno y atractividad" ></app-title>
+<app-title [title]="titleIndicator"></app-title>
 <div class="container">
-  <main>
-    <h2>Regeneración del parque “La Merced”</h2>
+  <main *ngIf="subindicator">
+    <h2>{{ subindicator.name }}</h2>
     <div class="info">
       <div class="qualification">
         <span class="bold">Estado: </span>
-      <span>Amarillo</span>
+        <span>Amarillo</span>
       </div>
       <div class="update">
         <span class="bold">Ultima Actualizacion:</span>
@@ -13,13 +13,16 @@
       </div>
     </div>
     <div class="btn-actions">
-    <button mat-raised-button>Ver Portada</button>
+      <button mat-raised-button (click)="setPortada()">Ver Portada</button>
     </div>
     <div class="view-pdf">
-    <app-render-document></app-render-document>
+      <app-render-document></app-render-document>
     </div>
   </main>
   <aside>
-    <app-side-bar-evidences [evidences]="characteristicsList" ></app-side-bar-evidences>
+    <app-side-bar-evidences
+      [characteristicWithEvidences]="characteristicWithEvidence"
+      [evidences]="characteristicsList"
+    ></app-side-bar-evidences>
   </aside>
 </div>

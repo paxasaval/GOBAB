@@ -34,6 +34,7 @@
   justify-content: space-between;
   max-width: 100%;
   height: 4vh;
+  width: 100%;
   .name {
     display: flex;
     align-items: center;
@@ -53,6 +54,15 @@
     }
     span {
       text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+  .noName{
+    color:#000;
+    font-style: normal;
+    span{
+      text-decoration: none;
+      cursor: default;
     }
   }
   .actions {

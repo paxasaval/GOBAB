@@ -42,6 +42,7 @@ export class IndicatorInstanceService {
   }
 
   setIndicatorInstance(indicator:IndicatorInstanceID){
+    console.log(indicator)
     this.IndicatorSelected.next(indicator)
   }
 }

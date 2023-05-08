@@ -4,7 +4,7 @@ export interface Indicator {
   name: string,
   description:string,
   number:number,
-  quadrant:string,
+  quadrant:number,
   quadrantName:string,
   red:string,
   yellow:string,
