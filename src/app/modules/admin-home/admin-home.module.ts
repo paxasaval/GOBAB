@@ -13,6 +13,7 @@ import { NavbarIndicatorsComponent } from './component/navbar-indicators/navbar-
 import { MaterialModule } from 'src/app/material/material.module';
 import { SpecificSubindicatorsComponent } from './pages/specific-subindicators/specific-subindicators.component';
 import { AddSubindicatorComponent } from './pages/add-subindicator/add-subindicator.component';
+import { DialogAbstractComponent } from './component/dialog-abstract/dialog-abstract.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { AddSubindicatorComponent } from './pages/add-subindicator/add-subindica
     NavbarIndicatorsComponent,
     SpecificSubindicatorsComponent,
     AddSubindicatorComponent,
+    DialogAbstractComponent,
   ],
   imports: [
     CommonModule,

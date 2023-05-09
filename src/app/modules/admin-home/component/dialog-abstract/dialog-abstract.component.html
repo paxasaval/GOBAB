@@ -1,0 +1,27 @@
+<h1 matDialogTitle>Resumen</h1>
+<mat-dialog-content>
+  <div *ngIf="evidenceGroup" class="content">
+    <div class="characteristic" *ngFor="let group of evidenceGroup">
+      <ul class="list">
+        <h3>
+          {{
+            group.characteristic.name
+          }}
+        </h3>
+
+        <li class="evidence" *ngFor="let evidence of group.evidences">
+          <span *ngIf="evidence.link == ''; else elseBlock">
+            {{ evidence.name }}
+          </span>
+          <ng-template #elseBlock>
+            <a>{{ evidence.link }}</a>
+          </ng-template>
+        </li>
+      </ul>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button (click)="saveEvience()">Aceptar</button>
+  <button mat-raised-button (click)="closeDialog()">Cancelar</button>
+</mat-dialog-actions>

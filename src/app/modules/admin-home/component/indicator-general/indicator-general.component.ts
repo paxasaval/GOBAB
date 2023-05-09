@@ -11,6 +11,9 @@ import { SubindicatorService } from 'src/app/services/subindicator/subindicator.
 import { TypeService } from 'src/app/services/type/type.service';
 import { concatMap } from 'rxjs/operators'
 import { EvidenceService } from 'src/app/services/evidence/evidence.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAbstractComponent } from '../dialog-abstract/dialog-abstract.component';
+
 @Component({
   selector: 'app-indicator-general',
   templateUrl: './indicator-general.component.html',
@@ -30,7 +33,8 @@ export class IndicatorGeneralComponent implements OnInit {
     private route: ActivatedRoute,
     private typeService: TypeService,
     private router: Router,
-    private evidenceService:EvidenceService
+    private evidenceService:EvidenceService,
+    private dialog:MatDialog
   ) { }
 
 
@@ -47,6 +51,21 @@ export class IndicatorGeneralComponent implements OnInit {
         this.arrayEvidence.push(evidence)
       }else{
         this.arrayEvidence[found] = evidence
+      }
+    })
+  }
+
+  openDialog(){
+    const dialogRef = this.dialog.open(DialogAbstractComponent,{
+      data:{
+        evidence:this.arrayEvidence,
+        type:this.type
+      }
+    })
+    dialogRef.afterClosed().subscribe(result=>{
+      if(result){
+        console.log('saving Evidence...')
+        this.saveEvidence()
       }
     })
   }
@@ -70,6 +89,7 @@ export class IndicatorGeneralComponent implements OnInit {
     this.id = this.route.snapshot.data.typeID
     combineLatest([this.typeService.getTypeById(this.id), this.indicatorInstanceService.getIndicatorInstance()]).subscribe(
       ([type, indicator]) => {
+        this.type = type
         this.subIndicator = this.findSubindicator(type, indicator.subindicators as SubindicatorID[])
         if (this.subIndicator) {
           this.characteristics = type.characteristics as CharacteristicID[]

@@ -38,7 +38,7 @@ export class SectionEvidenceComponent implements OnInit,AfterViewInit,OnChanges 
   ngOnChanges(changes:SimpleChanges){
     if(this.characteristicWithEvidences){
       this.title = this.characteristicWithEvidences.characteristic.name
-      this.evidences = this.characteristicWithEvidences.evidences
+      this.evidences = this.characteristicWithEvidences.evidences as EvidenceID[]
       this.characteristic=this.characteristicWithEvidences.characteristic
     }
   }

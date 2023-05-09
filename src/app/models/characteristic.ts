@@ -1,4 +1,4 @@
-import { EvidenceID } from "./evidence"
+import { Evidence, EvidenceID } from "./evidence"
 
 export interface Characteristic{
   name:string,
@@ -12,5 +12,5 @@ export interface Characteristic{
 export interface CharacteristicID extends Characteristic{id:string}
 export interface CharacteristicWithEvidence{
   characteristic:CharacteristicID
-  evidences:EvidenceID[]
+  evidences:EvidenceID[] | Evidence[]
 }
