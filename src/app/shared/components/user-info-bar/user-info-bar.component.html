@@ -1,4 +1,14 @@
 <div class="container">
+  <div class="info">
+    <div class="info-span mail">
+      <mat-icon class="mat-18">mail</mat-icon>
+      <span>info@gobierno.gob.ec</span>
+    </div>
+    <div class="info-span phone">
+      <mat-icon class="mat-18">phone</mat-icon>
+      <span>0912345678</span>
+    </div>
+  </div>
   <div class="user" *ngIf="userIsLogged;else elseBlock">
     <img class="user-img" [src]="image" alt="">
     <div class="userInfo">
@@ -7,8 +17,11 @@
     </div>
     <button mat-raised-button (click)="loggOut()">Salir</button>
   </div>
-  <ng-template class="noUser" #elseBlock>
-    <button mat-raised-button (click)="loggIn()" >Entrar</button>
+  <ng-template #elseBlock>
+    <div class="noUser">
+      <mat-icon class="mat-18">iso</mat-icon>
+      <span>{{'Norma ISO 18091'|uppercase}}</span>
+    </div>
   </ng-template>
 </div>
 

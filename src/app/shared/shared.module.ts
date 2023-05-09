@@ -13,6 +13,7 @@ import { InputEvidence1Component } from './components/input-evidence1/input-evid
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SearchSpecificSubindicatorComponent } from './components/search-specific-subindicator/search-specific-subindicator.component';
 import { InputEvidence2Component } from './components/input-evidence2/input-evidence2.component';
+import { HeaderComponent } from './components/header/header.component';
 
 
 
@@ -27,7 +28,8 @@ import { InputEvidence2Component } from './components/input-evidence2/input-evid
     SemaphoreComponent,
     InputEvidence1Component,
     SearchSpecificSubindicatorComponent,
-    InputEvidence2Component
+    InputEvidence2Component,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +47,8 @@ import { InputEvidence2Component } from './components/input-evidence2/input-evid
     SemaphoreComponent,
     InputEvidence1Component,
     SearchSpecificSubindicatorComponent,
-    InputEvidence2Component
+    InputEvidence2Component,
+    HeaderComponent
   ]
 })
 export class SharedModule { }
