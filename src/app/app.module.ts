@@ -9,7 +9,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TokenInterceptorService } from './services/token/token-interceptor.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import en from '@angular/common/locales/en';
+
+registerLocaleData(en);
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -42,7 +47,8 @@ export function tokenGetter() {
       provide:HTTP_INTERCEPTORS,
       useClass:TokenInterceptorService,
       multi:true
-    }
+    },
+    { provide: NZ_I18N, useValue: en_US }
   ],
   bootstrap: [AppComponent]
 })

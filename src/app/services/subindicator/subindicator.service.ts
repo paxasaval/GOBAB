@@ -38,6 +38,9 @@ export class SubindicatorService {
     return this.http.get<SubindicatorID>(`${this.apiUrl}/${id}`)
   }
 
+  getSubindicatorByIndicatorIDandTypeID(indicatorID:string,typeID:string){
+    return this.http.get<SubindicatorID>(`${this.apiUrl}/indicator/${indicatorID}/type/${typeID}`)
+  }
 
 
 }

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { TitleService } from 'src/app/services/title/title.service';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-title',
@@ -11,19 +12,31 @@ export class TitleComponent implements OnInit {
 
   @Input() title=''
 
+  ruta:string[]=[]
+  currentUrl=''
   constructor(
     private location:Location,
-    private titleService:TitleService
+    private titleService:TitleService,
+    private route:ActivatedRoute,
+    private router:Router
   ) { }
 
   goBack(){
     this.location.back()
   }
 
+  getPath(url:string){
+    let array = url.split('/')
+    array.splice(0,2)
+    return array
+  }
+
   ngOnInit(): void {
-    if(this.title===''){
-      this.titleService.title$.subscribe(title=>this.title=title)
-    }
+    this.titleService.getTitle().subscribe(
+      route=>{
+        this.ruta=route
+      }
+    )
   }
 
 }

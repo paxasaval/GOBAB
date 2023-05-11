@@ -10,7 +10,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzInputModule } from 'ng-zorro-antd/input';
 @NgModule({
   declarations: [],
   imports: [
@@ -25,7 +29,12 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatInputModule,
     MatTableModule,
     MatExpansionModule,
-    MatDialogModule
+    MatDialogModule,
+    NzCarouselModule,
+    NzBreadCrumbModule,
+    NzCheckboxModule,
+    NzTableModule,
+    NzInputModule
   ],
   exports:[
     MatButtonModule,
@@ -38,7 +47,12 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatInputModule,
     MatTableModule,
     MatExpansionModule,
-    MatDialogModule
+    MatDialogModule,
+    NzCarouselModule,
+    NzBreadCrumbModule,
+    NzCheckboxModule,
+    NzTableModule,
+    NzInputModule
   ]
 })
 export class MaterialModule { }

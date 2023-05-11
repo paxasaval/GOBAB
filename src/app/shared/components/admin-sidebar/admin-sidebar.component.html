@@ -1,15 +1,6 @@
 <div class="container">
-  <div class="user">
-    <div class="user-image">
-      <img [src]="userDefault" alt="" />
-    </div>
-    <div *ngIf="user" class="user-info">
-      <span class="user-name">{{ user.name }}</span>
-      <span *ngIf="rol" class="user-rol">{{ rol.name }}</span>
-    </div>
-  </div>
-  <menu class="menu">
-    <div class="menuItem">
+  <menu>
+    <mat-accordion class="menu">
       <mat-expansion-panel
         class="menu-list"
         routerLink="home"
@@ -18,29 +9,34 @@
         [hideToggle]="true"
       >
         <mat-expansion-panel-header>
-          <mat-panel-title><li>Inicio</li></mat-panel-title>
+          <mat-panel-title>
+            <li>
+              <mat-icon class="mat-18">space_dashboard</mat-icon>
+               Inicio
+            </li>
+          </mat-panel-title>
         </mat-expansion-panel-header>
       </mat-expansion-panel>
-    </div>
-    <div *ngIf="arrayQuadrant.length>0 && arrayQuadrant[0].length>0" class="flag">
-      <div *ngFor="let quadrant of arrayQuadrant" class="menuItem">
-        <mat-expansion-panel
-          class="menu-list"
-          [routerLink]="['quadrant', quadrant[0].quadrant]"
-          routerLinkActive="active"
-          [hideToggle]="true"
-        >
-          <mat-expansion-panel-header>
-            <mat-panel-title
-              ><li >Cuadrante {{ quadrant[0].quadrant }}</li></mat-panel-title
-            >
-          </mat-expansion-panel-header>
-          <li class="submenu" *ngFor="let indicator of quadrant">
-            -{{ indicator.name }}
-          </li>
-        </mat-expansion-panel>
-      </div>
-    </div>
-
+      <mat-expansion-panel
+        *ngFor="let quadrant of arrayQuadrant"
+        class="menu-list"
+        [routerLink]="['quadrant', quadrant[0].quadrant]"
+        routerLinkActive="active"
+        [hideToggle]="true"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title
+            ><li>
+              <mat-icon>pie_chart</mat-icon>
+              Cuadrante {{ quadrant[0].quadrant }}
+            </li>
+            </mat-panel-title
+          >
+        </mat-expansion-panel-header>
+        <li class="submenu" *ngFor="let indicator of quadrant">
+          -{{ indicator.name }}
+        </li>
+      </mat-expansion-panel>
+    </mat-accordion>
   </menu>
 </div>

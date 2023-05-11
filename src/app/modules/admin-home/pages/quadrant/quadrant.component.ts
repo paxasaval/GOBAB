@@ -56,8 +56,8 @@ export class QuadrantComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.pipe(
       switchMap(params=>{
-        this.id = params.id
-        console.log(this.id)
+        this.id = params.id //quadrantNumber
+        //console.log(this.id)
         this.indicators=[]
         return this.indicatorInstanceService.getIndicatorsByPeriodAndQuadrant('2022',params.id)
       })
@@ -65,7 +65,7 @@ export class QuadrantComponent implements OnInit {
       console.log(arrayIndicatorInstances)
       this.indicators=arrayIndicatorInstances
       const indicatorCatalogo = this.indicators[0].indicatorID as IndicatorID
-      this.titleService.setTitle(indicatorCatalogo.quadrantName)
+      this.titleService.setTitle([indicatorCatalogo.quadrantName])
     })
   }
 

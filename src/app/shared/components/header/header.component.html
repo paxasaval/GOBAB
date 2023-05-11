@@ -8,11 +8,5 @@
       <span>Gobiernos Abiertos</span>
     </div>
   </div>
-  <div class="search">
-    <mat-form-field appearance="outline">
-      <mat-label>Ingrese el nombre del proyecto</mat-label>
-      <input matInput type="text" [formControl]="searchControl">
-      <mat-icon matSuffix class="mat-18">search</mat-icon>
-    </mat-form-field>
-  </div>
+  <app-search-input></app-search-input>
 </header>

@@ -1,0 +1,8 @@
+<nz-carousel [nzEffect]="effect">
+  <div class="container" nz-carousel-content *ngFor="let img of urls">
+    <img class="content" [src]="img" alt="">
+    <div class="blackout">
+      <h2>Noticia {{findIndex(urls,img)}}</h2>
+    </div>
+  </div>
+</nz-carousel>

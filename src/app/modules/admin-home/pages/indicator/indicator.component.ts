@@ -34,7 +34,13 @@ export class IndicatorComponent implements OnInit {
       const indicatorCatalog = indicator.indicatorID as IndicatorID
       this.indicatorInstanceService.setIndicatorInstance(indicator)
       const title =  `${indicatorCatalog.quadrant}.${indicatorCatalog.number} ${indicatorCatalog.name}`
-      this.titleService.setTitle(title)
+      const array = [indicatorCatalog.quadrantName,indicatorCatalog.name]
+      this.titleService.getTitle().toPromise().then(title=>{
+        if(title.length>array.length){
+          this.titleService.setTitle(array)
+        }
+      })
+
     })
   }
 

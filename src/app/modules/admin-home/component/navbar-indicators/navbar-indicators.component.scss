@@ -1,31 +1,36 @@
 .container{
   display: flex;
   width: 100%;
+  height: 7vh;
   overflow-x: hidden;
+  align-items: center;
+  align-content: center;
 }
 .menu-indicators{
   display: flex;
   width: 100%;
   gap: 1em;
-
+  height: 80%;
+  margin: 0;
+  padding: 0;
+  padding-right: 1em;
 }
 .menu-option{
   list-style: none;
   display: flex;
-  height: 7vh;
   width: 20%;
   justify-content: center;
   align-items: center;
   border-radius: 6px;
-  background-color: var(--color2);
+  background-color: var(--color4);
   color:var(--white);
   font-weight: 600;
   cursor: pointer;
 }
 .active{
   background-color: var(--white);
-  border-color: var(--color2);
+  border-color: var(--color4);
   border-width: 2px;
   border-style: solid;
-  color: var(--color2);
+  color: var(--color4);
 }

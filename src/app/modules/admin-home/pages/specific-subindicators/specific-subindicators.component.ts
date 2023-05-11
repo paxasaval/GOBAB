@@ -5,6 +5,8 @@ import { SubindicatorID } from 'src/app/models/subindicators';
 import { SubindicatorService } from 'src/app/services/subindicator/subindicator.service';
 import { IndicatorInstanceService } from 'src/app/services/indicator-instance/indicator-instance.service';
 import { IndicatorInstanceID } from 'src/app/models/indicatorInstance';
+import { TitleService } from 'src/app/services/title/title.service';
+import { IndicatorID } from 'src/app/models/indicator';
 
 @Component({
   selector: 'app-specific-subindicators',
@@ -17,15 +19,18 @@ export class SpecificSubindicatorsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private indicatorService:IndicatorInstanceService
+    private indicatorService:IndicatorInstanceService,
+    private titleService:TitleService
   ) { }
 
   ngOnInit(): void {
     this.indicatorService.getIndicatorInstance().subscribe(
       indicator=>{
         this.indicator=indicator
+        const indicatorCatalog = indicator.indicatorID as IndicatorID
+        this.titleService.setTitle([indicatorCatalog.quadrantName,indicatorCatalog.name,'Subindicadores Especificos'])
       }
     )
-  }
+  } 
 
 }

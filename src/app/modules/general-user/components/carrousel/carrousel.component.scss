@@ -1,0 +1,31 @@
+[nz-carousel-content] {
+  height: 50vh;
+  overflow: hidden;
+
+}
+.container{
+  display: flex!important;
+  justify-content: center;
+}
+.content{
+  height: 100%;
+}
+.blackout{
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h2{
+    text-transform: uppercase;
+    color: var(--white);
+  }
+}
+
+h3 {
+  color: #fff;
+  margin-bottom: 0;
+  user-select: none;
+}

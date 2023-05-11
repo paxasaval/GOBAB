@@ -1,0 +1,31 @@
+<header class="header">
+  <div class="name">
+    <div class="logo">
+      <img src="../../../../assets/logo1.png" alt="">
+    </div>
+    <div class="hook">
+      <h4>Transparencia de la informacion</h4>
+      <span>Gobiernos Abiertos</span>
+    </div>
+  </div>
+  <app-search-input></app-search-input>
+  <div class="notifications">
+    <div class="icon messages">
+      <mat-icon class="mat-18">chat</mat-icon>
+    </div>
+    <div class="icon notifications">
+      <mat-icon class="mat-18">notifications</mat-icon>
+    </div>
+  </div>
+  <div class="user">
+    <div class="icon rol">
+      {{rol}}
+    </div>
+    <div class="icon userImg">
+      <img [src]="imageDefault" alt="">
+    </div>
+    <div class="icon config">
+      <mat-icon class="mat-18">settings</mat-icon>
+    </div>
+  </div>
+</header>

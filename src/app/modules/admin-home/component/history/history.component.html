@@ -1,0 +1,41 @@
+<nz-table class="table" *ngIf="groupEvidence" #evidenceTable [nzData]="groupEvidence">
+  <thead>
+    <tr>
+      <th rowSpan="2">Caracteristica</th>
+      <th colSpan="3">Evidencia</th>
+      <th colSpan="3">Revision</th>
+    </tr>
+    <tr>
+      <th>Nombre</th>
+      <th>Enlace</th>
+      <th>Observacion</th>
+      <th>Aprobado</th>
+      <th>Calificacion</th>
+      <th>Comentario</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let data of evidenceTable.data">
+      <tr>
+        <td [rowSpan]="data.evidences.length+1">
+          {{ data.characteristic.name }}
+        </td>
+      </tr>
+      <tr *ngFor="let evidence of data.evidences">
+        <td [rowSpan]="1">{{ evidence.name }}</td>
+        <td [rowSpan]="1">{{ evidence.link }}</td>
+        <td [rowSpan]="1">{{ evidence.note }}</td>
+        <td [rowSpan]="1">
+          <label nz-checkbox [(ngModel)]="evidence.verified"></label>
+        </td>
+        <td [rowSpan]="1">
+          <input nz-input nz-size="small" type="number" />
+        </td>
+        <td [rowSpan]="1">
+          <textarea nz-input type="text" nzAutosize></textarea>
+        </td>
+      </tr>
+    </ng-container>
+    <tr></tr>
+  </tbody>
+</nz-table>

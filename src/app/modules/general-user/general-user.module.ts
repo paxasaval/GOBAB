@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { MaterialModule } from 'src/app/material/material.module';
+import { CarrouselComponent } from './components/carrousel/carrousel.component';
 
 
 
@@ -21,12 +22,14 @@ import { MaterialModule } from 'src/app/material/material.module';
     QuadrantComponent,
     LayoutComponent,
     SummaryComponent,
+    CarrouselComponent,
+
   ],
   imports: [
     CommonModule,
     GeneraUserRoutingModule,
     SharedModule,
-    MaterialModule
+    MaterialModule,
   ]
 })
 export class GeneralUserModule { }

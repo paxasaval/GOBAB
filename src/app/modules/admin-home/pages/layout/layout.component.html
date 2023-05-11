@@ -1,7 +1,11 @@
-<aside>
-  <app-admin-sidebar></app-admin-sidebar>
-</aside>
-<main>
-  <app-title></app-title>
-  <router-outlet></router-outlet>
-</main>
+<div class="layout">
+  <app-admin-header></app-admin-header>
+  <div class="container">
+    <aside>
+      <app-admin-sidebar></app-admin-sidebar>
+    </aside>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

@@ -62,11 +62,6 @@ export class AdminSidebarComponent implements OnInit {
     ]
     console.log(this.arrayQuadrant)
   }
-  setTitle(title: string) {
-    this.titleService.setTitle(title)
-    console.log(title)
-
-  }
   ngOnInit(): void {
     const token = localStorage.getItem('token')
     const idUser = localStorage.getItem('user')

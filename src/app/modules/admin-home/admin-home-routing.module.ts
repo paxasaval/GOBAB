@@ -20,11 +20,17 @@ const routes: Routes = [
       {
         path:'',
         redirectTo:'quadrant/1',
-        pathMatch:'full'
+        pathMatch:'full',
+        data:{
+          breadcrumb:'Desarrollo Institucional para un Buen Gobierno'
+        }
       },
       {
         path:'home',
-        component:HomeComponent
+        component:HomeComponent,
+        data:{
+          breadcrumb:'Inicio'
+        }
       },
       {
         path:'quadrant/:id/indicator/:id',

@@ -5,12 +5,19 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class TitleService {
 
-  private titleSubject=new BehaviorSubject<string>('')
-  title$ = this.titleSubject.asObservable()
+  private titleSubject=new BehaviorSubject<string[]>([])
 
 
   constructor() { }
-  setTitle(title:string){
+  setTitle(title:string[]){
     this.titleSubject.next(title)
   }
+  addSubtitle(subtitle:string){
+    const addSubtitle = this.titleSubject.value.concat(subtitle)
+    this.titleSubject.next(addSubtitle)
+  }
+  getTitle(){
+    return this.titleSubject.asObservable()
+  }
+
 }

@@ -1,4 +1,10 @@
 <div class="container">
+  <h1>Instancia Responsable</h1>
+  <h2>Estado actual</h2>
+  <app-info *ngIf="subIndicator" [subindicator]="subIndicator"></app-info>
+  <h2>Registro de evidencias</h2>
+  <app-history *ngIf="flag" [indicatorID]="indicator.id" [typeID]="type"></app-history>
+  <h2>Ingreso de Evidencias</h2>
   <div class="form">
     <app-input-evidence1 (evidenceEmit)="addEvidence($event)" *ngFor="let characteristic of characteristics" [characteristic]="characteristic"></app-input-evidence1>
   </div>

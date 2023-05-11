@@ -1,6 +1,11 @@
-:host{
+.layout{
   width: 100%;
+  height: 100%;
+  position: relative;
+}
+.container{
   display: flex;
+  width: 100%;
 }
 aside{
   width: 20%;
