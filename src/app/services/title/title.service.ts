@@ -14,6 +14,7 @@ export class TitleService {
   }
   addSubtitle(subtitle:string){
     const addSubtitle = this.titleSubject.value.concat(subtitle)
+    console.log('as')
     this.titleSubject.next(addSubtitle)
   }
   getTitle(){
