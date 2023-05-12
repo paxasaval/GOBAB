@@ -16,12 +16,20 @@ export class StorageService {
   ) { }
 
   uploadFile(path:string, file:File){
-    const ref = this.storage.ref(path)
-    const task = this.storage.upload(path,file)
-    this.uploadPercent = task.percentageChanges()
-    return task.snapshotChanges().pipe(
-      finalize(()=>this.downloadURL = ref.getDownloadURL())
-    )
+    const filePath = `${path}/${file.name}`
+    const ref = this.storage.ref(filePath)
+    const uploadTask = this.storage.upload(filePath,file)
+    return new Promise<string>((res,rej)=>{
+      uploadTask.snapshotChanges()
+       .pipe(
+        finalize(async ()=>{
+          const dowloadURL = await ref.getDownloadURL().toPromise()
+          res(dowloadURL)
+        })
+       ).subscribe({
+        error:rej
+       })
+    })
   }
 
 }

@@ -7,6 +7,7 @@ import { TypeID } from 'src/app/models/type';
 import { TypeService } from 'src/app/services/type/type.service';
 import { EvidenceService } from 'src/app/services/evidence/evidence.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-finish-evidence',
@@ -22,7 +23,7 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
   constructor(
     private typeService: TypeService,
     private evidenceService: EvidenceService,
-    private storageService: StorageService
+    private storageService: StorageService,
   ) { }
 
   groupCharacteristics(typeID: TypeID, evidences: Evidence[]): CharacteristicWithEvidence[] {
@@ -38,7 +39,7 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
     })
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
+    //console.log(changes)
     if (this.typeID) {
       this.groupData = this.groupCharacteristics(this.typeID, this.evidences)
     }
@@ -46,16 +47,20 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
   cancel() {
 
   }
-  async saveEvidence() {
+  saveEvidence() {
+    let numberEvidences = this.evidences.length
+    const dialog = Swal.fire({
+      title:'Subiendo evidencias',
+      didOpen:()=>{
+        Swal.showLoading()
+      }
+    })
     from(this.evidences).pipe(
       concatMap(evidence => {
         if (evidence.link instanceof File) {
-          return this.storageService.uploadFile('test', evidence.link).pipe(
-            concatMap(async (task) => {
-              const url = await task?.ref.getDownloadURL()
-              if (url) {
+          return from(this.storageService.uploadFile('test', evidence.link)).pipe(
+            concatMap((url) => {
                 evidence.link = url
-              }
               return this.evidenceService.addEvidence(evidence)
             })
           )
@@ -64,6 +69,11 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
         }
       })
     ).subscribe(saveEvidence => {
+      if(numberEvidences<this.evidences.length){
+        numberEvidences+=1
+      }else{
+        Swal.close()
+      }
       console.log(saveEvidence)
     }, error => {
       console.log(error)
