@@ -11,7 +11,7 @@ export class IndicatorInstanceService {
 
   private apiUrl = `${environment.API_URL}/api/indicatorsInstance`
 
-  IndicatorSelected = new BehaviorSubject<IndicatorInstanceID>({
+  private IndicatorSelected = new BehaviorSubject<IndicatorInstanceID>({
     id:'',
     create:new Date(),
     createBy:'',

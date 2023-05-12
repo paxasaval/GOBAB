@@ -1,0 +1,24 @@
+:host{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.title{
+  width: 100%;
+  padding-left: 1em;
+  padding-top: 1em;
+  text-transform: uppercase;
+  font-weight: 800;
+  text-align: center;
+  font-size: 18pt;
+}
+.form{
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.evidence{
+  width: 45%;
+}

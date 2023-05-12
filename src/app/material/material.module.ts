@@ -15,6 +15,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
 @NgModule({
   declarations: [],
   imports: [
@@ -34,7 +35,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     NzBreadCrumbModule,
     NzCheckboxModule,
     NzTableModule,
-    NzInputModule
+    NzInputModule,
+    NzStepsModule
   ],
   exports:[
     MatButtonModule,
@@ -52,7 +54,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     NzBreadCrumbModule,
     NzCheckboxModule,
     NzTableModule,
-    NzInputModule
+    NzInputModule,
+    NzStepsModule
   ]
 })
 export class MaterialModule { }

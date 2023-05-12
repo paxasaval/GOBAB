@@ -1,0 +1,10 @@
+<h2 class="title" >Registrar Evidencias</h2>
+<div class="form">
+  <app-input-evidence1 class="evidence" (evidenceEmit)="addEvidence($event)" *ngFor="let characteristic of characteristics" [characteristic]="characteristic"></app-input-evidence1>
+</div>
+<div class="actions">
+  <div class="buttons">
+    <button class="save" mat-raised-button (click)="continue()">Continuar</button>
+    <button class="cancel" mat-raised-button routerLink="../">Cancelar</button>
+  </div>
+</div>

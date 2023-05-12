@@ -1,0 +1,7 @@
+<app-steps-evidence (stepEvent)="changeStep($event)" [step]="step"></app-steps-evidence>
+<div *ngIf="step==0;else elseBlock">
+<app-form-evidence (evidencesEvent)="handleEvidence($event)"></app-form-evidence>
+</div>
+<ng-template #elseBlock>
+  <app-finish-evidence [evidences]="arrayEvidence"></app-finish-evidence>
+</ng-template>

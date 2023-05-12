@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SubindicatorID } from 'src/app/models/subindicators';
+import { SubindicatorService } from 'src/app/services/subindicator/subindicator.service';
 
 @Component({
   selector: 'app-info',
@@ -8,11 +9,17 @@ import { SubindicatorID } from 'src/app/models/subindicators';
 })
 export class InfoComponent implements OnInit {
 
-  @Input() subindicator!:SubindicatorID
+  subindicator!:SubindicatorID
 
-  constructor() { }
+  constructor(
+    private subindicatorService:SubindicatorService
+  ) { }
 
   ngOnInit(): void {
+    this.subindicatorService.getSelectedSubindicator()
+      .subscribe(subindicator=>{
+        this.subindicator=subindicator
+      })
   }
 
 }

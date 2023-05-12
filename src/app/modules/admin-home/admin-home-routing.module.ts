@@ -7,6 +7,8 @@ import { IndicatorComponent } from './pages/indicator/indicator.component';
 import { IndicatorGeneralComponent } from './component/indicator-general/indicator-general.component';
 import { SpecificSubindicatorsComponent } from './pages/specific-subindicators/specific-subindicators.component';
 import { AddSubindicatorComponent } from './pages/add-subindicator/add-subindicator.component';
+import { SubindicatorGeneralComponent } from './component/subindicator-general/subindicator-general.component';
+import { AddEvidenceComponent } from './pages/add-evidence/add-evidence.component';
 
 const routes: Routes = [
   {
@@ -39,7 +41,17 @@ const routes: Routes = [
           {
             path:'Instancia-responsable',
             component:IndicatorGeneralComponent,
-            data:{typeID:'64400a11cf6b0eec947e8867'}
+            data:{typeID:'64400a11cf6b0eec947e8867'},
+            children:[
+              {
+                path:'',
+                component:SubindicatorGeneralComponent
+              },
+              {
+                path:'add-evidence',
+                component:AddEvidenceComponent
+              }
+            ]
           },
           {
             path:'',
@@ -49,23 +61,53 @@ const routes: Routes = [
           {
             path:'Diagnostico',
             component:IndicatorGeneralComponent,
-            data:{typeID:'64400a11cf6b0eec947e8869'}
-
+            data:{typeID:'64400a11cf6b0eec947e8869'},
+            children:[
+              {
+                path:'',
+                component:SubindicatorGeneralComponent
+              },
+              {
+                path:'add-evidence',
+                component:AddEvidenceComponent
+              }
+            ]
           },
           {
             path:'Normativa-y Reglamentación',
             component:IndicatorGeneralComponent,
-            data:{typeID:'64400a11cf6b0eec947e886b'}
+            data:{typeID:'64400a11cf6b0eec947e886b'},
+            children:[
+              {
+                path:'',
+                component:SubindicatorGeneralComponent
+              },
+              {
+                path:'add-evidence',
+                component:AddEvidenceComponent
+              }
+            ]
 
           },
           {
             path:'Mecanismos',
             component:IndicatorGeneralComponent,
-            data:{typeID:'64400a11cf6b0eec947e8871'}
+            data:{typeID:'64400a11cf6b0eec947e8871'},
+            children:[
+              {
+                path:'',
+                component:SubindicatorGeneralComponent
+              },
+              {
+                path:'add-evidence',
+                component:AddEvidenceComponent
+              }
+            ]
           },
           {
             path:'Subindicadores-Especificos',
             component:SpecificSubindicatorsComponent,
+
           },
           {
             path:'Subindicadores-Especificos/add-subindicator',

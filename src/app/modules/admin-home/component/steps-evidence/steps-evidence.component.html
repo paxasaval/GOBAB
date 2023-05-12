@@ -1,0 +1,21 @@
+<nz-steps nzType="navigation"  [nzCurrent]="step" (nzIndexChange)="changeStep($event)">
+  <nz-step
+  [nzTitle]="title1"
+  nzDescription="Completar"
+  >
+  </nz-step>
+  <ng-template #title1>
+    <span class="title">Registrar evidencias</span>
+  </ng-template>
+  <nz-step
+  [nzTitle]="title2"
+  nzDescription="Revisar"
+  nzDisabled
+  >
+  </nz-step>
+  <ng-template #title2>
+    <span class="title">Cuadro Resumen</span>
+  </ng-template>
+</nz-steps>
+
+

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "iso18091storage": {
+      "hosting": {
+        "baldurwatch": [
+          "iso18091storage"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "iso18091storage"
+  }
+}

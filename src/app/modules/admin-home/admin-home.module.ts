@@ -17,6 +17,11 @@ import { DialogAbstractComponent } from './component/dialog-abstract/dialog-abst
 import { CardInfoComponent } from './component/card-info/card-info.component';
 import { HistoryComponent } from './component/history/history.component';
 import { InfoComponent } from './component/info/info.component';
+import { AddEvidenceComponent } from './pages/add-evidence/add-evidence.component';
+import { SubindicatorGeneralComponent } from './component/subindicator-general/subindicator-general.component';
+import { StepsEvidenceComponent } from './component/steps-evidence/steps-evidence.component';
+import { FormEvidenceComponent } from './component/form-evidence/form-evidence.component';
+import { FinishEvidenceComponent } from './component/finish-evidence/finish-evidence.component';
 
 
 @NgModule({
@@ -34,6 +39,11 @@ import { InfoComponent } from './component/info/info.component';
     CardInfoComponent,
     HistoryComponent,
     InfoComponent,
+    AddEvidenceComponent,
+    SubindicatorGeneralComponent,
+    StepsEvidenceComponent,
+    FormEvidenceComponent,
+    FinishEvidenceComponent,
   ],
   imports: [
     CommonModule,

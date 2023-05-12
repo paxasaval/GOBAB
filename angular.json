@@ -111,6 +111,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "baldurwatch:build:production",
+            "firebaseProject": "iso18091storage",
+            "firebaseHostingSite": "iso18091storage"
+          }
         }
       }
     }

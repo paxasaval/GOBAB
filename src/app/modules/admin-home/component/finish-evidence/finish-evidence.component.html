@@ -1,0 +1,40 @@
+<h2>Cuadro de Resumen</h2>
+<nz-table class="table" *ngIf="groupData" #evidenceTable [nzData]="groupData">
+  <thead>
+    <tr>
+      <th rowSpan="2">Caracteristica</th>
+      <th colSpan="3">Evidencia</th>
+    </tr>
+    <tr>
+      <th>Nombre</th>
+      <th>Enlace/Archivo</th>
+      <th>Observacion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let data of evidenceTable.data">
+      <tr >
+        <td [rowSpan]="data.evidences.length>0?data.evidences.length+1:2">
+          {{ data.characteristic.name }}
+        </td>
+      </tr>
+      <ng-container *ngIf="data.evidences.length>0;else elseBlock">
+        <tr *ngFor="let evidence of data.evidences">
+          <td [rowSpan]="1">{{ evidence.name || 'no name' }}</td>
+          <td [rowSpan]="1">{{ evidence.link }}</td>
+          <td [rowSpan]="1">{{ evidence.note }}</td>
+        </tr>
+      </ng-container>
+      <ng-template #elseBlock>
+        <tr>
+          <td class="center" [colSpan]="3">no evidence upload</td>
+        </tr>
+      </ng-template>
+    </ng-container>
+    <tr></tr>
+  </tbody>
+</nz-table>
+<div class="actions">
+  <button mat-raised-button routerLink="../">Cancelar</button>
+  <button mat-raised-button (click)="saveEvidence()">Guardar</button>
+</div>

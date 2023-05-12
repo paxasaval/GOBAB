@@ -13,7 +13,11 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import en from '@angular/common/locales/en';
-
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideStorage,getStorage } from '@angular/fire/storage';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 registerLocaleData(en);
 
 export function tokenGetter() {
@@ -40,7 +44,9 @@ export function tokenGetter() {
         allowedDomains:["localhost:3001"],
         disallowedRoutes:["localhost:3001/api/login"]
       }
-    })
+    }),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule
   ],
   providers: [
     {
