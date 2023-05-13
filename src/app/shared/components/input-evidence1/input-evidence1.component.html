@@ -1,6 +1,7 @@
 <div class="container">
   <div class="title">
     <h3>{{ characteristic.groupName }}</h3>
+    <span>{{characteristic.name}}</span>
     <span class="opcional" *ngIf="opcional">(Opcional)</span>
   </div>
   <div *ngFor="let formEvidence of arrayForms" class="form">

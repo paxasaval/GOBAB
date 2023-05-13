@@ -9,6 +9,8 @@ import { SpecificSubindicatorsComponent } from './pages/specific-subindicators/s
 import { AddSubindicatorComponent } from './pages/add-subindicator/add-subindicator.component';
 import { SubindicatorGeneralComponent } from './component/subindicator-general/subindicator-general.component';
 import { AddEvidenceComponent } from './pages/add-evidence/add-evidence.component';
+import { SearchSpecificSubindicatorComponent } from 'src/app/shared/components/search-specific-subindicator/search-specific-subindicator.component';
+import { ReviewSubindicatorSpecifidcComponent } from './pages/review-subindicator-specifidc/review-subindicator-specifidc.component';
 
 const routes: Routes = [
   {
@@ -107,12 +109,32 @@ const routes: Routes = [
           {
             path:'Subindicadores-Especificos',
             component:SpecificSubindicatorsComponent,
+            children:[
+              {
+                path:'',
+                component:SearchSpecificSubindicatorComponent
+              },
+              {
+                path:'add-subindicator',
+                component:AddSubindicatorComponent
+              },
+              {
+                path:':id',
+                component:ReviewSubindicatorSpecifidcComponent,
+                children:[
+                  {
+                    path:'',
+                    component:SubindicatorGeneralComponent
+                  },
+                  {
+                    path:'add-evidence',
+                    component:AddEvidenceComponent
+                  }
+                ]
+              },
 
+            ]
           },
-          {
-            path:'Subindicadores-Especificos/add-subindicator',
-            component:AddSubindicatorComponent
-          }
         ]
       }
     ]

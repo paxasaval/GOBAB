@@ -26,7 +26,11 @@
     <h4>Eje</h4>
     <mat-form-field appearance="outline">
       <mat-label>Escoja el cuadrante</mat-label>
-      <mat-select (selectionChange)="handleEje($event)" [formControl]="ejeControl">
+      <mat-select
+        (selectionChange)="handleEje($event)"
+        [formControl]="ejeControl"
+        [disabled]="flag"
+      >
         <mat-option *ngFor="let eje of arrayEjes" [value]="eje.quadrant">
           {{ eje.quadrantName }}
         </mat-option>
@@ -37,8 +41,15 @@
     <h4>Indicador</h4>
     <mat-form-field appearance="outline">
       <mat-label>Escoja el indicador correspondiente</mat-label>
-      <mat-select (selectionChange)="handleIndicator($event)" [formControl]="indicatorControl">
-        <mat-option *ngFor="let indicator of arrayIndicator" [value]="indicator.number">
+      <mat-select
+        (selectionChange)="handleIndicator($event)"
+        [formControl]="indicatorControl"
+        [disabled]="flag"
+      >
+        <mat-option
+          *ngFor="let indicator of arrayIndicator"
+          [value]="indicator.number"
+        >
           {{ indicator.name }}
         </mat-option>
       </mat-select>
@@ -71,7 +82,7 @@
   <div class="cleanFilters">
     <span (click)="cleanFilters()">Reestablecer filtros</span>
   </div>
-  <div *ngIf="rol == 'admin'" class="addSubindicator">
+  <div *ngIf="auth" class="addSubindicator">
     <button class="btn-add" mat-mini-fab (click)="addSubindicator()">
       <mat-icon class="add">add</mat-icon>
     </button>
@@ -92,7 +103,9 @@
     <!-- Type Column -->
     <ng-container matColumnDef="type">
       <th mat-header-cell *matHeaderCellDef>Tipo</th>
-      <td mat-cell *matCellDef="let subindicator">{{ subindicator.typeID.name }}</td>
+      <td mat-cell *matCellDef="let subindicator">
+        {{ subindicator.typeID.name }}
+      </td>
     </ng-container>
 
     <!-- State Column -->
@@ -104,7 +117,9 @@
     <!-- Date-Update Column -->
     <ng-container matColumnDef="dateUpdate">
       <th mat-header-cell *matHeaderCellDef>Ultima actualización</th>
-      <td mat-cell *matCellDef="let subindicator">{{ subindicator.lastUpdate | date:'short' }}</td>
+      <td mat-cell *matCellDef="let subindicator">
+        {{ subindicator.lastUpdate | date : "short" }}
+      </td>
     </ng-container>
     <!-- Responsibles Column -->
     <ng-container matColumnDef="responsibles">
@@ -119,6 +134,9 @@
       <td mat-cell *matCellDef="let subindicador">
         <mat-icon class="mat-18" (click)="viewSubindicator(subindicador.id)"
           >visibility</mat-icon
+        >
+        <mat-icon *ngIf="auth" class="mat-18" [routerLink]="subindicador.id"
+          >settings</mat-icon
         >
       </td>
     </ng-container>

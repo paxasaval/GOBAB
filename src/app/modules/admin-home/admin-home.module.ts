@@ -26,6 +26,7 @@ import { AddSubindicatorDataComponent } from './component/add-subindicator-data/
 import { AddSubindicatorEvidencesComponent } from './component/add-subindicator-evidences/add-subindicator-evidences.component';
 import { AddSubindicatorConfirmComponent } from './component/add-subindicator-confirm/add-subindicator-confirm.component';
 import { StepsSubindicatorComponent } from './component/steps-subindicator/steps-subindicator.component';
+import { ReviewSubindicatorSpecifidcComponent } from './pages/review-subindicator-specifidc/review-subindicator-specifidc.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { StepsSubindicatorComponent } from './component/steps-subindicator/steps
     AddSubindicatorEvidencesComponent,
     AddSubindicatorConfirmComponent,
     StepsSubindicatorComponent,
+    ReviewSubindicatorSpecifidcComponent,
   ],
   imports: [
     CommonModule,

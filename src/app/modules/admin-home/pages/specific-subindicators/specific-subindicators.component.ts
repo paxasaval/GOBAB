@@ -20,7 +20,8 @@ export class SpecificSubindicatorsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private indicatorService:IndicatorInstanceService,
-    private titleService:TitleService
+    private titleService:TitleService,
+    private subindicatorService:SubindicatorService
   ) { }
 
   ngOnInit(): void {
@@ -31,6 +32,6 @@ export class SpecificSubindicatorsComponent implements OnInit {
         this.titleService.setTitle([indicatorCatalog.quadrantName,indicatorCatalog.name,'Subindicadores Especificos'])
       }
     )
-  } 
+  }
 
 }
