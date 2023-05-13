@@ -1,5 +1,8 @@
 <div class="container">
-  <h3>{{ characteristic.groupName }}</h3>
+  <div class="title">
+    <h3>{{ characteristic.groupName }}</h3>
+    <span class="opcional" *ngIf="opcional">(Opcional)</span>
+  </div>
   <div *ngFor="let formEvidence of arrayForms" class="form">
     <form class="formInput" [formGroup]="formEvidence.form">
       <span>Observaciones:</span>
@@ -21,14 +24,14 @@
       >
         <span>Subir Archivo:</span>
         <div class="dropFile">
-          <div class="legend" *ngIf="!formEvidence.evidence;else nameFile">
+          <div class="legend" *ngIf="!formEvidence.evidence; else nameFile">
             <mat-icon class="mat-18">upload</mat-icon>
             <p>Arrastre aquí los archivos</p>
             <span>Archivos (PDF, jpg, png)</span>
           </div>
           <ng-template #nameFile class="legend">
             <mat-icon class="mat-18">description</mat-icon>
-            {{formEvidence.evidence?.name}}
+            {{ formEvidence.evidence?.name }}
           </ng-template>
           <input
             #fileInput

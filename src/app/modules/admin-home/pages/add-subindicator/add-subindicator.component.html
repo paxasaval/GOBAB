@@ -1,126 +1,19 @@
+<app-steps-subindicator [step]="step" (stepEvent)="stepChange($event)" ></app-steps-subindicator>
 <div class="container">
-  <div class="summary">
-    <h3>Resumen del subindicador</h3>
-    <form class="name-form">
-      <span>Nombre</span>
-      <mat-form-field appearance="outline">
-        <mat-label>Nombre</mat-label>
-        <input matInput type="text" [formControl]="nameControl" />
-      </mat-form-field>
-    </form>
-    <form class="type-form" [formGroup]="typeControl">
-      <span>Tipo</span>
-      <mat-form-field appearance="outline">
-        <mat-label>Tipo</mat-label>
-        <mat-select
-          formControlName="type"
-          placeholder=""
-          (valueChange)="selectChanges($event)"
-        >
-          <mat-option *ngFor="let type of types" [value]="type">{{
-            type.name
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </form>
-    <form class="responsible-form">
-      <span>Responsable(s)</span>
-      <mat-form-field appearance="outline">
-        <mat-label>Responsable(s)</mat-label>
-        <textarea
-          matInput
-          cdkTextareaAutosize
-          cdkAutosizeMinRows="1"
-          cdkAutosizeMaxRows="5"
-          type="text"
-          [formControl]="responsibleControl"
-        ></textarea>
-      </mat-form-field>
-    </form>
-  </div>
-  <div class="portada">
-    <app-input-evidence1
-      class="evidence-portada"
-      [characteristic]="portada"
-      (evidenceEmit)="handlePortada($event)"
-    ></app-input-evidence1>
-  </div>
-  <div class="characteristics">
-    <h3>Ingreso de Evidencias</h3>
-    <div class="container-characteristics">
-      <div class="tree-characteristics">
-        <ul *ngIf="group1.length > 0" class="group entrada">
-          <span>{{ group1[0].groupName }}</span>
-          <li *ngFor="let characteristic of group1">
-            <a (click)="scroll(characteristic.name,group1[0].groupName)">{{ characteristic.name }}</a>
-
-          </li>
-        </ul>
-        <ul *ngIf="group2.length > 0" class="group ejejcucion">
-          <span>{{ group2[0].groupName }}</span>
-          <li *ngFor="let characteristic of group2">
-            <a (click)="scroll(characteristic.name,group2[0].groupName)">{{ characteristic.name }}</a>
-          </li>
-        </ul>
-        <ul *ngIf="group3.length > 0" class="group salida">
-          <span>{{ group3[0].groupName }}</span>
-          <li *ngFor="let characteristic of group3">
-            <a (click)="scroll(characteristic.name,group3[0].groupName)">{{ characteristic.name }}</a>
-          </li>
-        </ul>
-      </div>
-      <div class="characteristics-form">
-        <mat-expansion-panel *ngIf="group1.length > 0" [hideToggle]="false" [id]="group1[0].groupName">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <h4>{{ group1[0].groupName }}</h4>
-            </mat-panel-title>
-            <mat-panel-description></mat-panel-description>
-          </mat-expansion-panel-header>
-          <app-input-evidence2
-            (evidenceEmit)="addEvidence($event)"
-            *ngFor="let characteristic of group1"
-            [characteristic]="characteristic"
-            [id]="characteristic.name+group1[0].groupName"
-          ></app-input-evidence2>
-        </mat-expansion-panel>
-        <mat-expansion-panel *ngIf="group2.length > 0" [hideToggle]="false" [id]="group2[0].groupName">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <h4>{{ group2[0].groupName }}</h4>
-            </mat-panel-title>
-            <mat-panel-description></mat-panel-description>
-          </mat-expansion-panel-header>
-          <app-input-evidence2
-            (evidenceEmit)="addEvidence($event)"
-            *ngFor="let characteristic of group2"
-            [characteristic]="characteristic"
-            [id]="characteristic.name+group2[0].groupName"
-          ></app-input-evidence2>
-        </mat-expansion-panel>
-        <mat-expansion-panel *ngIf="group3.length > 0" [hideToggle]="false" [id]="group3[0].groupName">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <h4>{{ group3[0].groupName }}</h4>
-            </mat-panel-title>
-            <mat-panel-description></mat-panel-description>
-          </mat-expansion-panel-header>
-          <app-input-evidence2
-            (evidenceEmit)="addEvidence($event)"
-            *ngFor="let characteristic of group3"
-            [characteristic]="characteristic"
-            [id]="characteristic.name+group3[0].groupName"
-          ></app-input-evidence2>
-        </mat-expansion-panel>
-      </div>
-    </div>
-  </div>
-  <div class="actions">
-    <button class="save" mat-raised-button (click)="saveEvidence()">
-      Guardar
-    </button>
-    <button class="cancel" mat-raised-button (click)="cancelEvidence()">
-      Cancelar
-    </button>
-  </div>
+  <app-add-subindicator-data
+    *ngIf="step==0"
+    (dataEvent)="stepAddEvidences($event)"
+    [nameState]="nameSelected"
+    [typeState]="typeSelected"
+    [responsibleState]="responsibleSelected"
+    [portadaState]="portadaArray"
+    ></app-add-subindicator-data>
+  <app-add-subindicator-evidences (evidenceEvent)="stepConfirmSubindicator($event)" [type]="typeSelected" *ngIf="step==1"></app-add-subindicator-evidences>
+  <app-add-subindicator-confirm *ngIf="step==2"
+  [type]="typeSelected"
+  [name]="nameSelected"
+  [responsible]="responsibleSelected"
+  [portada]="portadaArray"
+  [evidences]="arrayEvidence"
+  ></app-add-subindicator-confirm>
 </div>

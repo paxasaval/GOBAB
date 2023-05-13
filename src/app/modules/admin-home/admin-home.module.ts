@@ -22,6 +22,10 @@ import { SubindicatorGeneralComponent } from './component/subindicator-general/s
 import { StepsEvidenceComponent } from './component/steps-evidence/steps-evidence.component';
 import { FormEvidenceComponent } from './component/form-evidence/form-evidence.component';
 import { FinishEvidenceComponent } from './component/finish-evidence/finish-evidence.component';
+import { AddSubindicatorDataComponent } from './component/add-subindicator-data/add-subindicator-data.component';
+import { AddSubindicatorEvidencesComponent } from './component/add-subindicator-evidences/add-subindicator-evidences.component';
+import { AddSubindicatorConfirmComponent } from './component/add-subindicator-confirm/add-subindicator-confirm.component';
+import { StepsSubindicatorComponent } from './component/steps-subindicator/steps-subindicator.component';
 
 
 @NgModule({
@@ -44,6 +48,10 @@ import { FinishEvidenceComponent } from './component/finish-evidence/finish-evid
     StepsEvidenceComponent,
     FormEvidenceComponent,
     FinishEvidenceComponent,
+    AddSubindicatorDataComponent,
+    AddSubindicatorEvidencesComponent,
+    AddSubindicatorConfirmComponent,
+    StepsSubindicatorComponent,
   ],
   imports: [
     CommonModule,

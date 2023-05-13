@@ -20,9 +20,9 @@
       </tr>
       <ng-container *ngIf="data.evidences.length>0;else elseBlock">
         <tr *ngFor="let evidence of data.evidences">
-          <td [rowSpan]="1">{{ evidence.name || 'no name' }}</td>
-          <td [rowSpan]="1">{{ evidence.link }}</td>
-          <td [rowSpan]="1">{{ evidence.note }}</td>
+          <td [rowSpan]="1" nzBreakWord>{{ evidence.name || 'no name' }}</td>
+          <td [rowSpan]="1" nzBreakWord>{{ evidence.link }}</td>
+          <td [rowSpan]="1" nzBreakWord>{{ evidence.note }}</td>
         </tr>
       </ng-container>
       <ng-template #elseBlock>

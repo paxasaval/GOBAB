@@ -15,13 +15,15 @@ import { from, of, EMPTY } from 'rxjs';
 import { EvidenceService } from 'src/app/services/evidence/evidence.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { User, UserID } from 'src/app/models/user';
+import { dataSubindicator } from '../../component/add-subindicator-data/add-subindicator-data.component';
+import { EvidenceSubindicator } from '../../component/add-subindicator-evidences/add-subindicator-evidences.component';
 
 @Component({
   selector: 'app-add-subindicator',
   templateUrl: './add-subindicator.component.html',
   styleUrls: ['./add-subindicator.component.scss']
 })
-export class AddSubindicatorComponent implements OnInit, AfterViewInit {
+export class AddSubindicatorComponent implements OnInit {
   @ViewChildren(MatExpansionPanel) panels!: QueryList<MatExpansionPanel>;
   @ViewChild('Entrada') panel1!: MatExpansionPanel
   @ViewChild('Ejecución') panel2!: MatExpansionPanel
@@ -43,6 +45,7 @@ export class AddSubindicatorComponent implements OnInit, AfterViewInit {
   })
   responsibleControl = new FormControl('')
   types: TypeID[] = []
+  step:number=0
   arrayEvidence: Evidence[] = []
   characteristics: CharacteristicID[] = []
   group1: CharacteristicID[] = []
@@ -50,8 +53,12 @@ export class AddSubindicatorComponent implements OnInit, AfterViewInit {
   group3: CharacteristicID[] = []
   indicatorInstance!: IndicatorInstanceID
   user!:UserID
+  //step1
+  typeSelected!:TypeID
+  nameSelected!:string
+  responsibleSelected!:string
+  portadaArray!: Evidence[]
   //event evidences
-  portadaArray: Evidence[] = []
   constructor(
     private typeService: TypeService,
     private location: Location,
@@ -62,63 +69,31 @@ export class AddSubindicatorComponent implements OnInit, AfterViewInit {
     private userService:UserService
   ) { }
 
-  groupCharacteristics(characteristics: CharacteristicID[]) {
-    this.group1 = []
-    this.group2 = []
-    this.group3 = []
-    characteristics.map(characteristic => {
-      if (characteristic.group === '1') {
-        this.group1.push(characteristic)
-      }
-      if (characteristic.group === '2') {
-        this.group2.push(characteristic)
-      }
-      if (characteristic.group === '3') {
-        this.group3.push(characteristic)
-      }
-    })
-  }
-  ngAfterViewInit(): void {
-    this.panels.changes.subscribe(() => {
-      this.panels.toArray().forEach(panel => {
-        panel.expanded = true
-      })
-    })
-  }
-  selectChanges(event: any) {
-    const type = event as TypeID
-    this.typeControl.setValue({ type: type })
-    this.characteristics = type.characteristics as CharacteristicID[]
-    this.groupCharacteristics(this.characteristics)
+  stepChange(step:number){
+    this.step=step
   }
 
-  addEvidence(event: Evidence[]) {
-    event.map(evidence => {
-      const found = this.arrayEvidence.findIndex(e => ((e.name == evidence.name) && (e.characteristicID == evidence.characteristicID)))
-      if (found == -1) {
-        this.arrayEvidence.push(evidence)
-      } else {
-        this.arrayEvidence[found] = evidence
+  stepAddEvidences(dataRecive:dataSubindicator){
+    if(dataRecive.flag){
+      this.step=1
+      this.typeSelected=dataRecive.data.type
+      this.nameSelected=dataRecive.data.name
+      this.responsibleSelected=dataRecive.data.responsible
+      if(dataRecive.data.portada){
+        this.portadaArray=dataRecive.data.portada
       }
-    })
-    console.log(this.arrayEvidence)
-  }
-  scroll(name: string, groupName: string) {
-    const elementID = name + groupName
-    const el = document.getElementById(elementID)
-    if (el) {
-      this.panels.map(panel => {
-        panel.open()
-        const panelID = panel._body.nativeElement.parentElement?.id
-        if (panelID !== groupName) {
-          panel.close()
-        }
-      })
-      setTimeout(() => {
-        el.scrollIntoView()
-      }, 250)
     }
   }
+  stepConfirmSubindicator(data:EvidenceSubindicator){
+    if(data.flag){
+      this.step=2
+      this.arrayEvidence=data.data.evidences
+    }else{
+      this.step=0
+      console.log('volver')
+    }
+  }
+
   saveEvidence() {
     const newSubindicator: Subindicator = {
       commits: [],

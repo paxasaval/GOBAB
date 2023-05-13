@@ -1,0 +1,46 @@
+:host{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.container{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  h2{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-top: 1em;
+  }
+}
+.abstract{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color2);
+  border-radius: 8px;
+  padding: 1em;
+  gap: 0.5em;
+}
+.text-line{
+  width: 100%;
+  display: flex;
+  gap: 1em;
+}
+.category{
+  font-weight: 600;
+}
+.table{
+  width: 90%;
+}
+.actions{
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -22,9 +22,9 @@
         </td>
       </tr>
       <tr *ngFor="let evidence of data.evidences">
-        <td [rowSpan]="1">{{ evidence.name }}</td>
-        <td [rowSpan]="1">{{ evidence.link }}</td>
-        <td [rowSpan]="1">{{ evidence.note }}</td>
+        <td [rowSpan]="1" nzBreakWord>{{ evidence.name }}</td>
+        <td [rowSpan]="1" nzBreakWord>{{ evidence.link }}</td>
+        <td [rowSpan]="1" nzBreakWord>{{ evidence.note }}</td>
         <td [rowSpan]="1">
           <label nz-checkbox [(ngModel)]="evidence.verified"></label>
         </td>

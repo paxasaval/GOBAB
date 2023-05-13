@@ -18,7 +18,7 @@ export class InputEvidence1Component implements OnInit {
 
   @Input() characteristic!: CharacteristicID
   @Output() evidenceEmit = new EventEmitter<Evidence[]>()
-
+  @Input() opcional:boolean=false
   fileFlag = true
   inputChange = 'enlace'
   inputChange1 = 'archivo'

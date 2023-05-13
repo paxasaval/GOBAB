@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="summary">
+    <h3>Datos del subindicador</h3>
+    <form class="name-form">
+      <span>Nombre</span>
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput type="text" [formControl]="nameControl" />
+      </mat-form-field>
+    </form>
+    <form class="type-form" [formGroup]="typeControl">
+      <span>Tipo</span>
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo</mat-label>
+        <mat-select
+          formControlName="type"
+          placeholder=""
+          (valueChange)="selectChanges($event)"
+          [compareWith]="compareFn"
+        >
+          <mat-option *ngFor="let type of types" [value]="type">{{
+            type.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+    <form class="responsible-form">
+      <span>Responsable(s)</span>
+      <mat-form-field appearance="outline">
+        <mat-label>Responsable(s)</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="5"
+          type="text"
+          [formControl]="responsibleControl"
+        ></textarea>
+      </mat-form-field>
+    </form>
+    <div class="help-portada">
+      <a href="../../../../../assets/helps/infogradia_subindicador.pdf"
+      download
+      >Descargar plantilla de portada</a>
+    </div>
+  </div>
+  <div class="portada">
+    <app-input-evidence1
+      [opcional]="true"
+      class="evidence-portada"
+      [characteristic]="portada"
+      (evidenceEmit)="handlePortada($event)"
+    ></app-input-evidence1>
+  </div>
+</div>
+<div class="actions">
+  <button mat-raised-button routerLink="../">Cancelar</button>
+  <button mat-raised-button (click)="continue()" [disabled]="(name!=''&&type!=''&&responsible!='')?false:true">Continuar</button>
+</div>
+

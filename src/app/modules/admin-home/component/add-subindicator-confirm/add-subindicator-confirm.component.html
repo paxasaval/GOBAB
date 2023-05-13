@@ -1,0 +1,74 @@
+<div class="container">
+  <h2>Resumen nuevo subindicador</h2>
+  <div class="abstract">
+    <div class="text-line">
+      <span class="category"> Nombre: </span>
+      <span class="element">
+        {{ name }}
+      </span>
+    </div>
+    <div class="text-line">
+      <span class="category"> Typo: </span>
+      <span class="element">
+        {{ type.name }}
+      </span>
+    </div>
+    <div class="text-line">
+      <span class="category"> Responsables: </span>
+      <span class="element">
+        {{ responsible }}
+      </span>
+    </div>
+    <div class="text-line">
+      <span class="category"> Tiene portada?: </span>
+      <span class="element">
+        {{ portada[0] ? "SI" : "NO" }}
+      </span>
+    </div>
+  </div>
+  <h2>Resumen de evidencias</h2>
+  <nz-table class="table" *ngIf="groupData" #evidenceTable [nzData]="groupData">
+    <thead>
+      <tr>
+        <th rowSpan="2">Caracteristica</th>
+        <th colSpan="3">Evidencia</th>
+      </tr>
+      <tr>
+        <th>Nombre</th>
+        <th>Enlace/Archivo</th>
+        <th>Observacion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let data of evidenceTable.data">
+        <tr>
+          <td
+            [rowSpan]="
+              data.evidences.length > 0 ? data.evidences.length + 1 : 2
+            "
+          >
+            {{ data.characteristic.name }}
+          </td>
+        </tr>
+        <ng-container *ngIf="data.evidences.length > 0; else elseBlock">
+          <tr *ngFor="let evidence of data.evidences">
+            <td [rowSpan]="1" nzBreakWord>{{ evidence.name || "no name" }}</td>
+            <td [rowSpan]="1" nzBreakWord>{{ evidence.link }}</td>
+            <td [rowSpan]="1" nzBreakWord>{{ evidence.note }}</td>
+          </tr>
+        </ng-container>
+        <ng-template #elseBlock>
+          <tr>
+            <td class="center" [colSpan]="3">no evidence upload</td>
+          </tr>
+        </ng-template>
+      </ng-container>
+      <tr></tr>
+    </tbody>
+  </nz-table>
+</div>
+
+<div class="actions">
+  <button mat-raised-button routerLink="../">Cancelar</button>
+  <button mat-raised-button (click)="saveEvidence()">Guardar</button>
+</div>
