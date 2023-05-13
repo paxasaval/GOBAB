@@ -1,3 +1,4 @@
+import { StorageService } from 'src/app/services/storage/storage.service';
 import { mergeMap, concatMap, catchError } from 'rxjs/operators';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CharacteristicID, CharacteristicWithEvidence } from 'src/app/models/characteristic';
@@ -30,7 +31,8 @@ export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
 
   constructor(
     private subindicatorService:SubindicatorService,
-    private evidenceService:EvidenceService
+    private evidenceService:EvidenceService,
+    private storageService:StorageService
   ) { }
 
   groupCharacteristics(typeID: TypeID, evidences: Evidence[]): CharacteristicWithEvidence[] {
@@ -55,7 +57,7 @@ export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
     })
     const newSubindicator: Subindicator = {
       commits: [],
-      cover: this.portada[0].link as string,
+      cover: '',
       requireCover: true,
       observationCover: this.portada[0].note,
       created: new Date(),
@@ -67,6 +69,15 @@ export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
       qualification: 0,
       responsible: this.responsible,
       typeID: this.type.id,
+    }
+    if(this.portada[0].link instanceof File){
+      this.storageService.uploadFile('test',this.portada[0].link)
+      .then(url=>{
+        newSubindicator.cover=url
+        console.log('portada guardada en: ',url)
+      })
+    }else{
+      newSubindicator.cover=this.portada[0].link as string
     }
     console.log(newSubindicator)
     console.log(this.evidences)
@@ -81,12 +92,20 @@ export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
             });
             return from(this.evidences).pipe(
               concatMap(evidence => {
+                if(evidence.link instanceof File){
+                  return from(this.storageService.uploadFile('test',evidence.link)).pipe(
+                    concatMap((url)=>{
+                      evidence.link=url
+                      return this.evidenceService.addEvidence(evidence)
+                    })
+                  )
+                }else{
                 return this.evidenceService.addEvidence(evidence).pipe(
                   catchError(error => {
                     console.error('Error al agregar la evidencia', error);
                     return EMPTY;
                   })
-                );
+                )};
               })
             );
           }),
