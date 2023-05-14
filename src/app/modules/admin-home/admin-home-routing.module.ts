@@ -11,6 +11,7 @@ import { SubindicatorGeneralComponent } from './component/subindicator-general/s
 import { AddEvidenceComponent } from './pages/add-evidence/add-evidence.component';
 import { SearchSpecificSubindicatorComponent } from 'src/app/shared/components/search-specific-subindicator/search-specific-subindicator.component';
 import { ReviewSubindicatorSpecifidcComponent } from './pages/review-subindicator-specifidc/review-subindicator-specifidc.component';
+import { LayoutIndicatorComponent } from './pages/layout-indicator/layout-indicator.component';
 
 const routes: Routes = [
   {
@@ -37,7 +38,11 @@ const routes: Routes = [
         }
       },
       {
-        path:'quadrant/:id/indicator/:id',
+        path:'quadrant/:quadrantNumber/indicator/:number',
+        component:LayoutIndicatorComponent,
+      },
+      {
+        path:'quadrant/:quadrantNumber/indicator/:number/:id',
         component:IndicatorComponent,
         children:[
           {

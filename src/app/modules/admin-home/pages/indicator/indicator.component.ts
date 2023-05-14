@@ -14,6 +14,7 @@ import { IndicatorID } from 'src/app/models/indicator';
 export class IndicatorComponent implements OnInit {
 
   id=''
+  quadrant!:string
   indicator!:IndicatorInstanceID
 
   constructor(
@@ -26,7 +27,9 @@ export class IndicatorComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.pipe(
       switchMap(params=>{
-        this.id=params.id
+        this.id=params['number']
+        this.quadrant=params['quadrantNumber']
+        console.log(params)
         return this.indicatorInstanceService.getIndicatorByID(this.id)
       })
     ).subscribe(indicator=>{

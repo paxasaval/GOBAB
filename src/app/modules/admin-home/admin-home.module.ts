@@ -27,6 +27,7 @@ import { AddSubindicatorEvidencesComponent } from './component/add-subindicator-
 import { AddSubindicatorConfirmComponent } from './component/add-subindicator-confirm/add-subindicator-confirm.component';
 import { StepsSubindicatorComponent } from './component/steps-subindicator/steps-subindicator.component';
 import { ReviewSubindicatorSpecifidcComponent } from './pages/review-subindicator-specifidc/review-subindicator-specifidc.component';
+import { LayoutIndicatorComponent } from './pages/layout-indicator/layout-indicator.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { ReviewSubindicatorSpecifidcComponent } from './pages/review-subindicato
     AddSubindicatorConfirmComponent,
     StepsSubindicatorComponent,
     ReviewSubindicatorSpecifidcComponent,
+    LayoutIndicatorComponent,
   ],
   imports: [
     CommonModule,
