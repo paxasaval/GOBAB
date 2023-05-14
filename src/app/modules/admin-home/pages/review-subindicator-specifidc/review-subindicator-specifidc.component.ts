@@ -7,6 +7,8 @@ import { TypeService } from 'src/app/services/type/type.service';
 import { switchMap } from 'rxjs/operators';
 import { IndicatorInstanceID } from 'src/app/models/indicatorInstance';
 import { TypeID } from 'src/app/models/type';
+import { TitleService } from 'src/app/services/title/title.service';
+import { IndicatorID } from 'src/app/models/indicator';
 
 @Component({
   selector: 'app-review-subindicator-specifidc',
@@ -21,7 +23,8 @@ export class ReviewSubindicatorSpecifidcComponent implements OnInit {
     private route: ActivatedRoute,
     private subindicatorService:SubindicatorService,
     private indicatorInstanceService:IndicatorInstanceService,
-    private typeService:TypeService
+    private typeService:TypeService,
+    private titleService:TitleService
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +38,9 @@ export class ReviewSubindicatorSpecifidcComponent implements OnInit {
           this.indicatorInstanceService.setIndicatorInstance(indicator)
           this.typeService.setTypeSelected(type)
           this.subindicatorService.setSelectedSubindicator(subindicator)
+          const indicatorCatalog =indicator.indicatorID as IndicatorID
+          this.titleService.setTitle([indicatorCatalog.quadrantName,indicatorCatalog.name,'Subindicadores Especificos',subindicator.name])
+
         }
       )
 

@@ -9,6 +9,19 @@
       <span>0912345678</span>
     </div>
   </div>
+  <div class="select-period">
+    <label>Periodo:</label>
+    <nz-select
+    class="select"
+    [formControl]="periodControl"
+    (ngModelChange)="changePeriod($event)"
+    >
+      <nz-option
+      [nzValue]="'2022'"
+      [nzLabel]="'2022'"
+      ></nz-option>
+    </nz-select>
+  </div>
   <div class="user" *ngIf="userIsLogged;else elseBlock">
     <img class="user-img" [src]="image" alt="">
     <div class="userInfo">

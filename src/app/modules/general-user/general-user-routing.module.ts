@@ -3,6 +3,9 @@ import { RouterModule,Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { QuadrantComponent } from './pages/quadrant/quadrant.component';
+import { QuadrantSummaryComponent } from './pages/quadrant-summary/quadrant-summary.component';
+import { IndicatorComponent } from './pages/indicator/indicator.component';
+import { IndicatorSummaryComponent } from './pages/indicator-summary/indicator-summary.component';
 
 const routes:Routes = [
   {
@@ -19,8 +22,27 @@ const routes:Routes = [
         pathMatch:'full'
       },
       {
-        path:'quadrant/:id',
-        component:QuadrantComponent
+        path:'quadrant/:quadrantNumber',
+        component:QuadrantComponent,
+        children:[
+          {
+            path:'',
+            component:QuadrantSummaryComponent
+          },
+          {
+            path:'indicator/:indicatorNumber',
+            component:IndicatorComponent,
+            children:[
+              {
+                path:':id',
+                component:IndicatorSummaryComponent
+              }
+            ]
+          }
+        ]
+      },
+      {
+        path:'indicator/:id'
       }
     ]
   },

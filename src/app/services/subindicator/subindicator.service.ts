@@ -19,6 +19,7 @@ export class SubindicatorService {
     qualification: 0,
     created: new Date(),
     lastUpdate: new Date(),
+    state:false,
     createdBy: '',
     commits: [],
     evidences: [],
@@ -51,6 +52,10 @@ export class SubindicatorService {
 
   getSubindicatorsByIndicator(id: string) {
     return this.http.get<SubindicatorID[]>(`${this.apiUrl}/indicator/${id}`)
+  }
+
+  getSubindicatorGeneralByIndicator(id:string){
+    return this.http.get<SubindicatorID[]>(`${this.apiUrl}/indicator/${id}/generalSubindicators`)
   }
 
   getSubindicatorSpecificByIndicator(id: string, page: number, size: number) {

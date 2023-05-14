@@ -19,6 +19,15 @@
   font-size: 0.7em;
 }
 
+.select-period{
+  width: 10vw;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+.select{
+  width: 75%;
+}
 .user{
   display: flex;
   align-content: center;

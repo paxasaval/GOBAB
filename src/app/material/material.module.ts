@@ -17,6 +17,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzAnchorModule } from 'ng-zorro-antd/anchor';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 @NgModule({
   declarations: [],
   imports: [
@@ -38,7 +39,8 @@ import { NzAnchorModule } from 'ng-zorro-antd/anchor';
     NzTableModule,
     NzInputModule,
     NzStepsModule,
-    NzAnchorModule
+    NzAnchorModule,
+    NzSelectModule
   ],
   exports:[
     MatButtonModule,
@@ -58,7 +60,8 @@ import { NzAnchorModule } from 'ng-zorro-antd/anchor';
     NzTableModule,
     NzInputModule,
     NzStepsModule,
-    NzAnchorModule
+    NzAnchorModule,
+    NzSelectModule
   ]
 })
 export class MaterialModule { }

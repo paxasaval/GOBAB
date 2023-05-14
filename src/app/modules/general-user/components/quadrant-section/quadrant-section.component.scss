@@ -1,0 +1,47 @@
+:host{
+  width: 100%;
+}
+.title{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  h2{
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    font-size: 18pt;
+  }
+}
+.card-container{
+  display: flex;
+  width: 100%;
+  padding: 2em 10em;
+  gap: 2em;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.card{
+  height: 20vh;
+  width: 18%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color4-bg);
+  border-radius: 6px;
+  cursor: pointer;
+  img{
+    display: flex;
+    height: 100%;
+  }
+}
+.card:hover{
+  background-color: var(--color4);
+}
+.style2{
+  background-color: var(--color1-bg)
+}
+.style2:hover{
+  background-color: var(--color1)
+}

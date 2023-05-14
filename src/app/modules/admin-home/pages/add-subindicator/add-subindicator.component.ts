@@ -17,6 +17,8 @@ import { UserService } from 'src/app/services/user/user.service';
 import { User, UserID } from 'src/app/models/user';
 import { dataSubindicator } from '../../component/add-subindicator-data/add-subindicator-data.component';
 import { EvidenceSubindicator } from '../../component/add-subindicator-evidences/add-subindicator-evidences.component';
+import { TitleService } from 'src/app/services/title/title.service';
+import { IndicatorID } from 'src/app/models/indicator';
 
 @Component({
   selector: 'app-add-subindicator',
@@ -66,7 +68,8 @@ export class AddSubindicatorComponent implements OnInit {
     private indicatorInstanceSevice: IndicatorInstanceService,
     private subindicatorService: SubindicatorService,
     private evidenceService: EvidenceService,
-    private userService:UserService
+    private userService:UserService,
+    private titleService:TitleService
   ) { }
 
   stepChange(step:number){
@@ -105,6 +108,7 @@ export class AddSubindicatorComponent implements OnInit {
       evidences: [],
       indicadorID: this.indicatorInstance.id,
       lastUpdate: new Date(),
+      state:false,
       name: this.name,
       qualification: 0,
       responsible: this.responsible,
@@ -164,6 +168,9 @@ export class AddSubindicatorComponent implements OnInit {
     this.indicatorInstanceSevice.getIndicatorInstance().subscribe(
       indicatorInstance => {
         this.indicatorInstance = indicatorInstance
+        const indicatorCatalog = indicatorInstance.indicatorID as IndicatorID
+        this.titleService.setTitle([indicatorCatalog.quadrantName,indicatorCatalog.name,'Subindicadores Especificos','Añadir Subindicador'])
+
       }
     )
     this.userService.getUserSesion().subscribe(user=>this.user=user)

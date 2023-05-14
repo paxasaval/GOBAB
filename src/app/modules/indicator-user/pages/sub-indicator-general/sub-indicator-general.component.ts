@@ -31,6 +31,7 @@ export class SubIndicatorGeneralComponent implements OnInit, OnChanges {
     id:'',
     indicadorID:'',
     lastUpdate:new Date(),
+    state:false,
     name:'',
     qualification:0,
     responsible:'',

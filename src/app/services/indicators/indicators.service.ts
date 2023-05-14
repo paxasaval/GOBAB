@@ -22,6 +22,8 @@ export class IndicatorsService {
    getAllIndicators(){
     return this.http.get<IndicatorID[]>(`${this.apiUrl}`)
    }
-
+   getIndicatorByQuadrantAndNumber(quadrant:Number,number:Number){
+    return this.http.get<IndicatorID>(`${this.apiUrl}/byQuadrantAndNumber?quadrant=${quadrant}&number=${number}`)
+   }
 
 }

@@ -135,8 +135,8 @@ export class SemaphoreComponent implements OnInit, AfterViewInit, OnChanges {
     series.slices.template.events.on("click", (e) => {
       const obj = e.target.dataItem?.dataContext as DataSlide
       this.navigationExtras.state = obj
-
-      this.router.navigate(['./indicator',obj.id],{relativeTo:this.route})
+      const indicatorCatalog = obj.indicatorID as IndicatorID
+      this.router.navigate(['./indicator',indicatorCatalog.number],{relativeTo:this.route})
     })
     series.labels.clear()
     series.labels.template.set("forceHidden", true);

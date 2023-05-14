@@ -16,6 +16,7 @@ export interface Subindicator{
   qualification:number,
   created:Date,
   lastUpdate:Date,
+  state:boolean,
   createdBy:string|User
   commits:string[] | CommitID[],
   evidences:string[] | EvidenceID[]

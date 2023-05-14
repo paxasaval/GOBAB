@@ -10,6 +10,10 @@ import { LayoutComponent } from './pages/layout/layout.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { MaterialModule } from 'src/app/material/material.module';
 import { CarrouselComponent } from './components/carrousel/carrousel.component';
+import { QuadrantSectionComponent } from './components/quadrant-section/quadrant-section.component';
+import { IndicatorComponent } from './pages/indicator/indicator.component';
+import { QuadrantSummaryComponent } from './pages/quadrant-summary/quadrant-summary.component';
+import { IndicatorSummaryComponent } from './pages/indicator-summary/indicator-summary.component';
 
 
 
@@ -23,6 +27,10 @@ import { CarrouselComponent } from './components/carrousel/carrousel.component';
     LayoutComponent,
     SummaryComponent,
     CarrouselComponent,
+    QuadrantSectionComponent,
+    IndicatorComponent,
+    QuadrantSummaryComponent,
+    IndicatorSummaryComponent,
 
   ],
   imports: [

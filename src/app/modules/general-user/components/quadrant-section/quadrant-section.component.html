@@ -1,0 +1,24 @@
+<div *ngIf="arrayIndicators[0]" class="title">
+  <h2>Indicadores cuadrante {{ quadrantNumber }}</h2>
+  <span>{{ arrayIndicators[0].quadrantName }}</span>
+</div>
+
+<div class="card-container">
+  <div
+    *ngFor="let indicator of arrayIndicators"
+    class="card"
+    [class.style2]="style2"
+    [routerLink]="'../quadrant/'+indicator.quadrant+'/indicator/'+indicator.number"
+  >
+    <img
+      [src]="
+        '../../../../../assets/logosIndicators/logo' +
+        indicator.quadrant +
+        '.' +
+        indicator.number +
+        '.png'
+      "
+      alt=""
+    />
+  </div>
+</div>

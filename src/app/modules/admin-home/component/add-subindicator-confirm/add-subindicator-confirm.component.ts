@@ -65,6 +65,7 @@ export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
       evidences: [],
       indicadorID: this.indicatorInstance.id,
       lastUpdate: new Date(),
+      state:false,
       name: this.name,
       qualification: 0,
       responsible: this.responsible,

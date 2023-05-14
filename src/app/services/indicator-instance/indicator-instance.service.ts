@@ -40,7 +40,9 @@ export class IndicatorInstanceService {
   getIndicatorInstance(){
     return this.IndicatorSelected.asObservable();
   }
-
+  getIndicatorByIndicatorIDandPeriod(indicatorID:string,period:string){
+    return this.http.get<IndicatorInstanceID>(`${this.apiUrl}/byIndicatorIDAndPeriod?indicatorID=${indicatorID}&period=${period}`)
+  }
   setIndicatorInstance(indicator:IndicatorInstanceID){
     console.log(indicator)
     this.IndicatorSelected.next(indicator)

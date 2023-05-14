@@ -1,0 +1,27 @@
+<div class="title">
+  <h2 *ngIf="indicatorCatalog">{{ indicatorCatalog.name }}</h2>
+</div>
+<h3>Generalidades</h3>
+<div *ngIf="generalidades.length>0" class="generalidades">
+  <div *ngFor="let generalidad of generalidades" class="card">
+    <div class="card-title" [class]="generalidad.name.replace(' ','')">
+      <span>{{ generalidad.name }}</span>
+    </div>
+    <div class="card-info">
+      <span>Evidencias registradas:</span>
+      <span>{{generalidad.evidences.length}}</span>
+    </div>
+    <div class="card-info">
+      <span>Calificacion Actual:</span>
+      <span>{{generalidad.qualification}}</span>
+    </div>
+    <div class="card-info">
+      <span>Revisado:</span>
+      <span>{{generalidad.state}}</span>
+    </div>
+    <div class="card-actions">
+    <span>Ver mas</span>
+    </div>
+  </div>
+</div>
+<h3>Subindicadores Especificos</h3>

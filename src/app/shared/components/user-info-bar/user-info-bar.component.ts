@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RolID } from 'src/app/models/rol';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { PeriodService } from 'src/app/services/period/period.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -9,17 +11,28 @@ import { UserService } from 'src/app/services/user/user.service';
   templateUrl: './user-info-bar.component.html',
   styleUrls: ['./user-info-bar.component.scss']
 })
-export class UserInfoBarComponent implements OnInit {
+export class UserInfoBarComponent implements OnInit, AfterViewInit {
 
   userIsLogged: boolean = false
   image = '../../../../assets/userDefault.png'
   mail = 'paxasaval1003@gmail.com'
   rol = 'ciudadano'
+  periodControl = new FormControl('2022')
   constructor(
     private userService: UserService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private periodservice: PeriodService
   ) { }
+
+  changePeriod(event: any) {
+
+  }
+
+
+  ngAfterViewInit(): void {
+    this.periodservice.setPeriodSelected(this.periodControl.value)
+  }
 
   ngOnInit(): void {
     this.authService.loggedIn().then(
