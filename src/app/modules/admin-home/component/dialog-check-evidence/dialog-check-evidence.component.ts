@@ -1,8 +1,14 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { NzModalRef } from 'ng-zorro-antd/modal';
+import { title } from 'process';
 import { Subscription } from 'rxjs';
+import { CharacteristicID } from 'src/app/models/characteristic';
 import { EvidenceID } from 'src/app/models/evidence';
 import { UserID } from 'src/app/models/user';
 import { EvidenceService } from 'src/app/services/evidence/evidence.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-dialog-check-evidence',
@@ -12,12 +18,18 @@ import { EvidenceService } from 'src/app/services/evidence/evidence.service';
 export class DialogCheckEvidenceComponent implements OnInit,OnChanges {
 
   isVisible =true
-  @Input()evidence!:EvidenceID
+  @Input() evidence!:EvidenceID
+  @Input() characteristic!:CharacteristicID
   evidenceSubscribe!:Subscription
-
+  @Output() evidenceEmmit!: EventEmitter<EvidenceID>
   evidenceID!:EvidenceID
+
+  qualifyControl = new FormControl(0)
+  commitControl=new FormControl()
+
   constructor(
-    private evidenceService:EvidenceService
+    private evidenceService:EvidenceService,
+    private modal: NzModalRef
   ) { }
 
   handleOk(): void {
@@ -29,11 +41,27 @@ export class DialogCheckEvidenceComponent implements OnInit,OnChanges {
     console.log('Button cancel clicked!');
     this.isVisible = false;
   }
-  evidenceAuthor(evidence:EvidenceID){
-    console.log(evidence.author)
-    return evidence.author as UserID
-  }
 
+  qualify(){
+    const qualify = this.qualifyControl.value
+    const commit = this.commitControl.value
+    Swal.fire({
+      title:'Calificando',
+      didOpen:()=>{
+        Swal.showLoading()
+      }
+    })
+    this.evidenceService.qualifyEvidence(this.evidence.id,qualify,commit).subscribe(
+      evidence=>{
+        console.log(evidence)
+        Swal.close()
+      }
+    )
+
+  }
+  cancel(){
+    this.modal.destroy({data:'destroy'})
+  }
   ngOnChanges(change:SimpleChanges){
     if(this.evidenceSubscribe){
       this.evidenceSubscribe.unsubscribe()

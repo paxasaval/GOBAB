@@ -46,7 +46,7 @@
           </ng-template>
         </td>
         <td [rowSpan]="1" *ngIf="auth">
-          <a (click)="openReview(evidence)">Revisar</a>
+          <a (click)="openReview(evidence,data.characteristic)">Revisar</a>
         </td>
         <td [rowSpan]="1" *ngIf="auth">
           <a>Eliminar</a>

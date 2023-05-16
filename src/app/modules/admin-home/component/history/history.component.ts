@@ -21,88 +21,117 @@ import { DialogCheckEvidenceComponent } from '../dialog-check-evidence/dialog-ch
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.scss']
 })
-export class HistoryComponent implements OnInit,OnChanges {
+export class HistoryComponent implements OnInit, OnChanges {
 
-  indicatorID=''
-  typeID!:TypeID
-  evidences:EvidenceID[]=[]
-  type!:TypeID
-  dataSource!:Observable<CharacteristicWithEvidenceID[]>
-  groupEvidence!:CharacteristicWithEvidenceID[] | null
-  displayedColumns:string[]=[]
-  subscribe1!:Subscription
-  ROL_ADMIN=environment.ROL_ADMIN
-  user!:UserID
-  auth=false
+  indicatorID = ''
+  typeID!: TypeID
+  evidences: EvidenceID[] = []
+  type!: TypeID
+  dataSource!: Observable<CharacteristicWithEvidenceID[]>
+  groupEvidence!: CharacteristicWithEvidenceID[] | null
+  displayedColumns: string[] = []
+  subscribe1!: Subscription
+  ROL_ADMIN = environment.ROL_ADMIN
+  user!: UserID
+  auth = false
+  subindicatorBD!: Subscription
+  id!: string
   constructor(
-    private subindicatorService:SubindicatorService,
-    private typeService:TypeService,
-    private userService:UserService,
-    private modalService:NzModalService
+    private subindicatorService: SubindicatorService,
+    private typeService: TypeService,
+    private userService: UserService,
+    private modalService: NzModalService
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
   }
 
-  dataEvidencesID(data:CharacteristicWithEvidenceID):EvidenceID[]{
+  dataEvidencesID(data: CharacteristicWithEvidenceID): EvidenceID[] {
     return data.evidences as EvidenceID[]
   }
 
-  arrayCommits(evidence:any){
+  arrayCommits(evidence: any) {
     return evidence.commits
   }
+  evidenceQualificate() {
 
-  groupCharacteristics(typeID:TypeID,evidences:EvidenceID[]){
-      const characteristics = typeID.characteristics as CharacteristicID[]
-      return characteristics.map((characteristic)=>{
-        const evidenceArray = evidences.filter(evidence=>{
-          const characteristicID = evidence.characteristicID
-          return characteristicID==characteristic.id})
-
-        return {characteristic:characteristic,evidences:evidenceArray}
+  }
+  groupCharacteristics(typeID: TypeID, evidences: EvidenceID[]) {
+    const characteristics = typeID.characteristics as CharacteristicID[]
+    return characteristics.map((characteristic) => {
+      const evidenceArray = evidences.filter(evidence => {
+        const characteristicID = evidence.characteristicID
+        return characteristicID == characteristic.id
       })
-  }
-  changeValidate(evidence:EvidenceID){
 
-  }
-
-  openReview(evidence:EvidenceID){
-    this.modalService.create({
-      nzTitle:'Revision de evidencias',
-      nzContent:DialogCheckEvidenceComponent,
-      nzComponentParams:{
-        evidence:evidence
-      }
+      return { characteristic: characteristic, evidences: evidenceArray }
     })
   }
+  changeValidate(evidence: EvidenceID) {
 
-  setColumns(subindicator:SubindicatorID){
-    this.evidences=subindicator.evidences as EvidenceID[]
-        this.displayedColumns = Object.keys(this.evidences[0])
-        this.displayedColumns.splice(1,1)
-        this.displayedColumns.pop()
-        this.displayedColumns.push('Calificar')
-        this.type=subindicator.typeID as TypeID
   }
 
-  authAdmin(){
+  openReview(evidence: EvidenceID, characteristic: CharacteristicID) {
+    this.modalService.create({
+      nzTitle: 'Revision de evidencias',
+      nzContent: DialogCheckEvidenceComponent,
+      nzComponentParams: {
+        evidence: evidence,
+        characteristic: characteristic
+      },
+      nzFooter: null,
+    })
+    this.afterClosed()
+  }
+
+  afterClosed() {
+    console.log('dasd1')
+    if (!this.subindicatorBD) {
+    console.log('dasd2')
+
+      this.subindicatorBD = this.subindicatorService.getSubindicatorByID(this.id).subscribe(
+        subindicatorBD => {
+          console.log(subindicatorBD)
+          this.groupEvidence = this.groupCharacteristics(this.typeID, subindicatorBD.evidences as EvidenceID[])
+        }
+      )
+
+    }
+  }
+
+  setColumns(subindicator: SubindicatorID) {
+    this.evidences = subindicator.evidences as EvidenceID[]
+    this.displayedColumns = Object.keys(this.evidences[0])
+    this.displayedColumns.splice(1, 1)
+    this.displayedColumns.pop()
+    this.displayedColumns.push('Calificar')
+    this.type = subindicator.typeID as TypeID
+  }
+
+  authAdmin() {
     const rol = this.user.rol as RolID
     const rolName = rol.name
-    if(rolName===this.ROL_ADMIN){
-      this.auth=true
+    if (rolName === this.ROL_ADMIN) {
+      this.auth = true
     }
   }
 
   ngOnInit(): void {
+    this.subindicatorService.getSubindicatorByID('64626a74e2044b52bfedac9c').subscribe(
+      res=>{
+        console.log(res)
+      }
+    )
     combineLatest([
       this.typeService.getTypeSelected(),
       this.subindicatorService.getSelectedSubindicator(),
       this.userService.getUserSesion()
     ])
-      .subscribe(([type,subindicator,user])=>{
-        this.typeID=type
-        this.groupEvidence = this.groupCharacteristics(type,subindicator.evidences as EvidenceID[])
-        this.user=user
+      .subscribe(([type, subindicator, user]) => {
+        this.typeID = type
+        this.id = subindicator.id
+        this.groupEvidence = this.groupCharacteristics(type, subindicator.evidences as EvidenceID[])
+        this.user = user
         this.authAdmin()
       })
   }

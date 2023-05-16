@@ -1,6 +1,6 @@
 <div class="info" *ngIf="evidenceID">
   <div class="line">
-    Autor:{{evidenceAuthor(evidenceID).name}}
+    Autor:{{evidenceID.name}}
   </div>
   <div class="line">
     Estado:{{evidenceID.verified?'Aprobado':'No Aprobado'}}
@@ -11,6 +11,20 @@
 </div>
 <form class="form">
   <div class="form-input">
-    <label for="Revisado"></label>
+      <nz-input-group [nzAddOnAfter]="'/'+characteristic.score!.toString()">
+        <input nz-input [formControl]="qualifyControl" placeholder="Calificacion" type="number">
+      </nz-input-group>
+      <textarea
+      nz-input
+      [formControl]="commitControl"
+      [placeholder]="'Comentario'"
+      [nzAutosize]="{ minRows: 2, maxRows: 6 }"
+      >
+      </textarea>
   </div>
 </form>
+<div class="actions">
+  <button mat-raised-button (click)="qualify()">Calificar</button>
+  <button mat-raised-button (click)="cancel()">cancel</button>
+
+</div>

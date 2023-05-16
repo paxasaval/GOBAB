@@ -43,5 +43,8 @@ export class EvidenceService {
     return this.http.get<EvidenceID>(`${this.apiUrl}/${id}`)
   }
 
+  qualifyEvidence(id:string,qualification:number,commit?:string){
+    return this.http.put(`${this.apiUrl}/qualify/${id}`,{qualification:qualification,commit:commit})
+  }
 
 }

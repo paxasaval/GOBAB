@@ -12,29 +12,37 @@ export class SubindicatorService {
   private apiUrl = `${environment.API_URL}/api/subIndicators`
 
   private subindicatorSelected = new BehaviorSubject<SubindicatorID>({
-    indicadorID:'',
+    indicadorID: '',
     typeID: '',
     name: '',
     responsible: '',
     qualification: 0,
     created: new Date(),
     lastUpdate: new Date(),
-    state:false,
+    state: false,
     createdBy: '',
     commits: [],
     evidences: [],
-    id:''
+    id: ''
   })
 
   constructor(
     private http: HttpClient
   ) { }
 
-  getSelectedSubindicator(){
+  getSelectedSubindicator() {
     return this.subindicatorSelected.asObservable()
   }
+  getSelectObserverSubindicator() {
+    if (this.subindicatorSelected.value.id !== '') {
 
-  setSelectedSubindicator(subindicator:SubindicatorID){
+      const subindicatorObserver = this.getSubindicatorByID(this.subindicatorSelected.value.id)
+      return subindicatorObserver
+    }
+    return this.subindicatorSelected.asObservable()
+
+  }
+  setSelectedSubindicator(subindicator: SubindicatorID) {
     this.subindicatorSelected.next(subindicator)
   }
 
@@ -54,7 +62,7 @@ export class SubindicatorService {
     return this.http.get<SubindicatorID[]>(`${this.apiUrl}/indicator/${id}`)
   }
 
-  getSubindicatorGeneralByIndicator(id:string){
+  getSubindicatorGeneralByIndicator(id: string) {
     return this.http.get<SubindicatorID[]>(`${this.apiUrl}/indicator/${id}/generalSubindicators`)
   }
 
