@@ -8,6 +8,7 @@ import { TypeService } from 'src/app/services/type/type.service';
 import { EvidenceService } from 'src/app/services/evidence/evidence.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-finish-evidence',
@@ -24,6 +25,7 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
     private typeService: TypeService,
     private evidenceService: EvidenceService,
     private storageService: StorageService,
+    private router:Router
   ) { }
 
   groupCharacteristics(typeID: TypeID, evidences: Evidence[]): CharacteristicWithEvidence[] {
@@ -72,6 +74,12 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
     ).subscribe(count => {
       if(count===numberEvidences){
         Swal.close()
+        const currentURL = this.router.url
+        const segments = currentURL.split('/');
+        segments.pop(); // Elimina el último segmento (parámetro) de la ruta
+
+        const newUrl = segments.join('/');
+        this.router.navigateByUrl(newUrl);
       }
       console.log(`evidencar upload (${count}/${numberEvidences})`)
     }, error => {
