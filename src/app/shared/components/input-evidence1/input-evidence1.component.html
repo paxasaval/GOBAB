@@ -28,7 +28,7 @@
           <div class="legend" *ngIf="!formEvidence.evidence; else nameFile">
             <mat-icon class="mat-18">upload</mat-icon>
             <p>Arrastre aquí los archivos</p>
-            <span>Archivos (PDF, jpg, png)</span>
+            <span>Archivos ({{characteristic.allowed_formats[0]}})</span>
           </div>
           <ng-template #nameFile class="legend">
             <mat-icon class="mat-18">description</mat-icon>
@@ -40,6 +40,7 @@
             (change)="getFiles($event, formEvidence)"
             formControlName="file"
             class="file"
+            accept=".pdf"
           />
         </div>
       </div>

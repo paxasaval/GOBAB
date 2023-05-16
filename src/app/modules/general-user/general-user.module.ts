@@ -14,6 +14,10 @@ import { QuadrantSectionComponent } from './components/quadrant-section/quadrant
 import { IndicatorComponent } from './pages/indicator/indicator.component';
 import { QuadrantSummaryComponent } from './pages/quadrant-summary/quadrant-summary.component';
 import { IndicatorSummaryComponent } from './pages/indicator-summary/indicator-summary.component';
+import { SubindicatorComponent } from './pages/subindicator/subindicator.component';
+import { RenderDocumentComponent } from './components/render-document/render-document.component';
+import { SideBarEvidencesComponent } from './components/side-bar-evidences/side-bar-evidences.component';
+import { SectionEvidenceComponent } from './components/section-evidence/section-evidence.component';
 
 
 
@@ -31,6 +35,10 @@ import { IndicatorSummaryComponent } from './pages/indicator-summary/indicator-s
     IndicatorComponent,
     QuadrantSummaryComponent,
     IndicatorSummaryComponent,
+    SubindicatorComponent,
+    RenderDocumentComponent,
+    SideBarEvidencesComponent,
+    SectionEvidenceComponent,
 
   ],
   imports: [

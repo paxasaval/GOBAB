@@ -27,7 +27,8 @@ export class InputEvidence2Component implements OnInit {
     name:'',
     required:true,
     tier:1,
-    unique:true
+    unique:true,
+    allowed_formats:['.pdf']
   }
   @Output() evidenceEmit = new EventEmitter<Evidence[]>()
 

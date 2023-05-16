@@ -17,8 +17,9 @@ export class ViewPdfComponent implements OnInit,OnChanges {
   ) { }
 
   validatePDF(){
-    const extension = this.url.slice(-3).toLowerCase()
-    if (extension=='pdf'){
+    const extension = this.url.includes('.pdf')
+    if(extension){
+      console.log(extension)
       this.formatPDF=true
     }
   }

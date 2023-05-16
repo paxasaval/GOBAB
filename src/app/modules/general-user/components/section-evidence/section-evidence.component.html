@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="subtitle">
+    <h4 id="titleDiv" #titleDiv>{{ title }}</h4>
+    <span><mat-icon class="mat-18">arrow_drop_down</mat-icon></span>
+  </div>
+  <div *ngIf="evidences.length>0;else elseBlock" class="evidences">
+    <div *ngFor="let evidence of evidences" class="evidence-line">
+      <div class="name">
+        <mat-icon>circle</mat-icon>
+        <span (click)="setEvidence(evidence)" >{{evidence.name}}</span>
+      </div>
+      <div class="actions">
+        <mat-icon class="dowload-icon">cloud_download</mat-icon>
+        <mat-icon class="help-icon">help</mat-icon>
+      </div>
+    </div>
+  </div>
+  <ng-template class="evidences" #elseBlock>
+    <div class="evidence-line">
+      <div class="name noName">
+        <mat-icon>circle</mat-icon>
+        <span>No hay evidencia cargada</span>
+      </div>
+    </div>
+  </ng-template>
+</div>

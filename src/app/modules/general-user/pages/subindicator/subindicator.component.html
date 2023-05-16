@@ -1,0 +1,27 @@
+<div class="container">
+  <main *ngIf="subindicator">
+    <h2>{{ subindicator.name }}</h2>
+    <div class="info">
+      <div class="qualification">
+        <span class="bold">Estado: </span>
+        <span>Amarillo</span>
+      </div>
+      <div class="update">
+        <span class="bold">Ultima Actualizacion:</span>
+        <span>06/03/203</span>
+      </div>
+    </div>
+    <div class="btn-actions">
+      <button mat-raised-button (click)="setPortada()">Ver Portada</button>
+    </div>
+    <div class="view-pdf">
+      <app-render-document></app-render-document>
+    </div>
+  </main>
+  <aside>
+    <app-side-bar-evidences
+      [characteristicWithEvidences]="characteristicWithEvidence"
+      [evidences]="characteristicsList"
+    ></app-side-bar-evidences>
+  </aside>
+</div>

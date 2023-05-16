@@ -39,7 +39,8 @@ export class AddSubindicatorComponent implements OnInit {
     name: 'Portada',
     required: true,
     tier: 1,
-    unique: true
+    unique: true,
+    allowed_formats:['.pdf']
   }
   nameControl = new FormControl('')
   typeControl = new FormGroup({

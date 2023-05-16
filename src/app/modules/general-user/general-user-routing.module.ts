@@ -6,6 +6,7 @@ import { QuadrantComponent } from './pages/quadrant/quadrant.component';
 import { QuadrantSummaryComponent } from './pages/quadrant-summary/quadrant-summary.component';
 import { IndicatorComponent } from './pages/indicator/indicator.component';
 import { IndicatorSummaryComponent } from './pages/indicator-summary/indicator-summary.component';
+import { SubindicatorComponent } from './pages/subindicator/subindicator.component';
 
 const routes:Routes = [
   {
@@ -36,6 +37,10 @@ const routes:Routes = [
               {
                 path:':id',
                 component:IndicatorSummaryComponent
+              },
+              {
+                path:':id/:subindicatorID',
+                component:SubindicatorComponent
               }
             ]
           }
