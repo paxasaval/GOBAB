@@ -18,7 +18,9 @@ export class EvidenceService {
     name:'',
     note:'',
     subIndicatorID:'',
-    verified:false
+    author:'',
+    verified:false,
+    commits:[]
   })
 
   constructor(
@@ -36,5 +38,10 @@ export class EvidenceService {
   setEvidenceSelected(evidence:EvidenceID){
     this.evidenceSelected$.next(evidence)
   }
+
+  getEvidenceByID(id:string){
+    return this.http.get<EvidenceID>(`${this.apiUrl}/${id}`)
+  }
+
 
 }

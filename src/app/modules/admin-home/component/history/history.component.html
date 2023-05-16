@@ -4,6 +4,7 @@
       <th rowSpan="2">Caracteristica</th>
       <th colSpan="3">Evidencia</th>
       <th colSpan="3">Revision</th>
+      <th *ngIf="auth" colSpan="2">Acciones</th>
     </tr>
     <tr>
       <th>Nombre</th>
@@ -25,14 +26,30 @@
         <td [rowSpan]="1" nzBreakWord>{{ evidence.name }}</td>
         <td [rowSpan]="1" nzBreakWord>{{ evidence.link }}</td>
         <td [rowSpan]="1" nzBreakWord>{{ evidence.note }}</td>
+        <!--Qualification-->
         <td [rowSpan]="1">
-          <label nz-checkbox [(ngModel)]="evidence.verified"></label>
+          <label nz-checkbox [(ngModel)]="evidence.verified" disabled></label>
         </td>
         <td [rowSpan]="1">
-          <input nz-input nz-size="small" type="number" />
+          {{evidence.qualification}}/{{data.characteristic.score}}
         </td>
         <td [rowSpan]="1">
-          <textarea nz-input type="text" nzAutosize></textarea>
+          <div *ngIf="evidence.commits.length>0;else elseBlock" class="comits-container">
+            <div class="commit" *ngFor="let commit of arrayCommits(evidence)">
+              {{commit}}
+            </div>
+          </div>
+          <ng-template #elseBlock>
+            <div class="no-commits">
+              Sin comentarios
+            </div>
+          </ng-template>
+        </td>
+        <td [rowSpan]="1" *ngIf="auth">
+          <a (click)="openReview(evidence)">Revisar</a>
+        </td>
+        <td [rowSpan]="1" *ngIf="auth">
+          <a>Eliminar</a>
         </td>
       </tr>
     </ng-container>

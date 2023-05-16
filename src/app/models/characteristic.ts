@@ -17,3 +17,7 @@ export interface CharacteristicWithEvidence{
   characteristic:CharacteristicID
   evidences:EvidenceID[] | Evidence[]
 }
+export interface CharacteristicWithEvidenceID{
+  characteristic:CharacteristicID
+  evidences:EvidenceID[]
+}

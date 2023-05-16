@@ -2,6 +2,7 @@ import { Evidence } from './../../../models/evidence';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CharacteristicID } from 'src/app/models/characteristic';
+import { UserID } from 'src/app/models/user';
 
 interface FormEvidence {
   form: FormGroup,

@@ -17,11 +17,13 @@ export interface Subindicator{
   created:Date,
   lastUpdate:Date,
   state:boolean,
-  createdBy:string|User
   commits:string[] | CommitID[],
   evidences:string[] | EvidenceID[]
 }
-export interface SubindicatorID extends Subindicator{id:string}
+export interface SubindicatorID extends Subindicator{
+  id:string,
+  createdBy:string|User
+}
 export interface SubindicatorIDWithPagination{
   pagination:Pagination
   docs:SubindicatorID[]

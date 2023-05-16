@@ -11,6 +11,8 @@ import { SubindicatorService } from 'src/app/services/subindicator/subindicator.
 import { EMPTY, from, of } from 'rxjs';
 import { EvidenceService } from 'src/app/services/evidence/evidence.service';
 import Swal from 'sweetalert2';
+import { IndicatorInstanceService } from 'src/app/services/indicator-instance/indicator-instance.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-subindicator-confirm',
@@ -32,8 +34,10 @@ export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
   constructor(
     private subindicatorService:SubindicatorService,
     private evidenceService:EvidenceService,
-    private storageService:StorageService
-  ) { }
+    private storageService:StorageService,
+    private indicatorInstanceSevice:IndicatorInstanceService,
+    private router:Router
+    ) { }
 
   groupCharacteristics(typeID: TypeID, evidences: Evidence[]): CharacteristicWithEvidence[] {
     console.log(evidences)
@@ -61,7 +65,6 @@ export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
       requireCover: true,
       observationCover: this.portada[0].note,
       created: new Date(),
-      createdBy: this.user.id,
       evidences: [],
       indicadorID: this.indicatorInstance.id,
       lastUpdate: new Date(),
@@ -120,6 +123,12 @@ export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
       () => {
         console.log('Todas las evidencias agregados al subindicador con éxito');
         Swal.close()
+        const currentURL = this.router.url
+        const segments = currentURL.split('/');
+        segments.pop(); // Elimina el último segmento (parámetro) de la ruta
+
+        const newUrl = segments.join('/');
+        this.router.navigateByUrl(newUrl);
       },
       error => {
         console.error('Error al agregar el subindicador y evidencias', error);
@@ -137,6 +146,12 @@ export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
     this.groupData = this.groupCharacteristics(this.type,this.evidences)
   }
   ngOnInit(): void {
+    this.indicatorInstanceSevice.getIndicatorInstance().subscribe(
+      indicator=>{
+        console.log(indicator)
+        this.indicatorInstance = indicator
+      }
+    )
   }
 
 }

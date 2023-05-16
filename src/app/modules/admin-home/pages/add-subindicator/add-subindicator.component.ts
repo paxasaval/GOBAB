@@ -105,7 +105,6 @@ export class AddSubindicatorComponent implements OnInit {
       requireCover: true,
       observationCover: this.portadaArray[0].note,
       created: new Date(),
-      createdBy: this.user.id,
       evidences: [],
       indicadorID: this.indicatorInstance.id,
       lastUpdate: new Date(),

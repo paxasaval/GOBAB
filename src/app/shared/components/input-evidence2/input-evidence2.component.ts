@@ -2,6 +2,8 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CharacteristicID } from 'src/app/models/characteristic';
 import { Evidence } from 'src/app/models/evidence';
+import { UserID } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user/user.service';
 
 interface FilesControlForm{
   nameControl:FormControl,
@@ -49,8 +51,11 @@ export class InputEvidence2Component implements OnInit {
       flag:true,
     }
   ]
+  user!:UserID
 
-  constructor() { }
+  constructor(
+    private userService:UserService
+  ) { }
 
   addFile(){
     const newNameControl = new FormControl('')
@@ -130,6 +135,11 @@ export class InputEvidence2Component implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userService.getUserSesion().subscribe(
+      user=>{
+        this.user=user
+      }
+    )
   }
 
 }

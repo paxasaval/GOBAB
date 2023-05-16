@@ -1,0 +1,16 @@
+<div class="info" *ngIf="evidenceID">
+  <div class="line">
+    Autor:{{evidenceAuthor(evidenceID).name}}
+  </div>
+  <div class="line">
+    Estado:{{evidenceID.verified?'Aprobado':'No Aprobado'}}
+  </div>
+  <div class="line">
+    Calificacion Actual:{{evidenceID.qualification===0?'No calificado':evidenceID.qualification}}
+  </div>
+</div>
+<form class="form">
+  <div class="form-input">
+    <label for="Revisado"></label>
+  </div>
+</form>

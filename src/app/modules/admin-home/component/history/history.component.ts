@@ -1,4 +1,4 @@
-import { CharacteristicID,CharacteristicWithEvidence } from './../../../../models/characteristic';
+import { CharacteristicID, CharacteristicWithEvidence, CharacteristicWithEvidenceID } from './../../../../models/characteristic';
 import { Subscription, Observable, combineLatest } from 'rxjs';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { EvidenceID } from 'src/app/models/evidence';
@@ -7,6 +7,12 @@ import { map, retry } from 'rxjs/operators';
 import { TypeID } from 'src/app/models/type';
 import { SubindicatorID } from 'src/app/models/subindicators';
 import { TypeService } from 'src/app/services/type/type.service';
+import { environment } from 'src/environments/environment';
+import { UserService } from 'src/app/services/user/user.service';
+import { UserID } from 'src/app/models/user';
+import { RolID } from 'src/app/models/rol';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { DialogCheckEvidenceComponent } from '../dialog-check-evidence/dialog-check-evidence.component';
 
 
 
@@ -21,16 +27,29 @@ export class HistoryComponent implements OnInit,OnChanges {
   typeID!:TypeID
   evidences:EvidenceID[]=[]
   type!:TypeID
-  dataSource!:Observable<CharacteristicWithEvidence[]>
-  groupEvidence!:CharacteristicWithEvidence[] | null
+  dataSource!:Observable<CharacteristicWithEvidenceID[]>
+  groupEvidence!:CharacteristicWithEvidenceID[] | null
   displayedColumns:string[]=[]
   subscribe1!:Subscription
+  ROL_ADMIN=environment.ROL_ADMIN
+  user!:UserID
+  auth=false
   constructor(
     private subindicatorService:SubindicatorService,
-    private typeService:TypeService
+    private typeService:TypeService,
+    private userService:UserService,
+    private modalService:NzModalService
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
+  }
+
+  dataEvidencesID(data:CharacteristicWithEvidenceID):EvidenceID[]{
+    return data.evidences as EvidenceID[]
+  }
+
+  arrayCommits(evidence:any){
+    return evidence.commits
   }
 
   groupCharacteristics(typeID:TypeID,evidences:EvidenceID[]){
@@ -46,6 +65,17 @@ export class HistoryComponent implements OnInit,OnChanges {
   changeValidate(evidence:EvidenceID){
 
   }
+
+  openReview(evidence:EvidenceID){
+    this.modalService.create({
+      nzTitle:'Revision de evidencias',
+      nzContent:DialogCheckEvidenceComponent,
+      nzComponentParams:{
+        evidence:evidence
+      }
+    })
+  }
+
   setColumns(subindicator:SubindicatorID){
     this.evidences=subindicator.evidences as EvidenceID[]
         this.displayedColumns = Object.keys(this.evidences[0])
@@ -55,12 +85,25 @@ export class HistoryComponent implements OnInit,OnChanges {
         this.type=subindicator.typeID as TypeID
   }
 
+  authAdmin(){
+    const rol = this.user.rol as RolID
+    const rolName = rol.name
+    if(rolName===this.ROL_ADMIN){
+      this.auth=true
+    }
+  }
+
   ngOnInit(): void {
-    combineLatest([this.typeService.getTypeSelected(),this.subindicatorService.getSelectedSubindicator()])
-      .subscribe(([type,subindicator])=>{
+    combineLatest([
+      this.typeService.getTypeSelected(),
+      this.subindicatorService.getSelectedSubindicator(),
+      this.userService.getUserSesion()
+    ])
+      .subscribe(([type,subindicator,user])=>{
         this.typeID=type
         this.groupEvidence = this.groupCharacteristics(type,subindicator.evidences as EvidenceID[])
-        console.log(this.groupEvidence)
+        this.user=user
+        this.authAdmin()
       })
   }
 
