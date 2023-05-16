@@ -21,12 +21,13 @@
     <label>Periodo:</label>
     <nz-select
     class="select"
+
     [formControl]="periodControl"
     (ngModelChange)="changePeriod($event)"
     >
-      <nz-option
-      [nzValue]="'2022'"
-      [nzLabel]="'2022'"
+      <nz-option *ngFor="let period of periods"
+      [nzValue]="period"
+      [nzLabel]="period.year"
       ></nz-option>
     </nz-select>
   </div>
