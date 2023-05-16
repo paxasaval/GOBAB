@@ -1,4 +1,4 @@
-import { concatMap } from 'rxjs/operators';
+import { concatMap,reduce } from 'rxjs/operators';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { combineLatest, from } from 'rxjs';
 import { CharacteristicID, CharacteristicWithEvidence } from 'src/app/models/characteristic';
@@ -67,14 +67,13 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
         } else {
           return this.evidenceService.addEvidence(evidence)
         }
-      })
-    ).subscribe(saveEvidence => {
-      if(numberEvidences<this.evidences.length){
-        numberEvidences+=1
-      }else{
+      }),
+      reduce((count)=>count+1,0)
+    ).subscribe(count => {
+      if(count===numberEvidences){
         Swal.close()
       }
-      console.log(saveEvidence)
+      console.log(`evidencar upload (${count}/${numberEvidences})`)
     }, error => {
       console.log(error)
     })

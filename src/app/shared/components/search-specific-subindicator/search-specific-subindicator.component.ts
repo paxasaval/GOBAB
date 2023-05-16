@@ -112,6 +112,7 @@ export class SearchSpecificSubindicatorComponent implements OnInit, OnChanges {
         }
       })
     ).subscribe((result) => {
+      if(result){
       const keys = Object.keys(result)
       if(keys.length<3){
         const data = result as SubindicatorIDWithPagination
@@ -122,13 +123,14 @@ export class SearchSpecificSubindicatorComponent implements OnInit, OnChanges {
         this.arrayIndicator = this.filterIndicatorsByQuadrant(group)
         console.log(this.arrayIndicator)
         this.ejeControl.setValue(group)
-        this.indicatorControl.setValue(indicatorCatalog.number)
+        this.indicatorControl.setValue(indicatorCatalog)
         this.flag=true
       }else{
         const data = result as SubindicatorID[]
         this.dataSource = data
       }
       console.log(this.dataSource)
+    }
     })
     this.fetchType()
   }

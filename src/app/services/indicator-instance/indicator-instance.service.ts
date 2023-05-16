@@ -1,3 +1,4 @@
+import { PeriodID } from './../../models/period';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -40,8 +41,8 @@ export class IndicatorInstanceService {
   getIndicatorInstance(){
     return this.IndicatorSelected.asObservable();
   }
-  getIndicatorByIndicatorIDandPeriod(indicatorID:string,period:string){
-    return this.http.get<IndicatorInstanceID>(`${this.apiUrl}/byIndicatorIDAndPeriod?indicatorID=${indicatorID}&period=${period}`)
+  getIndicatorByIndicatorIDandPeriod(indicatorID:string,period:PeriodID){
+    return this.http.get<IndicatorInstanceID>(`${this.apiUrl}/byIndicatorIDAndPeriod?indicatorID=${indicatorID}&period=${period.id} `)
   }
   setIndicatorInstance(indicator:IndicatorInstanceID){
     console.log(indicator)

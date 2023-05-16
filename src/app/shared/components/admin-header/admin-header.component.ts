@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PeriodID } from 'src/app/models/period';
 import { RolID } from 'src/app/models/rol';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { PeriodService } from 'src/app/services/period/period.service';
@@ -18,20 +19,21 @@ export class AdminHeaderComponent implements OnInit,AfterViewInit {
   mail = 'paxasaval1003@gmail.com'
   rol = 'ciudadano'
 
+  periods!:PeriodID[]
+
   searchControl = new FormControl('')
-  periodControl = new FormControl('2022')
+  periodControl = new FormControl('')
   constructor(
     private userService: UserService,
     private authService: AuthService,
     private periodservice: PeriodService,
-    private router: Router
+    private router: Router,
   ) { }
 
   changePeriod(event:any){
 
   }
   ngAfterViewInit(): void {
-    this.periodservice.setPeriodSelected(this.periodControl.value)
   }
   ngOnInit(): void {
     this.authService.loggedIn().then(
@@ -49,6 +51,13 @@ export class AdminHeaderComponent implements OnInit,AfterViewInit {
             }
           )
         }
+      }
+    )
+    this.periodservice.getAllPeriod().subscribe(
+      periods=>{
+        this.periods=periods
+        this.periodservice.setPeriodSelected(periods[0])
+        this.periodControl.setValue(periods[0])
       }
     )
   }

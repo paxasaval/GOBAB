@@ -1,3 +1,4 @@
+import { PeriodID } from './../../../models/period';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,6 +19,7 @@ export class UserInfoBarComponent implements OnInit, AfterViewInit {
   mail = 'paxasaval1003@gmail.com'
   rol = 'ciudadano'
   periodControl = new FormControl('2022')
+  periods!:PeriodID[]
   constructor(
     private userService: UserService,
     private authService: AuthService,
@@ -50,6 +52,13 @@ export class UserInfoBarComponent implements OnInit, AfterViewInit {
             }
           )
         }
+      }
+    )
+    this.periodservice.getAllPeriod().subscribe(
+      periods=>{
+        this.periods=periods
+        this.periodservice.setPeriodSelected(periods[0])
+        this.periodControl.setValue(periods[0])
       }
     )
 

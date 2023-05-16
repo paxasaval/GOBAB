@@ -33,7 +33,7 @@ export class QuadrantSummaryComponent implements OnInit {
           return this.periodService.getPeriodSelected().pipe(
             switchMap((period) => {
               return this.indicatorInstanceService
-                .getIndicatorsByPeriodAndQuadrant(period, params['quadrantNumber'])
+                .getIndicatorsByPeriodAndQuadrant(period.id, params['quadrantNumber'])
                 .pipe(
                   switchMap((res) => {
                     this.indicators = res;

@@ -1,5 +1,5 @@
 import { StorageService } from 'src/app/services/storage/storage.service';
-import { mergeMap, concatMap, catchError } from 'rxjs/operators';
+import { mergeMap, concatMap, catchError,reduce } from 'rxjs/operators';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CharacteristicID, CharacteristicWithEvidence } from 'src/app/models/characteristic';
 import { Evidence } from 'src/app/models/evidence';
@@ -118,7 +118,7 @@ export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
       })
     ).subscribe(
       () => {
-        console.log('evidencias agregados al subindicador con éxito');
+        console.log('Todas las evidencias agregados al subindicador con éxito');
         Swal.close()
       },
       error => {

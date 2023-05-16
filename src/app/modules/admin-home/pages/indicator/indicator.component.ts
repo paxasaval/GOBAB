@@ -27,7 +27,7 @@ export class IndicatorComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.pipe(
       switchMap(params=>{
-        this.id=params['number']
+        this.id=params['id']
         this.quadrant=params['quadrantNumber']
         console.log(params)
         return this.indicatorInstanceService.getIndicatorByID(this.id)
