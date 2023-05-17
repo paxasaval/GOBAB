@@ -14,6 +14,7 @@ export const environment = {
   production: false,
   API_URL:'http://localhost:3001',
   ROL_ADMIN:'Administrador',
+  ROL_RESPONSIBLE:'Responsable',
   TENATID:'64616f718e118fb22d4059e3',
 
   //API_URL:'https://iso-18091-backend-production.up.railway.app'

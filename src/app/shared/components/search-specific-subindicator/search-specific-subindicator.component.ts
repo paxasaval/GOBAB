@@ -97,7 +97,7 @@ export class SearchSpecificSubindicatorComponent implements OnInit, OnChanges {
         this.allIndicators=indicators
         this.indicator=indicatorSelected
         const rol = userSesion.rol as RolID
-        if(rol.name===environment.ROL_ADMIN){
+        if(rol.name===environment.ROL_ADMIN || rol.name==environment.ROL_RESPONSIBLE){
           this.auth=true
         }
       }
