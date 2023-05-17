@@ -32,7 +32,7 @@ export class IndicatorInstanceService {
     return this.http.get<IndicatorInstanceID[]>(`${this.apiUrl}?period=${period}`)
   }
   getIndicatorsByPeriodAndQuadrant(period: string, quadrant: string) {
-    return this.http.get<IndicatorInstanceID[]>(`${this.apiUrl}?period=${period}&quadrant=${quadrant}`)
+    return this.http.get<IndicatorInstanceID[]>(`${this.apiUrl}/byQuadrantAndPeriod?period=${period}&quadrant=${quadrant}`)
   }
   getIndicatorByID(id: string) {
     return this.http.get<IndicatorInstanceID>(`${this.apiUrl}/${id}`)

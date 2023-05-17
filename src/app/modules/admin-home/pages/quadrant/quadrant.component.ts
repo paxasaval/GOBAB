@@ -5,6 +5,7 @@ import { switchMap } from 'rxjs/operators'
 import { IndicatorInstanceService } from 'src/app/services/indicator-instance/indicator-instance.service';
 import { IndicatorInstanceID } from 'src/app/models/indicatorInstance';
 import { IndicatorID } from 'src/app/models/indicator';
+import { PeriodService } from 'src/app/services/period/period.service';
 
 export interface Data {
     date: Date,
@@ -49,8 +50,8 @@ export class QuadrantComponent implements OnInit {
   constructor(
     private titleService:TitleService,
     private route:ActivatedRoute,
-    private indicatorInstanceService:IndicatorInstanceService
-
+    private indicatorInstanceService:IndicatorInstanceService,
+    private periodService:PeriodService
   ) { }
 
   ngOnInit(): void {
@@ -59,7 +60,12 @@ export class QuadrantComponent implements OnInit {
         this.id = params.id //quadrantNumber
         //console.log(this.id)
         this.indicators=[]
-        return this.indicatorInstanceService.getIndicatorsByPeriodAndQuadrant('2022',params.id)
+        return this.periodService.getPeriodSelected().pipe(
+          switchMap(period=>{
+            return this.indicatorInstanceService.getIndicatorsByPeriodAndQuadrant(period.id,params.id)
+
+          })
+        )
       })
     ).subscribe(arrayIndicatorInstances=>{
       console.log(arrayIndicatorInstances)

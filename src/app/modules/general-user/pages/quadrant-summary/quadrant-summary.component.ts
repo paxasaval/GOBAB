@@ -32,14 +32,19 @@ export class QuadrantSummaryComponent implements OnInit {
           this.indicators = [];
           return this.periodService.getPeriodSelected().pipe(
             switchMap((period) => {
-              return this.indicatorInstanceService
+              if(period.id){
+                return this.indicatorInstanceService
                 .getIndicatorsByPeriodAndQuadrant(period.id, params['quadrantNumber'])
                 .pipe(
                   switchMap((res) => {
                     this.indicators = res;
+                    console.log(res)
                     return res;
                   })
                 );
+              }else{
+                return this.indicatorInstanceService.getIndicatorInstance()
+              }
             })
           );
         })
