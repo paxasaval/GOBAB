@@ -9,6 +9,11 @@ import { EvidenceService } from 'src/app/services/evidence/evidence.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { IndicatorInstanceService } from 'src/app/services/indicator-instance/indicator-instance.service';
+import { IndicatorInstanceID } from 'src/app/models/indicatorInstance';
+import { IndicatorID } from 'src/app/models/indicator';
+import { GadID } from 'src/app/models/gad';
+import { SubindicatorID } from 'src/app/models/subindicators';
 
 @Component({
   selector: 'app-finish-evidence',
@@ -20,9 +25,10 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
   typeID!: TypeID
   @Input() evidences: Evidence[] = []
   groupData: CharacteristicWithEvidence[] = []
-
+  indicator!:IndicatorInstanceID
   constructor(
     private typeService: TypeService,
+    private indicatorInstanceService:IndicatorInstanceService,
     private evidenceService: EvidenceService,
     private storageService: StorageService,
     private router:Router
@@ -60,6 +66,10 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
     from(this.evidences).pipe(
       concatMap(evidence => {
         if (evidence.link instanceof File) {
+          const indicatorCatalog =  this.indicator.indicatorID as IndicatorID
+          const gad = this.indicator.gadID as GadID
+          const subindicator = evidence.subIndicatorID as SubindicatorID
+          const path = gad.name+'/'+this.indicator.year+'/'+indicatorCatalog.quadrantName+'/'+indicatorCatalog.name+'/'+subindicator.name
           return from(this.storageService.uploadFile('test', evidence.link)).pipe(
             concatMap((url) => {
                 evidence.link = url
@@ -89,8 +99,10 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     combineLatest([
       this.typeService.getTypeSelected(),
-    ]).subscribe(([type]) => {
+      this.indicatorInstanceService.getIndicatorInstance()
+    ]).subscribe(([type,indicatorInstance]) => {
       this.typeID = type
+      this.indicator=indicatorInstance
       if (this.typeID.id != '') {
         this.groupData = this.groupCharacteristics(type, this.evidences)
 

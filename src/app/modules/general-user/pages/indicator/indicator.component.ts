@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { IndicatorID } from 'src/app/models/indicator';
 import { IndicatorInstanceID } from 'src/app/models/indicatorInstance';
@@ -12,10 +13,10 @@ import { PeriodService } from 'src/app/services/period/period.service';
   templateUrl: './indicator.component.html',
   styleUrls: ['./indicator.component.scss']
 })
-export class IndicatorComponent implements OnInit, AfterViewInit {
+export class IndicatorComponent implements OnInit, AfterViewInit,OnDestroy {
 
   indicatorInstance!: IndicatorInstanceID
-
+  subscribe!:Subscription
   constructor(
     private route: ActivatedRoute,
     private indicatorInstanceService: IndicatorInstanceService,
@@ -26,8 +27,11 @@ export class IndicatorComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
 
   }
+  ngOnDestroy(): void {
+      this.subscribe.unsubscribe()
+  }
   ngOnInit(): void {
-    this.route.parent?.params.pipe(
+    this.subscribe = this.route.parent?.params.pipe(
       switchMap(paramsParent => {
         const quadrant = paramsParent['quadrantNumber'] as number
         return this.route.params.pipe(
@@ -47,7 +51,7 @@ export class IndicatorComponent implements OnInit, AfterViewInit {
           })
         )
       })
-    ).subscribe(
+     ).subscribe(
       indicatorInstance => {
         this.indicatorInstance = indicatorInstance
         this.indicatorInstanceService.setIndicatorInstance(indicatorInstance)
@@ -57,7 +61,7 @@ export class IndicatorComponent implements OnInit, AfterViewInit {
           this.router.navigateByUrl(`user/quadrant/${indicatorCatalog.quadrant}/indicator/${indicatorCatalog.number}/${indicatorInstance.id}`)
         }
       }
-    )
+     )!
   }
 
 }

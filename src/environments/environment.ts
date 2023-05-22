@@ -18,7 +18,7 @@ export const environment = {
   TENATID:'64616f718e118fb22d4059e3',
 
   //API_URL:'https://iso-18091-backend-production.up.railway.app'
-  //API_URL:'https://iso-18091-backend-test-production.up.railway.app'
+//API_URL:'https://iso-18091-backend-test-production.up.railway.app'
 };
 
 /*

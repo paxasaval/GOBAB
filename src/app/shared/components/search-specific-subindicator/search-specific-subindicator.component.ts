@@ -118,6 +118,7 @@ export class SearchSpecificSubindicatorComponent implements OnInit, OnChanges {
         const data = result as SubindicatorIDWithPagination
         this.dataSource = data.docs
         this.pagination = data.pagination
+        console.log(result)
         const indicatorCatalog = this.indicator!.indicatorID as IndicatorID
         const group = indicatorCatalog.quadrant
         this.arrayIndicator = this.filterIndicatorsByQuadrant(group)

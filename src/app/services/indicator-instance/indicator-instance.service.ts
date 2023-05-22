@@ -15,6 +15,8 @@ export class IndicatorInstanceService {
   private IndicatorSelected = new BehaviorSubject<IndicatorInstanceID>({
     id:'',
     create:new Date(),
+    gadID:'',
+    year:'',
     createBy:'',
     indicatorID:'',
     lastUpdate:new Date(),

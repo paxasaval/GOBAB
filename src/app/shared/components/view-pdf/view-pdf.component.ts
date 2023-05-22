@@ -30,6 +30,7 @@ export class ViewPdfComponent implements OnInit,OnChanges {
   }
   ngOnChanges(changes: SimpleChanges): void {
       this.validatePDF()
+      this.safeURL=this.sanitizerURL(this.url)
   }
 
 }

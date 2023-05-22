@@ -13,6 +13,8 @@ import { EvidenceService } from 'src/app/services/evidence/evidence.service';
 import Swal from 'sweetalert2';
 import { IndicatorInstanceService } from 'src/app/services/indicator-instance/indicator-instance.service';
 import { Router } from '@angular/router';
+import { IndicatorID } from 'src/app/models/indicator';
+import { GadID } from 'src/app/models/gad';
 
 @Component({
   selector: 'app-add-subindicator-confirm',
@@ -30,6 +32,8 @@ export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
   groupData: CharacteristicWithEvidence[] = []
   user!:UserID
   indicatorInstance!:IndicatorInstanceID
+  indicatorCatalog!:IndicatorID
+  gadID!:GadID
 
   constructor(
     private subindicatorService:SubindicatorService,
@@ -63,7 +67,7 @@ export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
       commits: [],
       cover: '',
       requireCover: true,
-      observationCover: this.portada[0].note,
+      observationCover: this.portada[0].note ||'',
       created: new Date(),
       evidences: [],
       indicadorID: this.indicatorInstance.id,
@@ -97,7 +101,10 @@ export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
             return from(this.evidences).pipe(
               concatMap(evidence => {
                 if(evidence.link instanceof File){
-                  return from(this.storageService.uploadFile('test',evidence.link)).pipe(
+                  const indicatorCatalog = this.indicatorInstance.indicatorID as IndicatorID
+                  console.log(this.indicatorInstance.gadID)
+                  const path = this.gadID.name+'/'+this.indicatorInstance.year+'/'+indicatorCatalog.quadrantName+'/'+indicatorCatalog.name+'/'+subindicator.name
+                  return from(this.storageService.uploadFile(path,evidence.link)).pipe(
                     concatMap((url)=>{
                       evidence.link=url
                       return this.evidenceService.addEvidence(evidence)
@@ -150,6 +157,8 @@ export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
       indicator=>{
         console.log(indicator)
         this.indicatorInstance = indicator
+        this.indicatorCatalog = indicator.indicatorID as IndicatorID
+        this.gadID = indicator.gadID as GadID
       }
     )
   }

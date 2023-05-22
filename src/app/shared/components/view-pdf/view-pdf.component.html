@@ -1,6 +1,6 @@
 <iframe
   *ngIf="formatPDF; else elseBlock"
-  [src]="sanitizerURL(url)"
+  [src]="safeURL"
   frameborder="0"
   class="pdf"
 ></iframe>

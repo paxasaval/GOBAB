@@ -16,7 +16,7 @@ import { InputEvidence2Component } from './components/input-evidence2/input-evid
 import { HeaderComponent } from './components/header/header.component';
 import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
 import { SearchInputComponent } from './components/search-input/search-input.component';
-
+import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 
 
 @NgModule({
@@ -33,13 +33,15 @@ import { SearchInputComponent } from './components/search-input/search-input.com
     InputEvidence2Component,
     HeaderComponent,
     AdminHeaderComponent,
-    SearchInputComponent
+    SearchInputComponent,
+
   ],
   imports: [
     CommonModule,
     MaterialModule,
     RouterModule,
-    DragDropModule
+    DragDropModule,
+    PdfJsViewerModule
   ],
   exports:[
     NavBarComponent,
