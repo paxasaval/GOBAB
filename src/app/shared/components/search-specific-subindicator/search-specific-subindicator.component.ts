@@ -65,7 +65,9 @@ export class SearchSpecificSubindicatorComponent implements OnInit, OnChanges {
   arraySubindicators: SubindicatorID[] = []
   myContol = new FormControl('')
   ejeControl = new FormControl('')
+  ejeFlag=false
   indicatorControl = new FormControl('')
+  indicatorFlag=false
   options: string[] = ['One', 'Two', 'Three'];
   foods: Food[] = [
     { value: 'steak-0', viewValue: 'Steak' },
@@ -87,29 +89,35 @@ export class SearchSpecificSubindicatorComponent implements OnInit, OnChanges {
     private typeService: TypeService
   ) { }
 
+  compareCategoryObjects(object1: any, object2: any) {
+    //console.log(object1)
+    //console.log(object2)
+    return object1 && object2 && object1.id == object2.id;
+  }
   ngOnInit(): void {
+     // Combinar las tres llamadas a servicios en un solo observable
     combineLatest([
       this.indicatorService.getAllIndicators(),
       this.indicatorInstanceService.getIndicatorInstance(),
       this.userService.getUserSesion()
-    ]).subscribe(
-      ([indicators,indicatorSelected,userSesion])=>{
+    ]).pipe(
+      switchMap(([indicators,indicatorSelected,userSesion])=>{
         this.allIndicators=indicators
         this.indicator=indicatorSelected
+        //console.log(this.indicator)
+        // Obtener el rol del usuario y determinar la autorización
         const rol = userSesion.rol as RolID
-        if(rol.name===environment.ROL_ADMIN || rol.name==environment.ROL_RESPONSIBLE){
-          this.auth=true
-        }
-      }
-    )
-    this.indicatorInstanceService.getIndicatorInstance().pipe(
-      switchMap((indicator) => {
-        if(indicator.id!=''){
-          this.arrayIndicator = this.allIndicators
-          return this.subindicatorService.getSubindicatorSpecificByIndicator(indicator.id, this.page, this.size)
-        }else{
-          return this.subindicatorService.getAllSubindicators()
-        }
+        this.auth = (rol.name === environment.ROL_ADMIN || rol.name === environment.ROL_RESPONSIBLE);
+        // Obtener la instancia de indicador y realizar otra llamada dependiendo de su id
+        return this.indicatorInstanceService.getIndicatorInstance().pipe(
+          switchMap((indicator) => {
+            if(indicator.id!==''){
+              this.arrayIndicator = this.allIndicators
+              return this.subindicatorService.getSubindicatorSpecificByIndicator(indicator.id, this.page, this.size)
+            }else{
+              return this.subindicatorService.getAllSubindicators()
+            }
+          }))
       })
     ).subscribe((result) => {
       if(result){
@@ -118,25 +126,33 @@ export class SearchSpecificSubindicatorComponent implements OnInit, OnChanges {
         const data = result as SubindicatorIDWithPagination
         this.dataSource = data.docs
         this.pagination = data.pagination
-        console.log(result)
+        //console.log(result)
+        //console.log(this.indicator)
         const indicatorCatalog = this.indicator!.indicatorID as IndicatorID
         const group = indicatorCatalog.quadrant
         this.arrayIndicator = this.filterIndicatorsByQuadrant(group)
-        console.log(this.arrayIndicator)
-        this.ejeControl.setValue(group)
-        this.indicatorControl.setValue(indicatorCatalog)
-        this.flag=true
+        //console.log(this.arrayIndicator)
+        // Establecer los valores en los controles y activar la bandera
+        if(group){
+          this.ejeControl.setValue(group)
+          this.ejeFlag=true
+        }
+        const x = this.arrayIndicator.findIndex(indicator=>indicator.id==indicatorCatalog.id)
+        if(x!=-1){
+          this.indicatorControl.setValue(this.arrayIndicator[x])
+          this.indicatorFlag=true
+        }
       }else{
         const data = result as SubindicatorID[]
         this.dataSource = data
       }
-      console.log(this.dataSource)
+      //console.log(this.dataSource)
     }
     })
     this.fetchType()
   }
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes)
+    //console.log(changes)
     if (this.indicator!.id) {
       const indicatorCatalog = this.indicator!.indicatorID as IndicatorID
       const group = indicatorCatalog.quadrant
@@ -144,7 +160,7 @@ export class SearchSpecificSubindicatorComponent implements OnInit, OnChanges {
       this.ejeControl.setValue(group)
       this.indicatorControl.setValue(indicatorCatalog.number)
       if (this.subcriptionSubIndicators) {
-        console.log(this.indicator?.id)
+        //console.log(this.indicator?.id)
         this.subcriptionSubIndicators.unsubscribe()
         this.subcriptionSubIndicators = this.subindicatorService.getSubindicatorSpecificByIndicator(this.indicator!.id, this.page, this.size).subscribe(
           result => {
@@ -159,7 +175,7 @@ export class SearchSpecificSubindicatorComponent implements OnInit, OnChanges {
             this.dataSource = result.docs
           }
         )
-        console.log(this.indicator)
+        //console.log(this.indicator)
       }
     }
   }

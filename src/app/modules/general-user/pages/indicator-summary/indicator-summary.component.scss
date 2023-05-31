@@ -1,11 +1,11 @@
-.generalidades{
+.generalidades {
   width: 100%;
   height: 30vh;
   display: flex;
   gap: 2em;
   justify-content: center;
 }
-.card{
+.card {
   height: 20vh;
   width: 18vw;
   display: flex;
@@ -14,21 +14,64 @@
   background-color: var(--color2);
   border-radius: 6px;
 }
-.card-title{
+.card-title {
   width: 100%;
   justify-content: center;
   text-align: center;
   height: 5vh;
+  font-weight: 7 00;
 }
-.card-info{
+.card-info {
   display: flex;
   justify-content: space-between;
   height: 3vh;
 }
-.card-actions{
+.card-actions {
   width: 100%;
   height: 5vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.seeMore {
+  color: var(--red);
+  font-weight: 600;
+  text-decoration: underline;
+}
+.bg1 {
+  background-color: var(--color1-bg);
+  color: var(--black);
+}
+.bg2 {
+  background-color: var(--color4-bg);
+  color: var(--white);
+}
+.bg3 {
+  background-color: var(--color1-bg);
+  color: var(--black);
+}
+.bg4 {
+  background-color: var(--color4-bg);
+  color: var(--white);
+}
+.container-specific{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 1em;
+  padding-bottom: 1.5em;
+}
+.specific{
+  display: flex;
+  width: 90%;
+}
+.subindicator{
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  width: 100%;
+  .name{
+    width: 80%;
+  }
 }
