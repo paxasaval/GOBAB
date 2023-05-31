@@ -33,7 +33,7 @@ export class AddEvidenceComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.titleService.addSubtitle('Agregar Evidencia')
+    this.titleService.addSubRoute({name:'Agregar Evidencia',route:''})
   }
 
   changeStep(step:number){

@@ -29,6 +29,10 @@ import { StepsSubindicatorComponent } from './component/steps-subindicator/steps
 import { ReviewSubindicatorSpecifidcComponent } from './pages/review-subindicator-specifidc/review-subindicator-specifidc.component';
 import { LayoutIndicatorComponent } from './pages/layout-indicator/layout-indicator.component';
 import { DialogCheckEvidenceComponent } from './component/dialog-check-evidence/dialog-check-evidence.component';
+import { UsersComponent } from './pages/users/users.component';
+import { DialogNewUserComponent } from './component/dialog-new-user/dialog-new-user.component';
+import { UserConfigComponent } from './pages/user-config/user-config.component';
+import { WorkspaceComponent } from './pages/workspace/workspace.component';
 
 
 @NgModule({
@@ -58,6 +62,10 @@ import { DialogCheckEvidenceComponent } from './component/dialog-check-evidence/
     ReviewSubindicatorSpecifidcComponent,
     LayoutIndicatorComponent,
     DialogCheckEvidenceComponent,
+    UsersComponent,
+    DialogNewUserComponent,
+    UserConfigComponent,
+    WorkspaceComponent,
   ],
   imports: [
     CommonModule,

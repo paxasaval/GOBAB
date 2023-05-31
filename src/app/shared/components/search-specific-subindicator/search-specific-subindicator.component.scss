@@ -28,7 +28,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color2);
+  background-color: var(--color4);
   color: var((--white));
   text-transform: uppercase;
   font-weight: 700;
@@ -62,7 +62,7 @@
   gap: 1em;
   align-items: center;
   span {
-    color: var(--color2);
+    color: var(--color4);
     font-weight: 600;
     font-style: italic;
     cursor: pointer;
@@ -70,7 +70,7 @@
 }
 
 .btn-add {
-  background-color: var(--color2);
+  background-color: var(--color4);
   height: 4vh;
   width: 4vh;
   display: flex;
@@ -106,7 +106,7 @@
   }
 }
 .mat-header-cell {
-  background-color: var(--color3);
+  background-color: var(--color4);
   color: var(--white);
   font-size: 1em;
   font-weight: 700;

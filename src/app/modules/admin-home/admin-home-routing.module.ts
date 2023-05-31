@@ -12,6 +12,9 @@ import { AddEvidenceComponent } from './pages/add-evidence/add-evidence.componen
 import { SearchSpecificSubindicatorComponent } from 'src/app/shared/components/search-specific-subindicator/search-specific-subindicator.component';
 import { ReviewSubindicatorSpecifidcComponent } from './pages/review-subindicator-specifidc/review-subindicator-specifidc.component';
 import { LayoutIndicatorComponent } from './pages/layout-indicator/layout-indicator.component';
+import { UsersComponent } from './pages/users/users.component';
+import { UserConfigComponent } from './pages/user-config/user-config.component';
+import { WorkspaceComponent } from './pages/workspace/workspace.component';
 
 const routes: Routes = [
   {
@@ -36,6 +39,20 @@ const routes: Routes = [
         data:{
           breadcrumb:'Inicio'
         }
+      },
+      {
+        path:'workspace',
+        component:WorkspaceComponent,
+        children:[
+          {
+            path:'users',
+            component:UsersComponent
+          },
+        ]
+      },
+      {
+        path:'config',
+        component:UserConfigComponent
       },
       {
         path:'quadrant/:quadrantNumber/indicator/:number',

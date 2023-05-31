@@ -29,7 +29,21 @@ export class SpecificSubindicatorsComponent implements OnInit {
       indicator=>{
         this.indicator=indicator
         const indicatorCatalog = indicator.indicatorID as IndicatorID
-        this.titleService.setTitle([indicatorCatalog.quadrantName,indicatorCatalog.name,'Subindicadores Especificos'])
+        //this.titleService.setTitle([indicatorCatalog.quadrantName,indicatorCatalog.name,'Subindicadores Especificos'])
+        this.titleService.setRoute([
+          {
+            name:indicatorCatalog.quadrantName,
+            route:`/admin/quadrant/${indicatorCatalog.quadrant}`
+          },
+          {
+            name:indicatorCatalog.name,
+            route:`/admin/quadrant/${indicatorCatalog.quadrant}/indicator/${indicatorCatalog.number}`
+          },
+          {
+            name:'Subindicadores especificos',
+            route:`/admin/quadrant/${indicatorCatalog.quadrant}/indicator/${indicatorCatalog.number}/${indicator.id}/Subindicadores-Especificos`
+          }
+        ])
       }
     )
   }

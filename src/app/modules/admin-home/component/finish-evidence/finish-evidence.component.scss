@@ -9,3 +9,12 @@
 .table{
   width: 90%;
 }
+.actions{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 2em;
+  align-items: center;
+  height: 8vh;
+  gap: 1em;
+}

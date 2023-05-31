@@ -4,11 +4,18 @@
     <div class="info">
       <div class="qualification">
         <span class="bold">Estado: </span>
-        <span>Amarillo</span>
+        <span
+        class="circle"
+        [ngClass]="{
+          red:subindicator.qualification===1,
+          yellow:subindicator.qualification===2,
+          green:subindicator.qualification===3
+        }"
+        ></span>
       </div>
       <div class="update">
         <span class="bold">Ultima Actualizacion:</span>
-        <span>06/03/203</span>
+        <span>{{subindicator.lastUpdate | date:"short"  }} </span>
       </div>
     </div>
     <div class="btn-actions">

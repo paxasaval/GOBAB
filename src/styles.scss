@@ -35,3 +35,30 @@ body { margin: 0; font-family: "Montserrat", sans-serif; }
 :host ::ng-deep .mat-typography h1{
   font-family: "Montserrat",sans-serif;
 }
+.btn-bg4{
+  height: 6vh;
+    width: 12vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color4);
+    color: var(--white);
+}
+.btn-confirm{
+  height: 6vh;
+  min-width: 10vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--green);
+  color: var(--white);
+}
+.btn-cancel{
+  height: 6vh;
+  min-width: 10vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--red);
+  color: var(--white);
+}

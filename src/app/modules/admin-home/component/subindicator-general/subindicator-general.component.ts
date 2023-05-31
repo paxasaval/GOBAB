@@ -1,5 +1,5 @@
-import { combineLatest } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Observable, Subscription, combineLatest } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { IndicatorInstanceID } from 'src/app/models/indicatorInstance';
 import { SubindicatorID } from 'src/app/models/subindicators';
@@ -16,13 +16,13 @@ import { IndicatorID } from 'src/app/models/indicator';
   templateUrl: './subindicator-general.component.html',
   styleUrls: ['./subindicator-general.component.scss']
 })
-export class SubindicatorGeneralComponent implements OnInit {
+export class SubindicatorGeneralComponent implements OnInit,OnDestroy {
 
   subIndicator!: SubindicatorID
   flag:boolean=false
   indicator!: IndicatorInstanceID
   type!: TypeID
-
+  observer!:Subscription
   constructor(
     private router:Router,
     private titleService:TitleService,
@@ -32,7 +32,7 @@ export class SubindicatorGeneralComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    combineLatest([
+    this.observer=combineLatest([
       this.indicatorService.getIndicatorInstance(),
       this.subindicatorService.getSelectedSubindicator(),
       this.typeService.getTypeSelected()
@@ -40,8 +40,11 @@ export class SubindicatorGeneralComponent implements OnInit {
       .subscribe(([indicator,subindicator,type])=>{
         this.subIndicator= subindicator
         const indicatorCatalog = indicator.indicatorID as IndicatorID
-        this.titleService.setTitle([indicatorCatalog.quadrantName,indicatorCatalog.name,type.name])
+        //this.titleService.setTitle([indicatorCatalog.quadrantName,indicatorCatalog.name,type.name])
       })
+  }
+  ngOnDestroy(): void {
+      this.observer.unsubscribe()
   }
 
 }

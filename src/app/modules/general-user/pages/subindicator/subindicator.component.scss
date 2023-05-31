@@ -63,6 +63,18 @@ aside{
   padding-top: 1.5em;
   height: 100vh;
 }
+.circle{
+  height: 3vh;
+  width: 3vh;
+  border-radius: 50%;
+}
+.red{
+  background-color: var(--red);
+}
 
-
-
+.yellow{
+  background-color: var(--yellow);
+}
+.green{
+  background-color: var(--green);
+}

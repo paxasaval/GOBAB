@@ -1,8 +1,11 @@
+import { environment } from './../../../../environments/environment';
 import { Component, OnInit } from '@angular/core';
+import { GadID } from 'src/app/models/gad';
 import { IndicatorID } from 'src/app/models/indicator';
 import { IndicatorInstanceID } from 'src/app/models/indicatorInstance';
 import { Rol, RolID } from 'src/app/models/rol';
 import { User } from 'src/app/models/user';
+import { GadService } from 'src/app/services/gad/gad.service';
 import { IndicatorsService } from 'src/app/services/indicators/indicators.service';
 import { TitleService } from 'src/app/services/title/title.service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -18,7 +21,7 @@ export class AdminSidebarComponent implements OnInit {
   userDefault = "../../../../assets/userDefault-2.png"
   rol:RolID={description:'',name:'',id:''}
   arrayIndicadores: IndicatorID[] = []
-
+  gad!:GadID
   quadrant1: IndicatorID[] = []
   quadrant2: IndicatorID[] = []
   quadrant3: IndicatorID[] = []
@@ -28,10 +31,13 @@ export class AdminSidebarComponent implements OnInit {
 
   isExpanded = false
 
+  auth=false
+
   constructor(
     private titleService: TitleService,
     private indicatorService: IndicatorsService,
-    private userService:UserService
+    private userService:UserService,
+    private gadService:GadService
   ) { }
 
   filterQuadrants(arrayIndicators: IndicatorID[]) {
@@ -60,16 +66,27 @@ export class AdminSidebarComponent implements OnInit {
       this.quadrant3,
       this.quadrant4
     ]
-    console.log(this.arrayQuadrant)
+    //  console.log(this.arrayQuadrant)
   }
   ngOnInit(): void {
     const token = localStorage.getItem('token')
     const idUser = localStorage.getItem('user')
+    this.gadService.getGadSelected().subscribe(
+      gad=>{
+        this.gad=gad
+      }
+    )
+
     this.userService.getUserSesion().subscribe(
       user=>{
         this.user=user
         if(user.name!==''){
           this.rol = this.user?.rol as RolID
+          if(this.rol.name===environment.ROL_ADMIN){
+            this.auth=true
+            console.log('Bienvenido admin')
+
+          }
         }else if(idUser){
           this.userService.userById(idUser).toPromise().then(
             userBD=>{

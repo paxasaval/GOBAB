@@ -1,22 +1,32 @@
 <div class="container">
   <div class="info created">
-    <span>Creado:</span>
-    <span>{{subindicator.created | date:'shortDate' }}</span>
+    <span class="subtitle">Creado:</span>
+    <span>{{ subindicator.created | date : "shortDate" }}</span>
   </div>
   <div class="info lastUpdated">
-    <span>Ultima actualizacion:</span>
-    <span>{{subindicator.lastUpdate | date:'shortDate' }}</span>
+    <span class="subtitle">Ultima actualizacion:</span>
+    <span>{{ subindicator.lastUpdate | date : "shortDate" }}</span>
   </div>
   <div class="info qualification">
-    <span>Autoevaluacion ISO</span>
-    <span>{{subindicator.qualification}}</span>
+    <span class="subtitle">Autoevaluacion ISO</span>
+    <span class="circle"
+    [ngClass]="{
+      red: subindicator.qualification === 1,
+      yellow: subindicator.qualification === 2,
+      green: subindicator.qualification === 3,
+      gray: subindicator.qualification === 0
+    }"
+    ></span>
   </div>
   <div class="info documents">
-    <span>Evidencas presentadas:</span>
-    <span>{{subindicator.evidences.length}}</span>
+    <span class="subtitle">Evidencas presentadas:</span>
+    <span
+
+      >{{ subindicator.evidences.length }}</span
+    >
   </div>
   <div class="info state">
-    <span>Estado:</span>
+    <span class="subtitle">Estado:</span>
     <span>No publicado</span>
   </div>
 </div>

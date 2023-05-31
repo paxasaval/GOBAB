@@ -1,4 +1,9 @@
-<nz-table class="table" *ngIf="groupEvidence" #evidenceTable [nzData]="groupEvidence">
+<nz-table
+  class="table"
+  *ngIf="groupEvidence"
+  #evidenceTable
+  [nzData]="groupEvidence"
+>
   <thead>
     <tr>
       <th rowSpan="2">Caracteristica</th>
@@ -18,7 +23,7 @@
   <tbody>
     <ng-container *ngFor="let data of evidenceTable.data">
       <tr>
-        <td [rowSpan]="data.evidences.length+1">
+        <td [rowSpan]="data.evidences.length + 1">
           {{ data.characteristic.name }}
         </td>
       </tr>
@@ -31,25 +36,32 @@
           <label nz-checkbox [(ngModel)]="evidence.verified" disabled></label>
         </td>
         <td [rowSpan]="1">
-          {{evidence.qualification}}/{{data.characteristic.score}}
+          {{ evidence.qualification }}/{{ data.characteristic.score }}
         </td>
         <td [rowSpan]="1">
-          <div *ngIf="evidence.commits.length>0;else elseBlock" class="comits-container">
+          <div
+            *ngIf="evidence.commits.length > 0; else elseBlock"
+            class="comits-container"
+          >
             <div class="commit" *ngFor="let commit of arrayCommits(evidence)">
-              {{commit}}
+              <nz-comment
+                *ngIf="commit.autor"
+                [nzAuthor]="commit.autor.name"
+                [nzDatetime]="dataDistance(commit.lastUpdate)"
+              >
+                <nz-comment-content>{{ commit.body }}</nz-comment-content>
+              </nz-comment>
             </div>
           </div>
           <ng-template #elseBlock>
-            <div class="no-commits">
-              Sin comentarios
-            </div>
+            <div class="no-commits">Sin comentarios</div>
           </ng-template>
         </td>
         <td [rowSpan]="1" *ngIf="auth">
-          <a (click)="openReview(evidence,data.characteristic)">Revisar</a>
+          <a (click)="openReview(evidence, data.characteristic)">Revisar</a>
         </td>
         <td [rowSpan]="1" *ngIf="auth">
-          <a>Eliminar</a>
+          <a (click)="deleteEvidence(evidence)" >Eliminar</a>
         </td>
       </tr>
     </ng-container>

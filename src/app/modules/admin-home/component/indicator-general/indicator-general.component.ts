@@ -1,6 +1,6 @@
 import { Evidence } from './../../../../models/evidence';
-import { combineLatest, from } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Subscription, combineLatest, from } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CharacteristicID } from 'src/app/models/characteristic';
 import { IndicatorInstance, IndicatorInstanceID } from 'src/app/models/indicatorInstance';
@@ -21,7 +21,7 @@ import { IndicatorID } from 'src/app/models/indicator';
   templateUrl: './indicator-general.component.html',
   styleUrls: ['./indicator-general.component.scss']
 })
-export class IndicatorGeneralComponent implements OnInit {
+export class IndicatorGeneralComponent implements OnInit,OnDestroy {
 
   type!: TypeID
   indicator!: IndicatorInstanceID
@@ -30,6 +30,7 @@ export class IndicatorGeneralComponent implements OnInit {
   characteristics: CharacteristicID[] = []
   id = ''
   arrayEvidence: Evidence[] = []
+  subscription!:Subscription
   constructor(
     private indicatorInstanceService: IndicatorInstanceService,
     private subIndicatorService: SubindicatorService,
@@ -42,13 +43,43 @@ export class IndicatorGeneralComponent implements OnInit {
   ) { }
 
 
-  findSubindicator(type: TypeID, subindicators: SubindicatorID[]) {
-    return subindicators.find(subindicator => subindicator.typeID == type.id)
+  findSubindicator(type: TypeID, subindicators: SubindicatorID[],indicatorCatalog:IndicatorID) {
+
+    const subidicator = subindicators.find(subindicator => subindicator.typeID == type.id)
+    //console.log(subidicator)
+    if(subidicator){
+    this.subIndicatorService.getSubindicatorByID(subidicator?.id!).subscribe(
+      subindicator=>{
+        this.subIndicator=subindicator
+        console.log(this.subIndicator)
+        this.subIndicatorService.setSelectedSubindicator(subindicator)
+        this.characteristics = type.characteristics as CharacteristicID[]
+        //this.titleService.setTitle([indicatorCatalog.quadrantName,indicatorCatalog.name,this.subIndicator.name])
+        const name = this.subIndicator.name.replace(' ','-')
+       const indicatorID = this.subIndicator.indicadorID as IndicatorInstanceID
+        this.titleService.setRoute([
+          {
+            name:indicatorCatalog.quadrantName,
+            route:`/admin/quadrant/${indicatorCatalog.quadrant}`
+          },
+          {
+            name:indicatorCatalog.name,
+            route:`/admin/quadrant/${indicatorCatalog.quadrant}/indicator/${indicatorCatalog.number}`
+          },
+          {
+            name:this.subIndicator.name,
+            route:`/admin/quadrant/${indicatorCatalog.quadrant}/indicator/${indicatorCatalog.number}/${indicatorID.id}/${name}`
+          }
+        ])
+      }
+    )}
   }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.data.typeID
-    combineLatest([this.typeService.getTypeById(this.id), this.indicatorInstanceService.getIndicatorInstance()]).subscribe(
+    this.subscription=combineLatest([
+      this.typeService.getTypeById(this.id),
+      this.indicatorInstanceService.getIndicatorInstance()]).subscribe(
       ([type, indicator]) => {
         if(type){
           this.typeService.setTypeSelected(type)
@@ -57,15 +88,16 @@ export class IndicatorGeneralComponent implements OnInit {
           this.flag=true
         }
         const indicatorCatalog = indicator.indicatorID as IndicatorID
-        this.subIndicator = this.findSubindicator(type, indicator.subindicators as SubindicatorID[])!
-        if (this.subIndicator) {
-          this.characteristics = type.characteristics as CharacteristicID[]
-          this.titleService.setTitle([indicatorCatalog.quadrantName,indicatorCatalog.name,this.subIndicator.name])
-          this.subIndicatorService.setSelectedSubindicator(this.subIndicator)
-        }
+        this.findSubindicator(type, indicator.subindicators as SubindicatorID[],indicatorCatalog)
+
+
+
       }
     )
 
+  }
+  ngOnDestroy(): void {
+      this.subscription.unsubscribe()
   }
 
 }

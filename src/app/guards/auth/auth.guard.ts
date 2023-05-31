@@ -25,7 +25,7 @@ export class AuthGuard implements CanActivate {
     if(flag){
       this.userService.getUserSesion().subscribe(
         user=>{
-          console.log(user)
+          //console.log(user)
           if(user){
             const rol = user.rol as RolID
             if(rol.name===this.ADMIN_ROL || rol.name===this.RESPONSABLE_ROL){

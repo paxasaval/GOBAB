@@ -29,7 +29,7 @@ export class IndicatorComponent implements OnInit {
       switchMap(params=>{
         this.id=params['id']
         this.quadrant=params['quadrantNumber']
-        console.log(params)
+        //console.log(params)
         return this.indicatorInstanceService.getIndicatorByID(this.id)
       })
     ).subscribe(indicator=>{

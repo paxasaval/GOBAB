@@ -47,4 +47,11 @@ export class EvidenceService {
     return this.http.put(`${this.apiUrl}/qualify/${id}`,{qualification:qualification,commit:commit})
   }
 
+  getEvidencesBySubindicatorID(subindicatorID:string){
+    console.log(subindicatorID)
+    return this.http.get<EvidenceID[]>(`${this.apiUrl}/subindicatorID/${subindicatorID}`)
+  }
+  deleteEvidence(id:string){
+    return this.http.delete<any>(`${this.apiUrl}/${id}`)
+  }
 }

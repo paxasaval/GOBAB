@@ -18,7 +18,7 @@ export class IndicatorSummaryComponent implements OnInit {
   indicator!:IndicatorInstanceID
   indicatorCatalog!:IndicatorID
   generalidades:SubindicatorID[]=[]
-
+  specifics:SubindicatorID[]=[]
   constructor(
     private titleService:TitleService,
     private indicatorInstanceService:IndicatorInstanceService,
@@ -36,11 +36,30 @@ export class IndicatorSummaryComponent implements OnInit {
             this.indicatorInstanceService.setIndicatorInstance(indicatorInstance)
             return this.subindicatorService.getSubindicatorGeneralByIndicator(indicatorInstance.id)
           })
+        ).pipe(
+          switchMap(subindicators=>{
+            this.titleService.setRoute([
+              {
+                name:this.indicatorCatalog.quadrantName,
+                route:`/user/quadrant/${this.indicatorCatalog.quadrant}`
+              },
+              {
+                name:this.indicatorCatalog.name,
+                route:`/user/quadrant/${this.indicatorCatalog.quadrant}/indicator/${this.indicatorCatalog.number}`
+              }
+            ])
+            this.generalidades = subindicators
+            //return this.subindicatorService.getOWL('Book')
+            return this.subindicatorService.getSubindicatorSpecificByIndicator(this.indicator.id,0,10)
+          })
         )
       })
-    ).subscribe(subindicators=>{
-      this.generalidades = subindicators
-      console.log(this.generalidades)
+    ).subscribe(data=>{
+      if(data){
+        this.specifics = data.docs
+        console.log(this.specifics)
+      }
+
     })
 
   }

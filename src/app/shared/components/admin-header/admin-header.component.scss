@@ -71,4 +71,11 @@
 .rol{
   color: var(--black);
 }
-
+.userInfo{
+  display: flex;
+  min-height: 5vh;
+  padding: 0.2em;
+  gap: 0.2em;
+  flex-direction: column;
+  background-color: #fff;
+}

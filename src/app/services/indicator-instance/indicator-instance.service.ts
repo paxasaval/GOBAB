@@ -47,7 +47,7 @@ export class IndicatorInstanceService {
     return this.http.get<IndicatorInstanceID>(`${this.apiUrl}/byIndicatorIDAndPeriod?indicatorID=${indicatorID}&period=${period.id} `)
   }
   setIndicatorInstance(indicator:IndicatorInstanceID){
-    console.log(indicator)
+    //console.log(indicator)
     this.IndicatorSelected.next(indicator)
   }
 }

@@ -10,3 +10,7 @@ export interface User{
   state:boolean
 }
 export interface UserID extends User {id:string}
+export interface UserIDwithRolID extends User{
+  id:string,
+  rol:RolID
+}

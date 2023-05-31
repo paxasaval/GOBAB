@@ -12,7 +12,7 @@
           <mat-panel-title>
             <li>
               <mat-icon class="mat-18">space_dashboard</mat-icon>
-               Inicio
+              Inicio
             </li>
           </mat-panel-title>
         </mat-expansion-panel-header>
@@ -30,12 +30,48 @@
               <mat-icon>pie_chart</mat-icon>
               Cuadrante {{ quadrant[0].quadrant }}
             </li>
-            </mat-panel-title
-          >
+          </mat-panel-title>
         </mat-expansion-panel-header>
         <li class="submenu" *ngFor="let indicator of quadrant">
           -{{ indicator.name }}
         </li>
+      </mat-expansion-panel>
+      <mat-expansion-panel
+      class="menu-list"
+      [hideToggle]="true"
+      routerLink="config"
+      routerLinkActive="active"
+      >
+        <mat-expansion-panel-header >
+          <mat-panel-title>
+            <li>
+              <mat-icon class="mat-18">settings</mat-icon>
+            Configuracion
+
+            </li>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+      <mat-expansion-panel
+      class="menu-list"
+      *ngIf="auth"
+      [hideToggle]="true"
+
+      >
+        <mat-expansion-panel-header class="long"
+        routerLink="workspace"
+        routerLinkActive="active"
+        >
+          <mat-panel-title>
+            <li>
+              <mat-icon class="mat-18">workspaces</mat-icon>
+            {{gad.name}}
+
+            </li>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <li class="submenu" [routerLink]="['workspace','users']" >Usuarios</li>
+
       </mat-expansion-panel>
     </mat-accordion>
   </menu>

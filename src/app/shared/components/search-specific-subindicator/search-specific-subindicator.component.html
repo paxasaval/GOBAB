@@ -29,7 +29,7 @@
       <mat-select
         (selectionChange)="handleEje($event)"
         [formControl]="ejeControl"
-        [disabled]="flag"
+        [disabled]="ejeFlag"
       >
         <mat-option *ngFor="let eje of arrayEjes" [value]="eje.quadrant">
           {{ eje.quadrantName }}
@@ -44,11 +44,13 @@
       <mat-select
         (selectionChange)="handleIndicator($event)"
         [formControl]="indicatorControl"
-        [disabled]="flag"
+        [compareWith]="compareCategoryObjects"
+        [disabled]="indicatorFlag"
+
       >
         <mat-option
           *ngFor="let indicator of arrayIndicator"
-          [value]="indicator.number"
+          [value]="indicator"
         >
           {{ indicator.name }}
         </mat-option>

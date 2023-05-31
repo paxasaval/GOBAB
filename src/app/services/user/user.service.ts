@@ -36,4 +36,20 @@ export class UserService {
     return this.http.get<UserID>(`${this.apiUrl}/${id}`)
   }
 
+  getAllUsers(){
+    return this.http.get<UserID[]>(`${this.apiUrl}`)
+  }
+
+  newUser(name:string,mail:string,rol:string,pass:string){
+    return this.http.post(`${this.apiUrl}/signUp`,{name,mail,rol,password:pass})
+  }
+
+  editUser(id:string,name:string,mail:string,rol:string,pass:string){
+    return this.http.put(`${this.apiUrl}/${id}`,{name,mail,rol,password:pass})
+
+  }
+  deleteUser(id:string){
+    console.log(id)
+    return this.http.delete(`${this.apiUrl}/${id}`)
+  }
 }

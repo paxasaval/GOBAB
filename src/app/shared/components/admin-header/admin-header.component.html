@@ -39,7 +39,16 @@
       <img [src]="imageDefault" alt="">
     </div>
     <div class="icon config">
-      <mat-icon class="mat-18">settings</mat-icon>
+      <mat-icon nz-dropdown class="mat-18" [nzDropdownMenu]="userMenu" >settings</mat-icon>
+      <nz-dropdown-menu #userMenu>
+        <div *ngIf="user" class="userInfo">
+          <span>{{user.name}}</span>
+          <span>{{rol}}</span>
+        </div>
+        <ul nz-menu nzSelectable>
+          <li nz-menu-item nzDanger (click)="logOut()">Salir <mat-icon class="logout">logout</mat-icon></li>
+        </ul>
+      </nz-dropdown-menu>
     </div>
   </div>
 </header>

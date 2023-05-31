@@ -25,6 +25,7 @@ menu{
   justify-content: flex-start;
   align-items: center;
   gap: 0.5em;
+  width: 20em;
 }
 
 li{
@@ -36,6 +37,7 @@ li{
   background-color: var(--color2);
   cursor: pointer;
 }
+
 .active {
   color: var(--color2);
   background-color: var(--color4);
@@ -63,7 +65,7 @@ mat-expansion-panel-header li{
 .submenu{
   padding-left: 1em;
   padding-bottom: 0.75em;
-  max-width: 15em;
+  width: 15em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space:nowrap;
@@ -74,4 +76,13 @@ mat-expansion-panel-header li{
 }
 .submenu.expanded{
   background-color: var(--white);
+}
+.long{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space:nowrap;
+}
+.long:hover{
+
+  font-size: 0.8em;
 }

@@ -9,6 +9,8 @@ import { EvidenceID } from 'src/app/models/evidence';
 import { TypeID } from 'src/app/models/type';
 import { IndicatorID } from 'src/app/models/indicator';
 import { IndicatorInstanceID } from 'src/app/models/indicatorInstance';
+import { TitleService } from 'src/app/services/title/title.service';
+import { IndicatorInstanceService } from 'src/app/services/indicator-instance/indicator-instance.service';
 
 @Component({
   selector: 'app-subindicator',
@@ -23,11 +25,13 @@ export class SubindicatorComponent implements OnInit {
   typeID:string|TypeID=''
   characteristicWithEvidence:CharacteristicWithEvidence[]=[]
   characteristicsList:CharacteristicID[]=[]
-
+  indicatorCatalog!:IndicatorID
   constructor(
     private route:ActivatedRoute,
     private subindicatorService:SubindicatorService,
-    private documentService:DocumentService
+    private documentService:DocumentService,
+    private indicatorService:IndicatorInstanceService,
+    private titleService:TitleService
   ) { }
 
   setPortada(){
@@ -46,7 +50,8 @@ export class SubindicatorComponent implements OnInit {
       switchMap(params=>{
         return this.subindicatorService.getSubindicatorByID(params['subindicatorID'])
       })
-    ).subscribe(
+    ).pipe(
+      switchMap(
       subindicator=>{
         this.subindicator=subindicator
         this.typeID = subindicator.typeID as TypeID
@@ -57,8 +62,25 @@ export class SubindicatorComponent implements OnInit {
           this.documentService.setDocumentSelected(this.portadaURL)
         }
         this.characteristicWithEvidence=this.filterEvidences(this.characteristicsList,this.evidenceList)
-      }
-    )
+        return this.indicatorService.getIndicatorInstance()
+      })
+    ).subscribe(indicatorInstance=>{
+      this.indicatorCatalog = indicatorInstance.indicatorID as IndicatorID
+      this.titleService.setRoute([
+        {
+          name:this.indicatorCatalog.quadrantName,
+          route:`/user/quadrant/${this.indicatorCatalog.quadrant}`
+        },
+        {
+          name:this.indicatorCatalog.name,
+          route:`/user/quadrant/${this.indicatorCatalog.quadrant}/indicator/${this.indicatorCatalog.number}/${indicatorInstance.id}`
+        },
+        {
+          name:this.subindicator.name,
+          route:`/user/quadrant/${this.indicatorCatalog.quadrant}/indicator/${this.indicatorCatalog.number}/${indicatorInstance.id}/${this.subindicator.id}`
+        }
+      ])
+    })
   }
 
 }

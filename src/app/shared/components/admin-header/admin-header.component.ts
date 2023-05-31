@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PeriodID } from 'src/app/models/period';
 import { RolID } from 'src/app/models/rol';
+import { UserID } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { PeriodService } from 'src/app/services/period/period.service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -18,7 +19,7 @@ export class AdminHeaderComponent implements OnInit,AfterViewInit {
   imageDefault = '../../../../assets/userDefault.png'
   mail = 'paxasaval1003@gmail.com'
   rol = 'ciudadano'
-
+  user!:UserID
   periods!:PeriodID[]
 
   searchControl = new FormControl('')
@@ -33,6 +34,9 @@ export class AdminHeaderComponent implements OnInit,AfterViewInit {
   changePeriod(event:any){
 
   }
+  logOut(){
+    this.authService.logout()
+  }
   ngAfterViewInit(): void {
   }
   ngOnInit(): void {
@@ -42,8 +46,9 @@ export class AdminHeaderComponent implements OnInit,AfterViewInit {
           this.userIsLogged = true
           this.userService.getUserSesion().subscribe(
             user => {
-              console.log(user)
+              //console.log(user)
               if (user.name !== '') {
+                this.user=user
                 this.mail = user.mail
                 const rol = user.rol as RolID
                 this.rol = rol.name

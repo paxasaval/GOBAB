@@ -1,9 +1,9 @@
 import { CharacteristicID, CharacteristicWithEvidence, CharacteristicWithEvidenceID } from './../../../../models/characteristic';
-import { Subscription, Observable, combineLatest } from 'rxjs';
+import { Subscription, Observable, combineLatest, of } from 'rxjs';
 import { Component, EventEmitter, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { EvidenceID } from 'src/app/models/evidence';
 import { SubindicatorService } from 'src/app/services/subindicator/subindicator.service';
-import { map, retry } from 'rxjs/operators';
+import { map, retry, switchMap } from 'rxjs/operators';
 import { TypeID } from 'src/app/models/type';
 import { SubindicatorID } from 'src/app/models/subindicators';
 import { TypeService } from 'src/app/services/type/type.service';
@@ -13,7 +13,8 @@ import { UserID } from 'src/app/models/user';
 import { RolID } from 'src/app/models/rol';
 import { NzModalService, nzModalAnimations } from 'ng-zorro-antd/modal';
 import { DialogCheckEvidenceComponent } from '../dialog-check-evidence/dialog-check-evidence.component';
-
+import { EvidenceService } from 'src/app/services/evidence/evidence.service';
+import { formatDistance} from 'date-fns'
 
 
 @Component({
@@ -36,16 +37,20 @@ export class HistoryComponent implements OnInit, OnChanges {
   auth = false
   subindicatorBD!: Subscription
   id!: string
-  closeOK!:EventEmitter<any>
+  closeOK!: EventEmitter<any>
 
   constructor(
     private subindicatorService: SubindicatorService,
     private typeService: TypeService,
     private userService: UserService,
-    private modalService: NzModalService
+    private modalService: NzModalService,
+    private evidenceService: EvidenceService
   ) { }
 
 
+  dataDistance(date:Date){
+    return formatDistance(new Date(date),new Date(),{addSuffix:true})
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
   }
@@ -67,7 +72,7 @@ export class HistoryComponent implements OnInit, OnChanges {
         const characteristicID = evidence.characteristicID
         return characteristicID == characteristic.id
       })
-
+      //console.log(evidences)
       return { characteristic: characteristic, evidences: evidenceArray }
     })
   }
@@ -87,7 +92,7 @@ export class HistoryComponent implements OnInit, OnChanges {
     }
     )
     modal.afterClose.subscribe(
-      result=>{
+      result => {
         console.log(result)
         this.afterClosed()
       }
@@ -96,14 +101,20 @@ export class HistoryComponent implements OnInit, OnChanges {
 
   afterClosed() {
     if (!this.subindicatorBD) {
-      this.groupEvidence=null
-      this.subindicatorBD = this.subindicatorService.getSubindicatorByID(this.id).subscribe(
-        subindicatorBD => {
-          console.log(subindicatorBD)
-          this.groupEvidence = this.groupCharacteristics(this.typeID, subindicatorBD.evidences as EvidenceID[])
+      this.groupEvidence = null
+      this.subindicatorBD = this.subindicatorService.getSubindicatorByID(this.id)
+      .pipe(
+        switchMap(subindicator=>{
+          this.typeID = subindicator.typeID as TypeID
+          return this.evidenceService.getEvidencesBySubindicatorID(subindicator.id)
+        })
+      )
+      .subscribe(
+        evidences => {
+          this.groupEvidence = this.groupCharacteristics(this.typeID, evidences)
         }
       )
-    }else{
+    } else {
       this.subindicatorBD.unsubscribe()
       this.subindicatorBD = this.subindicatorService.getSubindicatorByID(this.id).subscribe(
         subindicatorBD => {
@@ -131,24 +142,42 @@ export class HistoryComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnInit(): void {
-    this.subindicatorService.getSubindicatorByID('64626a74e2044b52bfedac9c').subscribe(
+  deleteEvidence(evidence:EvidenceID){
+    this.evidenceService.deleteEvidence(evidence.id).subscribe(
       res=>{
         console.log(res)
+        this.afterClosed()
+      },
+      error=>{
+        console.log(error)
       }
     )
+  }
+
+  ngOnInit(): void {
     combineLatest([
       this.typeService.getTypeSelected(),
       this.subindicatorService.getSelectedSubindicator(),
       this.userService.getUserSesion()
-    ])
-      .subscribe(([type, subindicator, user]) => {
+    ]).pipe(
+      switchMap(([type, subindicator, user]) => {
         this.typeID = type
         this.id = subindicator.id
-        this.groupEvidence = this.groupCharacteristics(type, subindicator.evidences as EvidenceID[])
+        //console.log(subindicator)
         this.user = user
         this.authAdmin()
+        if(subindicator.id!=''){
+          return this.evidenceService.getEvidencesBySubindicatorID(subindicator.id)
+
+        }else{
+          return of([])
+        }
       })
+    )
+    .subscribe((evidences) => {
+      //console.log(evidences)
+      this.groupEvidence = this.groupCharacteristics(this.typeID, evidences)
+    })
   }
 
 }
