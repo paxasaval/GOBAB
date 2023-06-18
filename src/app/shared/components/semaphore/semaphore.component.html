@@ -14,11 +14,13 @@
   </div>
   <div #chartContainer class="chartContainer">
     <div class="chartInfo">
-      <div class="cardInfo">
-        <mat-icon class="mat-18">info</mat-icon>
+      <nz-card class="card"  nzSize="small" nzTitle='Informacion' [nzExtra]="infoExtra">
         <p>Para mayor información sobre un indicador haga clic sobre el mismo</p>
-      </div>
+      </nz-card>
     </div>
+    <ng-template #infoExtra>
+      <mat-icon class="mat-18">info</mat-icon>
+    </ng-template>
     <div class="chartSemaphore">
      <div #chartdiv class="chart" id="chartdiv"></div>
     </div>
