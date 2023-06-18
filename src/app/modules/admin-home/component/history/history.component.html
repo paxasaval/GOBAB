@@ -9,7 +9,7 @@
       <th rowSpan="2">Caracteristica</th>
       <th colSpan="3">Evidencia</th>
       <th colSpan="3">Revision</th>
-      <th *ngIf="auth" colSpan="2">Acciones</th>
+      <th *ngIf="auth" colSpan="2" rowSpan="2">Acciones</th>
     </tr>
     <tr>
       <th>Nombre</th>
@@ -29,7 +29,9 @@
       </tr>
       <tr *ngFor="let evidence of data.evidences">
         <td [rowSpan]="1" nzBreakWord>{{ evidence.name }}</td>
-        <td [rowSpan]="1" nzBreakWord>{{ evidence.link }}</td>
+        <td class="td-link" [rowSpan]="1" nzBreakWord>
+          <a [href]="evidence.link" target="_blank">Acceder</a>
+        </td>
         <td [rowSpan]="1" nzBreakWord>{{ evidence.note }}</td>
         <!--Qualification-->
         <td [rowSpan]="1">

@@ -1,0 +1,37 @@
+
+<h1>Subindicadores especificos</h1>
+<div *ngIf="auth" class="addSubindicator">
+  <button class="btn-add" mat-mini-fab (click)="addSubindicator()">
+    <mat-icon class="add">add</mat-icon>
+  </button>
+  <span (click)="addSubindicator()">Ingresar nuevo subindicador</span>
+</div>
+<nz-table
+class="tableSummary"
+#specificSubindicatorsTable
+nzSize="small"
+[nzData]="specificSubindicators"
+[nzShowPagination]="false"
+>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Calificacion</th>
+      <th>Tipo</th>
+      <th>Ultima Actualizacion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sub of specificSubindicatorsTable.data" [routerLink]="'../'+'Subindicadores-Especificos/'+sub.id">
+      <td>{{sub.name}}</td>
+      <td><span class="circle" [ngClass]="{
+        gray:sub.qualification==0,
+        red:sub.qualification===1,
+        yellow:sub.qualification===2,
+        green:sub.qualification===3
+      }"></span></td>
+      <td>{{sub.typeID.name}}</td>
+      <td >{{sub.lastUpdate|date:'short'}}</td>
+    </tr>
+  </tbody>
+</nz-table>

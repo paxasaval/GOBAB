@@ -1,0 +1,16 @@
+:host{
+  display: flex;
+  justify-content: center;
+  width: 95%
+}
+.container{
+  width: 95%;
+  margin-top: 1em;
+}
+.actions{
+  margin-bottom: 1em;
+  button{
+    background-color: var(--color4);
+    color: var(--white);
+  }
+}

@@ -28,3 +28,6 @@ export interface SubindicatorIDWithPagination{
   pagination:Pagination
   docs:SubindicatorID[]
 }
+export interface SubndicatorWithTypeID extends SubindicatorID{
+  typeID:TypeID,
+}

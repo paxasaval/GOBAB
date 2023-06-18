@@ -56,22 +56,36 @@
       class="menu-list"
       *ngIf="auth"
       [hideToggle]="true"
-
+      routerLink="workspace"
+      routerLinkActive="active"
       >
         <mat-expansion-panel-header class="long"
-        routerLink="workspace"
-        routerLinkActive="active"
-        >
-          <mat-panel-title>
-            <li>
-              <mat-icon class="mat-18">workspaces</mat-icon>
-            {{gad.name}}
 
+        >
+          <mat-panel-title *ngIf="gad">
+            <li>
+              <mat-icon  class="mat-18">workspaces</mat-icon>
+            {{gad.name}}
             </li>
           </mat-panel-title>
         </mat-expansion-panel-header>
         <li class="submenu" [routerLink]="['workspace','users']" >Usuarios</li>
-
+      </mat-expansion-panel>
+      <mat-expansion-panel
+        class="menu-list"
+        routerLink="help"
+        routerLinkActive="active"
+        [disabled]="true"
+        [hideToggle]="true"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <li>
+              <mat-icon class="mat-18">help</mat-icon>
+              Ayuda
+            </li>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
       </mat-expansion-panel>
     </mat-accordion>
   </menu>

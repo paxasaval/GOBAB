@@ -15,6 +15,9 @@ import { LayoutIndicatorComponent } from './pages/layout-indicator/layout-indica
 import { UsersComponent } from './pages/users/users.component';
 import { UserConfigComponent } from './pages/user-config/user-config.component';
 import { WorkspaceComponent } from './pages/workspace/workspace.component';
+import { SummaryIndicatorComponent } from './pages/summary-indicator/summary-indicator.component';
+import { SpecificSubindicatorsTableComponent } from './component/specific-subindicators/specific-subindicators.component';
+import { HelpComponent } from './pages/help/help.component';
 
 const routes: Routes = [
   {
@@ -41,6 +44,10 @@ const routes: Routes = [
         }
       },
       {
+        path:'help',
+        component:HelpComponent
+      },
+      {
         path:'workspace',
         component:WorkspaceComponent,
         children:[
@@ -48,6 +55,11 @@ const routes: Routes = [
             path:'users',
             component:UsersComponent
           },
+          {
+            path:'',
+            redirectTo:'users',
+            pathMatch:'full'
+          }
         ]
       },
       {
@@ -63,6 +75,15 @@ const routes: Routes = [
         component:IndicatorComponent,
         children:[
           {
+            path:'Resumen',
+            component:SummaryIndicatorComponent
+          },
+          {
+            path:'',
+            redirectTo:'Resumen',
+            pathMatch:'full'
+          },
+          {
             path:'Instancia-responsable',
             component:IndicatorGeneralComponent,
             data:{typeID:'6461ad67bb91a3acea65635a'},
@@ -76,11 +97,6 @@ const routes: Routes = [
                 component:AddEvidenceComponent
               }
             ]
-          },
-          {
-            path:'',
-            redirectTo:'Instancia-responsable',
-            pathMatch:'full'
           },
           {
             path:'Diagnostico',
@@ -134,7 +150,7 @@ const routes: Routes = [
             children:[
               {
                 path:'',
-                component:SearchSpecificSubindicatorComponent
+                component:SpecificSubindicatorsTableComponent
               },
               {
                 path:'add-subindicator',

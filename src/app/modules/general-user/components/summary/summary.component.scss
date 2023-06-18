@@ -1,72 +1,56 @@
 .summary{
   width: 100%;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
 }
 .summaryTitle{
-  padding: 1.5em 4em;
   height: 8vh;
   display: flex;
   align-items: center;
 }
 .summaryTitle h2{
-  padding: 0 2em;
+  padding-left: 1em;
   font-size: 2.5em;
 }
 .summaryData{
   display: flex;
   width: 100%;
-  justify-content: space-around;
-}
-.dataCell{
-  border-radius: 8px;
-  border: 2px solid var(--black);
-  height: 15vh;
-  width: 28%;
-  padding: 1em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.dataCell h3{
-  font-size:1.75em;
-  margin: 0;
-  text-align: center;
-  letter-spacing: 1px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
   justify-content: center;
+  gap: 1.5em;
 }
-.dataCell span{
-  font-size: 3.5em;
-  text-align: center;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.card{
+  width: 25%;
+  height: 18hv;
+  span{
+    margin-top: 0.5em;
+    font-size: 1.5em;
+    font-weight: 600;
+  }
+  .icon{
+    color: var(--color4);
+  }
 }
 .data{
-  width: 100%;
-  height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1em;
+  gap: 1.75em;
 }
 .autoLeft{
   align-self: start;
+  margin-top: 0.5em;
 }
 .semaphore{
   display: flex;
   flex-wrap: wrap;
-  width: 70%;
+  gap: 0.5em;
+  width: 60%;
   height: 100%;
 }
 .light{
-  width: 50%;
+  width: 40%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 0.5em;
+  gap: 0.25em;
   height: 50%;
 }
 .light p{

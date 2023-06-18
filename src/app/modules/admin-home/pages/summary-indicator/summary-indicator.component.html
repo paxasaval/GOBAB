@@ -1,0 +1,93 @@
+<div class="container">
+  <h1>{{title}}</h1>
+<h2>Resumen</h2>
+<div class="card-container">
+  <nz-card nzHoverable class="card" nzSize="small" nzTitle='Calificacion' [nzExtra]="qualifyExtra">
+    <div class="f-center">
+      <span class="circle" [ngClass]="{
+        gray:indicator.qualification==0,
+        red:indicator.qualification===1,
+        yellow:indicator.qualification===2,
+        green:indicator.qualification===3
+      }"></span>
+    </div>
+  </nz-card>
+  <ng-template #qualifyExtra>
+    <mat-icon class="icon">traffic</mat-icon>
+  </ng-template>
+  <nz-card nzHoverable class="card" nzSize="small" nzTitle='Evidencias Registradas' [nzExtra]="EvidencesExtra">
+    <div class="f-center">
+      <span class="lastUpdate">{{evidences}}</span>
+    </div>
+  </nz-card>
+  <ng-template #EvidencesExtra>
+    <mat-icon class="icon">folder_open</mat-icon>
+  </ng-template>
+  <nz-card nzHoverable class="card" nzSize="small" nzTitle='Ultima Actualizacion' [nzExtra]="UpdateExtra">
+    <div class="f-center">
+      <span class="lastUpdate">{{indicator.lastUpdate |date:'short'}}</span>
+    </div>
+  </nz-card>
+  <ng-template #UpdateExtra>
+    <mat-icon class="icon">update</mat-icon>
+  </ng-template>
+</div>
+
+<h3>Subindicadores generales</h3>
+<nz-table
+#generalSubindicatorsTable
+class="tableSummary"
+nzSize="small"
+[nzData]="generalSubindicators"
+[nzShowPagination]="false"
+>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Calificacion</th>
+      <th>Ultima Actualizacion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sub of generalSubindicatorsTable.data" [routerLink]="'../'+sub.name.replace(' ','-')">
+      <td>{{sub.name}}</td>
+      <td><span class="circle" [ngClass]="{
+        gray:sub.qualification==0,
+        red:sub.qualification===1,
+        yellow:sub.qualification===2,
+        green:sub.qualification===3
+      }"></span></td>
+      <td>{{sub.lastUpdate|date:'short'}}</td>
+    </tr>
+  </tbody>
+</nz-table>
+<h3>Subindicadores especificos</h3>
+<nz-table
+class="tableSummary"
+#specificSubindicatorsTable
+nzSize="small"
+[nzData]="specificSubindicators"
+[nzShowPagination]="false"
+>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Calificacion</th>
+      <th>Ultima Actualizacion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sub of specificSubindicatorsTable.data" [routerLink]="'../'+'Subindicadores-Especificos/'+sub.id">
+      <td>{{sub.name}}</td>
+      <td><span class="circle" [ngClass]="{
+        gray:sub.qualification==0,
+        red:sub.qualification===1,
+        yellow:sub.qualification===2,
+        green:sub.qualification===3
+      }"></span></td>
+      <td >{{sub.lastUpdate|date:'short'}}</td>
+    </tr>
+  </tbody>
+</nz-table>
+
+</div>

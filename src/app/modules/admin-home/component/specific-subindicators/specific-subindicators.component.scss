@@ -1,0 +1,95 @@
+:host{
+  width: 95%;
+  padding-top:1em;
+}
+.card-container{
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  height: 15vh;
+  margin-bottom: 1.5em;
+}
+.card{
+  width: 30%;
+  div{
+    height: 7vh;
+  };
+  span{
+    justify-self: center;
+  }
+}
+.lastUpdate{
+  font-size: 1em;
+  font-weight: 600;
+}
+.icon{
+  color: var(--color4);
+  font-size: 1.5em;
+}
+.tableSummary{
+  padding-bottom: 1.5em;
+}
+.qualify{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.circle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 6vh;
+  width: 10vh;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 0.8em;
+}
+.gray{
+  background-color: var(--gray);
+}
+.gray::after{
+  content: 'No evaluado';
+}
+
+.red{
+  background-color: var(--red);
+}
+.red::after{
+  content: 'Inaceptable';
+  color: white;
+}
+
+.yellow{
+  background-color: var(--yellow);
+}
+.yellow::after{
+  content: 'Debajo de lo aceptable';
+  color: var(--black);
+}
+.green{
+  background-color: var(--green);
+}
+.green::after{
+  content: 'Aceptable';
+  color: white;
+}
+.addSubindicator {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  padding-bottom: 1em;
+  span {
+    color: var(--color4);
+    font-weight: 600;
+    font-style: italic;
+    cursor: pointer;
+  }
+}
+.btn-add {
+  background-color: var(--color4);
+  height: 4vh;
+  width: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

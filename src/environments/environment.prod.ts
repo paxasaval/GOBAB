@@ -7,5 +7,12 @@ export const environment = {
     authDomain: 'iso18091storage.firebaseapp.com',
     messagingSenderId: '399872374285',
   },
-  production: true
+  production: true,
+  //API_URL:'http://localhost:3001',
+  ROL_ADMIN:'Administrador',
+  ROL_RESPONSIBLE:'Responsable',
+  TENATID:'64616f718e118fb22d4059e3',
+
+  //API_URL:'https://iso-18091-backend-production.up.railway.app'
+  API_URL:'https://iso-18091-backend-test-production.up.railway.app'
 };

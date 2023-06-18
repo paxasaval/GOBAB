@@ -23,6 +23,10 @@ import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 @NgModule({
   declarations: [],
   imports: [
@@ -51,6 +55,10 @@ import { NzFormModule } from 'ng-zorro-antd/form';
     NzDropDownModule,
     NzAlertModule,
     NzFormModule,
+    NzSkeletonModule,
+    NzListModule,
+    NzButtonModule,
+    NzCardModule
   ],
   exports:[
     MatButtonModule,
@@ -77,6 +85,10 @@ import { NzFormModule } from 'ng-zorro-antd/form';
     NzDropDownModule,
     NzAlertModule,
     NzFormModule,
+    NzSkeletonModule,
+    NzListModule,
+    NzButtonModule,
+    NzCardModule
 
   ]
 })

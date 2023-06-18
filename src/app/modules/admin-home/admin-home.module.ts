@@ -33,6 +33,9 @@ import { UsersComponent } from './pages/users/users.component';
 import { DialogNewUserComponent } from './component/dialog-new-user/dialog-new-user.component';
 import { UserConfigComponent } from './pages/user-config/user-config.component';
 import { WorkspaceComponent } from './pages/workspace/workspace.component';
+import { SummaryIndicatorComponent } from './pages/summary-indicator/summary-indicator.component';
+import { SpecificSubindicatorsTableComponent } from './component/specific-subindicators/specific-subindicators.component';
+import { HelpComponent } from './pages/help/help.component';
 
 
 @NgModule({
@@ -66,6 +69,9 @@ import { WorkspaceComponent } from './pages/workspace/workspace.component';
     DialogNewUserComponent,
     UserConfigComponent,
     WorkspaceComponent,
+    SummaryIndicatorComponent,
+    SpecificSubindicatorsTableComponent,
+    HelpComponent
   ],
   imports: [
     CommonModule,

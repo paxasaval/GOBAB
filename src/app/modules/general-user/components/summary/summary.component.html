@@ -3,39 +3,51 @@
     <h2>Resumen General</h2>
   </div>
   <div class="summaryData">
-    <article class="dataCell">
-      <h3>Indicadores Evaluados</h3>
-      <span>{{ evaluated + "/" + totalIndicators }}</span>
-    </article>
-    <article class="dataCell">
-      <h3>Evidencias Registradas</h3>
-      <span>{{ totalEvidences }}</span>
-    </article>
-    <article class="dataCell">
-      <h3>Subindicadores Evaluados</h3>
-      <div class="data">
-        <span class="autoLeft">{{
-          evaluatedSub + "/" + totalSubindicators
-        }}</span>
-        <div class="semaphore">
-          <div class="light">
-            <div class="circle red"></div>
-            <p>{{ red }}</p>
-          </div>
-          <div class="light">
-            <div class="circle yellow"></div>
-            <p>{{ yellow }}</p>
-          </div>
-          <div class="light">
-            <div class="circle green"></div>
-            <p>{{ green }}</p>
-          </div>
-          <div class="light">
-            <div class="circle grey"></div>
-            <p>{{ grey }}</p>
+    <nz-card nzHoverable class="card" nzSize="small" nzTitle='Indicadores Evaluados' [nzExtra]="EvaluatedExtra">
+      <div class="f-center">
+        <span>{{ evaluated + "/" + totalIndicators }}</span>
+      </div>
+    </nz-card>
+    <ng-template #EvaluatedExtra>
+      <mat-icon class="icon">checklist</mat-icon>
+    </ng-template>
+    <nz-card nzHoverable class="card" nzSize="small" nzTitle='Evidencias Registradas' [nzExtra]="TotalExtra">
+      <div class="f-center">
+        <span>{{ totalEvidences }}</span>
+      </div>
+    </nz-card>
+    <ng-template #TotalExtra>
+      <mat-icon class="icon">folder_open</mat-icon>
+    </ng-template>
+    <nz-card nzHoverable class="card" nzSize="small" nzTitle='Subindicadores Evaluados' [nzExtra]="SubindicatorsExtra">
+      <div class="f-center">
+        <div class="data">
+          <span class="autoLeft">{{
+            evaluatedSub + "/" + totalSubindicators
+          }}</span>
+          <div class="semaphore">
+            <div class="light">
+              <div class="circle red"></div>
+              <p>{{ red }}</p>
+            </div>
+            <div class="light">
+              <div class="circle yellow"></div>
+              <p>{{ yellow }}</p>
+            </div>
+            <div class="light">
+              <div class="circle green"></div>
+              <p>{{ green }}</p>
+            </div>
+            <div class="light">
+              <div class="circle grey"></div>
+              <p>{{ grey }}</p>
+            </div>
           </div>
         </div>
       </div>
-    </article>
+    </nz-card>
+    <ng-template #SubindicatorsExtra>
+      <mat-icon class="icon">traffic</mat-icon>
+    </ng-template>
   </div>
 </section>
