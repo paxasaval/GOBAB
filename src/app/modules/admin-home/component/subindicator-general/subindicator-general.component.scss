@@ -1,6 +1,6 @@
 .container{
   display: flex;
-  width: 100%;
+  min-width: 80vw;
   flex-direction: column;
   padding-left: 1em;
 }
