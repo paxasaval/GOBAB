@@ -47,7 +47,7 @@ export class QuadrantComponent implements OnInit {
     }
   ]
   indicators: IndicatorInstanceID[] = []
-
+  indicatorCatalog!:IndicatorID
   constructor(
     private titleService: TitleService,
     private route: ActivatedRoute,
@@ -78,6 +78,7 @@ export class QuadrantComponent implements OnInit {
         this.indicators = arrayIndicatorInstances
         const indicatorCatalogo = this.indicators[0].indicatorID as IndicatorID
         //this.titleService.setTitle([indicatorCatalogo.quadrantName])
+        this.indicatorCatalog = indicatorCatalogo
         this.titleService.setRoute([
           {
             name: indicatorCatalogo.quadrantName,
