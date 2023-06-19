@@ -1,1 +1,27 @@
-<p>user-config works!</p>
+<div class="container">
+  <h1>Cambiar Contraseña</h1>
+  <form>
+    <div class="line">
+      <label>Contraseña actual:</label>
+      <input
+        nz-input
+        class="pass"
+        placeholder="Contraseña antigua"
+        type="text"
+        [(ngModel)]="passwordOld"
+        (on)
+      />
+    </div>
+    <div class="line">
+      <label>Contraseña nueva:</label>
+      <input
+        nz-input
+        class="pass"
+        placeholder="Contraseña antigua"
+        type="text"
+        [(ngModel)]="passwordNew"
+
+      />
+    </div>
+  </form>
+</div>

@@ -1,6 +1,14 @@
 <div class="container">
   <div class="summary">
     <h3>Datos del subindicador</h3>
+    <div class="flags-form">
+      <div class="line">
+        <label nz-checkbox [(ngModel)]="isPlanned">Se incluye en el diagnóstico del indicador</label>
+      </div>
+      <div class="line">
+        <label nz-checkbox [(ngModel)]="isDiagnosed">Se incluye en la planificación del PDOT</label>
+      </div>
+    </div>
     <form class="name-form">
       <span>Nombre</span>
       <mat-form-field appearance="outline">
