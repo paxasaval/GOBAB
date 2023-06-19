@@ -1,22 +1,22 @@
 <div class="container">
   <menu>
     <mat-accordion class="menu">
-      <mat-expansion-panel
-        class="menu-list"
-        routerLink="home"
-        routerLinkActive="active"
-        [disabled]="true"
-        [hideToggle]="true"
-      >
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <li>
-              <mat-icon class="mat-18">space_dashboard</mat-icon>
-              Inicio
-            </li>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-      </mat-expansion-panel>
+<!--         <mat-expansion-panel
+          class="menu-list"
+          routerLink="home"
+          routerLinkActive="active"
+          [disabled]="true"
+          [hideToggle]="true"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <li>
+                <mat-icon class="mat-18">space_dashboard</mat-icon>
+                Inicio
+              </li>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel> -->
       <mat-expansion-panel
         *ngFor="let quadrant of arrayQuadrant"
         class="menu-list"
