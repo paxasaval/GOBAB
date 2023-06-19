@@ -86,7 +86,7 @@ const routes: Routes = [
           {
             path:'Instancia-responsable',
             component:IndicatorGeneralComponent,
-            data:{typeID:'6461ad67bb91a3acea65635a'},
+            data:{typeID:'648fd82bf2888184112b98bf'},
             children:[
               {
                 path:'',
@@ -101,7 +101,7 @@ const routes: Routes = [
           {
             path:'Diagnostico',
             component:IndicatorGeneralComponent,
-            data:{typeID:'6461ad68bb91a3acea65635c'},
+            data:{typeID:'648fd82cf2888184112b98c1'},
             children:[
               {
                 path:'',
@@ -116,7 +116,7 @@ const routes: Routes = [
           {
             path:'Normativa-y Reglamentación',
             component:IndicatorGeneralComponent,
-            data:{typeID:'6461ad68bb91a3acea65635e'},
+            data:{typeID:'648fd82cf2888184112b98c3'},
             children:[
               {
                 path:'',
@@ -132,7 +132,7 @@ const routes: Routes = [
           {
             path:'Mecanismos',
             component:IndicatorGeneralComponent,
-            data:{typeID:'6461ad68bb91a3acea656360'},
+            data:{typeID:'648fd82cf2888184112b98c5'},
             children:[
               {
                 path:'',

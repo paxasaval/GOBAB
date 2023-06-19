@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Cambiar Contraseña</h1>
-  <form>
+  <div>
     <div class="line">
       <label>Contraseña actual:</label>
       <input
@@ -9,7 +9,7 @@
         placeholder="Contraseña antigua"
         type="text"
         [(ngModel)]="passwordOld"
-        (on)
+        (change)="matcherPassword($event)"
       />
     </div>
     <div class="line">
@@ -23,5 +23,5 @@
 
       />
     </div>
-  </form>
+  </div>
 </div>
