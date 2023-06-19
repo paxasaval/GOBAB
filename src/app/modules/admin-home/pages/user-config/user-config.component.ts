@@ -19,7 +19,8 @@ export class UserConfigComponent implements OnInit {
     private userService:UserService
   ) { }
 
-  matcherPassword(){
+  matcherPassword(event:any){
+    console.log(this.passwordOld)
     this.userService.mathPassword(this.mail,this.passwordOld).subscribe(
       res=>{
         console.log(res)
