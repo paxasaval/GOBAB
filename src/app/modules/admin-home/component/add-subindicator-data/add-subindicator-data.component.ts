@@ -12,6 +12,8 @@ export interface dataSubindicator {
     name: string,
     type: TypeID,
     responsible: string,
+    isPlanned?:boolean,
+    isDiagnosed?:boolean,
     portada?: Evidence[]
   }
 }
@@ -38,6 +40,8 @@ export class AddSubindicatorDataComponent implements OnInit,OnChanges {
   typeControl = new FormGroup({
     type: new FormControl()
   })
+  isPlanned=false
+  isDiagnosed=false
   responsibleControl = new FormControl('')
   portadaArray: Evidence[] = []
   //si volvemos
@@ -70,6 +74,8 @@ export class AddSubindicatorDataComponent implements OnInit,OnChanges {
       data:{
         name:this.name,
         type:this.type,
+        isPlanned:this.isPlanned,
+        isDiagnosed:this.isDiagnosed,
         responsible:this.responsible,
         portada:this.portadaArray
       }

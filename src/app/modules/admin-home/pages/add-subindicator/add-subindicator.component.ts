@@ -60,6 +60,8 @@ export class AddSubindicatorComponent implements OnInit {
   typeSelected!:TypeID
   nameSelected!:string
   responsibleSelected!:string
+  isPlanned:boolean = false
+  isDiagnosed:boolean = false
   portadaArray!: Evidence[]
   //event evidences
   constructor(
@@ -83,6 +85,9 @@ export class AddSubindicatorComponent implements OnInit {
       this.typeSelected=dataRecive.data.type
       this.nameSelected=dataRecive.data.name
       this.responsibleSelected=dataRecive.data.responsible
+      this.isPlanned=dataRecive.data.isPlanned!
+      this.isDiagnosed=dataRecive.data.isDiagnosed!
+      console.log(this.isPlanned,this.isDiagnosed)
       if(dataRecive.data.portada){
         this.portadaArray=dataRecive.data.portada
       }
@@ -104,6 +109,8 @@ export class AddSubindicatorComponent implements OnInit {
       cover: this.portadaArray[0].link as string,
       requireCover: true,
       observationCover: this.portadaArray[0].note,
+      isDiagnosed:this.isDiagnosed,
+      isPlanned:this.isPlanned,
       created: new Date(),
       evidences: [],
       indicadorID: this.indicatorInstance.id,

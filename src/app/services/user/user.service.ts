@@ -36,6 +36,10 @@ export class UserService {
     return this.http.get<UserID>(`${this.apiUrl}/${id}`)
   }
 
+  mathPassword(mail:string,password:string){
+    return this.http.post(`${this.apiUrl}/password`,{mail,password})
+  }
+
   getAllUsers(){
     return this.http.get<UserID[]>(`${this.apiUrl}`)
   }

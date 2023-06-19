@@ -25,6 +25,18 @@
         {{ portada[0] ? "SI" : "NO" }}
       </span>
     </div>
+    <div class="text-line">
+      <span class="category">Se incluye en el diagnóstico del indicador? </span>
+      <span class="element">
+        {{ isDiagnosed ? "SI" : "NO" }}
+      </span>
+    </div>
+    <div class="text-line">
+      <span class="category">Se incluye en la planificación del PDOT? </span>
+      <span class="element">
+        {{ isPlanned ? "SI" : "NO" }}
+      </span>
+    </div>
   </div>
   <h2>Resumen de evidencias</h2>
   <nz-table class="table" *ngIf="groupData" #evidenceTable [nzData]="groupData">

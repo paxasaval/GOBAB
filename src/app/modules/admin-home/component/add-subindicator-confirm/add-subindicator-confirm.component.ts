@@ -1,5 +1,5 @@
 import { StorageService } from 'src/app/services/storage/storage.service';
-import { mergeMap, concatMap, catchError,reduce } from 'rxjs/operators';
+import { mergeMap, concatMap, catchError, reduce } from 'rxjs/operators';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CharacteristicID, CharacteristicWithEvidence } from 'src/app/models/characteristic';
 import { Evidence } from 'src/app/models/evidence';
@@ -21,27 +21,30 @@ import { GadID } from 'src/app/models/gad';
   templateUrl: './add-subindicator-confirm.component.html',
   styleUrls: ['./add-subindicator-confirm.component.scss']
 })
-export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
+export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
 
-  @Input() type!:TypeID
-  @Input() name!:string
-  @Input() responsible!:string
-  @Input() portada!:Evidence[]
-  @Input() evidences!:Evidence[]
+  @Input() type!: TypeID
+  @Input() name!: string
+  @Input() responsible!: string
+  @Input() portada!: Evidence[]
+  @Input() isPlanned!: boolean
+  @Input() isDiagnosed!: boolean
+
+  @Input() evidences!: Evidence[]
 
   groupData: CharacteristicWithEvidence[] = []
-  user!:UserID
-  indicatorInstance!:IndicatorInstanceID
-  indicatorCatalog!:IndicatorID
-  gadID!:GadID
+  user!: UserID
+  indicatorInstance!: IndicatorInstanceID
+  indicatorCatalog!: IndicatorID
+  gadID!: GadID
 
   constructor(
-    private subindicatorService:SubindicatorService,
-    private evidenceService:EvidenceService,
-    private storageService:StorageService,
-    private indicatorInstanceSevice:IndicatorInstanceService,
-    private router:Router
-    ) { }
+    private subindicatorService: SubindicatorService,
+    private evidenceService: EvidenceService,
+    private storageService: StorageService,
+    private indicatorInstanceSevice: IndicatorInstanceService,
+    private router: Router
+  ) { }
 
   groupCharacteristics(typeID: TypeID, evidences: Evidence[]): CharacteristicWithEvidence[] {
     console.log(evidences)
@@ -58,8 +61,8 @@ export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
 
   saveEvidence() {
     Swal.fire({
-      title:'Creando subindicador',
-      didOpen:()=>{
+      title: 'Creando subindicador',
+      didOpen: () => {
         Swal.showLoading()
       }
     })
@@ -67,25 +70,29 @@ export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
       commits: [],
       cover: '',
       requireCover: true,
-      observationCover: this.portada[0].note ||'',
+      observationCover: this.portada[0] ? this.portada[0].note : '',
+      isDiagnosed: this.isDiagnosed,
+      isPlanned: this.isPlanned,
       created: new Date(),
       evidences: [],
       indicadorID: this.indicatorInstance.id,
       lastUpdate: new Date(),
-      state:false,
+      state: false,
       name: this.name,
       qualification: 0,
       responsible: this.responsible,
       typeID: this.type.id,
     }
-    if(this.portada[0].link instanceof File){
-      this.storageService.uploadFile('test',this.portada[0].link)
-      .then(url=>{
-        newSubindicator.cover=url
-        console.log('portada guardada en: ',url)
-      })
-    }else{
-      newSubindicator.cover=this.portada[0].link as string
+    if (this.portada[0]) {
+      if (this.portada[0].link instanceof File) {
+        this.storageService.uploadFile('test', this.portada[0].link)
+          .then(url => {
+            newSubindicator.cover = url
+            console.log('portada guardada en: ', url)
+          })
+      } else {
+        newSubindicator.cover = this.portada[0].link as string
+      }
     }
     console.log(newSubindicator)
     console.log(this.evidences)
@@ -94,31 +101,36 @@ export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
         console.log('subindicador subido con exito!')
         return of(subindicator).pipe(
           mergeMap(subindicator => {
+            if(this.evidences.length>0){
             this.evidences = this.evidences.map(evidence => {
               evidence.subIndicatorID = subindicator.id;
               return evidence;
             });
             return from(this.evidences).pipe(
               concatMap(evidence => {
-                if(evidence.link instanceof File){
+                if (evidence.link instanceof File) {
                   const indicatorCatalog = this.indicatorInstance.indicatorID as IndicatorID
                   console.log(this.indicatorInstance.gadID)
-                  const path = this.gadID.name+'/'+this.indicatorInstance.year+'/'+indicatorCatalog.quadrantName+'/'+indicatorCatalog.name+'/'+subindicator.name
-                  return from(this.storageService.uploadFile(path,evidence.link)).pipe(
-                    concatMap((url)=>{
-                      evidence.link=url
+                  const path = this.gadID.name + '/' + this.indicatorInstance.year + '/' + indicatorCatalog.quadrantName + '/' + indicatorCatalog.name + '/' + subindicator.name
+                  return from(this.storageService.uploadFile(path, evidence.link)).pipe(
+                    concatMap((url) => {
+                      evidence.link = url
                       return this.evidenceService.addEvidence(evidence)
                     })
                   )
-                }else{
-                return this.evidenceService.addEvidence(evidence).pipe(
-                  catchError(error => {
-                    console.error('Error al agregar la evidencia', error);
-                    return EMPTY;
-                  })
-                )};
+                } else {
+                  return this.evidenceService.addEvidence(evidence).pipe(
+                    catchError(error => {
+                      console.error('Error al agregar la evidencia', error);
+                      return EMPTY;
+                    })
+                  )
+                };
               })
-            );
+            )}else{
+              return of([])
+            }
+            ;
           }),
           catchError(error => {
             console.error('Error al agregar el subindicador', error);
@@ -149,12 +161,12 @@ export class AddSubindicatorConfirmComponent implements OnInit,OnChanges {
     );
   }
 
-  ngOnChanges(changes:SimpleChanges){
-    this.groupData = this.groupCharacteristics(this.type,this.evidences)
+  ngOnChanges(changes: SimpleChanges) {
+    this.groupData = this.groupCharacteristics(this.type, this.evidences)
   }
   ngOnInit(): void {
     this.indicatorInstanceSevice.getIndicatorInstance().subscribe(
-      indicator=>{
+      indicator => {
         console.log(indicator)
         this.indicatorInstance = indicator
         this.indicatorCatalog = indicator.indicatorID as IndicatorID

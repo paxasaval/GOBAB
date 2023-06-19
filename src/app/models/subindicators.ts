@@ -10,6 +10,8 @@ export interface Subindicator{
   requireCover?:boolean,
   cover?:string,
   observationCover?:string,
+  isPlanned?:boolean,
+  isDiagnosed?:boolean,
   typeID:string | TypeID,
   name: string,
   responsible:string,
