@@ -4,11 +4,11 @@
     <span>{{ subindicator.created | date : "shortDate" }}</span>
   </div>
   <div class="info lastUpdated">
-    <span class="subtitle">Ultima actualizacion:</span>
+    <span class="subtitle">Ultima actualización:</span>
     <span>{{ subindicator.lastUpdate | date : "shortDate" }}</span>
   </div>
   <div class="info qualification">
-    <span class="subtitle">Calificacion ISO</span>
+    <span class="subtitle">Calificación ISO</span>
     <span class="circle"
     [ngClass]="{
       red: subindicator.qualification === 1,

@@ -98,7 +98,7 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
     console.log(this.evidences)
     this.subindicatorService.addSubindicator(newSubindicator).pipe(
       mergeMap(subindicator => {
-        console.log('subindicador subido con exito!')
+        console.log('subindicador subido con éxito!')
         return of(subindicator).pipe(
           mergeMap(subindicator => {
             if(this.evidences.length>0){
@@ -153,7 +153,7 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
         console.error('Error al agregar el subindicador y evidencias', error);
         Swal.close()
         Swal.fire(
-          'Error: Lo sentimos no se ha podido completar su peticion',
+          'Error: Lo sentimos no se ha podido completar su petición',
           '',
           'error'
         )

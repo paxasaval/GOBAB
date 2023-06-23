@@ -8,7 +8,7 @@
     class="card"
     [ngClass]="{
       bg1: generalidad.name === 'Mecanismos',
-      bg2: generalidad.name === 'Diagnostico',
+      bg2: generalidad.name === 'Diagnóstico',
       bg3: generalidad.name === 'Instancia responsable',
       bg4: generalidad.name === 'Normativa y Reglamentación'
     }"
@@ -21,7 +21,7 @@
       <span>{{ generalidad.evidences.length }}</span>
     </div>
     <div class="card-info">
-      <span>Calificacion Actual:</span>
+      <span>Calificación Actual:</span>
       <span>{{ generalidad.qualification }}</span>
     </div>
     <div class="card-info">
@@ -29,29 +29,29 @@
       <span>{{ generalidad.state }}</span>
     </div>
     <div class="card-actions">
-      <a class="seeMore" [routerLink]="generalidad.id">Ver mas</a>
+      <a class="seeMore" [routerLink]="generalidad.id">Ver más</a>
     </div>
   </div>
 </div>
-<h3>Subindicadores Especificos</h3>
+<h3>Subindicadores Específicos</h3>
 <div class="container-specific">
   <div class="specific" *ngFor="let specific of specifics">
     <ng-container *ngIf="specific.qualification === 1">
       <div class="subindicator">
         <nz-alert class="name" nzType="error" nzShowIcon [nzMessage]="specific.name"></nz-alert>
-        <a class="seeMore" [routerLink]="specific.id">Ver mas</a>
+        <a class="seeMore" [routerLink]="specific.id">Ver más</a>
       </div>
     </ng-container>
     <ng-container *ngIf="specific.qualification === 2">
       <div class="subindicator">
         <nz-alert class="name" nzType="warning" nzShowIcon [nzMessage]="specific.name"></nz-alert>
-        <a class="seeMore" [routerLink]="specific.id">Ver mas</a>
+        <a class="seeMore" [routerLink]="specific.id">Ver más</a>
       </div>
     </ng-container>
     <ng-container *ngIf="specific.qualification === 3">
       <div class="subindicator">
         <nz-alert class="name" nzType="success" nzShowIcon [nzMessage]="specific.name"></nz-alert>
-        <a class="seeMore" [routerLink]="specific.id">Ver mas</a>
+        <a class="seeMore" [routerLink]="specific.id">Ver más</a>
       </div>
     </ng-container>
   </div>

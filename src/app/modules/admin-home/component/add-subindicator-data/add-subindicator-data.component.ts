@@ -27,7 +27,7 @@ export class AddSubindicatorDataComponent implements OnInit,OnChanges {
   //Portada
   portada: CharacteristicID = {
     group: '0',
-    groupName: 'Suba la infografia/portada del proyecto',
+    groupName: 'Suba la infografía/portada del proyecto',
     id: '',
     isRequired: true,
     name: 'Portada',

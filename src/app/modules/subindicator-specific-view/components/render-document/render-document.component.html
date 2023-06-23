@@ -2,6 +2,6 @@
 <app-view-pdf class="container" *ngIf="url;else elseBlock" [url]="url"></app-view-pdf>
 <ng-template class="container no-content" #elseBlock class="noContent">
   No existe portada
-  <span>Puede selecionar otra evidencia para cargarla aqui!</span>
+  <span>Puede selecionar otra evidencia para cargarla aquí!</span>
 </ng-template>
 <span class="note" *ngIf="note">{{note}}</span>

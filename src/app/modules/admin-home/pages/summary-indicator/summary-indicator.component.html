@@ -2,7 +2,7 @@
   <h1>{{title}}</h1>
 <h2>Resumen</h2>
 <div class="card-container">
-  <nz-card nzHoverable class="card" nzSize="small" nzTitle='Calificacion' [nzExtra]="qualifyExtra">
+  <nz-card nzHoverable class="card" nzSize="small" nzTitle='Calificación' [nzExtra]="qualifyExtra">
     <div class="f-center">
       <span class="circle" [ngClass]="{
         gray:indicator.qualification==0,
@@ -23,7 +23,7 @@
   <ng-template #EvidencesExtra>
     <mat-icon class="icon">folder_open</mat-icon>
   </ng-template>
-  <nz-card nzHoverable class="card" nzSize="small" nzTitle='Ultima Actualizacion' [nzExtra]="UpdateExtra">
+  <nz-card nzHoverable class="card" nzSize="small" nzTitle='Ultima Actualización' [nzExtra]="UpdateExtra">
     <div class="f-center">
       <span class="lastUpdate">{{indicator.lastUpdate |date:'short'}}</span>
     </div>
