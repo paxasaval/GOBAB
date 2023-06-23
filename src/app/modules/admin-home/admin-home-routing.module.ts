@@ -97,9 +97,9 @@ const routes: Routes = [
                 component:AddEvidenceComponent
               }
             ]
-          },
+          },  
           {
-            path:'Diagnostico',
+            path:'Diagnóstico',
             component:IndicatorGeneralComponent,
             data:{typeID:'648fd82cf2888184112b98c1'},
             children:[
