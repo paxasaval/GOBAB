@@ -12,10 +12,11 @@
   justify-content: center;
 }
 .card {
-  height: 20vh;
-  width: 18vw;
+  height: 25vh;
+  width: 20vw;
   display: flex;
   flex-direction: column;
+  gap: 0.2em;
   padding: 1.5em;
   background-color: var(--color2);
   border-radius: 6px;
@@ -25,7 +26,9 @@
   justify-content: center;
   text-align: center;
   height: 5vh;
+  font-size: 1.2em;
   font-weight: 800;
+  padding-bottom: 0.5em;
 }
 .card-info {
   display: flex;
@@ -40,7 +43,7 @@
   align-items: center;
 }
 .seeMore {
-  color: var(--red);
+  color: var(--color4);
   font-weight: 600;
   text-decoration: underline;
 }
@@ -57,6 +60,7 @@
   color: var(--black);
 }
 .bg4 {
+  width: 20vw;
   background-color: var(--color4-bg);
   color: var(--white);
 }
@@ -80,4 +84,16 @@
   .name{
     width: 80%;
   }
+}
+.info-data{
+  font-size: 1.2em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.pass{
+  color: var(--green);
+}
+.alert{
+  color: var(--red);
+
 }

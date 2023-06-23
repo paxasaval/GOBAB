@@ -6,7 +6,6 @@
   <div *ngIf="evidences.length>0;else elseBlock" class="evidences">
     <div *ngFor="let evidence of evidences" class="evidence-line">
       <div class="name">
-        <mat-icon>circle</mat-icon>
         <span (click)="setEvidence(evidence)" >{{evidence.name}}</span>
       </div>
       <div class="actions">
@@ -18,7 +17,6 @@
   <ng-template class="evidences" #elseBlock>
     <div class="evidence-line">
       <div class="name noName">
-        <mat-icon>circle</mat-icon>
         <span>No hay evidencia cargada</span>
       </div>
     </div>

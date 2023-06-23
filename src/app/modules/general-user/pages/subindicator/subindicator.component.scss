@@ -1,5 +1,5 @@
 :host{
-  width: 95%;
+  width: 100%;
 }
 .container{
   display: flex;
@@ -67,9 +67,10 @@ aside{
   height: 100vh;
 }
 .circle{
-  height: 3vh;
-  width: 3vh;
+  height: 5vh;
+  width: 5vh;
   border-radius: 50%;
+  border: 2px inset #000;
 }
 .red{
   background-color: var(--red);

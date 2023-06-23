@@ -18,15 +18,24 @@
     </div>
     <div class="card-info">
       <span>Evidencias registradas:</span>
-      <span>{{ generalidad.evidences.length }}</span>
+      <span class="info-data" [ngClass]="{
+        alert: generalidad.evidences.length ==0,
+        passs: generalidad.evidences.length >0
+      }">{{ generalidad.evidences.length }}</span>
     </div>
     <div class="card-info">
       <span>Calificación Actual:</span>
-      <span>{{ generalidad.qualification }}</span>
+      <span class="info-data" [ngClass]="{
+        alert: generalidad.qualification <2,
+        passs: generalidad.qualification >1
+      }">{{ generalidad.qualification }}</span>
     </div>
     <div class="card-info">
       <span>Revisado:</span>
-      <span>{{ generalidad.state }}</span>
+      <span class="info-data" [ngClass]="{
+        alert: !generalidad.state,
+        passs: generalidad.state
+      }">{{ generalidad.state?'si':'no' }}</span>
     </div>
     <div class="card-actions">
       <a class="seeMore" [routerLink]="generalidad.id">Ver más</a>
