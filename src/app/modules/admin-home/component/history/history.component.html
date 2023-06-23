@@ -6,18 +6,18 @@
 >
   <thead>
     <tr>
-      <th rowSpan="2">Característica</th>
-      <th colSpan="3">Evidencia</th>
-      <th colSpan="3">Revisión</th>
+      <th rowSpan="2" class="br-left">Característica</th>
+      <th colSpan="3" class="br-left">Evidencia</th>
+      <th colSpan="3" class="br-left">Revisión</th>
       <th *ngIf="auth" colSpan="2" rowSpan="2">Acciones</th>
     </tr>
     <tr>
       <th>Nombre</th>
       <th>Enlace</th>
-      <th>Observación</th>
+      <th  class="br-left">Observación</th>
       <th>Aprobado</th>
       <th>Calificación</th>
-      <th>Comentario</th>
+      <th class="br-left">Comentario</th>
     </tr>
   </thead>
   <tbody>
@@ -25,6 +25,9 @@
       <tr>
         <td [rowSpan]="data.evidences.length + 1">
           {{ data.characteristic.name }}
+        </td>
+        <td *ngIf="data.evidences.length==0" colspan="8" class="text-center">
+          No hay evidencias registradas
         </td>
       </tr>
       <tr *ngFor="let evidence of data.evidences">

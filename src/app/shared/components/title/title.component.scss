@@ -1,12 +1,19 @@
 
 .nav-container{
+  height: 5vh;
+  height: 95%;
+  display: flex;
   padding-top: 1em;
   padding-left: 1em;
   padding-bottom: 1em;
+  align-items: baseline;
 }
 .nav{
   color: var(--color4);
   font-weight: 600;
   cursor: pointer;
   letter-spacing: 0.05em;
+}
+.icon{
+  font-size: 1em;
 }

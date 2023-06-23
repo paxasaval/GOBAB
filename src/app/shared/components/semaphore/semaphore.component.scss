@@ -1,27 +1,17 @@
 .trafficLigth{
-
-}
-.title{
-  height: 8vh;
-  display: flex;
-  align-items: center;
-}
-.title h2{
-  font-size: 2.5em;
-  padding-left: 1em;
+  padding-bottom: 1em;
 }
 .controllers{
   display: flex;
   width: 100%;
-  padding: 0 2em;
 }
 
 .legend{
   display: flex;
   width: 50%;
   gap: 1em;
-  padding: 0.2em;
 }
+
 .semaphoreLegend{
   width: 75%;
   height: 5vh;
@@ -72,7 +62,7 @@
 .chartContainer{
   display: flex;
   height: 100vh;
-  margin: 2em;
+  margin: 2em 0;
   border-radius: 10px;
   border: 2px solid #000;
 }

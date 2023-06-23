@@ -154,7 +154,7 @@ export class SemaphoreComponent implements OnInit, AfterViewInit, OnChanges {
       if (this.quadrant === '1') {
         this.startAngle = -90
         this.endAngle = -180
-        this.centerX = -300 + (1-this.scale)*400
+        this.centerX = -300 + (1-this.scale)*200
         this.centerY = 0
         this.chartContainer.nativeElement.style.flexDirection = 'row'
 
@@ -170,14 +170,14 @@ export class SemaphoreComponent implements OnInit, AfterViewInit, OnChanges {
       if (this.quadrant === '3') {
         this.startAngle = -360
         this.endAngle = -270
-        this.centerX = 250 - (1-this.scale)*500
+        this.centerX = 225 - (1-this.scale)*500
         this.centerY = 60
         this.chartContainer.nativeElement.style.flexDirection = 'row-reverse'
 
       } if (this.quadrant === '4') {
         this.startAngle = -180
         this.endAngle = -270
-        this.centerX =-250 - (1-this.scale)*150
+        this.centerX =-200 - (1-this.scale)*150
         this.centerY = 25
         this.chartContainer.nativeElement.style.flexDirection = 'row'
 
@@ -191,7 +191,7 @@ export class SemaphoreComponent implements OnInit, AfterViewInit, OnChanges {
     if (this.quadrant === '1') {
       this.startAngle = -90
       this.endAngle = -180
-      this.centerX = -250
+      this.centerX = -300 + (1-this.scale)*200
       this.centerY = 0
       this.chartContainer.nativeElement.style.flexDirection = 'row'
 
@@ -207,14 +207,14 @@ export class SemaphoreComponent implements OnInit, AfterViewInit, OnChanges {
     if (this.quadrant === '3') {
       this.startAngle = -360
       this.endAngle = -270
-      this.centerX = 225
+      this.centerX = 225 - (1-this.scale)*500
       this.centerY = 50
       this.chartContainer.nativeElement.style.flexDirection = 'row-reverse'
 
     } if (this.quadrant === '4') {
       this.startAngle = -180
       this.endAngle = -270
-      this.centerX =-250
+      this.centerX =-200 - (1-this.scale)*150
       this.centerY = 25
       this.chartContainer.nativeElement.style.flexDirection = 'row'
 

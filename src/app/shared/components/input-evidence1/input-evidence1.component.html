@@ -1,7 +1,7 @@
 <div class="container">
   <div class="title">
-    <h3>{{ characteristic.groupName }}</h3>
-    <span>{{characteristic.name}}</span>
+    <h3>{{ characteristic.name }}</h3>
+    <!-- <span>{{characteristic.name}}</span> -->
     <span class="opcional" *ngIf="opcional">(Opcional)</span>
   </div>
   <div *ngFor="let formEvidence of arrayForms" class="form">
@@ -23,7 +23,7 @@
         *ngIf="formEvidence.flag == true; else elseBlock"
         class="upload-file"
       >
-        <span>Subir Archivo:</span>
+        <span class="label">Subir Archivo:</span>
         <div class="dropFile">
           <div class="legend" *ngIf="!formEvidence.evidence; else nameFile">
             <mat-icon class="mat-18">upload</mat-icon>

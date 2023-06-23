@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { RolID } from 'src/app/models/rol';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login-form',
@@ -45,7 +46,8 @@ export class LoginFormComponent implements OnInit {
         localStorage.setItem('user',userToken.id)
         return this.userService.userById(id)
       })
-    ).subscribe(user=>{
+    ).subscribe(
+      user=>{
       this.userService.setUserSesion(user)
       const rol = user.rol as RolID
       if(rol.name===this.ADMIN_ROL || rol.name===this.RESPONSABLE_ROL){
@@ -54,7 +56,17 @@ export class LoginFormComponent implements OnInit {
       if(rol.name===this.USER_ROL){
         this.router.navigate(['/user'])
       }
-    })
+    },
+    error=>{
+      const msg = error.error.error
+      Swal.fire({
+        title:msg,
+        timer:2000,
+        icon:'error',
+        showConfirmButton:false
+      })
+    }
+    )
   }
 
   ngOnInit(): void {

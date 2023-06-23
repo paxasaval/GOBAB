@@ -59,6 +59,10 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
     })
   }
 
+  isFile(link: any): boolean {
+    return link instanceof File;
+  }
+
   saveEvidence() {
     Swal.fire({
       title: 'Creando subindicador',
