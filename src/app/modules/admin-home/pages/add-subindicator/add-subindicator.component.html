@@ -1,21 +1,29 @@
-<app-steps-subindicator [step]="step" (stepEvent)="stepChange($event)" ></app-steps-subindicator>
+<app-steps-subindicator
+  [step]="step"
+  (stepEvent)="stepChange($event)"
+></app-steps-subindicator>
 <div class="container">
   <app-add-subindicator-data
-    *ngIf="step==0"
+    *ngIf="step == 0"
     (dataEvent)="stepAddEvidences($event)"
     [nameState]="nameSelected"
     [typeState]="typeSelected"
     [responsibleState]="responsibleSelected"
     [portadaState]="portadaArray"
-    ></app-add-subindicator-data>
-  <app-add-subindicator-evidences (evidenceEvent)="stepConfirmSubindicator($event)" [type]="typeSelected" *ngIf="step==1"></app-add-subindicator-evidences>
-  <app-add-subindicator-confirm *ngIf="step==2"
-  [type]="typeSelected"
-  [name]="nameSelected"
-  [responsible]="responsibleSelected"
-  [portada]="portadaArray"
-  [isPlanned]="isPlanned"
-  [isDiagnosed]="isDiagnosed"
-  [evidences]="arrayEvidence"
+  ></app-add-subindicator-data>
+  <app-add-subindicator-evidences
+    (evidenceEvent)="stepConfirmSubindicator($event)"
+    [type]="typeSelected"
+    *ngIf="step == 1"
+  ></app-add-subindicator-evidences>
+  <app-add-subindicator-confirm
+    *ngIf="step == 2"
+    [type]="typeSelected"
+    [name]="nameSelected"
+    [responsible]="responsibleSelected"
+    [portada]="portadaArray"
+    [isPlanned]="isPlanned"
+    [isDiagnosed]="isDiagnosed"
+    [evidences]="arrayEvidence"
   ></app-add-subindicator-confirm>
 </div>
