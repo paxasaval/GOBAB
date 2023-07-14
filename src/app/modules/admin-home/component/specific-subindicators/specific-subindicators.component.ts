@@ -32,6 +32,13 @@ export class SpecificSubindicatorsTableComponent implements OnInit {
     this.router.navigate(['add-subindicator'], { relativeTo: this.route })
   }
 
+  deleteSubindicator(id:string){
+    console.log(id)
+    this.subindicatorService.deleteSubindicator(id).subscribe(res=>{
+      console.log(res)
+    })
+  }
+
   ngOnInit(): void {
     combineLatest([
       this.indicatorInstanceService.getIndicatorInstance(),

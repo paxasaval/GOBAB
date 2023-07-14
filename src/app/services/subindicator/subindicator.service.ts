@@ -80,8 +80,8 @@ export class SubindicatorService {
   getSubindicatorByIndicatorIDandTypeID(indicatorID: string, typeID: string) {
     return this.http.get<SubindicatorID>(`${this.apiUrl}/indicator/${indicatorID}/type/${typeID}`)
   }
-  getOWL(word:string){
-    return this.http.get<any>(`https://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=select+*%0D%0Awhere%7B%0D%0A%3Flibros+rdf%3Atype+schema%3A${word}+%0D%0A%7D+LIMIT+100&format=application%2Fsparql-results%2Bjson&timeout=30000&signal_void=on&signal_unconnected=on`)
-  }
 
+  deleteSubindicator(id:string){
+    return this.http.delete(`${this.apiUrl}/${id}`)
+  }
 }

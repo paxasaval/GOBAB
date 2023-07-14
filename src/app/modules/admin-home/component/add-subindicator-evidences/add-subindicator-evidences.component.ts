@@ -48,7 +48,7 @@ export class AddSubindicatorEvidencesComponent implements OnInit,AfterViewInit,O
   }
   addEvidence(event: Evidence[]) {
     event.map(evidence => {
-      const found = this.arrayEvidence.findIndex(e => ((e.name == evidence.name) && (e.characteristicID == evidence.characteristicID)))
+      const found = this.arrayEvidence.findIndex(e => ((e.link == evidence.link) && (e.characteristicID == evidence.characteristicID)))
       if (found == -1) {
         this.arrayEvidence.push(evidence)
       } else {

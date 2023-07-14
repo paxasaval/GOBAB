@@ -19,11 +19,12 @@ nzSize="small"
       <th>Calificación</th>
       <th>Tipo</th>
       <th>Ultima Actualización</th>
+      <th *ngIf="auth">Actions</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let sub of specificSubindicatorsTable.data" [routerLink]="'../'+'Subindicadores-Especificos/'+sub.id">
-      <td>{{sub.name}}</td>
+    <tr *ngFor="let sub of specificSubindicatorsTable.data" >
+      <td [routerLink]="'../'+'Subindicadores-Especificos/'+sub.id">{{sub.name}} </td>
       <td><span class="circle" [ngClass]="{
         gray:sub.qualification==0,
         red:sub.qualification===1,
@@ -32,6 +33,7 @@ nzSize="small"
       }"></span></td>
       <td>{{sub.typeID.name}}</td>
       <td >{{sub.lastUpdate|date:'short'}}</td>
+      <td><button mat-fab (click)="deleteSubindicator(sub.id)"><mat-icon>delete</mat-icon></button></td>
     </tr>
   </tbody>
 </nz-table>
