@@ -3,7 +3,8 @@
 <div class="dowload_report">
   <button mat-raised-button (click)="dowloadReport()">Descagar reoporte</button>
 </div>
-<div class="gad-legend"></div>
+<div id="report" class="report">
+  <div class="gad-legend"></div>
 <div class="section1">
   <article class="extra_info">
     <h3 *ngIf="gad">Informacion adicional del {{ gad.name }}</h3>
@@ -282,3 +283,5 @@
     </nz-tab>
   </nz-tabset>
 </div>
+</div>
+

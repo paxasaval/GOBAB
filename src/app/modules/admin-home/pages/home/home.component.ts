@@ -13,6 +13,7 @@ import * as am5 from "@amcharts/amcharts5";
 import * as am5percent from "@amcharts/amcharts5/percent";
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { ExportPdfService } from 'src/app/services/export-pdf/export-pdf.service';
 
 interface ExtraData {
   data: number | string,
@@ -137,10 +138,12 @@ export class HomeComponent implements OnInit,AfterViewInit {
     private gadService: GadService,
     private periodService: PeriodService,
     private indicatorInstanceService: IndicatorInstanceService,
-  ) { }
+    private exportPdfService:ExportPdfService
+    ) { }
 
   dowloadReport() {
-
+    let name = `Report ${new Date()}`
+    this.exportPdfService.createPdfs(name,'report')
   }
 
   getDataDonut(quadrant: SummarySubindicators) {
