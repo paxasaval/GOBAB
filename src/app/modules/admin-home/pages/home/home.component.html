@@ -98,11 +98,13 @@
   </article>
   <article *ngIf="summarySubindicators" class="summary_subindicators">
     <h3>Porcentaje de avance total de subindicadores</h3>
-    <span class="progress"> {{ percentRegister | number : "1.0-2" }}% </span>
+    <span class="progress"> {{ percentRegister | number : "1.0-2" }} % </span>
     <div class="content">
       <div class="line">
         <span class="label"> Subindicadores en estado aceptable: </span>
         <span class="data">
+          <div class="circle q_3"></div>
+
           {{ summarySubindicators.qualify_3 }}
         </span>
       </div>
@@ -111,24 +113,28 @@
           Subindicadores en estado por debajo del lo aceptable:
         </span>
         <span class="data">
+          <div class="circle q_2"></div>
           {{ summarySubindicators.qualify_2 }}
         </span>
       </div>
       <div class="line">
         <span class="label"> Subindicadores en estado inaceptable: </span>
         <span class="data">
+          <div class="circle q_1"></div>
           {{ summarySubindicators.qualify_1 }}
         </span>
       </div>
       <div class="line">
         <span class="label"> Subindicadores por registrar: </span>
         <span class="data">
+          <div class="circle q_0"></div>
+
           {{ summarySubindicators.qualify_0 }}
         </span>
       </div>
       <div class="line line-total">
         <span class="label"> Total de subindicadores registrados: </span>
-        <span class="data">
+        <span class="data total">
           {{ totalSubindicatorsEvaluated }}/{{ totalSubindicators }}
         </span>
       </div>
@@ -157,38 +163,43 @@
             </div>
             <div class="content">
               <div class="header">
-                <span>Indicadores</span>
-                <span>Estado</span>
+                <span class="label">Indicadores</span>
+                <span class="data">Estado</span>
               </div>
-              <div class="row" *ngFor="let indicator of quadrant">
-                <span class="label">
-                  {{
-                    indicator.indicatorID.number +
-                      ". " +
-                      indicator.indicatorID.name
-                  }}
-                </span>
-                <span class="data">
-                  <div
-                    class="circle circle2"
-                    [ngStyle]="{
-                      'background-color': getQualifyColor(
-                        indicator.qualification
-                      )
-                    }"
-                  ></div>
-                  <div class="legend"></div>
-                  {{
-                    indicator.qualification == 0
-                      ? "Sin evaluar"
-                      : indicator.qualification == 1
-                      ? "Inaceptable"
-                      : indicator.qualification == 2
-                      ? "Debajo de lo aceptable"
-                      : "Acetable"
-                  }}
-                </span>
+              <div class="description">
+                <div class="row" *ngFor="let indicator of quadrant">
+                  <span class="label">
+                    {{
+                      indicator.indicatorID.number +
+                        ". " +
+                        indicator.indicatorID.name
+                    }}
+                  </span>
+                  <span class="data">
+                    <div
+                      class="circle circle3"
+                      [ngStyle]="{
+                        'background-color': getQualifyColor(
+                          indicator.qualification
+                        )
+                      }"
+                    ></div>
+                    <div class="legend">
+                      {{
+                        indicator.qualification == 0
+                          ? "Sin evaluar"
+                          : indicator.qualification == 1
+                          ? "Inaceptable"
+                          : indicator.qualification == 2
+                          ? "Debajo de lo aceptable"
+                          : "Acetable"
+                      }}
+                    </div>
+
+                  </span>
+                </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -210,40 +221,40 @@
                   quadrant[0].indicatorID.quadrantName
               }}
             </div>
-            <div class="content">
+            <div class="content content2">
               <div class="c-rigth">
                 <div class="line">
-                  <div class="label">Subindicadores en estado aceptable</div>
-                  <div class="circle circle3 q_0"></div>
+                  <div class="label">Subindicadores en <b> estado aceptable</b></div>
+                  <div class="circle circle3 q_3"></div>
                   <div class="data">
                     {{ allSummary[allQuadrant.indexOf(quadrant)].qualify_3 }}
                   </div>
                 </div>
                 <div class="line">
                   <div class="label">
-                    Subindicadores por debajo del estado aceptable
+                    Subindicadores por <b>debajo del estado aceptable</b>
                   </div>
-                  <div class="circle circle3 q_1"></div>
+                  <div class="circle circle3 q_2"></div>
                   <div class="data">
                     {{ allSummary[allQuadrant.indexOf(quadrant)].qualify_2 }}
                   </div>
                 </div>
                 <div class="line">
-                  <div class="label">Subindicadores en estado inaceptable</div>
-                  <div class="circle circle3 q_2"></div>
+                  <div class="label">Subindicadores en <b> estado inaceptable</b></div>
+                  <div class="circle circle3 q_1"></div>
                   <div class="data">
                     {{ allSummary[allQuadrant.indexOf(quadrant)].qualify_1 }}
                   </div>
                 </div>
                 <div class="line">
-                  <div class="label">Subindicadores en proceso de registro</div>
-                  <div class="circle circle3 q_3"></div>
+                  <div class="label">Subindicadores en <b>proceso de registro</b></div>
+                  <div class="circle circle3 q_0"></div>
                   <div class="data">
                     {{ allSummary[allQuadrant.indexOf(quadrant)].qualify_0 }}
                   </div>
                 </div>
                 <div class="line">
-                  <div class="label">Total de subindicadores registrados</div>
+                  <div class="label total">Total de subindicadores registrados</div>
                   <div class="data">
                     {{
                       getSubEval(allSummary[allQuadrant.indexOf(quadrant)])
