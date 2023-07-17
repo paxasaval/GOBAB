@@ -50,4 +50,11 @@ export class IndicatorInstanceService {
     //console.log(indicator)
     this.IndicatorSelected.next(indicator)
   }
+  getSummaryIndicators(period:string){
+    return this.http.get<any>(`${this.apiUrl}/summary?period=${period}`)
+
+  }
+  getSummarySubindicators(period:string){
+    return this.http.get<any>(`${this.apiUrl}/summarySubindicators?period=${period}`)
+  }
 }

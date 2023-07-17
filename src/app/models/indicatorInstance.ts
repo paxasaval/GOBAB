@@ -15,3 +15,4 @@ export interface IndicatorInstance{
   subindicators:string[] | SubindicatorID[]
 }
 export interface IndicatorInstanceID extends IndicatorInstance{id:string}
+export interface IndicatorInstanceIDWithCatalog extends IndicatorInstance { indicatorID: IndicatorID}

@@ -1,4 +1,273 @@
 <app-title></app-title>
-<h1>Inicio</h1>
-<h2>Resumen General</h2>
+<h1 *ngIf="gad">{{ gad.name }}</h1>
+<div class="dowload_report">
+  <button mat-raised-button (click)="dowloadReport()">Descagar reoporte</button>
+</div>
+<div class="gad-legend"></div>
+<div class="section1">
+  <article class="extra_info">
+    <h3 *ngIf="gad">Informacion adicional del {{ gad.name }}</h3>
+    <div class="content">
+      <div class="data_line" *ngFor="let data of infoExtra">
+        <span class="label">{{ data.data }}</span>
+        <span class="data">{{ data.label }}</span>
+      </div>
+    </div>
+    <div class="source">
+      <span class="sourceTitle">{{ sourceReport }}</span>
+    </div>
+  </article>
+  <article class="summary_quadrant">
+    <h3>Estado de lon indicadores en los 4 ejes ISO 18091:2019</h3>
+    <div class="content">
+      <div class="data-line" *ngFor="let res of summary">
+        <span class="quadrant">{{ res.quadrantName }}</span>
+        <span class="total">Indicadores aceptables {{res.qualify_3}} / {{res.qualify_3+res.qualify_2+res.qualify_1+res.qualify_0}}</span>
+        <div class="bar">
+          <div class="qualify-bar">
+            <div
+              class="qualify-segment segment-1"
+              [ngStyle]="{ 'background-color': getQualifyColor(0) }"
+              [style.width.%]="getWidhtColor(res.qualify_0, res)"
+            >
+              {{ res.qualify_0 }}
+            </div>
+            <div
+              class="qualify-segment"
+              [ngStyle]="{ 'background-color': getQualifyColor(1) }"
+              [style.width.%]="getWidhtColor(res.qualify_1, res)"
+            >
+              {{ res.qualify_1 }}
+            </div>
+            <div
+              class="qualify-segment"
+              [ngStyle]="{ 'background-color': getQualifyColor(2) }"
+              [style.width.%]="getWidhtColor(res.qualify_2, res)"
+            >
+              {{ res.qualify_2 }}
+            </div>
+            <div
+              class="qualify-segment"
+              [ngStyle]="{ 'background-color': getQualifyColor(3) }"
+              [style.width.%]="getWidhtColor(res.qualify_3, res)"
+            >
+              {{ res.qualify_3 }}
+            </div>
+          </div>
+          <div class="legend">
+            <div class="label">
+              <div
+                class="circle"
+                [ngStyle]="{ 'background-color': getQualifyColor(0) }"
+              ></div>
+              <div class="value">
+                {{ res.qualify_0 }}
+              </div>
+            </div>
+            <div class="label">
+              <div
+                class="circle"
+                [ngStyle]="{ 'background-color': getQualifyColor(1) }"
+              ></div>
+              <div class="value">
+                {{ res.qualify_1 }}
+              </div>
+            </div>
+            <div class="label">
+              <div
+                class="circle"
+                [ngStyle]="{ 'background-color': getQualifyColor(2) }"
+              ></div>
+              <div class="value">
+                {{ res.qualify_2 }}
+              </div>
+            </div>
+            <div class="label">
+              <div
+                class="circle"
+                [ngStyle]="{ 'background-color': getQualifyColor(3) }"
+              ></div>
+              <div class="value">
+                {{ res.qualify_3 }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article *ngIf="summarySubindicators" class="summary_subindicators">
+    <h3>Porcentaje de avance total de subindicadores</h3>
+    <span class="progress"> {{ percentRegister | number : "1.0-2" }}% </span>
+    <div class="content">
+      <div class="line">
+        <span class="label"> Subindicadores en estado aceptable: </span>
+        <span class="data">
+          {{ summarySubindicators.qualify_3 }}
+        </span>
+      </div>
+      <div class="line">
+        <span class="label">
+          Subindicadores en estado por debajo del lo aceptable:
+        </span>
+        <span class="data">
+          {{ summarySubindicators.qualify_2 }}
+        </span>
+      </div>
+      <div class="line">
+        <span class="label"> Subindicadores en estado inaceptable: </span>
+        <span class="data">
+          {{ summarySubindicators.qualify_1 }}
+        </span>
+      </div>
+      <div class="line">
+        <span class="label"> Subindicadores por registrar: </span>
+        <span class="data">
+          {{ summarySubindicators.qualify_0 }}
+        </span>
+      </div>
+      <div class="line line-total">
+        <span class="label"> Total de subindicadores registrados: </span>
+        <span class="data">
+          {{ totalSubindicatorsEvaluated }}/{{ totalSubindicators }}
+        </span>
+      </div>
+    </div>
+  </article>
+</div>
+<div *ngIf="summarySubindicators" class="section2">
+  <h2>Resultados del proceso de registro</h2>
+  <span>Informacion registrada</span>
+  <nz-tabset>
+    <nz-tab nzTitle="Lista de indicadores">
+      <div class="grid-container">
+        <div nz-row [nzGutter]="16">
+          <div
+            *ngFor="let quadrant of allQuadrant"
+            class="grid"
+            nz-col
+            [nzSpan]="12"
+          >
+            <div class="title">
+              {{
+                quadrant[0].indicatorID.quadrant +
+                  ". " +
+                  quadrant[0].indicatorID.quadrantName
+              }}
+            </div>
+            <div class="content">
+              <div class="header">
+                <span>Indicadores</span>
+                <span>Estado</span>
+              </div>
+              <div class="row" *ngFor="let indicator of quadrant">
+                <span class="label">
+                  {{
+                    indicator.indicatorID.number +
+                      ". " +
+                      indicator.indicatorID.name
+                  }}
+                </span>
+                <span class="data">
+                  <div
+                    class="circle circle2"
+                    [ngStyle]="{
+                      'background-color': getQualifyColor(
+                        indicator.qualification
+                      )
+                    }"
+                  ></div>
+                  <div class="legend"></div>
+                  {{
+                    indicator.qualification == 0
+                      ? "Sin evaluar"
+                      : indicator.qualification == 1
+                      ? "Inaceptable"
+                      : indicator.qualification == 2
+                      ? "Debajo de lo aceptable"
+                      : "Acetable"
+                  }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nz-tab>
+    <nz-tab nzTitle="Cantidad de documentos">
+      <div class="grid-container container2">
+        <div nz-row [nzGutter]="16">
+          <div
+            *ngFor="let quadrant of allQuadrant"
+            class="grid"
+            nz-col
+            [nzSpan]="12"
+          >
+            <div *ngIf="quadrant[0]" class="title">
+              {{
+                quadrant[0].indicatorID.quadrant +
+                  ". " +
+                  quadrant[0].indicatorID.quadrantName
+              }}
+            </div>
+            <div class="content">
+              <div class="c-rigth">
+                <div class="line">
+                  <div class="label">Subindicadores en estado aceptable</div>
+                  <div class="circle circle3 q_0"></div>
+                  <div class="data">
+                    {{ allSummary[allQuadrant.indexOf(quadrant)].qualify_3 }}
+                  </div>
+                </div>
+                <div class="line">
+                  <div class="label">
+                    Subindicadores por debajo del estado aceptable
+                  </div>
+                  <div class="circle circle3 q_1"></div>
+                  <div class="data">
+                    {{ allSummary[allQuadrant.indexOf(quadrant)].qualify_2 }}
+                  </div>
+                </div>
+                <div class="line">
+                  <div class="label">Subindicadores en estado inaceptable</div>
+                  <div class="circle circle3 q_2"></div>
+                  <div class="data">
+                    {{ allSummary[allQuadrant.indexOf(quadrant)].qualify_1 }}
+                  </div>
+                </div>
+                <div class="line">
+                  <div class="label">Subindicadores en proceso de registro</div>
+                  <div class="circle circle3 q_3"></div>
+                  <div class="data">
+                    {{ allSummary[allQuadrant.indexOf(quadrant)].qualify_0 }}
+                  </div>
+                </div>
+                <div class="line">
+                  <div class="label">Total de subindicadores registrados</div>
+                  <div class="data">
+                    {{
+                      getSubEval(allSummary[allQuadrant.indexOf(quadrant)])
+                    }}/{{ getTotal(allSummary[allQuadrant.indexOf(quadrant)]) }}
+                  </div>
+                </div>
+              </div>
+              <div class="c-left">
+                <canvas
+                  *ngIf="flag"
+                  baseChart
+                  class="chart"
+                  [data]="getDataDonut(allSummary[allQuadrant.indexOf(quadrant)])"
+                  [type]="pieChartType"
+                  [options]="pieChartOptions"
 
+
+                >
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nz-tab>
+  </nz-tabset>
+</div>

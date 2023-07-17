@@ -27,6 +27,9 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NgChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [],
   imports: [
@@ -58,7 +61,10 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     NzSkeletonModule,
     NzListModule,
     NzButtonModule,
-    NzCardModule
+    NzCardModule,
+    NzTabsModule,
+    NzGridModule,
+    NgChartsModule
   ],
   exports:[
     MatButtonModule,
@@ -88,7 +94,10 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     NzSkeletonModule,
     NzListModule,
     NzButtonModule,
-    NzCardModule
+    NzCardModule,
+    NzTabsModule,
+    NzGridModule,
+    NgChartsModule
 
   ]
 })

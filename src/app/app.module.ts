@@ -18,6 +18,7 @@ import { environment } from '../environments/environment';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { NgChartsModule } from 'ng2-charts';
 registerLocaleData(en);
 
 export function tokenGetter() {
@@ -30,6 +31,7 @@ export function tokenGetter() {
   ],
   imports: [
     BrowserModule,
+    NgChartsModule,
     CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
