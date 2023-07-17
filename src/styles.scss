@@ -14,7 +14,7 @@ $my-theme: mat.define-light-theme((
 
 
 :root{
-  --white: #ffffff;
+  --white: hsl(0, 0%, 100%);
   --black: #000000;
   --footer-bg:#333333;
   --color1:#FFC819;
@@ -25,7 +25,7 @@ $my-theme: mat.define-light-theme((
   --color4-bg:rgba(4, 6, 21, 0.4);
   --color5:#FFE181;
   --icon1:#A9A9A9;
-  --green:#009640;
+  --green:#007934;
   --yellow:#FCEA00;
   --red:#E00613;
   --grey: #D9D9D9;
