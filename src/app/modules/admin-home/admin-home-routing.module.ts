@@ -30,7 +30,7 @@ const routes: Routes = [
       },
       {
         path:'',
-        redirectTo:'quadrant/1',
+        redirectTo:'home',
         pathMatch:'full',
         data:{
           breadcrumb:'Desarrollo Institucional para un Buen Gobierno'
@@ -97,7 +97,7 @@ const routes: Routes = [
                 component:AddEvidenceComponent
               }
             ]
-          },  
+          },
           {
             path:'Diagnóstico',
             component:IndicatorGeneralComponent,
