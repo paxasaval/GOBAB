@@ -5,6 +5,9 @@
     <span class="opcional" *ngIf="opcional">(Opcional)</span>
   </div>
   <div *ngFor="let formEvidence of arrayForms" class="form">
+    <button *ngIf="dectectIndex(formEvidence)>0" mat-icon-button aria-label="Close" (click)="deleteInput(formEvidence)">
+      <mat-icon>close</mat-icon>
+    </button>
     <form class="formInput" [formGroup]="formEvidence.form">
       <span>Observaciones:</span>
       <mat-form-field class="formField" appearance="outline">

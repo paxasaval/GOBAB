@@ -58,6 +58,7 @@ export class InputEvidence1Component implements OnInit {
     form.evidence = file
     this.emitEvidence()
   }
+
   addEvidence() {
     const newForm = new FormGroup({
       observation: new FormControl(''),
@@ -66,7 +67,13 @@ export class InputEvidence1Component implements OnInit {
     })
     this.arrayForms.push({ form: newForm, flag: true, changeName: 'enlace' })
   }
-
+  deleteInput(formEvidence:FormEvidence){
+    const i = this.arrayForms.indexOf(formEvidence)
+    this.arrayForms = this.arrayForms.splice(i,1)
+  }
+  dectectIndex(formEvidence:FormEvidence){
+    return this.arrayForms.indexOf(formEvidence)
+  }
   emitEvidence() {
     this.evidences = []
     this.arrayForms.forEach(formEvidence => {

@@ -1,6 +1,9 @@
 <div class="container">
   <span class="title">{{ characteristic.name }}</span>
   <div *ngFor="let evidence of arrayEvidence" class="file-container">
+    <button *ngIf="dectectIndex(evidence)>0" mat-icon-button aria-label="Close" (click)="deleteInput(evidence)">
+      <mat-icon>close</mat-icon>
+    </button>
     <div class="file">
       <div class="file-name">
         <span>Nombre del documento</span>

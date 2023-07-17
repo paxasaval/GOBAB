@@ -73,6 +73,13 @@ export class InputEvidence2Component implements OnInit {
     })
 
   }
+  deleteInput(formEvidence:FilesControlForm){
+    const i = this.arrayEvidence.indexOf(formEvidence)
+    this.arrayEvidence = this.arrayEvidence.splice(i,1)
+  }
+  dectectIndex(formEvidence:FilesControlForm){
+    return this.arrayEvidence.indexOf(formEvidence)
+  }
 
   changeName(evidence:FilesControlForm){
     evidence.flag=!evidence.flag
