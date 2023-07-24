@@ -36,6 +36,7 @@ import { WorkspaceComponent } from './pages/workspace/workspace.component';
 import { SummaryIndicatorComponent } from './pages/summary-indicator/summary-indicator.component';
 import { SpecificSubindicatorsTableComponent } from './component/specific-subindicators/specific-subindicators.component';
 import { HelpComponent } from './pages/help/help.component';
+import { WkconfigComponent } from './pages/wkconfig/wkconfig.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { HelpComponent } from './pages/help/help.component';
     WorkspaceComponent,
     SummaryIndicatorComponent,
     SpecificSubindicatorsTableComponent,
-    HelpComponent
+    HelpComponent,
+    WkconfigComponent
   ],
   imports: [
     CommonModule,

@@ -15,6 +15,7 @@ import { IndicatorInstanceService } from 'src/app/services/indicator-instance/in
 import { Router } from '@angular/router';
 import { IndicatorID } from 'src/app/models/indicator';
 import { GadID } from 'src/app/models/gad';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-subindicator-confirm',
@@ -64,8 +65,10 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
   }
 
   saveEvidence() {
+    let x=1
     Swal.fire({
       title: 'Creando subindicador',
+      text:`evidencias subidas: ${x} / ${this.evidences.length}`,
       didOpen: () => {
         Swal.showLoading()
       }
@@ -115,10 +118,13 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
                 if (evidence.link instanceof File) {
                   const indicatorCatalog = this.indicatorInstance.indicatorID as IndicatorID
                   console.log(this.indicatorInstance.gadID)
-                  const path = this.gadID.name + '/' + this.indicatorInstance.year + '/' + indicatorCatalog.quadrantName + '/' + indicatorCatalog.name + '/' + subindicator.name
-                  return from(this.storageService.uploadFile(path, evidence.link)).pipe(
-                    concatMap((url) => {
-                      evidence.link = url
+                  const path = this.gadID.name + '/' + this.indicatorInstance.year + '/' + indicatorCatalog.quadrantName + '/' + indicatorCatalog.name + '/' + subindicator.name + evidence.link.name
+                  return from(this.storageService.uploadFile2(environment.azureStorage.key,evidence.link,path,()=>{
+                    x+=1
+                    Swal.update({text:`evidencias subidas ${x} / ${this.evidences.length}`})
+                  })).pipe(
+                    concatMap((res) => {
+                      evidence.link = res._response.request.url
                       return this.evidenceService.addEvidence(evidence)
                     })
                   )

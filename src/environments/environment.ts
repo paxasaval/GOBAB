@@ -12,10 +12,15 @@ export const environment = {
     messagingSenderId: '399872374285',
   },
   production: false,
-  API_URL:'http://localhost:3001',
-  ROL_ADMIN:'Administrador',
-  ROL_RESPONSIBLE:'Responsable',
-  TENATID:'64616f718e118fb22d4059e3',
+  API_URL: 'http://localhost:3001',
+  ROL_ADMIN: 'Administrador',
+  ROL_RESPONSIBLE: 'Responsable',
+  TENATID: '64616f718e118fb22d4059e3',
+  azureStorage: {
+    accountName: 'iso18091storage',
+    containerName: 'test',
+    key:'sp=racwdli&st=2023-07-23T18:14:24Z&se=2024-07-24T02:14:24Z&spr=https&sv=2022-11-02&sr=c&sig=tBFJe4XlbgPukKS2XkBVjj2bmvWtQBKX1tU74v3DIHI%3D'
+  }
 
   //API_URL:'https://iso-18091-backend-production.up.railway.app'
   //API_URL:'https://iso-18091-backend-test-production.up.railway.app'

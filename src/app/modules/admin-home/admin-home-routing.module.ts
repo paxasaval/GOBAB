@@ -18,155 +18,160 @@ import { WorkspaceComponent } from './pages/workspace/workspace.component';
 import { SummaryIndicatorComponent } from './pages/summary-indicator/summary-indicator.component';
 import { SpecificSubindicatorsTableComponent } from './component/specific-subindicators/specific-subindicators.component';
 import { HelpComponent } from './pages/help/help.component';
+import { WkconfigComponent } from './pages/wkconfig/wkconfig.component';
 
 const routes: Routes = [
   {
-    path:'',
-    component:LayoutComponent,
-    children:[
+    path: '',
+    component: LayoutComponent,
+    children: [
       {
-        path:'quadrant/:id',
-        component:QuadrantComponent
+        path: 'quadrant/:id',
+        component: QuadrantComponent
       },
       {
-        path:'',
-        redirectTo:'home',
-        pathMatch:'full',
-        data:{
-          breadcrumb:'Desarrollo Institucional para un Buen Gobierno'
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+        data: {
+          breadcrumb: 'Desarrollo Institucional para un Buen Gobierno'
         }
       },
       {
-        path:'home',
-        component:HomeComponent,
-        data:{
-          breadcrumb:'Inicio'
+        path: 'home',
+        component: HomeComponent,
+        data: {
+          breadcrumb: 'Inicio'
         }
       },
       {
-        path:'help',
-        component:HelpComponent
+        path: 'help',
+        component: HelpComponent
       },
       {
-        path:'workspace',
-        component:WorkspaceComponent,
-        children:[
+        path: 'workspace',
+        component: WorkspaceComponent,
+        children: [
           {
-            path:'users',
-            component:UsersComponent
+            path: 'users',
+            component: UsersComponent
           },
           {
-            path:'',
-            redirectTo:'users',
-            pathMatch:'full'
+            path: 'wkconfig',
+            component: WkconfigComponent
+          },
+          {
+            path: '',
+            redirectTo: 'users',
+            pathMatch: 'full'
           }
         ]
       },
       {
-        path:'config',
-        component:UserConfigComponent
+        path: 'config',
+        component: UserConfigComponent
       },
       {
-        path:'quadrant/:quadrantNumber/indicator/:number',
-        component:LayoutIndicatorComponent,
+        path: 'quadrant/:quadrantNumber/indicator/:number',
+        component: LayoutIndicatorComponent,
       },
       {
-        path:'quadrant/:quadrantNumber/indicator/:number/:id',
-        component:IndicatorComponent,
-        children:[
+        path: 'quadrant/:quadrantNumber/indicator/:number/:id',
+        component: IndicatorComponent,
+        children: [
           {
-            path:'Resumen',
-            component:SummaryIndicatorComponent
+            path: 'Resumen',
+            component: SummaryIndicatorComponent
           },
           {
-            path:'',
-            redirectTo:'Resumen',
-            pathMatch:'full'
+            path: '',
+            redirectTo: 'Resumen',
+            pathMatch: 'full'
           },
           {
-            path:'Instancia-responsable',
-            component:IndicatorGeneralComponent,
-            data:{typeID:'648fd82bf2888184112b98bf'},
-            children:[
+            path: 'Instancia-responsable',
+            component: IndicatorGeneralComponent,
+            data: { typeID: '648fd82bf2888184112b98bf' },
+            children: [
               {
-                path:'',
-                component:SubindicatorGeneralComponent
+                path: '',
+                component: SubindicatorGeneralComponent
               },
               {
-                path:'add-evidence',
-                component:AddEvidenceComponent
+                path: 'add-evidence',
+                component: AddEvidenceComponent
               }
             ]
           },
           {
-            path:'Diagnóstico',
-            component:IndicatorGeneralComponent,
-            data:{typeID:'648fd82cf2888184112b98c1'},
-            children:[
+            path: 'Diagnóstico',
+            component: IndicatorGeneralComponent,
+            data: { typeID: '648fd82cf2888184112b98c1' },
+            children: [
               {
-                path:'',
-                component:SubindicatorGeneralComponent
+                path: '',
+                component: SubindicatorGeneralComponent
               },
               {
-                path:'add-evidence',
-                component:AddEvidenceComponent
+                path: 'add-evidence',
+                component: AddEvidenceComponent
               }
             ]
           },
           {
-            path:'Normativa-y Reglamentación',
-            component:IndicatorGeneralComponent,
-            data:{typeID:'648fd82cf2888184112b98c3'},
-            children:[
+            path: 'Normativa-y Reglamentación',
+            component: IndicatorGeneralComponent,
+            data: { typeID: '648fd82cf2888184112b98c3' },
+            children: [
               {
-                path:'',
-                component:SubindicatorGeneralComponent
+                path: '',
+                component: SubindicatorGeneralComponent
               },
               {
-                path:'add-evidence',
-                component:AddEvidenceComponent
+                path: 'add-evidence',
+                component: AddEvidenceComponent
               }
             ]
 
           },
           {
-            path:'Mecanismos',
-            component:IndicatorGeneralComponent,
-            data:{typeID:'648fd82cf2888184112b98c5'},
-            children:[
+            path: 'Mecanismos',
+            component: IndicatorGeneralComponent,
+            data: { typeID: '648fd82cf2888184112b98c5' },
+            children: [
               {
-                path:'',
-                component:SubindicatorGeneralComponent
+                path: '',
+                component: SubindicatorGeneralComponent
               },
               {
-                path:'add-evidence',
-                component:AddEvidenceComponent
+                path: 'add-evidence',
+                component: AddEvidenceComponent
               }
             ]
           },
           {
-            path:'Subindicadores-Especificos',
-            component:SpecificSubindicatorsComponent,
-            children:[
+            path: 'Subindicadores-Especificos',
+            component: SpecificSubindicatorsComponent,
+            children: [
               {
-                path:'',
-                component:SpecificSubindicatorsTableComponent
+                path: '',
+                component: SpecificSubindicatorsTableComponent
               },
               {
-                path:'add-subindicator',
-                component:AddSubindicatorComponent
+                path: 'add-subindicator',
+                component: AddSubindicatorComponent
               },
               {
-                path:':id',
-                component:ReviewSubindicatorSpecifidcComponent,
-                children:[
+                path: ':id',
+                component: ReviewSubindicatorSpecifidcComponent,
+                children: [
                   {
-                    path:'',
-                    component:SubindicatorGeneralComponent
+                    path: '',
+                    component: SubindicatorGeneralComponent
                   },
                   {
-                    path:'add-evidence',
-                    component:AddEvidenceComponent
+                    path: 'add-evidence',
+                    component: AddEvidenceComponent
                   }
                 ]
               },

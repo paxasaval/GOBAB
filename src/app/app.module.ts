@@ -13,9 +13,9 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import en from '@angular/common/locales/en';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideStorage,getStorage } from '@angular/fire/storage';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { NgChartsModule } from 'ng2-charts';
@@ -41,10 +41,10 @@ export function tokenGetter() {
     MaterialModule,
     DragDropModule,
     JwtModule.forRoot({
-      config:{
+      config: {
         tokenGetter: tokenGetter,
-        allowedDomains:["localhost:3001"],
-        disallowedRoutes:["localhost:3001/api/login"]
+        allowedDomains: ["localhost:3001"],
+        disallowedRoutes: ["localhost:3001/api/login"]
       }
     }),
     AngularFireModule.initializeApp(environment.firebase),
@@ -52,9 +52,9 @@ export function tokenGetter() {
   ],
   providers: [
     {
-      provide:HTTP_INTERCEPTORS,
-      useClass:TokenInterceptorService,
-      multi:true
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
     },
     { provide: NZ_I18N, useValue: en_US }
   ],

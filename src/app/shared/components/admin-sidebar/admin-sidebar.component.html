@@ -1,22 +1,22 @@
 <div class="container">
   <menu>
     <mat-accordion class="menu">
-         <mat-expansion-panel
-          class="menu-list"
-          routerLink="home"
-          routerLinkActive="active"
-          [disabled]="true"
-          [hideToggle]="true"
-        >
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <li>
-                <mat-icon class="mat-18">space_dashboard</mat-icon>
-                Inicio
-              </li>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-        </mat-expansion-panel>
+      <mat-expansion-panel
+        class="menu-list"
+        routerLink="home"
+        routerLinkActive="active"
+        [disabled]="true"
+        [hideToggle]="true"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <li>
+              <mat-icon class="mat-18">space_dashboard</mat-icon>
+              Inicio
+            </li>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
       <mat-expansion-panel
         *ngFor="let quadrant of arrayQuadrant"
         class="menu-list"
@@ -37,39 +37,38 @@
         </li>
       </mat-expansion-panel>
       <mat-expansion-panel
-      class="menu-list"
-      [hideToggle]="true"
-      routerLink="config"
-      routerLinkActive="active"
+        class="menu-list"
+        [hideToggle]="true"
+        routerLink="config"
+        routerLinkActive="active"
       >
-        <mat-expansion-panel-header >
+        <mat-expansion-panel-header>
           <mat-panel-title>
             <li>
               <mat-icon class="mat-18">person</mat-icon>
-            Perfil
-
+              Perfil
             </li>
           </mat-panel-title>
         </mat-expansion-panel-header>
       </mat-expansion-panel>
       <mat-expansion-panel
-      class="menu-list"
-      *ngIf="auth"
-      [hideToggle]="true"
-      routerLink="workspace"
-      routerLinkActive="active"
+        class="menu-list"
+        *ngIf="auth"
+        [hideToggle]="true"
+        routerLinkActive="active"
       >
-        <mat-expansion-panel-header class="long"
-
-        >
+        <mat-expansion-panel-header class="long">
           <mat-panel-title *ngIf="gad">
             <li>
-              <mat-icon  class="mat-18">workspaces</mat-icon>
-            {{gad.name}}
+              <mat-icon class="mat-18">workspaces</mat-icon>
+              {{ gad.name }}
             </li>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <li class="submenu" [routerLink]="['workspace','users']" >Usuarios</li>
+        <li class="submenu" [routerLink]="['workspace', 'users']">Usuarios</li>
+        <li class="submenu" [routerLink]="['workspace', 'wkconfig']">
+          Configuracion
+        </li>
       </mat-expansion-panel>
       <mat-expansion-panel
         class="menu-list"
