@@ -65,11 +65,9 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
   }
 
   saveEvidence() {
-    let x=1
     Swal.fire({
       title: 'Creando subindicador',
-      text:`evidencias subidas: ${x} / ${this.evidences.length}`,
-      didOpen: () => {
+      didRender: () => {
         Swal.showLoading()
       }
     })
@@ -96,11 +94,27 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
           .then(url => {
             newSubindicator.cover = url
             console.log('portada guardada en: ', url)
+            this.continueAddSubindicator(newSubindicator)
+          })
+          .catch(error=>{
+            console.log('Error al suubir la portada',error)
           })
       } else {
         newSubindicator.cover = this.portada[0].link as string
+        this.continueAddSubindicator(newSubindicator)
       }
+    }else{
+      this.continueAddSubindicator(newSubindicator)
     }
+
+  }
+  continueAddSubindicator(newSubindicator:Subindicator){
+    let x=0
+    Swal.update({
+      title:'Creando Subindicador',
+      text:`Evidencias subidas ${x} / ${this.evidences.length}`,
+      showConfirmButton:false,
+    })
     console.log(newSubindicator)
     console.log(this.evidences)
     this.subindicatorService.addSubindicator(newSubindicator).pipe(
@@ -120,11 +134,15 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
                   console.log(this.indicatorInstance.gadID)
                   const path = this.gadID.name + '/' + this.indicatorInstance.year + '/' + indicatorCatalog.quadrantName + '/' + indicatorCatalog.name + '/' + subindicator.name + evidence.link.name
                   return from(this.storageService.uploadFile2(environment.azureStorage.key,evidence.link,path,()=>{
-                    x+=1
-                    Swal.update({text:`evidencias subidas ${x} / ${this.evidences.length}`})
                   })).pipe(
                     concatMap((res) => {
+                      x+=1
+                      Swal.update({
+                        text:`evidencias subidas ${x} / ${this.evidences.length}`,
+                        showConfirmButton:false,
+                      })
                       evidence.link = res._response.request.url
+                      console.log(evidence)
                       return this.evidenceService.addEvidence(evidence)
                     })
                   )
@@ -143,7 +161,7 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
             ;
           }),
           catchError(error => {
-            console.error('Error al agregar el subindicador', error);
+            console.error('Error al agregar evidencia al subindicador', error);
             return EMPTY;
           })
         );

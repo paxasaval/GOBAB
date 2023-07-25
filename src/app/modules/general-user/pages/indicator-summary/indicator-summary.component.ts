@@ -57,7 +57,7 @@ export class IndicatorSummaryComponent implements OnInit {
     ).subscribe(data=>{
       if(data){
         this.specifics = data.docs
-        console.log(this.specifics)
+        //console.log(this.specifics)
       }
 
     })

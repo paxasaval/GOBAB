@@ -47,7 +47,7 @@ export class SpecificSubindicatorsTableComponent implements OnInit {
     ]).pipe(
       switchMap(([indicator,user])=>{
         const rol = user.rol as RolID
-        this.auth = (rol.name === environment.ROL_ADMIN || rol.name === environment.ROL_RESPONSIBLE);
+        this.auth = (rol.name === environment.ROL_ADMIN);
         if(indicator.id!==''){
           return this.subindicatorService.getSubindicatorSpecificByIndicator(indicator.id,0,10)
 

@@ -22,7 +22,7 @@ export class TitleService {
     return this.routeSubject.asObservable()
   }
   setTitle(title:string[]){
-    console.log(title)
+    //console.log(title)
     this.titleSubject.next(title)
   }
   addSubtitle(subtitle:string){
