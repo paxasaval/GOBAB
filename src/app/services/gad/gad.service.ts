@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { GadID } from 'src/app/models/gad';
+import { Report, ReportID } from 'src/app/models/report';
 
 @Injectable({
   providedIn: 'root'
@@ -38,4 +39,18 @@ export class GadService {
     return this.gadSubject.next(gad)
   }
 
+  addReport(report:Report){
+    return this.http.put(`${this.apiUrl}/newReport`,report)
+  }
+  getReports(){
+    return this.http.get<ReportID[]>(`${this.apiUrl}/reports`)
+  }
+
+  updateConfig(gad:GadID){
+    return this.http.put(`${this.apiUrl}/updateConfig`,gad)
+
+  }
+  getReportDefault(){
+    return this.http.get<ReportID>(`${this.apiUrl}/reportDefault `)
+  }
 }

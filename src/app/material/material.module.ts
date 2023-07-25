@@ -30,6 +30,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NgChartsModule } from 'ng2-charts';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 @NgModule({
   declarations: [],
   imports: [
@@ -64,7 +66,9 @@ import { NgChartsModule } from 'ng2-charts';
     NzCardModule,
     NzTabsModule,
     NzGridModule,
-    NgChartsModule
+    NgChartsModule,
+    NzSwitchModule,
+    NzRadioModule
   ],
   exports:[
     MatButtonModule,
@@ -97,7 +101,9 @@ import { NgChartsModule } from 'ng2-charts';
     NzCardModule,
     NzTabsModule,
     NzGridModule,
-    NgChartsModule
+    NgChartsModule,
+    NzSwitchModule,
+    NzRadioModule
 
   ]
 })
