@@ -14,6 +14,7 @@ import { IndicatorInstanceID } from 'src/app/models/indicatorInstance';
 import { IndicatorID } from 'src/app/models/indicator';
 import { GadID } from 'src/app/models/gad';
 import { SubindicatorID } from 'src/app/models/subindicators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-finish-evidence',
@@ -57,8 +58,10 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
   }
   saveEvidence() {
     let numberEvidences = this.evidences.length
+    let x=1
     const dialog = Swal.fire({
       title:'Subiendo evidencias',
+      text:`evidencias subidas: ${x} / ${this.evidences.length}`,
       didOpen:()=>{
         Swal.showLoading()
       }
@@ -69,10 +72,13 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
           const indicatorCatalog =  this.indicator.indicatorID as IndicatorID
           const gad = this.indicator.gadID as GadID
           const subindicator = evidence.subIndicatorID as SubindicatorID
-          const path = gad.name+'/'+this.indicator.year+'/'+indicatorCatalog.quadrantName+'/'+indicatorCatalog.name+'/'+subindicator.name
-          return from(this.storageService.uploadFile('test', evidence.link)).pipe(
-            concatMap((url) => {
-                evidence.link = url
+          const path = gad.name+'/'+this.indicator.year+'/'+indicatorCatalog.quadrantName+'/'+indicatorCatalog.name+'/'+subindicator.name + evidence.link.name
+          return from(this.storageService.uploadFile2(environment.azureStorage.key, evidence.link,path,()=>{
+            x+=1
+            Swal.update({text:`evidencias subidas ${x} / ${this.evidences.length}`})
+          })).pipe(
+            concatMap((res) => {
+              evidence.link = res._response.request.url
               return this.evidenceService.addEvidence(evidence)
             })
           )
