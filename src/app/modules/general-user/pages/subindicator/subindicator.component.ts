@@ -35,6 +35,7 @@ export class SubindicatorComponent implements OnInit {
   ) { }
 
   setPortada(){
+    console.log(this.portadaURL)
     this.documentService.setDocumentSelected(this.portadaURL)
   }
 
@@ -58,6 +59,7 @@ export class SubindicatorComponent implements OnInit {
         this.characteristicsList = this.typeID.characteristics as CharacteristicID[]
         this.evidenceList = subindicator.evidences as EvidenceID[]
         if(subindicator.requireCover){
+          console.log(subindicator.cover)
           this.portadaURL = subindicator.cover!
           this.documentService.setDocumentSelected(this.portadaURL)
         }

@@ -36,9 +36,9 @@ export class IndicatorComponent implements OnInit, AfterViewInit,OnDestroy {
         const quadrant = paramsParent['quadrantNumber'] as number
         return this.route.params.pipe(
           switchMap(params => {
-            console.log(params)
+            //console.log(params)
             const number = params['indicatorNumber'] as number
-            console.log(quadrant, number)
+            //console.log(quadrant, number)
             return this.indicatorService.getIndicatorByQuadrantAndNumber(quadrant, number).pipe(
               switchMap(indicator => {
                 return this.periodService.getPeriodSelected().pipe(
@@ -56,7 +56,7 @@ export class IndicatorComponent implements OnInit, AfterViewInit,OnDestroy {
         this.indicatorInstance = indicatorInstance
         this.indicatorInstanceService.setIndicatorInstance(indicatorInstance)
         if (this.indicatorInstance) {
-          console.log(indicatorInstance)
+          //  console.log(indicatorInstance)
           const indicatorCatalog = this.indicatorInstance.indicatorID as IndicatorID
           this.router.navigateByUrl(`user/quadrant/${indicatorCatalog.quadrant}/indicator/${indicatorCatalog.number}/${indicatorInstance.id}`)
         }
