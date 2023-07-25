@@ -14,6 +14,7 @@ import * as am5percent from "@amcharts/amcharts5/percent";
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { ExportPdfService } from 'src/app/services/export-pdf/export-pdf.service';
+import { Info } from 'src/app/models/report';
 
 interface ExtraData {
   data: number | string,
@@ -58,7 +59,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
   sourceReport = 'Test'
   codigoReport = 'Test001'
   summary: SummaryInfo[] = []
-  infoExtra: ExtraData[] = [
+  infoExtra: ExtraData[]|Info[] = [
     {
       data: 171.356,
       label: 'Poblacion proyectada (2022)'
@@ -203,10 +204,15 @@ export class HomeComponent implements OnInit,AfterViewInit {
     ])
     combineLatest([
       this.gadService.getGadSelected(),
-      this.periodService.getPeriodSelected()
+      this.periodService.getPeriodSelected(),
+      this.gadService.getReportDefault()
     ]).pipe(
-      concatMap(([gad, period]) => {
+      concatMap(([gad, period,report]) => {
         this.gad = gad
+        this.infoExtra = report.info
+        this.sourceReport = report.source
+        console.log(report)
+        console.log(report.info)
         //console.log(period)
         if (period.id !== '') {
           return combineLatest([
@@ -215,7 +221,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
             this.indicatorInstanceService.getIndicatorsByPeriodAndQuadrant(period.id, '1'),
             this.indicatorInstanceService.getIndicatorsByPeriodAndQuadrant(period.id, '2'),
             this.indicatorInstanceService.getIndicatorsByPeriodAndQuadrant(period.id, '3'),
-            this.indicatorInstanceService.getIndicatorsByPeriodAndQuadrant(period.id, '4')
+            this.indicatorInstanceService.getIndicatorsByPeriodAndQuadrant(period.id, '4'),
 
           ])
         } else {
