@@ -38,6 +38,7 @@ export class QuadrantSummaryComponent implements OnInit {
                 .pipe(
                   switchMap((res) => {
                     this.indicators = res;
+                    console.log(this.indicators)
                     return res;
                   })
                 );
@@ -47,6 +48,13 @@ export class QuadrantSummaryComponent implements OnInit {
             })
           );
         })
+      ).subscribe(
+        (res)=>{
+
+        },
+        error=>{
+          console.log('Error al traer los subindicadores',error)
+        }
       )
   }
 
