@@ -192,7 +192,6 @@ export class HomeComponent implements OnInit,AfterViewInit {
   }
   getWidhtColor(qualifyValue: number, data: SummaryInfo) {
     const total = data.qualify_0 + data.qualify_1 + data.qualify_2 + data.qualify_3
-    //console.log('total',total,'percernt:',(qualifyValue/total)*100)
     return (qualifyValue / total) * 100
   }
   ngOnInit(): void {
@@ -211,9 +210,6 @@ export class HomeComponent implements OnInit,AfterViewInit {
         this.gad = gad
         this.infoExtra = report.info
         this.sourceReport = report.source
-        console.log(report)
-        console.log(report.info)
-        //console.log(period)
         if (period.id !== '') {
           return combineLatest([
             this.indicatorInstanceService.getSummaryIndicators(period.id),
@@ -230,11 +226,9 @@ export class HomeComponent implements OnInit,AfterViewInit {
       })
     ).subscribe(
       ([res, res2, quadrant1, quadrant2, quadrant3, quadrant4]) => {
-        console.log(res)
         this.summary = res!
         if (res2 != null) {
           this.summarySubindicators = res2 as SummarySubindicators
-          //console.log(this.summarySubindicators)
           this.totalSubindicators = this.summarySubindicators.qualify_0 + this.summarySubindicators.qualify_1 + this.summarySubindicators.qualify_2 + this.summarySubindicators.qualify_3
           this.totalSubindicatorsEvaluated = this.summarySubindicators.qualify_1 + this.summarySubindicators.qualify_2 + this.summarySubindicators.qualify_3
           this.percentRegister = (this.totalSubindicatorsEvaluated / this.totalSubindicators) * 100
@@ -242,7 +236,6 @@ export class HomeComponent implements OnInit,AfterViewInit {
           this.sub_q2 = []
           this.sub_q3 = []
           this.sub_q4 = []
-          console.log(quadrant1)
           quadrant1?.forEach(ind => {
             this.sub_q1 = this.sub_q1.concat(ind.subindicators as SubindicatorID[])
           })
@@ -360,7 +353,6 @@ export class HomeComponent implements OnInit,AfterViewInit {
     this.charts.forEach(chart => {
       chart?.update();
     })
-    console.log(this.pieChartData)
     this.flag=true
   }
   ngAfterViewInit(): void {

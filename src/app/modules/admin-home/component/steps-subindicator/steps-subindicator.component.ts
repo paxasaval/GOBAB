@@ -13,7 +13,6 @@ export class StepsSubindicatorComponent implements OnInit {
   constructor() { }
   changeStep(event:number){
     this.step=event
-    console.log(event)
     this.stepEvent.emit(event)
   }
   ngOnInit(): void {

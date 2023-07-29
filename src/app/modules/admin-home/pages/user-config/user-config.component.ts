@@ -20,12 +20,7 @@ export class UserConfigComponent implements OnInit {
   ) { }
 
   matcherPassword(event:any){
-    console.log(this.passwordOld)
-    this.userService.mathPassword(this.mail,this.passwordOld).subscribe(
-      res=>{
-        console.log(res)
-      }
-    )
+    this.userService.mathPassword(this.mail,this.passwordOld)
   }
 
   ngOnInit(): void {

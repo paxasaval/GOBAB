@@ -36,7 +36,6 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
   ) { }
 
   groupCharacteristics(typeID: TypeID, evidences: Evidence[]): CharacteristicWithEvidence[] {
-    console.log(evidences)
     const characteristics = typeID.characteristics as CharacteristicID[]
     return characteristics.map((characteristic) => {
       const evidenceArray = evidences.filter(evidence => {
@@ -48,7 +47,7 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
     })
   }
   ngOnChanges(changes: SimpleChanges): void {
-    //console.log(changes)
+   
     if (this.typeID) {
       this.groupData = this.groupCharacteristics(this.typeID, this.evidences)
     }
@@ -97,9 +96,9 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
         const newUrl = segments.join('/');
         this.router.navigateByUrl(newUrl);
       }
-      console.log(`evidencar upload (${count}/${numberEvidences})`)
+      
     }, error => {
-      console.log(error)
+      
     })
   }
   ngOnInit(): void {

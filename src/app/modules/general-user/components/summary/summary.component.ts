@@ -49,7 +49,6 @@ export class SummaryComponent implements OnInit, OnChanges {
           const indicator:IndicatorInstanceID = i
           const j = i as any
           indicator.id = j._id
-          console.log(indicator)
           return this.subindicatorService.getAllSubindicatorsByIndicator(indicator.id )
         })
       ).pipe(

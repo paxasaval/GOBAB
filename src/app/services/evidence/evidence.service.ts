@@ -48,7 +48,6 @@ export class EvidenceService {
   }
 
   getEvidencesBySubindicatorID(subindicatorID:string){
-    //console.log(subindicatorID)
     return this.http.get<EvidenceID[]>(`${this.apiUrl}/subindicatorID/${subindicatorID}`)
   }
   deleteEvidence(id:string){

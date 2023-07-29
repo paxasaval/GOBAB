@@ -87,7 +87,6 @@ export class AddSubindicatorComponent implements OnInit {
       this.responsibleSelected=dataRecive.data.responsible
       this.isPlanned=dataRecive.data.isPlanned!
       this.isDiagnosed=dataRecive.data.isDiagnosed!
-      console.log(this.isPlanned,this.isDiagnosed)
       if(dataRecive.data.portada){
         this.portadaArray=dataRecive.data.portada
       }
@@ -99,7 +98,6 @@ export class AddSubindicatorComponent implements OnInit {
       this.arrayEvidence=data.data.evidences
     }else{
       this.step=0
-      console.log('volver')
     }
   }
 
@@ -121,11 +119,10 @@ export class AddSubindicatorComponent implements OnInit {
       responsible: this.responsible,
       typeID: this.type.id,
     }
-    console.log(newSubindicator)
-    console.log(this.arrayEvidence)
+    
     this.subindicatorService.addSubindicator(newSubindicator).pipe(
       mergeMap(subindicator => {
-        console.log('subindicador subido con exito!')
+       
         return of(subindicator).pipe(
           mergeMap(subindicator => {
             this.arrayEvidence = this.arrayEvidence.map(evidence => {
@@ -150,9 +147,6 @@ export class AddSubindicatorComponent implements OnInit {
         );
       })
     ).subscribe(
-      () => {
-        console.log('evidencias agregados al subindicador con éxito');
-      },
       error => {
         console.error('Error al agregar el subindicador y evidencias', error);
       }

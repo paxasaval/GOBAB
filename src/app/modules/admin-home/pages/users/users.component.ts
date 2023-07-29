@@ -36,7 +36,6 @@ export class UsersComponent implements OnInit {
     )
   }
   afterClosed(){
-    console.log('modal cerrado')
     if(this.subscription){
       this.subscription.unsubscribe()
     }
@@ -49,10 +48,7 @@ export class UsersComponent implements OnInit {
     )
   }
   deleteUser(user:UserIDwithRolID){
-    console.log(user)
-    this.userService.deleteUser(user.id).subscribe(res=>{
-      console.log(res)
-    })
+    this.userService.deleteUser(user.id)
     this.afterClosed()
   }
   editUser(user:UserIDwithRolID){
@@ -65,7 +61,6 @@ export class UsersComponent implements OnInit {
     })
     modal.afterClose.subscribe(
       result=>{
-        console.log(result)
         this.afterClosed()
       }
     )

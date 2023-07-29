@@ -44,7 +44,6 @@ export class LayoutIndicatorComponent implements OnInit {
         this.indicatorInstance = indicatorInstance
         this.indicatorInstanceService.setIndicatorInstance(indicatorInstance)
         if (this.indicatorInstance) {
-          console.log(indicatorInstance)
           const indicatorCatalog = this.indicatorInstance.indicatorID as IndicatorID
           this.router.navigateByUrl(`admin/quadrant/${indicatorCatalog.quadrant}/indicator/${indicatorCatalog.number}/${indicatorInstance.id}`)
         }

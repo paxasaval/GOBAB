@@ -87,7 +87,6 @@ export class AddSubindicatorDataComponent implements OnInit,OnChanges {
     if(this.typeState){
       this.nameControl.setValue(this.nameState)
       this.typeControl.controls['type'].setValue(this.typeState)
-      console.log(this.type)
       this.responsibleControl.setValue(this.responsibleState)
       this.portadaArray=this.portadaState
     }

@@ -49,11 +49,11 @@ export class WkconfigComponent implements OnInit {
   ) { }
 
   getEvidence(evidence: Evidence[]) {
-    console.log(evidence)
+  
     this.files = evidence.map(e => {
       return e.link
     })
-    console.log(this.files)
+    
   }
   changeReport(event:Report){
     this.flag=false
@@ -78,7 +78,7 @@ export class WkconfigComponent implements OnInit {
   }
   saveReport(){
     const source = this.formReport.controls['source'].value
-    console.log(source)
+    
     let report:Report = {
       info:[],
       period: new Date().getFullYear().toString(),
@@ -91,7 +91,6 @@ export class WkconfigComponent implements OnInit {
       report.info.push({data,label})
     }
     this.gadService.addReport(report).subscribe(res=>{
-      console.log(res)
       this.subscribeListReport.unsubscribe()
       this.listReport()
       Swal.fire({

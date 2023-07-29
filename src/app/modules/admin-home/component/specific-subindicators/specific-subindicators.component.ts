@@ -33,9 +33,9 @@ export class SpecificSubindicatorsTableComponent implements OnInit {
   }
 
   deleteSubindicator(id:string){
-    console.log(id)
+    
     this.subindicatorService.deleteSubindicator(id).subscribe(res=>{
-      console.log(res)
+      
     })
   }
 
@@ -59,7 +59,7 @@ export class SpecificSubindicatorsTableComponent implements OnInit {
       subindicators=>{
         if(subindicators){
           this.specificSubindicators=subindicators.docs as SubndicatorWithTypeID[]
-          console.log(this.specificSubindicators)
+         
         }
 
       }

@@ -65,7 +65,7 @@ export class SemaphoreComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   generateHTML(dataContext: DataSlide) {
-    //console.log(dataContext)
+    
     let html = ''
     if (dataContext) {
       dataContext.indicatorID = dataContext.indicatorID as IndicatorID
@@ -80,7 +80,7 @@ export class SemaphoreComponent implements OnInit, AfterViewInit, OnChanges {
 
   renderChart() {
     //this.root.container.children.dispose()
-    console.log(this.data)
+   
     this.root.dispose()
     this.root = am5.Root.new("chartdiv");
     this.root.container.children.clear()

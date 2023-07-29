@@ -14,7 +14,6 @@ export class StepsEvidenceComponent implements OnInit,OnChanges {
 
   changeStep(event:number){
     this.step=event
-    console.log(event)
     this.stepEvent.emit(event)
   }
 

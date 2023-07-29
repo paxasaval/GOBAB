@@ -48,7 +48,6 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
   ) { }
 
   groupCharacteristics(typeID: TypeID, evidences: Evidence[]): CharacteristicWithEvidence[] {
-    console.log(evidences)
     const characteristics = typeID.characteristics as CharacteristicID[]
     return characteristics.map((characteristic) => {
       const evidenceArray = evidences.filter(evidence => {
@@ -93,11 +92,9 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
         this.storageService.uploadFile('test', this.portada[0].link)
           .then(url => {
             newSubindicator.cover = url
-            console.log('portada guardada en: ', url)
             this.continueAddSubindicator(newSubindicator)
           })
           .catch(error=>{
-            console.log('Error al suubir la portada',error)
           })
       } else {
         newSubindicator.cover = this.portada[0].link as string
@@ -115,11 +112,9 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
       text:`Evidencias subidas ${x} / ${this.evidences.length}`,
       showConfirmButton:false,
     })
-    console.log(newSubindicator)
-    console.log(this.evidences)
     this.subindicatorService.addSubindicator(newSubindicator).pipe(
       mergeMap(subindicator => {
-        console.log('subindicador subido con éxito!')
+      
         return of(subindicator).pipe(
           mergeMap(subindicator => {
             if(this.evidences.length>0){
@@ -131,7 +126,7 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
               concatMap(evidence => {
                 if (evidence.link instanceof File) {
                   const indicatorCatalog = this.indicatorInstance.indicatorID as IndicatorID
-                  console.log(this.indicatorInstance.gadID)
+                  
                   const path = this.gadID.name + '/' + this.indicatorInstance.year + '/' + indicatorCatalog.quadrantName + '/' + indicatorCatalog.name + '/' + subindicator.name + evidence.link.name
                   return from(this.storageService.uploadFile2(environment.azureStorage.key,evidence.link,path,()=>{
                   })).pipe(
@@ -142,7 +137,7 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
                         showConfirmButton:false,
                       })
                       evidence.link = res._response.request.url
-                      console.log(evidence)
+                     
                       return this.evidenceService.addEvidence(evidence)
                     })
                   )
@@ -168,7 +163,6 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
       })
     ).subscribe(
       () => {
-        console.log('Todas las evidencias agregados al subindicador con éxito');
         Swal.close()
         const currentURL = this.router.url
         const segments = currentURL.split('/');
@@ -195,7 +189,6 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.indicatorInstanceSevice.getIndicatorInstance().subscribe(
       indicator => {
-        console.log(indicator)
         this.indicatorInstance = indicator
         this.indicatorCatalog = indicator.indicatorID as IndicatorID
         this.gadID = indicator.gadID as GadID

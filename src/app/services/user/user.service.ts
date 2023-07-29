@@ -53,7 +53,6 @@ export class UserService {
 
   }
   deleteUser(id:string){
-    console.log(id)
     return this.http.delete(`${this.apiUrl}/${id}`)
   }
 }

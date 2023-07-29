@@ -44,7 +44,6 @@ export class AddSubindicatorEvidencesComponent implements OnInit,AfterViewInit,O
         this.group3.push(characteristic)
       }
     })
-    console.log(this.group1)
   }
   addEvidence(event: Evidence[]) {
     event.map(evidence => {
@@ -58,7 +57,6 @@ export class AddSubindicatorEvidencesComponent implements OnInit,AfterViewInit,O
         this.arrayEvidence[found] = evidence
       }
     })
-    console.log(this.arrayEvidence)
   }
   scroll(name: string, groupName: string) {
     const elementID = name + groupName

@@ -37,7 +37,6 @@ export class DialogNewUserComponent implements OnInit,OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if(this.user){
-      console.log(this.user)
       this.formUser.get('name')?.setValue(this.user.name)
       this.formUser.get('mail')?.setValue(this.user.mail)
       this.formUser.get('rol')?.setValue(this.user.rol.id)
@@ -66,13 +65,13 @@ export class DialogNewUserComponent implements OnInit,OnChanges {
     })
     this.userService.newUser(this.name,this.mail,this.rol,this.password).subscribe(
       res=>{
-        console.log(res)
+        
         Swal.close()
         this.modal.destroy()
       },
       error=>{
         Swal.close()
-        console.log(error)
+      
         Swal.fire({
           title:error.error.error,
           icon:'error',
@@ -91,13 +90,13 @@ export class DialogNewUserComponent implements OnInit,OnChanges {
     })
     this.userService.editUser(this.user.id,this.name,this.mail,this.rol,this.password).subscribe(
       res=>{
-        console.log(res)
+        
         Swal.close()
         this.modal.destroy()
       },
       error=>{
         Swal.close()
-        console.log(error)
+       
         Swal.fire({
           title:error.error.error,
           icon:'error',

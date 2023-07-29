@@ -33,12 +33,10 @@ export class DialogCheckEvidenceComponent implements OnInit,OnChanges {
   ) { }
 
   handleOk(): void {
-    console.log('Button ok clicked!');
     this.isVisible = false;
   }
 
   handleCancel(): void {
-    console.log('Button cancel clicked!');
     this.isVisible = false;
   }
 
@@ -53,7 +51,6 @@ export class DialogCheckEvidenceComponent implements OnInit,OnChanges {
     })
     this.evidenceService.qualifyEvidence(this.evidence.id,qualify,commit).subscribe(
       evidence=>{
-        console.log(evidence)
         Swal.close()
       }
     )

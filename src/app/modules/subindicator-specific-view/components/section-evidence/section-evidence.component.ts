@@ -29,7 +29,6 @@ export class SectionEvidenceComponent implements OnInit,AfterViewInit,OnChanges 
       const containerWidth = divElement.nativeElement.clientWidth;
       const contentWidth = divElement.nativeElement.scrollWidth;
       const fontSize = Math.min(100, containerWidth / (contentWidth / 12));
-      console.log(containerWidth,contentWidth)
         this.renderer.setStyle(divElement.nativeElement, 'font-size', `${fontSize}px`);
       this.renderer.setStyle(divElement.nativeElement, 'height', 'auto');
     })
@@ -44,7 +43,6 @@ export class SectionEvidenceComponent implements OnInit,AfterViewInit,OnChanges 
   }
 
   setEvidence(evidence:EvidenceID){
-    console.log(evidence)
     this.documentService.setDocumentSelected(evidence.link as string)
     this.evidenceService.setEvidenceSelected(evidence)
   }

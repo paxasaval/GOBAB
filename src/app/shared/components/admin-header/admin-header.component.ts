@@ -46,7 +46,7 @@ export class AdminHeaderComponent implements OnInit,AfterViewInit {
           this.userIsLogged = true
           this.userService.getUserSesion().subscribe(
             user => {
-              //console.log(user)
+              
               if (user.name !== '') {
                 this.user=user
                 this.mail = user.mail
@@ -60,7 +60,6 @@ export class AdminHeaderComponent implements OnInit,AfterViewInit {
     )
     this.periodservice.getAllPeriod().subscribe(
       periods=>{
-        console.log(periods)
         this.periods=periods
         this.periodservice.setPeriodSelected(periods[0])
         this.periodControl.setValue(periods[0])

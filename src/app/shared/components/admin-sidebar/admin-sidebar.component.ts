@@ -66,7 +66,6 @@ export class AdminSidebarComponent implements OnInit {
       this.quadrant3,
       this.quadrant4
     ]
-    //  console.log(this.arrayQuadrant)
   }
   ngOnInit(): void {
     const token = localStorage.getItem('token')
@@ -84,7 +83,6 @@ export class AdminSidebarComponent implements OnInit {
           this.rol = this.user?.rol as RolID
           if(this.rol.name===environment.ROL_ADMIN){
             this.auth=true
-            console.log('Bienvenido admin')
 
           }
         }else if(idUser){

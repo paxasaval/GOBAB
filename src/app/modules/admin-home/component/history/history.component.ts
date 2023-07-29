@@ -72,7 +72,7 @@ export class HistoryComponent implements OnInit, OnChanges {
         const characteristicID = evidence.characteristicID
         return characteristicID == characteristic.id
       })
-      //console.log(evidences)
+   
       return { characteristic: characteristic, evidences: evidenceArray }
     })
   }
@@ -93,7 +93,7 @@ export class HistoryComponent implements OnInit, OnChanges {
     )
     modal.afterClose.subscribe(
       result => {
-        console.log(result)
+        
         this.afterClosed()
       }
     )
@@ -118,7 +118,7 @@ export class HistoryComponent implements OnInit, OnChanges {
       this.subindicatorBD.unsubscribe()
       this.subindicatorBD = this.subindicatorService.getSubindicatorByID(this.id).subscribe(
         subindicatorBD => {
-          console.log(subindicatorBD)
+          
           this.groupEvidence = this.groupCharacteristics(this.typeID, subindicatorBD.evidences as EvidenceID[])
         }
       )
@@ -145,11 +145,11 @@ export class HistoryComponent implements OnInit, OnChanges {
   deleteEvidence(evidence:EvidenceID){
     this.evidenceService.deleteEvidence(evidence.id).subscribe(
       res=>{
-        console.log(res)
+       
         this.afterClosed()
       },
       error=>{
-        console.log(error)
+        
       }
     )
   }
@@ -163,7 +163,7 @@ export class HistoryComponent implements OnInit, OnChanges {
       switchMap(([type, subindicator, user]) => {
         this.typeID = type
         this.id = subindicator.id
-        //console.log(subindicator)
+        
         this.user = user
         this.authAdmin()
         if(subindicator.id!=''){
@@ -175,7 +175,7 @@ export class HistoryComponent implements OnInit, OnChanges {
       })
     )
     .subscribe((evidences) => {
-      //console.log(evidences)
+      
       this.groupEvidence = this.groupCharacteristics(this.typeID, evidences)
     })
   }

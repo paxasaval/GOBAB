@@ -59,7 +59,6 @@ export class QuadrantComponent implements OnInit {
     this.route.params.pipe(
       switchMap(params => {
         this.id = params.id //quadrantNumber
-        //console.log(this.id)
         this.indicators = []
         return this.periodService.getPeriodSelected().pipe(
           switchMap(period => {

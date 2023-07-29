@@ -46,12 +46,10 @@ export class IndicatorGeneralComponent implements OnInit,OnDestroy {
   findSubindicator(type: TypeID, subindicators: SubindicatorID[],indicatorCatalog:IndicatorID) {
 
     const subidicator = subindicators.find(subindicator => subindicator.typeID == type.id)
-    //console.log(subidicator)
     if(subidicator){
     this.subIndicatorService.getSubindicatorByID(subidicator?.id!).subscribe(
       subindicator=>{
         this.subIndicator=subindicator
-        console.log(this.subIndicator)
         this.subIndicatorService.setSelectedSubindicator(subindicator)
         this.characteristics = type.characteristics as CharacteristicID[]
         //this.titleService.setTitle([indicatorCatalog.quadrantName,indicatorCatalog.name,this.subIndicator.name])

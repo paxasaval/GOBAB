@@ -43,7 +43,7 @@ export class UserInfoBarComponent implements OnInit, AfterViewInit {
           this.userIsLogged = true
           this.userService.getUserSesion().subscribe(
             user => {
-              //console.log(user)
+              
               if (user.name !== '') {
                 this.mail = user.mail
                 const rol = user.rol as RolID

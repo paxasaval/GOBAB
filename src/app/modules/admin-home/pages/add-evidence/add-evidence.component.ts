@@ -52,11 +52,10 @@ export class AddEvidenceComponent implements OnInit {
       concatMap(evidence=>{
         return this.evidenceService.addEvidence(evidence)
         })
-      ).subscribe(saveEvidence=>{
-        console.log(saveEvidence)
-      },error=>{
-        console.log(error)
-      })
+      ).subscribe(error => {
+        console.error('Error al agregar evidencias', error);
+      }
+    );
   }
 
 }

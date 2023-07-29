@@ -28,7 +28,6 @@ export class SideBarComponent implements OnInit, OnChanges {
       const array = this.subindicators as SubindicatorID[]
       const dataRoute = array.find((subindicator: SubindicatorID) => subindicator.typeID === type.id)
       const newRoute: SubindcatorInstance = { subindicator: dataRoute, route: type.name.replace(' ', '-') }
-      //console.log(newRoute.route)
       this.routes.push(newRoute)
     })
 

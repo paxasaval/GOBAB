@@ -41,7 +41,7 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.instanceIndicatorService.getIndicatorInstance().subscribe(res=>console.log(res))
+    this.instanceIndicatorService.getIndicatorInstance().subscribe()
     this.fetchTypeMandatory()
     this.route.params.pipe(
       mergeMap((params:Params)=>{
@@ -49,7 +49,6 @@ export class LayoutComponent implements OnInit {
         return this.instanceIndicatorService.getIndicatorByID(this.id).pipe(
           mergeMap(indicator=>{
             this.instanceIndicatorService.setIndicatorInstance(indicator)
-            //console.log(this.instanceIndicatorService.IndicatorSelected.getValue())
             return of(indicator)
           })
         )
