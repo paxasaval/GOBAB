@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/2d186935-f1aa-4a7c-b4bc-66722ccd32e5/resourceGroups/ISO18091/providers/Microsoft.Web/sites/TransformacionDigitalGobiernosAbiertos",
+    "appService.deploySubpath": "dist\\baldurwatch"
+}

@@ -20,7 +20,8 @@ export class AuthService {
   ) { }
 
   login(mail: string, password: string) {
-    return this.http.post<any>(`${this.apiUrl}/login`, { mail: mail, password: password })
+    console.log(mail,password)
+    return this.http.post<any>(`${this.apiUrl}/login/`, { mail: mail, password: password })
   }
 
   async loggedIn() {
@@ -43,7 +44,7 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     localStorage.removeItem('rol');
-    this.router.navigate(['./'])
+    window.location.reload()
   }
 
 }

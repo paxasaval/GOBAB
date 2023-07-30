@@ -38,9 +38,17 @@ export class LoginFormComponent implements OnInit {
   }
 
   login(){
+    Swal.fire({
+      title:'Iniciando Sesión',
+      didRender:()=>{
+        Swal.showLoading()
+      },
+      showConfirmButton:false
+    })
     const {mail,password} =  this.loginForm.value
     this.authService.login(mail,password).pipe(
       switchMap(userToken=>{
+        console.log(userToken)
         const id = userToken.id as string
         localStorage.setItem('token',userToken.token)
         localStorage.setItem('user',userToken.id)
@@ -52,18 +60,19 @@ export class LoginFormComponent implements OnInit {
       const rol = user.rol as RolID
       if(rol.name===this.ADMIN_ROL || rol.name===this.RESPONSABLE_ROL){
         this.router.navigate(['/admin'])
+        Swal.close()
       }
       if(rol.name===this.USER_ROL){
         this.router.navigate(['/user'])
+        Swal.close()
       }
     },
     error=>{
       const msg = error.error.error
-      Swal.fire({
-        title:msg,
-        timer:2000,
+      Swal.update({
+        title:`Error al iniciar sesion: ${msg}`,
         icon:'error',
-        showConfirmButton:false
+        showConfirmButton:true,
       })
     }
     )
