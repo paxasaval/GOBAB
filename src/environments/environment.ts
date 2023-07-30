@@ -22,8 +22,6 @@ export const environment = {
     key:'sp=racwdli&st=2023-07-23T18:14:24Z&se=2024-07-24T02:14:24Z&spr=https&sv=2022-11-02&sr=c&sig=tBFJe4XlbgPukKS2XkBVjj2bmvWtQBKX1tU74v3DIHI%3D'
   }
 
-  //API_URL:'https://iso-18091-backend-production.up.railway.app'
-  //API_URL:'https://iso-18091-backend-test-production.up.railway.app'
 };
 
 /*
