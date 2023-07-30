@@ -50,14 +50,6 @@ const routes:Routes = [
         path:'indicator/:id'
       }
     ]
-  },
-  {
-    path:'quadrant/:id/indicator/:id',
-    loadChildren:()=>import('../indicator-user/indicator-user.module').then(m=>m.IndicatorUserModule)
-  },
-  {
-    path:'subindicator-view',
-    loadChildren:()=>import('../subindicator-specific-view/subindicator-specific-view.module').then(m=>m.SubindicatorSpecificViewModule)
   }
 ]
 

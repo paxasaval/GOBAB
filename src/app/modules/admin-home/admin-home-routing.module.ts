@@ -9,7 +9,6 @@ import { SpecificSubindicatorsComponent } from './pages/specific-subindicators/s
 import { AddSubindicatorComponent } from './pages/add-subindicator/add-subindicator.component';
 import { SubindicatorGeneralComponent } from './component/subindicator-general/subindicator-general.component';
 import { AddEvidenceComponent } from './pages/add-evidence/add-evidence.component';
-import { SearchSpecificSubindicatorComponent } from 'src/app/shared/components/search-specific-subindicator/search-specific-subindicator.component';
 import { ReviewSubindicatorSpecifidcComponent } from './pages/review-subindicator-specifidc/review-subindicator-specifidc.component';
 import { LayoutIndicatorComponent } from './pages/layout-indicator/layout-indicator.component';
 import { UsersComponent } from './pages/users/users.component';
