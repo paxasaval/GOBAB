@@ -79,3 +79,16 @@
   flex-direction: column;
   background-color: #fff;
 }
+.column{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userName{
+  font-weight: 600;
+}
+.userRol{
+  font-weight: 400;
+  font-style: italic;
+  font-size: 0.75em;
+}

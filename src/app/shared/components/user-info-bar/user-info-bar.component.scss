@@ -53,18 +53,18 @@
   height: 50%;
   display: flex;
   align-items: flex-start;
-  color: var(--white);
+  color: var(--black);
 }
 .rol{
   font-style: italic;
   text-decoration: underline;
   font-size: 0.75em;
   align-items: flex-end;
-  font-weight: 100;
+  font-weight: 400;
 }
 
 button{
-  background-color: var(--color1);
+  background-color: var(--orange);
   color: var(--white);
   height: 4vh;
   width: 6vw;

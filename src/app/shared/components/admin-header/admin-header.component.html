@@ -23,19 +23,22 @@
     </nz-select>
   </div>
   <div class="user">
-    <div class="icon rol">
-      {{rol}}
+    <div class="column">
+      <div class="userName">
+        {{user.name}}
+      </div>
+      <div class="userRol">
+        {{rol}}
+      </div>
+
     </div>
+
     <div class="icon userImg">
       <img [src]="imageDefault" alt="">
     </div>
     <div class="icon config">
       <mat-icon nz-dropdown class="mat-18" [nzDropdownMenu]="userMenu" >settings</mat-icon>
       <nz-dropdown-menu #userMenu>
-        <div *ngIf="user" class="userInfo">
-          <span>{{user.name}}</span>
-          <span>{{rol}}</span>
-        </div>
         <ul nz-menu nzSelectable>
           <li nz-menu-item nzDanger (click)="logOut()">Salir <mat-icon class="logout">logout</mat-icon></li>
         </ul>

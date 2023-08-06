@@ -11,8 +11,10 @@ h3{
 .container{
   display: flex;
   flex-direction: column;
+  gap: 1em;
   overflow-y: scroll;
-  height: 85vh;
+  min-height: 85vh;
+  padding-left: 1em;
 }
 /* ===== Scrollbar CSS ===== */
   /* Firefox */
