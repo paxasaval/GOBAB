@@ -30,6 +30,11 @@ $my-theme: mat.define-light-theme((
   --red:#E00613;
   --grey: #D9D9D9;
   --orange:#F98D0E;
+  --card1:#FFB6C1 ;
+  --card2:#87CEEB;
+  --card3: #ccfdcc;
+  --card4:#FFFACD;
+  --border:#e3e3e3;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: "Montserrat", sans-serif; }

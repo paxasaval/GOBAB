@@ -177,7 +177,8 @@
                     }}
                   </span>
                   <span class="data">
-                    <div
+                    <span class="circle-container">
+                      <div
                       class="circle circle3"
                       [ngStyle]="{
                         'background-color': getQualifyColor(
@@ -185,6 +186,8 @@
                         )
                       }"
                     ></div>
+                    </span>
+
                     <div class="legend">
                       {{
                         indicator.qualification == 0

@@ -20,6 +20,7 @@
   padding: 1.5em;
   background-color: var(--color2);
   border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 .card-title {
   width: 100%;
@@ -27,7 +28,7 @@
   text-align: center;
   height: 5vh;
   font-size: 1.2em;
-  font-weight: 800;
+  font-weight: 600;
   padding-bottom: 0.5em;
 }
 .card-info {
@@ -48,21 +49,24 @@
   text-decoration: underline;
 }
 .bg1 {
-  background-color: var(--color1-bg);
+  width: 20vw;
+  background-color: var(--card1);
   color: var(--black);
 }
 .bg2 {
-  background-color: var(--color4-bg);
-  color: var(--white);
+  width: 20vw;
+  background-color: var(--card2);
+  color: var(--black);
 }
 .bg3 {
-  background-color: var(--color1-bg);
+  width: 20vw;
+  background-color: var(--card3);
   color: var(--black);
 }
 .bg4 {
   width: 20vw;
-  background-color: var(--color4-bg);
-  color: var(--white);
+  background-color: var(--card4);
+  color: var(--black);
 }
 .container-specific{
   display: flex;
@@ -83,7 +87,9 @@
   width: 100%;
   .name{
     width: 80%;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   }
+
 }
 .info-data{
   font-size: 1.2em;

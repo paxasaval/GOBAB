@@ -1,39 +1,66 @@
-<h1>Configuracion</h1>
-<div class="config-list">
-  <label for="">Publicar el estado de los indicadore y subindicadores</label>
-  <nz-switch [(ngModel)]="publishAuto" (ngModelChange)="changeSwitch($event)" [nzCheckedChildren]="'Automatico'" [nzUnCheckedChildren]="'Manual'" >asdas</nz-switch>
-</div>
-<div class="report">
-  <h2>Informacion adicional</h2>
-  <div class="lit-report">
-    <span>Marque el reporte para mostrar por defecto</span>
-    <nz-radio-group *ngFor="let report of allReports" (ngModelChange)="changeReport($event)" [(ngModel)]="reportSelect" class="report">
-      <label nz-radio [nzValue]="report">{{report.source}}</label>
-    </nz-radio-group>
+<div class="container">
+  <h1>Configuracion</h1>
+  <div class="config-list">
+    <label for="">Publicar el estado de los indicadore y subindicadores</label>
+    <nz-switch
+      [(ngModel)]="publishAuto"
+      (ngModelChange)="changeSwitch($event)"
+      [nzCheckedChildren]="'Automatico'"
+      [nzUnCheckedChildren]="'Manual'"
+      >asdas</nz-switch
+    >
   </div>
-  <button mat-raised-button (click)="addReport()">Nuevo reporte</button>
-  <div *ngIf="newReport" class="new-report">
-    <form action="" [formGroup]="formReport">
-      <mat-form-field class="form" appearance="outline">
-        <mat-label>Fuente:</mat-label>
-        <input matInput type="text" formControlName="source">
-      </mat-form-field>
-      <div class="list-info">
-        <div class="line" *ngFor="let form of data">
-          <mat-form-field class="form" appearance="outline">
-            <mat-label>Etiqueta</mat-label>
-            <input matInput type="text" [formControl]="form">
-          </mat-form-field>
-          <mat-form-field class="form" appearance="outline">
-            <mat-label>Dato</mat-label>
-            <input matInput type="text" [formControl]="labels[data.indexOf(form)]">
-          </mat-form-field>
-        </div>
-      <button mat-raised-button (click)="addInfo()">Agregar Campo</button>
+  <div class="report-contaier">
+    <h2>Informacion adicional</h2>
+    <div class="content">
+      <span>Marque el reporte para mostrar por defecto</span>
+      <div class="list-report">
+        <nz-radio-group
+          *ngFor="let report of allReports"
+          (ngModelChange)="changeReport($event)"
+          [(ngModel)]="reportSelect"
+          class="report"
+        >
+          <label nz-radio [nzValue]="report">{{ report.source }}</label>
+        </nz-radio-group>
       </div>
-    </form>
-    <button mat-raised-button (click)="saveReport()">Subir Reporte</button>
-
+    </div>
+    <button class="btn-add" mat-raised-button (click)="addReport()">
+      Nuevo reporte
+    </button>
+    <div *ngIf="newReport" class="new-report">
+      <form class="form-report" [formGroup]="formReport">
+        <span>Titulo o Fuente:</span>
+        <mat-form-field class="form" appearance="outline">
+          <mat-label>Titulo o Fuente:</mat-label>
+          <input matInput type="text" formControlName="source" />
+        </mat-form-field>
+        <div class="list-info">
+          <div class="line" *ngFor="let form of data">
+            <div class="column">
+              <span>Etiqueta</span>
+              <mat-form-field class="form" appearance="outline">
+                <mat-label>Etiqueta</mat-label>
+                <input matInput type="text" [formControl]="form" />
+              </mat-form-field>
+            </div>
+            <div class="column">
+              <span>Dato</span>
+              <mat-form-field class="form" appearance="outline">
+                <mat-label>Dato</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  [formControl]="labels[data.indexOf(form)]"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <button class="btn-info" mat-raised-button (click)="addInfo()">Agregar Campo</button>
+        </div>
+      </form>
+      <button mat-raised-button class="btn-saveReport" (click)="saveReport()">Subir Reporte</button>
+    </div>
   </div>
+  <button mat-raised-button class="btn-save" (click)="save()" [disabled]="flag">Guardar</button>
 </div>
-<button mat-raised-button (click)="save()" [disabled]="flag">Guardar</button>
