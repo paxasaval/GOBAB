@@ -7,5 +7,6 @@ export interface Type{
   green:string,
   mandatory:boolean,
   characteristics:string[] | CharacteristicID[]
+  extraInfo?: any
 }
 export interface TypeID extends Type{id:string}

@@ -1,30 +1,48 @@
 <div class="info" *ngIf="evidenceID">
   <div class="line">
-    Autor:{{evidenceID.name}}
+    Evidencia: {{evidenceID.name}}
+    <a [href]="evidenceID.link" target="_blank" >Ver archivo
+      <mat-icon class="newTab">open_in_new</mat-icon>
+    </a>
   </div>
   <div class="line">
-    Estado:{{evidenceID.verified?'Aprobado':'No Aprobado'}}
-  </div>
-  <div class="line">
-    Calificación Actual:{{evidenceID.qualification===0?'No calificado':evidenceID.qualification}}
+    <div class="column">
+      <div class="line">
+        Estado:{{evidenceID.verified?'Aprobado':'No Aprobado'}}
+      </div>
+      <div class="line">
+        Calificación Actual:{{evidenceID.qualification===0?'No calificado':evidenceID.qualification}}
+      </div>
+    </div>
+    <div class="column">
+      <div class="line">
+        <div class="extras" *ngFor="let extra of evidenceID.extras">
+          {{extra.clave}}: {{extra.valor}} <mat-icon *ngIf="extra.clave==='Presupuesto'">attach_money</mat-icon>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 <form class="form">
+
+  <h3>Rubrica</h3>
   <div class="form-input">
-      <nz-input-group [nzAddOnAfter]="'/'+characteristic.score!.toString()">
-        <input nz-input [formControl]="qualifyControl" placeholder="Calificacion" type="number">
-      </nz-input-group>
-      <textarea
-      nz-input
-      [formControl]="commitControl"
-      [placeholder]="'Comentario'"
-      [nzAutosize]="{ minRows: 2, maxRows: 6 }"
-      >
-      </textarea>
+      <label *ngFor="let v of valuation" nz-checkbox [ngModelOptions]="{standalone:true}" [(ngModel)]="rubric[valuation.indexOf(v)].qualify">{{v.name}}</label>
+  </div>
+  <div class="form-input">
+    <h3>Comentario</h3>
+    <textarea
+    nz-input
+    [formControl]="commitControl"
+    [placeholder]="'Comentarip'"
+    [nzAutosize]="{minRows:2,maxRows:6}"
+    >
+    </textarea>
   </div>
 </form>
 <div class="actions">
-  <button mat-raised-button (click)="qualify()">Calificar</button>
-  <button mat-raised-button (click)="cancel()">Cancelar</button>
+  <button class="succes" mat-raised-button (click)="qualify()">Calificar</button>
+  <button class="cancel"  mat-raised-button (click)="cancel()">Cancelar</button>
 
 </div>

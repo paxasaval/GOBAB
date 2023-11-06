@@ -20,4 +20,7 @@ export class CharacteristicsService {
    getCharacteristicID(id:string): Observable<CharacteristicID> {
     return this.http.get<CharacteristicID>(`${this.apiUrl}/${id}`)
  }
+ getValuationByCharacteristicID(id:string): Observable<CharacteristicID> {
+  return this.http.get<CharacteristicID>(`${this.apiUrl}/valuation?id=${id}`)
+}
 }

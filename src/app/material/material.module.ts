@@ -32,6 +32,8 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NgChartsModule } from 'ng2-charts';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip'
 @NgModule({
   declarations: [],
   imports: [
@@ -68,7 +70,9 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
     NzGridModule,
     NgChartsModule,
     NzSwitchModule,
-    NzRadioModule
+    NzRadioModule,
+    MatTooltipModule,
+    NzToolTipModule
   ],
   exports:[
     MatButtonModule,
@@ -103,8 +107,9 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
     NzGridModule,
     NgChartsModule,
     NzSwitchModule,
-    NzRadioModule
-
+    NzRadioModule,
+    MatTooltipModule,
+    NzToolTipModule
   ]
 })
 export class MaterialModule { }

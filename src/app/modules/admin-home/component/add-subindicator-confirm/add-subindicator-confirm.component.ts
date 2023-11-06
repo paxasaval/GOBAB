@@ -114,7 +114,7 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
     })
     this.subindicatorService.addSubindicator(newSubindicator).pipe(
       mergeMap(subindicator => {
-      
+
         return of(subindicator).pipe(
           mergeMap(subindicator => {
             if(this.evidences.length>0){
@@ -126,18 +126,17 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
               concatMap(evidence => {
                 if (evidence.link instanceof File) {
                   const indicatorCatalog = this.indicatorInstance.indicatorID as IndicatorID
-                  
+
                   const path = this.gadID.name + '/' + this.indicatorInstance.year + '/' + indicatorCatalog.quadrantName + '/' + indicatorCatalog.name + '/' + subindicator.name + evidence.link.name
-                  return from(this.storageService.uploadFile2(environment.azureStorage.key,evidence.link,path,()=>{
-                  })).pipe(
+                  return from(this.storageService.uploadFile(path,evidence.link)).pipe(
                     concatMap((res) => {
                       x+=1
                       Swal.update({
                         text:`evidencias subidas ${x} / ${this.evidences.length}`,
                         showConfirmButton:false,
                       })
-                      evidence.link = res._response.request.url
-                     
+                      evidence.link = res
+
                       return this.evidenceService.addEvidence(evidence)
                     })
                   )

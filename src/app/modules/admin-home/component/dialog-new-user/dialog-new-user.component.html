@@ -2,24 +2,39 @@
   <form [formGroup]="formUser">
     <mat-form-field appearance="outline">
       <mat-label>Nombre:</mat-label>
-      <input matInput type="text" formControlName="name">
+      <input matInput type="text" formControlName="name" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Correo electrónico:</mat-label>
-      <input matInput type="text" formControlName="mail">
+      <input matInput type="text" formControlName="mail" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Rol:</mat-label>
       <mat-select formControlName="rol" (valueChange)="changeRol($event)">
-        <mat-option *ngFor="let rol of allRol" [value]="rol.id">{{rol.name}}</mat-option>
+        <mat-option *ngFor="let rol of allRol" [value]="rol.id">{{
+          rol.name
+        }}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Password:</mat-label>
-      <input matInput type="text" formControlName="password">
+      <input matInput type="text" formControlName="password" />
     </mat-form-field>
   </form>
-  <button *ngIf="create" mat-raised-button (click)="createUser()">Crear usuario</button>
-  <button *ngIf="edit" mat-raised-button (click)="editUser()">Editar usuario</button>
-
+  <div class="actions">
+    <button
+      class="succes"
+      *ngIf="create"
+      mat-raised-button
+      (click)="createUser()"
+    >
+      Crear usuario
+    </button>
+    <button class="succes" *ngIf="edit" mat-raised-button (click)="editUser()">
+      Editar usuario
+    </button>
+    <button class="cancel" mat-raised-button (click)="cancel()">
+      Cancelar
+    </button>
+  </div>
 </div>

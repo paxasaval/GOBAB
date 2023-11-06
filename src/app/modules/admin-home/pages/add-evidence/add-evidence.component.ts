@@ -11,7 +11,7 @@ import { EvidenceService } from 'src/app/services/evidence/evidence.service';
 import { SubindicatorService } from 'src/app/services/subindicator/subindicator.service';
 import { TypeService } from 'src/app/services/type/type.service';
 import { TitleService } from 'src/app/services/title/title.service';
-import { ContinueEvidences } from '../../component/form-evidence/form-evidence.component';
+import { ContinueEvidences, ContinueExtraInfo, ExtraInfoContinue } from '../../component/form-evidence/form-evidence.component';
 
 @Component({
   selector: 'app-add-evidence',
@@ -23,6 +23,7 @@ export class AddEvidenceComponent implements OnInit {
   characteristics!:CharacteristicID[]
   subIndicator!:SubindicatorID
   arrayEvidence: Evidence[] = []
+  arrayExtraInfo: ExtraInfoContinue[] =[]
   type!: TypeID
   step=0
 
@@ -38,6 +39,12 @@ export class AddEvidenceComponent implements OnInit {
 
   changeStep(step:number){
     this.step=step
+  }
+
+  handleExtraInfo(event:ContinueExtraInfo){
+    if(event.flag){
+      this.arrayExtraInfo=event.extras!
+    }
   }
 
   handleEvidence(event:ContinueEvidences){

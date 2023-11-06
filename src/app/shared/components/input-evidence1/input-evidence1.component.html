@@ -27,7 +27,10 @@
         class="upload-file"
       >
         <span class="label">Subir Archivo:</span>
-        <div class="dropFile">
+        <div *ngIf="characteristic.format" class="format">
+          <a [href]="characteristic.format">Descargar formato UTPL</a>
+        </div>
+        <div nz-tooltip [nzTooltipTitle]="helpS" class="dropFile">
           <div class="legend" *ngIf="!formEvidence.evidence; else nameFile">
             <mat-icon class="mat-18">upload</mat-icon>
             <p>Arrastre aquí los archivos</p>
@@ -47,14 +50,19 @@
             formControlName="file"
             class="file"
             accept=".pdf"
+
           />
         </div>
       </div>
       <ng-template #elseBlock>
-        <span>Subir Enlace:</span>
+        <span class="label">Subir Enlace:</span>
+        <div *ngIf="characteristic.format" class="format">
+          <a [href]="characteristic.format">Descargar formato UTPL</a>
+        </div>
         <mat-form-field appearance="outline" class="formField">
           <mat-label>Ingrese el enlace hacia su documento</mat-label>
           <input
+          nz-tooltip [nzTooltipTitle]="helpS"
             matInput
             (change)="changeLink($event)"
             type="text"
@@ -65,6 +73,13 @@
       <span class="changeInput" (click)="changeInput(formEvidence)"
         >Cambiar a subir {{ formEvidence.changeName }}</span
       >
+      <div *ngIf="characteristic.extras" class="extra">
+        <mat-form-field *ngFor="let extra of extras" appearance="outline">
+          <mat-label>{{extra.clave}}</mat-label>
+          <input  matInput  (change)="changeExtra($event)" [type]="extra.tipo==='double'?'number':'string'" [formControl]="arrayFormExtras[extras.indexOf(extra)]" >
+          <mat-icon *ngIf="extra.clave==='Presupuesto'" matSuffix>attach_money</mat-icon>
+        </mat-form-field>
+      </div>
     </form>
   </div>
   <div *ngIf="!characteristic.unique" class="actions">

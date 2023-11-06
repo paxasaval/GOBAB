@@ -1,7 +1,7 @@
 <header class="header">
   <div class="name">
     <div class="logo">
-      <img src="../../../../assets/logo1.png" alt="">
+      <img src="../../../../assets/logo1.png" alt="" />
     </div>
     <div class="hook">
       <h4>Transparencia de la informacion</h4>
@@ -11,36 +11,39 @@
   <div class="select-period">
     <label>Periodo:</label>
     <nz-select
-    class="select"
-
-    [formControl]="periodControl"
-    (ngModelChange)="changePeriod($event)"
+      class="select"
+      [formControl]="periodControl"
+      (ngModelChange)="changePeriod($event)"
     >
-      <nz-option *ngFor="let period of periods"
-      [nzValue]="period"
-      [nzLabel]="period.year"
+      <nz-option
+        *ngFor="let period of periods"
+        [nzValue]="period"
+        [nzLabel]="period.year"
       ></nz-option>
     </nz-select>
   </div>
   <div class="user">
     <div class="column">
-      <div class="userName">
-        {{user.name}}
+      <div *ngIf="user" class="userName">
+        {{ user.name }}
       </div>
       <div class="userRol">
-        {{rol}}
+        {{ rol }}
       </div>
-
     </div>
 
     <div class="icon userImg">
-      <img [src]="imageDefault" alt="">
+      <img [src]="imageDefault" alt="" />
     </div>
     <div class="icon config">
-      <mat-icon nz-dropdown class="mat-18" [nzDropdownMenu]="userMenu" >settings</mat-icon>
+      <mat-icon nz-dropdown class="mat-18" [nzDropdownMenu]="userMenu"
+        >settings</mat-icon
+      >
       <nz-dropdown-menu #userMenu>
         <ul nz-menu nzSelectable>
-          <li nz-menu-item nzDanger (click)="logOut()">Salir <mat-icon class="logout">logout</mat-icon></li>
+          <li nz-menu-item nzDanger (click)="logOut()">
+            Salir <mat-icon class="logout">logout</mat-icon>
+          </li>
         </ul>
       </nz-dropdown-menu>
     </div>

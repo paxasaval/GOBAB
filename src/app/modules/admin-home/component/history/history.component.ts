@@ -1,6 +1,6 @@
 import { CharacteristicID, CharacteristicWithEvidence, CharacteristicWithEvidenceID } from './../../../../models/characteristic';
 import { Subscription, Observable, combineLatest, of } from 'rxjs';
-import { Component, EventEmitter, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { EvidenceID } from 'src/app/models/evidence';
 import { SubindicatorService } from 'src/app/services/subindicator/subindicator.service';
 import { map, retry, switchMap } from 'rxjs/operators';
@@ -38,6 +38,8 @@ export class HistoryComponent implements OnInit, OnChanges {
   subindicatorBD!: Subscription
   id!: string
   closeOK!: EventEmitter<any>
+  flag=false
+  @Output() emitQualify = new EventEmitter<boolean>()
 
   constructor(
     private subindicatorService: SubindicatorService,
@@ -72,7 +74,7 @@ export class HistoryComponent implements OnInit, OnChanges {
         const characteristicID = evidence.characteristicID
         return characteristicID == characteristic.id
       })
-   
+
       return { characteristic: characteristic, evidences: evidenceArray }
     })
   }
@@ -81,6 +83,7 @@ export class HistoryComponent implements OnInit, OnChanges {
   }
 
   openReview(evidence: EvidenceID, characteristic: CharacteristicID) {
+    this.flag=false
     const modal = this.modalService.create({
       nzTitle: 'Revision de evidencias',
       nzContent: DialogCheckEvidenceComponent,
@@ -89,14 +92,18 @@ export class HistoryComponent implements OnInit, OnChanges {
         characteristic: characteristic
       },
       nzFooter: null,
+      nzWidth:750
     }
     )
     modal.afterClose.subscribe(
       result => {
-        
         this.afterClosed()
       }
     )
+  }
+
+  handleChange(){
+
   }
 
   afterClosed() {
@@ -112,14 +119,16 @@ export class HistoryComponent implements OnInit, OnChanges {
       .subscribe(
         evidences => {
           this.groupEvidence = this.groupCharacteristics(this.typeID, evidences)
+          this.emitQualify.emit(true)
         }
       )
     } else {
       this.subindicatorBD.unsubscribe()
       this.subindicatorBD = this.subindicatorService.getSubindicatorByID(this.id).subscribe(
         subindicatorBD => {
-          
+
           this.groupEvidence = this.groupCharacteristics(this.typeID, subindicatorBD.evidences as EvidenceID[])
+          this.emitQualify.emit(true)
         }
       )
     }
@@ -145,11 +154,11 @@ export class HistoryComponent implements OnInit, OnChanges {
   deleteEvidence(evidence:EvidenceID){
     this.evidenceService.deleteEvidence(evidence.id).subscribe(
       res=>{
-       
+
         this.afterClosed()
       },
       error=>{
-        
+
       }
     )
   }
@@ -163,7 +172,7 @@ export class HistoryComponent implements OnInit, OnChanges {
       switchMap(([type, subindicator, user]) => {
         this.typeID = type
         this.id = subindicator.id
-        
+
         this.user = user
         this.authAdmin()
         if(subindicator.id!=''){
@@ -175,7 +184,7 @@ export class HistoryComponent implements OnInit, OnChanges {
       })
     )
     .subscribe((evidences) => {
-      
+
       this.groupEvidence = this.groupCharacteristics(this.typeID, evidences)
     })
   }

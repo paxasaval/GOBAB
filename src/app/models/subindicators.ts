@@ -20,8 +20,15 @@ export interface Subindicator{
   lastUpdate:Date,
   state:boolean,
   commits:string[] | CommitID[],
-  evidences:string[] | EvidenceID[]
+  evidences:string[] | EvidenceID[],
+  extraInfo?:ExtraInfo[]  
 }
+
+export interface ExtraInfo{
+  clave: string,
+  valor: string|string[]
+}
+
 export interface SubindicatorID extends Subindicator{
   id:string,
   createdBy:string|User

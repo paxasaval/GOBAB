@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Subindicator, SubindicatorID, SubindicatorIDWithPagination } from 'src/app/models/subindicators';
+import { ExtraInfoContinue } from 'src/app/modules/admin-home/component/form-evidence/form-evidence.component';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -79,6 +80,11 @@ export class SubindicatorService {
 
   getSubindicatorByIndicatorIDandTypeID(indicatorID: string, typeID: string) {
     return this.http.get<SubindicatorID>(`${this.apiUrl}/indicator/${indicatorID}/type/${typeID}`)
+  }
+
+  updateInfoExtraBySubindicatorID(id:string, extra:ExtraInfoContinue[]){
+    return this.http.put<SubindicatorID>(`${this.apiUrl}/addInfo?id=${id}`,{extraInfo:extra})
+
   }
 
   deleteSubindicator(id:string){

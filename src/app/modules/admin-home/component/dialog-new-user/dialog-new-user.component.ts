@@ -55,7 +55,9 @@ export class DialogNewUserComponent implements OnInit,OnChanges {
     z+=x
     return z
   }
-
+  cancel(){
+    this.modal.close()
+  }
   createUser(){
     Swal.fire({
       title:'Creando Usuario',
@@ -65,13 +67,13 @@ export class DialogNewUserComponent implements OnInit,OnChanges {
     })
     this.userService.newUser(this.name,this.mail,this.rol,this.password).subscribe(
       res=>{
-        
+
         Swal.close()
-        this.modal.destroy()
+        this.modal.close()
       },
       error=>{
         Swal.close()
-      
+
         Swal.fire({
           title:error.error.error,
           icon:'error',
@@ -90,13 +92,13 @@ export class DialogNewUserComponent implements OnInit,OnChanges {
     })
     this.userService.editUser(this.user.id,this.name,this.mail,this.rol,this.password).subscribe(
       res=>{
-        
+
         Swal.close()
-        this.modal.destroy()
+        this.modal.close()
       },
       error=>{
         Swal.close()
-       
+
         Swal.fire({
           title:error.error.error,
           icon:'error',

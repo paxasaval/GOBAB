@@ -1,0 +1,14 @@
+.actions{
+  display: flex;
+  justify-content: flex-end;
+  gap: 1em;
+}
+.succes{
+  background-color: var(--color4);
+  color: var(--white);
+}
+.cancel{
+  background-color: var(--red);
+  color: var(--white);
+
+}

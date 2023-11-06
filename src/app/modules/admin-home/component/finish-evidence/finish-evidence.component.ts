@@ -15,6 +15,8 @@ import { IndicatorID } from 'src/app/models/indicator';
 import { GadID } from 'src/app/models/gad';
 import { SubindicatorID } from 'src/app/models/subindicators';
 import { environment } from 'src/environments/environment';
+import { ExtraInfoContinue } from '../form-evidence/form-evidence.component';
+import { SubindicatorService } from 'src/app/services/subindicator/subindicator.service';
 
 @Component({
   selector: 'app-finish-evidence',
@@ -25,12 +27,16 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
 
   typeID!: TypeID
   @Input() evidences: Evidence[] = []
+  @Input() extras: ExtraInfoContinue[] = []
+
   groupData: CharacteristicWithEvidence[] = []
   indicator!:IndicatorInstanceID
+  subindicator!:SubindicatorID
   constructor(
     private typeService: TypeService,
     private indicatorInstanceService:IndicatorInstanceService,
     private evidenceService: EvidenceService,
+    private subindicatorService:SubindicatorService,
     private storageService: StorageService,
     private router:Router
   ) { }
@@ -47,7 +53,7 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
     })
   }
   ngOnChanges(changes: SimpleChanges): void {
-   
+
     if (this.typeID) {
       this.groupData = this.groupCharacteristics(this.typeID, this.evidences)
     }
@@ -56,12 +62,20 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
 
   }
   saveEvidence() {
+
+    if(this.extras.length>0){
+      console.log(this.subindicator.id)
+      this.subindicatorService.updateInfoExtraBySubindicatorID(this.subindicator.id,this.extras).subscribe(res=>{
+        console.log('actualizado',res)
+      })
+    }
+
     let numberEvidences = this.evidences.length
     let x=1
     const dialog = Swal.fire({
       title:'Subiendo evidencias',
       text:`evidencias subidas: ${x} / ${this.evidences.length}`,
-      didOpen:()=>{
+      didRender:()=>{
         Swal.showLoading()
       }
     })
@@ -72,12 +86,14 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
           const gad = this.indicator.gadID as GadID
           const subindicator = evidence.subIndicatorID as SubindicatorID
           const path = gad.name+'/'+this.indicator.year+'/'+indicatorCatalog.quadrantName+'/'+indicatorCatalog.name+'/'+subindicator.name + evidence.link.name
-          return from(this.storageService.uploadFile2(environment.azureStorage.key, evidence.link,path,()=>{
-            x+=1
-            Swal.update({text:`evidencias subidas ${x} / ${this.evidences.length}`})
-          })).pipe(
+          return from(this.storageService.uploadFile(path,evidence.link)).pipe(
             concatMap((res) => {
-              evidence.link = res._response.request.url
+              evidence.link = res
+              Swal.update({
+                text:`evidencias subidas ${x} / ${this.evidences.length}`,
+                showConfirmButton:false,
+
+              })
               return this.evidenceService.addEvidence(evidence)
             })
           )
@@ -96,18 +112,20 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
         const newUrl = segments.join('/');
         this.router.navigateByUrl(newUrl);
       }
-      
+
     }, error => {
-      
+
     })
   }
   ngOnInit(): void {
     combineLatest([
       this.typeService.getTypeSelected(),
-      this.indicatorInstanceService.getIndicatorInstance()
-    ]).subscribe(([type,indicatorInstance]) => {
+      this.indicatorInstanceService.getIndicatorInstance(),
+      this.subindicatorService.getSelectedSubindicator()
+    ]).subscribe(([type,indicatorInstance,subindicator]) => {
       this.typeID = type
       this.indicator=indicatorInstance
+      this.subindicator=subindicator
       if (this.typeID.id != '') {
         this.groupData = this.groupCharacteristics(type, this.evidences)
 

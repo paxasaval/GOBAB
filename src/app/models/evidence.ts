@@ -1,6 +1,6 @@
 import { CharacteristicID } from "./characteristic";
 import { CommitID } from "./commit";
-import { SubindicatorID } from "./subindicators";
+import { ExtraInfo, SubindicatorID } from "./subindicators";
 import { UserID } from "./user";
 
 export interface Evidence{
@@ -12,6 +12,7 @@ export interface Evidence{
   verified:boolean,
   qualification?:number,
   commits?:string[]|CommitID[]
+  extras?:ExtraInfo[]
 }
 export interface EvidenceID extends Evidence{
   id:string,

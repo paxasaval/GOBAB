@@ -32,7 +32,7 @@
             </li>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <li class="submenu" *ngFor="let indicator of quadrant">
+        <li class="submenu" *ngFor="let indicator of quadrant" [routerLink]="['/indicator',indicator.number]">
           -{{ indicator.name }}
         </li>
       </mat-expansion-panel>

@@ -3,7 +3,19 @@
   <h2>Estado actual</h2>
   <app-info class="info"></app-info>
   <h2>Registro de evidencias</h2>
-  <app-history></app-history>
+  <div *ngIf="subIndicator.extraInfo" class="extras">
+    <div class="extraArray" *ngFor="let extra of subIndicator.extraInfo">
+      <div class="line">
+        <span class="clave">{{extra.clave|uppercase}}: </span><span *ngIf="extra.clave !='corresponsables';else arrayTemplate">{{extra.valor}}</span>
+        <ng-template #arrayTemplate>
+          <ul class="list">
+            <li *ngFor="let c of list">{{c}}</li>
+          </ul>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <app-history (emitQualify)="handleQualify($event)" ></app-history>
   <h2>Ingreso de Evidencias</h2>
   <div class="btn-addEvidence">
     <button class="btn-bg4" mat-raised-button routerLink="add-evidence">

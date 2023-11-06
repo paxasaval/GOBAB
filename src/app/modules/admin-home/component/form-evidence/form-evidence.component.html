@@ -1,4 +1,37 @@
 <h2 class="title" >Registrar Evidencias</h2>
+<!--Formulario de extra info-->
+<form class="form" [formGroup]="extraFormGroup">
+  <div *ngFor="let input of inputs" class="inputs">
+    <span>{{input.clave+": "|titlecase}}</span>
+    <mat-form-field appearance="outline">
+      <mat-label>{{input.clave}}</mat-label>
+      <input matInput type="text" [formControlName]="input.clave!"/>
+    </mat-form-field>
+  </div>
+  <div *ngFor="let radio of radioBtn" class="inputs">
+    <span>Seleccione el {{radio.clave |titlecase}} al que pertenece:</span>
+    <mat-form-field appearance="outline">
+      <mat-label>{{radio.clave}}</mat-label>
+      <mat-select [formControlName]="radio.clave!">
+        <mat-option *ngFor="let option of radio.valor" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+</form>
+<div *ngFor="let mInput of multiInput" class="multiInput">
+  <span>{{"Añadir "+mInput.clave|titlecase}}</span>
+  <mat-form-field *ngFor="let x of corresponsablesForm" appearance="outline">
+    <mat-label>{{mInput.clave+' '+(corresponsablesForm.indexOf(x)+1)}}</mat-label>
+    <input matInput type="text" [formControl]="corresponsablesForm[corresponsablesForm.indexOf(x)]"/>
+  </mat-form-field>
+  <button mat-mini-fab color="primary" (click)="addInput(mInput.clave!)">
+    <mat-icon class="mat-18">add</mat-icon>
+  </button>
+</div>
+<!--Formulario de caracteristicas-->
 <div class="form">
   <app-input-evidence1 class="evidence" (evidenceEmit)="addEvidence($event)" *ngFor="let characteristic of characteristics" [characteristic]="characteristic"></app-input-evidence1>
 </div>

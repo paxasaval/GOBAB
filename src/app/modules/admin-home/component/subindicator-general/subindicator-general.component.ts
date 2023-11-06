@@ -1,4 +1,5 @@
-import { Observable, Subscription, combineLatest } from 'rxjs';
+import { concatMap, mergeMap } from 'rxjs/operators';
+import { Observable, Subscription, combineLatest, of, EMPTY } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { IndicatorInstanceID } from 'src/app/models/indicatorInstance';
@@ -23,6 +24,8 @@ export class SubindicatorGeneralComponent implements OnInit,OnDestroy {
   indicator!: IndicatorInstanceID
   type!: TypeID
   observer!:Subscription
+  subindicatorSubscribe!:Subscription
+  list:string[] = []
   constructor(
     private router:Router,
     private titleService:TitleService,
@@ -39,9 +42,31 @@ export class SubindicatorGeneralComponent implements OnInit,OnDestroy {
     ])
       .subscribe(([indicator,subindicator,type])=>{
         this.subIndicator= subindicator
+        if(subindicator.extraInfo){
+          console.log(subindicator.extraInfo)
+          this.list = subindicator.extraInfo![2].valor as string[]
+
+        }
         const indicatorCatalog = indicator.indicatorID as IndicatorID
         //this.titleService.setTitle([indicatorCatalog.quadrantName,indicatorCatalog.name,type.name])
       })
+  }
+
+  handleQualify(flag:boolean){
+    if (flag) {
+      console.log(this.subIndicator)//Estado anterior
+        this.subindicatorService.getSubindicatorByID(this.subIndicator.id)
+        .pipe(
+          mergeMap(subindicator => {
+            console.log(subindicator)//Actual
+            this.subindicatorService.setSelectedSubindicator(subindicator);
+            return EMPTY; // O cualquier otro observable que desees retornar, como of(null)
+          })
+        )
+        .subscribe(res => {
+          console.log(res);
+        });
+    }
   }
   ngOnDestroy(): void {
       this.observer.unsubscribe()

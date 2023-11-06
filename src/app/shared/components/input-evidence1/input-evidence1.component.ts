@@ -1,5 +1,5 @@
 import { Evidence } from './../../../models/evidence';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CharacteristicID } from 'src/app/models/characteristic';
 import { UserID } from 'src/app/models/user';
@@ -10,12 +10,17 @@ interface FormEvidence {
   flag: boolean,
   changeName: string
 }
+interface ExtraInput{
+  clave:string,
+  tipo:string,
+  valor:any|any[]
+}
 @Component({
   selector: 'app-input-evidence1',
   templateUrl: './input-evidence1.component.html',
   styleUrls: ['./input-evidence1.component.scss']
 })
-export class InputEvidence1Component implements OnInit {
+export class InputEvidence1Component implements OnInit, OnChanges {
 
   @Input() characteristic!: CharacteristicID
   @Output() evidenceEmit = new EventEmitter<Evidence[]>()
@@ -26,6 +31,10 @@ export class InputEvidence1Component implements OnInit {
   pdfs: File[] = []
   files: File[] = []
   evidences: Evidence[] = []
+  helpS!:string
+  extras:ExtraInput[] = []
+
+  arrayFormExtras: FormControl[]=[]
 
   evidenceForm = new FormGroup({
     observation: new FormControl(''),
@@ -58,6 +67,8 @@ export class InputEvidence1Component implements OnInit {
     form.evidence = file
     this.emitEvidence()
   }
+
+
 
   addEvidence() {
     const newForm = new FormGroup({
@@ -100,6 +111,19 @@ export class InputEvidence1Component implements OnInit {
         this.evidences.push(newEvidence)
       }
     })
+    if(this.extras && this.evidences.length>0){
+      this.extras.forEach(extra=>{
+        if(!this.evidences[0].extras){
+          this.evidences[0].extras=[]
+        }
+        console.log(this.arrayFormExtras[this.extras.indexOf(extra)].value)
+        this.evidences[0].extras?.push({
+          clave:extra.clave,
+          valor:this.arrayFormExtras[this.extras.indexOf(extra)].value
+        })
+      })
+    }
+    console.log(this.evidences)
     this.evidenceEmit.emit(this.evidences)
 
   }
@@ -115,6 +139,20 @@ export class InputEvidence1Component implements OnInit {
 
   }
 
+  filterExtras(extraInfo:any):ExtraInput[]{
+    //console.log(extraInfo)
+    //console.log(typeof extraInfo)
+    const res = Object.entries(extraInfo).map(([c,v])=>{
+      const value = v as string
+      return{
+       clave:c,
+       tipo:value,
+       valor:''
+      }
+    })
+    return res
+  }
+
   constructor() { }
 
   changeObservation(event: any) {
@@ -123,7 +161,33 @@ export class InputEvidence1Component implements OnInit {
   changeLink(event: any) {
     this.emitEvidence()
   }
+  changeExtra(event:any){
+    this.emitEvidence()
+
+  }
   ngOnInit(): void {
+
+  }
+  ngOnChanges(){
+    if(this.characteristic.extras){
+    this.extras=this.filterExtras(this.characteristic.extras)
+    this.arrayFormExtras=[]
+    this.extras.forEach(e=>{
+      this.arrayFormExtras.push(
+        new FormControl('')
+      )
+    })
+    }
+    if(this.characteristic.type==2){
+      this.arrayForms.forEach(form=>{
+        form.changeName=this.inputChange
+        form.flag=false
+      })
+    }
+    if(this.characteristic.help){
+    this.helpS=this.characteristic.help
+    console.log(this.characteristic)
+    }
   }
 
 }

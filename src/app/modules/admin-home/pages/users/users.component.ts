@@ -26,6 +26,7 @@ export class UsersComponent implements OnInit {
     const modal = this.modalService.create({
       nzTitle:'Agregar Usuario',
       nzContent:DialogNewUserComponent,
+      nzFooter:null,
       nzComponentParams:{
       },
     })
