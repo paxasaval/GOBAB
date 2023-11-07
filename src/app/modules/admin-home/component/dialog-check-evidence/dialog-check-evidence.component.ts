@@ -29,10 +29,10 @@ export class DialogCheckEvidenceComponent implements OnInit,OnChanges {
   evidenceID!:EvidenceID
   valuation: ValuationID[] =[]
   rubric: Rubric[]=[]
-
+  rubricToSend:Rubric[]=[]
   qualifyControl = new FormControl(0)
   commitControl=new FormControl()
-
+  isPublic=false
   constructor(
     private evidenceService:EvidenceService,
     private characteristicService:CharacteristicsService,
@@ -50,18 +50,22 @@ export class DialogCheckEvidenceComponent implements OnInit,OnChanges {
   qualify(){
     let qualify = 1
     this.rubric.forEach(r=>{
-      if(r.qualify){
+      if(r.qualification){
         qualify+=1
+        r.qualification=1
+      }else{
+        r.qualification=0
       }
     })
-    const commit = ''
+    const commit = this.commitControl.value
     Swal.fire({
       title:'Calificando',
       didOpen:()=>{
         Swal.showLoading()
       }
     })
-    this.evidenceService.qualifyEvidence(this.evidence.id,qualify,commit).subscribe(
+    //console.log(this.rubric)
+    this.evidenceService.qualifyEvidence(this.evidence.id,qualify,this.isPublic,this.rubric,commit).subscribe(
       evidence=>{
         Swal.close()
         this.modal.close()
@@ -82,6 +86,10 @@ export class DialogCheckEvidenceComponent implements OnInit,OnChanges {
     )
   }
 
+  fetchRubric(){
+
+  }
+
   ngOnInit(): void {
     if(this.evidenceSubscribe){
       this.evidenceSubscribe.unsubscribe()
@@ -91,20 +99,30 @@ export class DialogCheckEvidenceComponent implements OnInit,OnChanges {
       this.evidenceID=evidence
       const characteristic = evidence.characteristicID as CharacteristicID
       const id = characteristic.id
+      this.isPublic = this.evidenceID.verified
       return(this.characteristicService.getValuationByCharacteristicID(id))
     }))
     .subscribe(chracteristic=>{
         this.valuation = chracteristic.valuation!
         this.rubric=[]
-        let maxValue = 0
         this.valuation.forEach(v=>{
-          maxValue+=v.maxValue
-          this.rubric.push({
-            valuation:v.id,
-            qualify:false
-          })
+          if(v.maxValue==1){
+            //console.log(this.evidenceID.rubric![0])
+            //console.log(v.id)
+            const founded = this.evidenceID.rubric?.find((r)=>(r.valuation===v.id))
+            const q =founded?.qualification===1?true:false
+            this.rubric.push({
+              valuation:v.id,
+              qualification:founded?.qualification===1?true:false
+            })
+          }else{
+            this.rubric.push({
+              valuation:v.id,
+              qualification:0
+            })
+          }
+
         })
-        console.log(this.rubric)
       }
     )
 

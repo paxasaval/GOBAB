@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Evidence, EvidenceID } from 'src/app/models/evidence';
+import { Rubric } from 'src/app/models/rubric';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -43,8 +44,8 @@ export class EvidenceService {
     return this.http.get<EvidenceID>(`${this.apiUrl}/${id}`)
   }
 
-  qualifyEvidence(id:string,qualification:number,commit?:string){
-    return this.http.put(`${this.apiUrl}/qualify/${id}`,{qualification:qualification,commit:commit})
+  qualifyEvidence(id:string,qualification:number,isPublic:boolean,rubric:Rubric[],commit?:string){
+    return this.http.put(`${this.apiUrl}/qualify/${id}`,{qualification:qualification,verified:isPublic,rubric:rubric,commit:commit})
   }
 
   getEvidencesBySubindicatorID(subindicatorID:string){

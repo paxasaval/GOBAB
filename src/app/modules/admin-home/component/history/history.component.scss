@@ -18,3 +18,19 @@
 .text-center{
   text-align: center;
 }
+.comits-container{
+  max-height: 15vh;
+  overflow-y: scroll;
+  scrollbar-width: 8px;
+  scrollbar-color: var(--color4);
+}::-webkit-scrollbar{
+  width: 8px;
+}
+.comits-container::-webkit-scrollbar-track{
+  background: #f8f8f8;
+}
+.comits-container::-webkit-scrollbar-thumb{
+  background-color: var(--color4);
+  border-radius: 10px;
+  border: 1px solid #ffffff;
+}

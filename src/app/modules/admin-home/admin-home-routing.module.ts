@@ -118,7 +118,7 @@ const routes: Routes = [
             ]
           },
           {
-            path: 'Normativa-y Reglamentación',
+            path: "Mecanismo,-Normativa y Reglamentación",
             component: IndicatorGeneralComponent,
             data: { typeID: '648fd82cf2888184112b98c3' },
             children: [

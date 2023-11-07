@@ -25,17 +25,22 @@
   </div>
 </div>
 <form class="form">
-
+  <div class="line">
+    Estado:<nz-switch name="state" [(ngModel)]="isPublic" nzCheckedChildren="Publicado" nzUnCheckedChildren="No Publicado"></nz-switch>
+  </div>
   <h3>Rubrica</h3>
   <div class="form-input">
-      <label *ngFor="let v of valuation" nz-checkbox [ngModelOptions]="{standalone:true}" [(ngModel)]="rubric[valuation.indexOf(v)].qualify">{{v.name}}</label>
+    <div class="input" *ngFor="let v of valuation">
+      <label *ngIf="v.maxValue==1" nz-checkbox [ngModelOptions]="{standalone:true}" [(ngModel)]="rubric[valuation.indexOf(v)].qualification">{{v.name}}</label>
+
+    </div>
   </div>
   <div class="form-input">
     <h3>Comentario</h3>
     <textarea
     nz-input
     [formControl]="commitControl"
-    [placeholder]="'Comentarip'"
+    [placeholder]="'Comentario'"
     [nzAutosize]="{minRows:2,maxRows:6}"
     >
     </textarea>

@@ -3,14 +3,16 @@
     <h4 id="titleDiv" #titleDiv>{{ title }}</h4>
   </div>
   <div *ngIf="evidences.length>0;else elseBlock" class="evidences">
-    <div *ngFor="let evidence of evidences" class="evidence-line">
-      <div class="name">
-        <span (click)="setEvidence(evidence)" >{{evidence.name}}</span>
-      </div>
-      <div class="actions">
-        <a [href]="evidence.link" [download]="evidence.name" target="_blank">
-          <mat-icon class="dowload-icon">cloud_download</mat-icon>
-        </a>
+    <div *ngFor="let evidence of evidences" class="evidenceItem">
+      <div *ngIf="evidence.verified" class="evidence-line">
+        <div class="name">
+          <span (click)="setEvidence(evidence)" >{{evidence.name}}</span>
+        </div>
+        <div class="actions">
+          <a [href]="evidence.link" [download]="evidence.name" target="_blank">
+            <mat-icon class="dowload-icon">cloud_download</mat-icon>
+          </a>
+        </div>
       </div>
     </div>
   </div>

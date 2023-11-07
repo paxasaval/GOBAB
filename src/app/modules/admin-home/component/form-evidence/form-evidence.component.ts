@@ -63,7 +63,7 @@ export class FormEvidenceComponent implements OnInit {
   }
   continue(): void {
     const flag = true
-    console.log(this.arrayEvidence)
+    //console.log(this.arrayEvidence)
     this.evidencesEvent.emit({ flag: flag, evidences: this.arrayEvidence })
     const extraArray:ExtraInfoContinue[]  = []
     this.inputs.forEach(i=>{
@@ -78,7 +78,8 @@ export class FormEvidenceComponent implements OnInit {
       let array:string[] = []
       let extra = {clave:i.clave,valor:array}
       this.corresponsablesForm.forEach(x=>{
-        const value = x.get(i.clave!)?.value as string
+        const value = x.value as string
+        console.log(value)
         array.push(value)
       })
       extra.valor=array

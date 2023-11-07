@@ -24,7 +24,8 @@ export class NavbarIndicatorsComponent implements OnInit {
     this.typeService.getTypeByMandatory(true).subscribe(types=>{
       this.generalSubIndicators=types
       this.routes = types.map(type=>{
-        let route = type.name.replace(' ','-')
+        let route = type.name.replace(' ','-')  
+        console.log(route)
         return {type:type,route:route}
       })
     })

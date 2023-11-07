@@ -54,7 +54,7 @@ export class SubindicatorGeneralComponent implements OnInit,OnDestroy {
 
   handleQualify(flag:boolean){
     if (flag) {
-      console.log(this.subIndicator)//Estado anterior
+      //console.log(this.subIndicator)//Estado anterior
         this.subindicatorService.getSubindicatorByID(this.subIndicator.id)
         .pipe(
           mergeMap(subindicator => {
@@ -64,7 +64,7 @@ export class SubindicatorGeneralComponent implements OnInit,OnDestroy {
           })
         )
         .subscribe(res => {
-          console.log(res);
+          //console.log(res);
         });
     }
   }
