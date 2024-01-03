@@ -73,8 +73,8 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
     let numberEvidences = this.evidences.length
     let x=1
     const dialog = Swal.fire({
-      title:'Subiendo evidencias',
-      text:`evidencias subidas: ${x} / ${this.evidences.length}`,
+      title:`Actualizando ${this.subindicator.name}`,
+      text:`Evidencias subidas: ${x} / ${this.evidences.length}`,
       didRender:()=>{
         Swal.showLoading()
       }
@@ -89,11 +89,6 @@ export class FinishEvidenceComponent implements OnInit, OnChanges {
           return from(this.storageService.uploadFile(path,evidence.link)).pipe(
             concatMap((res) => {
               evidence.link = res
-              Swal.update({
-                text:`evidencias subidas ${x} / ${this.evidences.length}`,
-                showConfirmButton:false,
-
-              })
               return this.evidenceService.addEvidence(evidence)
             })
           )

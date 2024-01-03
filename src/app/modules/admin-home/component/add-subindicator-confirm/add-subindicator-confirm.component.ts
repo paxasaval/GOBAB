@@ -1,5 +1,5 @@
 import { StorageService } from 'src/app/services/storage/storage.service';
-import { mergeMap, concatMap, catchError, reduce } from 'rxjs/operators';
+import { mergeMap, concatMap, catchError, reduce, scan, tap, finalize } from 'rxjs/operators';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CharacteristicID, CharacteristicWithEvidence } from 'src/app/models/characteristic';
 import { Evidence } from 'src/app/models/evidence';
@@ -28,8 +28,6 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
   @Input() name!: string
   @Input() responsible!: string
   @Input() portada!: Evidence[]
-  @Input() isPlanned!: boolean
-  @Input() isDiagnosed!: boolean
 
   @Input() evidences!: Evidence[]
 
@@ -66,6 +64,7 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
   saveEvidence() {
     Swal.fire({
       title: 'Creando subindicador',
+      showConfirmButton: false,
       didRender: () => {
         Swal.showLoading()
       }
@@ -75,8 +74,6 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
       cover: '',
       requireCover: true,
       observationCover: this.portada[0] ? this.portada[0].note : '',
-      isDiagnosed: this.isDiagnosed,
-      isPlanned: this.isPlanned,
       created: new Date(),
       evidences: [],
       indicadorID: this.indicatorInstance.id,
@@ -94,87 +91,97 @@ export class AddSubindicatorConfirmComponent implements OnInit, OnChanges {
             newSubindicator.cover = url
             this.continueAddSubindicator(newSubindicator)
           })
-          .catch(error=>{
+          .catch(error => {
           })
       } else {
         newSubindicator.cover = this.portada[0].link as string
         this.continueAddSubindicator(newSubindicator)
       }
-    }else{
+    } else {
       this.continueAddSubindicator(newSubindicator)
     }
 
   }
-  continueAddSubindicator(newSubindicator:Subindicator){
-    let x=0
-    Swal.update({
-      title:'Creando Subindicador',
-      text:`Evidencias subidas ${x} / ${this.evidences.length}`,
-      showConfirmButton:false,
-    })
+  continueAddSubindicator(newSubindicator: Subindicator) {
+    let x = 1;
+    const evidencesObservable = (subindicator: Subindicator) => {
+      return from(this.evidences).pipe(
+        concatMap(evidence => {
+          if (evidence.link instanceof File) {
+            const indicatorCatalog = this.indicatorInstance.indicatorID as IndicatorID
+            const path = this.gadID.name + '/' + this.indicatorInstance.year + '/' + indicatorCatalog.quadrantName + '/' + indicatorCatalog.name + '/' + subindicator.name + evidence.link.name
+            return from(this.storageService.uploadFile(path, evidence.link)).pipe(
+              concatMap((res) => {
+                evidence.link = res
+                return this.evidenceService.addEvidence(evidence)
+              }),
+              finalize(() => {
+                Swal.update({
+                  text:`Evidencias subidas ${x}/ ${this.evidences.length}`,
+                  showConfirmButton:false
+                })
+                x++
+              })
+            )
+          } else {
+            return this.evidenceService.addEvidence(evidence).pipe(
+              catchError(error => {
+                console.error('Error al agregar la evidencia', error);
+                return EMPTY;
+              })
+            )
+          };
+        }),
+        finalize(() => {
+          console.log(x)
+          if (x === this.evidences.length) {
+            console.log('cerrado poup')
+            Swal.update({
+              text:`Evidencias subidas ${x}/ ${this.evidences.length}`,
+              showConfirmButton:false
+            })
+            Swal.close()
+            const currentURL = this.router.url
+            const segments = currentURL.split('/');
+            segments.pop(); // Elimina el último segmento (parámetro) de la ruta
+            const newUrl = segments.join('/');
+            this.router.navigateByUrl(newUrl);
+          }
+        })
+      )
+    };
+
     this.subindicatorService.addSubindicator(newSubindicator).pipe(
       mergeMap(subindicator => {
-
-        return of(subindicator).pipe(
-          mergeMap(subindicator => {
-            if(this.evidences.length>0){
-            this.evidences = this.evidences.map(evidence => {
-              evidence.subIndicatorID = subindicator.id;
-              return evidence;
-            });
-            return from(this.evidences).pipe(
-              concatMap(evidence => {
-                if (evidence.link instanceof File) {
-                  const indicatorCatalog = this.indicatorInstance.indicatorID as IndicatorID
-
-                  const path = this.gadID.name + '/' + this.indicatorInstance.year + '/' + indicatorCatalog.quadrantName + '/' + indicatorCatalog.name + '/' + subindicator.name + evidence.link.name
-                  return from(this.storageService.uploadFile(path,evidence.link)).pipe(
-                    concatMap((res) => {
-                      x+=1
-                      Swal.update({
-                        text:`evidencias subidas ${x} / ${this.evidences.length}`,
-                        showConfirmButton:false,
-                      })
-                      evidence.link = res
-
-                      return this.evidenceService.addEvidence(evidence)
-                    })
-                  )
-                } else {
-                  return this.evidenceService.addEvidence(evidence).pipe(
-                    catchError(error => {
-                      console.error('Error al agregar la evidencia', error);
-                      return EMPTY;
-                    })
-                  )
-                };
-              })
-            )}else{
-              return of([])
-            }
-            ;
-          }),
-          catchError(error => {
-            console.error('Error al agregar evidencia al subindicador', error);
-            return EMPTY;
-          })
-        );
+        if (this.evidences.length > 0) {
+          this.evidences = this.evidences.map(evidence => {
+            evidence.subIndicatorID = subindicator.id;
+            return evidence;
+          });
+          return evidencesObservable(subindicator)
+        } else {
+          return of([])
+        }
+        ;
+      }),
+      catchError(error => {
+        console.error('Error al agregar evidencias', error);
+        Swal.close()
+        Swal.fire({
+          icon: 'error',
+          title: 'Lo sentimos',
+          text: `Ha ocurrdido un error al agregar evidencias al subindicador`,
+        })
+        return EMPTY;
       })
     ).subscribe(
       () => {
-        Swal.close()
-        const currentURL = this.router.url
-        const segments = currentURL.split('/');
-        segments.pop(); // Elimina el último segmento (parámetro) de la ruta
-
-        const newUrl = segments.join('/');
-        this.router.navigateByUrl(newUrl);
       },
       error => {
         console.error('Error al agregar el subindicador y evidencias', error);
         Swal.close()
         Swal.fire(
-          'Error: Lo sentimos no se ha podido completar su petición',
+          'Lo sentimos no se ha podido completar su petición',
           '',
           'error'
         )
