@@ -12,7 +12,7 @@ export const environment = {
     messagingSenderId: '399872374285',
   },
   production: false,
-  
+
   API_URL: 'http://localhost:3001',
   //API_URL:'https://iso-18091-backend-test-production.up.railway.app',
   ROL_ADMIN: 'Administrador',

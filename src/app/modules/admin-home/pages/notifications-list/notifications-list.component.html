@@ -1,0 +1,41 @@
+<div class="container">
+  <section class="tabs">
+    <h2>Notificaciones</h2>
+  </section>
+  <section class="list">
+    <nz-list class="demo-loadmore-list" [nzLoading]="initLoading">
+      <nz-list-item *ngFor="let item of list"
+      [ngClass]="{
+        'unread': item.state === 1,
+        'read': item.state === 2
+      }">
+        <ng-container >
+          <nz-list-item-meta
+          >
+            <nz-list-item-meta-title>
+              <span>{{ item.itemType===1?'Indicador':item.itemType===2?'Subindicador':'Evidencia'  }}{{item.type===1?' Agregado':item.type===2?' Modificado':' Eliminado' }}</span>
+            </nz-list-item-meta-title>
+            <nz-list-item-meta-description>
+                {{item.content}}
+            </nz-list-item-meta-description>
+          </nz-list-item-meta>
+          <ul nz-list-item-actions>
+            <nz-list-item-action><a (click)="openElement(item)">Ver</a></nz-list-item-action>
+            <nz-list-item-action><a (click)="openElement(item)">Marcar como leido</a></nz-list-item-action>
+          </ul>
+        </ng-container>
+        <nz-skeleton
+          *ngIf="loading"
+          [nzAvatar]="true"
+          [nzActive]="true"
+          [nzTitle]="false"
+          [nzLoading]="true"
+        ></nz-skeleton>
+      </nz-list-item>
+    <!--   <div class="loadmore" nz-list-load-more>
+        <button nz-button *ngIf="!loadingMore" (click)="onLoadMore()">loading more</button>
+      </div> -->
+    </nz-list>
+
+  </section>
+</div>

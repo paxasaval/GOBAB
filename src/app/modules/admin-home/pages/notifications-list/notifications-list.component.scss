@@ -1,0 +1,25 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.tabs{
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  width: 90%;
+}
+.list{
+  max-height: 80vh;
+  overflow-y: scroll;
+  width: 98%;
+  padding-bottom: 1em;
+  scrollbar-width: none; /* Para Firefox */
+  -ms-overflow-style: none; /* Para IE 10+ */
+}::-webkit-scrollbar {
+  display: none;
+}
+.unread{
+  background-color: #9ccbf8;
+}

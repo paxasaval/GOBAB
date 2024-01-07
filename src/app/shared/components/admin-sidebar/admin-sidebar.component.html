@@ -39,7 +39,6 @@
       <mat-expansion-panel
         class="menu-list"
         [hideToggle]="true"
-        routerLink="config"
         routerLinkActive="active"
       >
         <mat-expansion-panel-header>
@@ -50,6 +49,8 @@
             </li>
           </mat-panel-title>
         </mat-expansion-panel-header>
+        <li class="submenu" routerLink="config">Cambiar Contraseña</li>
+        <li class="submenu" routerLink="notifications">Notificaciones</li>
       </mat-expansion-panel>
       <mat-expansion-panel
         class="menu-list"

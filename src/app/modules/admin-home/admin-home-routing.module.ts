@@ -18,6 +18,7 @@ import { SummaryIndicatorComponent } from './pages/summary-indicator/summary-ind
 import { SpecificSubindicatorsTableComponent } from './component/specific-subindicators/specific-subindicators.component';
 import { HelpComponent } from './pages/help/help.component';
 import { WkconfigComponent } from './pages/wkconfig/wkconfig.component';
+import { NotificationsListComponent } from './pages/notifications-list/notifications-list.component';
 
 const routes: Routes = [
   {
@@ -69,6 +70,10 @@ const routes: Routes = [
       {
         path: 'config',
         component: UserConfigComponent
+      },
+      {
+        path: 'notifications',
+        component: NotificationsListComponent
       },
       {
         path: 'quadrant/:quadrantNumber/indicator/:number',

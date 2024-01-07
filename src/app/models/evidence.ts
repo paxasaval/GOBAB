@@ -12,6 +12,7 @@ export interface Evidence{
   note:string,
   verified:boolean,
   qualification?:number,
+  qualificationBy?:UserID|String,
   commits?:string[]|CommitID[]
   extras?:ExtraInfo[]
   rubric?:Rubric[]
