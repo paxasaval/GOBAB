@@ -11,48 +11,52 @@ export class UserService {
 
   private apiUrl = `${environment.API_URL}/api/users`
   private userSubject = new BehaviorSubject<UserID>({
-    created:new Date(),
-    lastUpdate:new Date(),
-    mail:'',
-    name:'',
-    password:'',
-    rol:'',
-    state:true,
-    id:''
+    created: new Date(),
+    lastUpdate: new Date(),
+    mail: '',
+    name: '',
+    password: '',
+    rol: '',
+    state: true,
+    id: ''
   })
   private user$ = this.userSubject.asObservable()
   constructor(
-    private http:HttpClient
+    private http: HttpClient
   ) { }
 
-  getUserSesion(){
+  getUserSesion() {
     return this.user$
   }
 
-  setUserSesion(user:UserID){
+  setUserSesion(user: UserID) {
     this.userSubject.next(user)
   }
-  userById(id:string){
+  userById(id: string) {
     return this.http.get<UserID>(`${this.apiUrl}/${id}`)
   }
 
-  mathPassword(mail:string,password:string){
-    return this.http.post(`${this.apiUrl}/password`,{mail,password})
+  mathPassword(mail: string, password: string) {
+    return this.http.post<boolean>(`${this.apiUrl}/password`, { mail, password })
   }
 
-  getAllUsers(){
+  newPassword(id: string, password: string) {
+    return this.http.put<UserID>(`${this.apiUrl}/newPassword?id=${id}`, { password })
+  }
+
+  getAllUsers() {
     return this.http.get<UserID[]>(`${this.apiUrl}`)
   }
 
-  newUser(name:string,mail:string,rol:string,pass:string){
-    return this.http.post(`${this.apiUrl}/signUp`,{name,mail,rol,password:pass})
+  newUser(name: string, mail: string, rol: string, pass: string) {
+    return this.http.post(`${this.apiUrl}/signUp`, { name, mail, rol, password: pass })
   }
 
-  editUser(id:string,name:string,mail:string,rol:string,pass:string){
-    return this.http.put(`${this.apiUrl}/${id}`,{name,mail,rol,password:pass})
+  editUser(id: string, name: string, mail: string, rol: string, pass: string) {
+    return this.http.put(`${this.apiUrl}/${id}`, { name, mail, rol, password: pass })
 
   }
-  deleteUser(id:string){
+  deleteUser(id: string) {
     return this.http.delete(`${this.apiUrl}/${id}`)
   }
 }

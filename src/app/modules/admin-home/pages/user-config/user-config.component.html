@@ -20,8 +20,10 @@
         placeholder="Contraseña antigua"
         type="text"
         [(ngModel)]="passwordNew"
-
       />
     </div>
+  </div>
+  <div>
+    <button mat-raised-button class="btn-update" [disabled]="!flag" (click)="changePassword()">Actualizar</button>
   </div>
 </div>
