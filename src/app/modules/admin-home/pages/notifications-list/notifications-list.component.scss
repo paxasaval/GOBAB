@@ -4,10 +4,11 @@
   justify-content: center;
   align-items: center;
 }
-.tabs{
+.title{
   height: 10vh;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 90%;
 }
 .list{

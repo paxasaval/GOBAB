@@ -34,6 +34,8 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { MatTooltipModule } from '@angular/material/tooltip'
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -72,7 +74,8 @@ import { MatTooltipModule } from '@angular/material/tooltip'
     NzSwitchModule,
     NzRadioModule,
     MatTooltipModule,
-    NzToolTipModule
+    NzToolTipModule,
+    NzBadgeModule
   ],
   exports:[
     MatButtonModule,
@@ -109,7 +112,8 @@ import { MatTooltipModule } from '@angular/material/tooltip'
     NzSwitchModule,
     NzRadioModule,
     MatTooltipModule,
-    NzToolTipModule
+    NzToolTipModule,
+    NzBadgeModule
   ]
 })
 export class MaterialModule { }

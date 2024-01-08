@@ -1,6 +1,15 @@
 <div class="container">
-  <section class="tabs">
+  <section class="title">
     <h2>Notificaciones</h2>
+    <div class="tabs">
+
+    </div>
+    <div class="actions">
+      <button nz-button nzType="primary" (click)="fetchData()" [nzLoading]="loading">
+        Actualizar
+      </button>
+    </div>
+
   </section>
   <section class="list">
     <nz-list class="demo-loadmore-list" [nzLoading]="initLoading">
@@ -21,7 +30,7 @@
           </nz-list-item-meta>
           <ul nz-list-item-actions>
             <nz-list-item-action><a (click)="openElement(item)">Ver</a></nz-list-item-action>
-            <nz-list-item-action><a (click)="openElement(item)">Marcar como leido</a></nz-list-item-action>
+            <nz-list-item-action><a (click)="item.state==1?checkNotify(item):uncheckNotify(item)">{{item.state==1?'Marcar como leido':'Marcar como no leido'}}</a></nz-list-item-action>
           </ul>
         </ng-container>
         <nz-skeleton

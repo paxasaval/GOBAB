@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { UserService } from '../user/user.service';
 import { JwtHelperService } from '@auth0/angular-jwt'
+import { NotificationService } from '../notification/notification.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +17,7 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
     private userService: UserService,
+    private notificationService:NotificationService,
     private jwtHelper:JwtHelperService
   ) { }
 
@@ -29,7 +31,9 @@ export class AuthService {
     const token = localStorage.getItem('token')
     if(userID && token){
       const user = await this.userService.userById(userID).toPromise()
+      const numberNotifications = await this.notificationService.getNumberOfUnreadNoticationsByUser(userID).toPromise()
       this.userService.setUserSesion(user)
+      this.notificationService.setUnread(numberNotifications)
       const flag = this.jwtHelper.isTokenExpired(token)
       return Promise.resolve(!flag)
     }else{

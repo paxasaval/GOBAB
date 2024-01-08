@@ -32,7 +32,11 @@
             </li>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <li class="submenu" *ngFor="let indicator of quadrant" [routerLink]="['/indicator',indicator.number]">
+        <li
+          class="submenu"
+          *ngFor="let indicator of quadrant"
+          [routerLink]="['/indicator', indicator.number]"
+        >
           -{{ indicator.name }}
         </li>
       </mat-expansion-panel>
@@ -50,7 +54,11 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <li class="submenu" routerLink="config">Cambiar Contraseña</li>
-        <li class="submenu" routerLink="notifications">Notificaciones</li>
+        <nz-badge [nzCount]="numberOfUnreadNotifications"[nzOverflowCount]="99" [nzOffset]="[-10,6]">
+          <li class="submenu" routerLink="notifications">
+            Notificaciones
+          </li>
+        </nz-badge>
       </mat-expansion-panel>
       <mat-expansion-panel
         class="menu-list"
