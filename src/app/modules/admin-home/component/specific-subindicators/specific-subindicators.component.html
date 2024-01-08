@@ -1,6 +1,6 @@
 
 <h1>Subindicadores específicos</h1>
-<div *ngIf="auth" class="addSubindicator">
+<div *ngIf="auth2" class="addSubindicator">
   <button class="btn-add" mat-mini-fab (click)="addSubindicator()">
     <mat-icon class="add">add</mat-icon>
   </button>
@@ -33,7 +33,7 @@ nzSize="small"
       }"></span></td>
       <td>{{sub.typeID.name}}</td>
       <td >{{sub.lastUpdate|date:'short'}}</td>
-      <td><button mat-fab (click)="deleteSubindicator(sub.id)"><mat-icon>delete</mat-icon></button></td>
+      <td *ngIf="auth"><button mat-fab (click)="deleteSubindicator(sub.id)"><mat-icon>delete</mat-icon></button></td>
     </tr>
   </tbody>
 </nz-table>

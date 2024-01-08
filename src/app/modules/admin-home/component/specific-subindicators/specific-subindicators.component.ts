@@ -18,6 +18,8 @@ export class SpecificSubindicatorsTableComponent implements OnInit {
 
   specificSubindicators!:SubndicatorWithTypeID[]
   auth=false;
+  auth2=false;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -47,7 +49,7 @@ export class SpecificSubindicatorsTableComponent implements OnInit {
     ]).pipe(
       switchMap(([indicator,user])=>{
         const rol = user.rol as RolID
-        this.auth = (rol.name === environment.ROL_ADMIN ||rol.name === environment.ROL_RESPONSIBLE );
+        this.auth2 = (rol.name === environment.ROL_ADMIN ||rol.name === environment.ROL_RESPONSIBLE );
         if(indicator.id!==''){
           return this.subindicatorService.getSubindicatorSpecificByIndicator(indicator.id,0,10)
 
