@@ -33,9 +33,9 @@ export class SpecificSubindicatorsTableComponent implements OnInit {
   }
 
   deleteSubindicator(id:string){
-    
+
     this.subindicatorService.deleteSubindicator(id).subscribe(res=>{
-      
+
     })
   }
 
@@ -47,7 +47,7 @@ export class SpecificSubindicatorsTableComponent implements OnInit {
     ]).pipe(
       switchMap(([indicator,user])=>{
         const rol = user.rol as RolID
-        this.auth = (rol.name === environment.ROL_ADMIN);
+        this.auth = (rol.name === (environment.ROL_ADMIN || environment.ROL_RESPONSIBLE));
         if(indicator.id!==''){
           return this.subindicatorService.getSubindicatorSpecificByIndicator(indicator.id,0,10)
 
@@ -59,7 +59,7 @@ export class SpecificSubindicatorsTableComponent implements OnInit {
       subindicators=>{
         if(subindicators){
           this.specificSubindicators=subindicators.docs as SubndicatorWithTypeID[]
-         
+
         }
 
       }
