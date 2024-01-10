@@ -56,9 +56,14 @@ h3 {
   flex-direction: column;
 }
 .changeInput {
-  color: var(--color2);
+  color: var(--color4);
   text-decoration: underline;
+  height: 4vh;
+  width: 100%;
+  justify-content: end;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 .actions {
   display: flex;
