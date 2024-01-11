@@ -57,7 +57,7 @@
       <ng-template #elseBlock>
         <span class="label">Subir Enlace:</span>
         <div *ngIf="characteristic.format" class="format">
-          <a [href]="characteristic.format">Descargar formato UTPL</a>
+          <a [href]="characteristic.format" target="_blank">Descargar formato UTPL</a>
         </div>
         <mat-form-field appearance="outline" class="formField">
           <mat-label>Ingrese el enlace hacia su documento</mat-label>
