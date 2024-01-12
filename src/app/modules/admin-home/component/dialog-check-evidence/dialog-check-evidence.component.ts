@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import { CharacteristicsService } from 'src/app/services/characteristics/characteristics.service';
 import { Valuation, ValuationID } from 'src/app/models/valuation';
 import { Rubric } from 'src/app/models/rubric';
+import { UserService } from 'src/app/services/user/user.service';
 
 
 @Component({
@@ -33,10 +34,12 @@ export class DialogCheckEvidenceComponent implements OnInit,OnChanges {
   qualifyControl = new FormControl(0)
   commitControl=new FormControl()
   isPublic=false
+  user?:UserID
   constructor(
     private evidenceService:EvidenceService,
     private characteristicService:CharacteristicsService,
-    private modal: NzModalRef
+    private modal: NzModalRef,
+    private userService: UserService
   ) { }
 
   handleOk(): void {
@@ -65,7 +68,8 @@ export class DialogCheckEvidenceComponent implements OnInit,OnChanges {
       }
     })
     //console.log(this.rubric)
-    this.evidenceService.qualifyEvidence(this.evidence.id,qualify,this.isPublic,this.rubric,commit).subscribe(
+    let userID = this.user?.id as string
+    this.evidenceService.qualifyEvidence(this.evidence.id,qualify,this.isPublic,this.rubric,userID,commit,).subscribe(
       evidence=>{
         Swal.close()
         this.modal.close()
@@ -91,6 +95,9 @@ export class DialogCheckEvidenceComponent implements OnInit,OnChanges {
   }
 
   ngOnInit(): void {
+    this.userService.getUserSesion().subscribe(user=>{
+      this.user=user
+    })
     if(this.evidenceSubscribe){
       this.evidenceSubscribe.unsubscribe()
     }
